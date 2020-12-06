@@ -1,5 +1,5 @@
 
-$field_width: 17rem;
+
 
 .form-control {
 	font-weight: inherit;
@@ -18,15 +18,13 @@ select {
 	font-weight: inherit;
 	padding: 0 .6rem;
 	min-height: 2rem;
-	width: $field_width;
 	max-width: 100%;
 	@include mb2_border_radius(.15rem);
 
 	&.form-control {
-		width: $field_width;
-		max-width: 100%;
 		font-size: inherit;
 		font-weight: inherit;
+		height: auto;
 	}
 
 	.form-inline & {
@@ -36,12 +34,11 @@ select {
 
 textarea {
 	min-height: 6rem;
-	width: 100%;
 	line-height: inherit;
 
-	.form-textarea &,
-	&.form-control {
+	.path-mod-forum .forumpost & {
 		width: 100%;
+		margin-bottom: .5rem;
 	}
 }
 
@@ -51,8 +48,6 @@ select {
 	&.custom-select {
 		padding-top: 0;
 		padding-bottom: 0;
-		width: $field_width !important;
-		max-width: 100%;
 		font-weight: inherit;
 	}
 
@@ -68,7 +63,6 @@ select {
 	&[multiple] {
 		min-height: 8rem;
 		height: auto;
-		width: $field_width !important;
 		max-width: 100%;
 	}
 
@@ -89,7 +83,10 @@ select {
 /* Hide search from in main content container */
 
 #main-content #coursesearch,
-#main-content #coursesearch2 {
+#main-content #coursesearch2,
+/* For Moodle 3.10+ */
+#page-course-search #main-content .simplesearchform,
+#page-course-index-category #main-content .simplesearchform {
 	display: none;
 }
 
@@ -162,7 +159,7 @@ small,
 
 .editor_atto_content {
 	&.form-control {
-		border: 0;
+		@include mb2_border_radius(0 0 .15rem .15rem);
 	}
 }
 
@@ -270,6 +267,10 @@ small,
 				padding: .25rem;
 			}
 
+			.fp-filename-field {
+				margin-top: 0;
+			}
+
 
 		}
 
@@ -353,4 +354,24 @@ abbr[data-original-title] {
 	.form-group & {
 		text-decoration: none;
 	}
+}
+
+
+
+#page-search-index {
+    .content-col {
+        .mform {
+            margin-bottom: 2rem;
+        }
+    }
+
+}
+
+/* Style for builder layout content field */
+
+.opacity0 {
+	opacity: 0;
+	height: 0;
+	width: 0;
+	overflow: hidden;
 }

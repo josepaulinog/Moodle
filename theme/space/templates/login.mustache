@@ -31,7 +31,7 @@
 }}
 {{> theme_space/head }}
 
-<body {{{ bodyattributes }}} {{#showlbg}}style="background-image: url({{{loginbg}}}); background-size: cover; background-attachment: fixed; background-repeat: no-repeat;" data-login="bg"{{/showlbg}}>
+<body {{{ bodyattributes }}} {{#showlbg}}style="background-image: url({{loginbg}}); background-size: cover; background-attachment: fixed; background-repeat: no-repeat;" data-login="bg"{{/showlbg}}>
 {{> core/local/toast/wrapper}}
 <div id="page-wrapper">
 
@@ -40,15 +40,13 @@
     <div>
         <div id="page-content" class="row no-gutters">
             <div id="region-main-box">
+                {{#output.render_lang_menu}}<div class="c-lang-menu c-lang-menu--login">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
                 <section id="region-main">
                     <div class="login-box">
                     {{{ output.course_content_header }}}
                     {{{ output.main_content }}}
                     {{{ output.course_content_footer }}}
-
-                    {{#output.render_lang_menu}}<div class="c-lang-menu c-lang-menu--login">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
                     </div>
-                    
                 </section>
             </div>
         </div>

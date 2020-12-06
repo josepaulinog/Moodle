@@ -42,7 +42,7 @@ echo $OUTPUT->doctype() ?>
 	<?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body <?php echo $OUTPUT->body_attributes(theme_mb2nl_body_cls($PAGE)) . $isPageBg; ?>>
+<body <?php echo $OUTPUT->body_attributes(theme_mb2nl_body_cls()) . $isPageBg; ?>>
 <div id="page-outer">
 <div id="page">
     <div id="page-b">

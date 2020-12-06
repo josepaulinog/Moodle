@@ -40,6 +40,7 @@ textarea {
   border: $input-border-width solid $input-border-color;
 
   box-shadow: inset 0px 1px 3px 0 rgba(0,0,0,.13), inset 0 2px 1px 0 rgba(0,0,0,.05);
+  cursor: auto!important;
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
   @if $enable-rounded {
@@ -86,6 +87,7 @@ textarea {
 select.form-control[multiple],
 select.form-control[size],
 textarea.form-control {
+  width: 100%;
   height: auto;
   transition: $general-transition;
 }
@@ -333,6 +335,11 @@ select.form-control-sm {
 
   font-size: $font-size-sm;
 
+  label {
+    display: inline-flex;
+    align-items: center;
+  }
+
   // Undo .form-check-input defaults and add some `margin-right`.
   .form-check-input {
     position: static;
@@ -385,7 +392,7 @@ select.form-control-sm {
   @include media-breakpoint-up(sm) {
     label {
       margin-bottom: 0;
-
+      padding: 5px 0;
       font-weight: $font-weight-sm-bold;
     }
 
@@ -539,7 +546,6 @@ select.form-control-sm {
 #page-login-index {
   #signup {
     .btn {
-      margin-top: 1rem;
       width: 100%;
     }
   }
@@ -593,6 +599,7 @@ legend.ftoggler {
 
 [data-content="inpage-reply-content"] {
   margin-top: $spacer;
+  padding-left: 60px;
 }
 
 .form-setting .editor_atto_wrap {

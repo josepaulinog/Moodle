@@ -76,7 +76,7 @@ for ($i = 1; $i <=3; $i++)
 
 	$name = 'theme_mb2nl/gfontstyle' . $i;
 	$title = get_string('fontstyle','theme_mb2nl') . ' #' . $i;
-	$def2 = $i == 1 ? '300,400,700' : '';
+	$def2 = $i == 1 ? '100,300,400,700' : '';
 	$desc = '';
 	$setting = new admin_setting_configtext($name, $title, $desc, $def2);
 	$setting->set_updatedcallback('theme_reset_all_caches');

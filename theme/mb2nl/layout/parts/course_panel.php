@@ -29,6 +29,7 @@ $isCourse = (isset($COURSE->id) && $COURSE->id > 1);
 $course_access = theme_mb2nl_site_access();
 $can_manage = array('admin','manager','editingteacher','teacher');
 $course_manage_string = in_array($course_access,$can_manage) ? get_string('coursemanagement','theme_mb2nl') : get_string('coursedashboard','theme_mb2nl');
+$cname = format_text( $COURSE->fullname, FORMAT_HTML );
 
 if (theme_mb2nl_theme_setting( $PAGE, 'coursepanel') && $isCourse && $course_access !== 'none' && $course_access !== 'user') :
 ?>
@@ -37,7 +38,7 @@ if (theme_mb2nl_theme_setting( $PAGE, 'coursepanel') && $isCourse && $course_acc
     <div class="modal-content">
     		<div class="modal-header">
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        		<h4 class="modal-title" id="course-panel-label"><?php echo $course_manage_string . ': ' . theme_mb2nl_wordlimit(format_text($COURSE->fullname),6); ?></h4>
+        		<h4 class="modal-title" id="course-panel-label"><?php echo $course_manage_string . ': ' . theme_mb2nl_wordlimit( $cname,6); ?></h4>
       		</div>
             <div class="course-panel-content">
             <?php if ( in_array( $course_access, $can_manage ) ) : ?>

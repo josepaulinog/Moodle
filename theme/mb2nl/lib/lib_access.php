@@ -30,27 +30,28 @@ defined('MOODLE_INTERNAL') || die();
  * Method to define site access
  *
  */
-function theme_mb2nl_site_access($courseid = NULL)
+function theme_mb2nl_site_access( $courseid = NULL )
 {
 
 	global $PAGE, $COURSE, $USER;
 	$access = 'none';
 	$courseid = $courseid ? $courseid : $COURSE->id;
 
-	$context = context_course::instance($courseid);
+	$context = context_course::instance( $courseid );
 	$course_cancreate = has_capability('moodle/course:create',$context);
 	$course_canedit = has_capability('moodle/course:update',$context);
 	$hidden_activities = has_capability('moodle/course:viewhiddenactivities',$context);
+	//$manage_activities = has_capability('moodle/course:manageactivities', $context );
 	$coursecat_canmanage = has_capability('moodle/category:manage', $context);
 	$enrolled = is_enrolled($context, $USER->id,'',true);
 	$site_canconfig = has_capability('moodle/site:config',$context);
 
 	$access_admin = ($site_canconfig && $coursecat_canmanage && $course_canedit && $course_cancreate && $hidden_activities);
 	$access_manager = ($coursecat_canmanage && $course_canedit && $course_cancreate && $hidden_activities);
-	$access_teacher = ($enrolled && $hidden_activities && $course_canedit);
-	$access_noediting_teacher = ($enrolled && $hidden_activities && !$course_canedit);
+	$access_teacher = ($hidden_activities && $course_canedit);
+	$access_noediting_teacher = ($hidden_activities && ! $course_canedit);
 	$access_creator = (!$course_canedit && $course_cancreate);
-	$access_student = ($enrolled && isloggedin() && !isguestuser() && !$hidden_activities);
+	$access_student = ($enrolled && isloggedin() && !isguestuser() && ! $hidden_activities);
 	$access_user = (isloggedin() && !isguestuser());
 
 	if ($access_admin)

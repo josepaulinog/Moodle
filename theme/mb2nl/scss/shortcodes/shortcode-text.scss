@@ -2,41 +2,56 @@
 
 .theme-text {
 
-	&.text-sm {
-		font-size: $fssmall;
-	}
-
-	&.text-lg {
-		font-size: $fsbig;
-		line-height: $fsbig_lh;
-	}
-
-	&.text-xlg {
-		font-size: $fxsbig;
-		line-height: $fxsbig_lh;
-	}
-
-
-	&.text-lighten {
-		color: $textcolor_lighten;
-	}
-
-	&.text-darken {
-		color: $textcolor_darken;
-	}
-
-
-	&.text-center {
-		text-align: center;
-	}
-
-
-	&.text-right {
-		text-align: right;
+	&.title0 {
+		.theme-text-title {
+			display: none;
+		}
 	}
 
 }
 
+
+.text-sm {
+	font-size: $fssmall;
+}
+
+.text-lg {
+	font-size: $fsbig;
+}
+
+.text-xlg {
+	font-size: $fxsbig;
+}
+
+
+.text-lighten {
+	color: $textcolor_lighten;
+}
+
+.text-darken {
+	color: $textcolor_darken;
+}
+
+
+.align-center {
+	text-align: center;
+}
+
+.align-left {
+	text-align: left;
+}
+
+.align-right {
+	text-align: right;
+}
+
+
+@media only screen and (max-width: $tablet_width){
+
+	.mb2-pb-column.text-right {
+		text-align: inherit !important;
+	}
+}
 
 
 .theme-color {
@@ -64,4 +79,55 @@
 	&.color-inverse {
 		color: $accent2;
 	}
+}
+
+
+@media only screen and (max-width: $tablet_width){
+
+	.theme-text {
+
+		&.textsize-6 {
+			font-size: 5.2rem !important;
+		}
+
+		&.textsize-5 {
+			font-size: 4.2rem !important;
+		}
+
+		&.textsize-4 {
+			font-size: 3.5rem !important;
+		}
+
+		&.textsize-3 {
+			font-size: 3rem !important;
+		}
+
+	}
+
+}
+
+
+@media only screen and (max-width: $phone_width){
+
+	.theme-text {
+
+		&.textsize-6 {
+			font-size: 4.5rem !important;
+		}
+
+		&.textsize-5 {
+			font-size: 3.5rem !important;
+		}
+
+		&.textsize-4 {
+			font-size: 3rem !important;
+		}
+
+		&.textsize-3,
+		&.textsize-2 {
+			font-size: 2rem !important;
+		}
+
+	}
+
 }

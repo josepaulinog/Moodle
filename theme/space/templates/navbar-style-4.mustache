@@ -18,52 +18,53 @@
     Page navbar.
 }}
 
-<div id="topBar4" class="s-top s-top--sidebar justify-content-center">
 
-  {{> theme_space/navbar-mobile }}
+  <div id="topBar4" class="s-top s-top--sidebar justify-content-center {{#ShowTopBarUserName}}showusername{{/ShowTopBarUserName}} {{#customtopnavhtml}}topbar-customtopnav{{/customtopnavhtml}} {{#TopBarText}}topbar-text{{/TopBarText}}">
 
-  <div class="s-top-container">
-    <div class="c-container c-top-additional row no-gutters justify-content-between align-items-center">
-      {{#ShowTopBarText}}<div class="c-top-text mx-2">{{{TopBarText}}}</div>{{/ShowTopBarText}}
-      {{#output.render_lang_menu}}<div class="c-lang-menu m-0">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
-    </div>
+    {{> theme_space/navbar-mobile }}
 
-    <div id="navBar" class="c-container row no-gutters justify-content-start align-items-center">
-
-      {{> theme_space/navbar-btn }}
-      
-      {{#customlogotopbar}}
-      <div class="logo d-sm-none d-md-inline pl-md-0 pr-md-2">
-          <a href="{{{ config.wwwroot }}}"><img src="{{customlogotopbar}}" alt="{{sitename}}"/></a>
+    <div class="s-top-container">
+      <div class="c-container c-top-additional {{^TopBarText}}c-top-additional-hidden{{/TopBarText}} row no-gutters justify-content-between align-items-center mx-auto">
+        {{#TopBarText}}<div class="c-top-text mx-2 text-sm-center text-lg-left">{{{TopBarText}}}</div>{{/TopBarText}}
+        {{#output.render_lang_menu}}<div class="c-lang-menu m-0 d-sm-none d-lg-inline-flex">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
       </div>
-      {{/customlogotopbar}}
 
-      {{#customtopnavhtml}}
-      <div class="col-md-auto s-custom-main-nav text-md-left mx-md-4 mt-sm-3 mt-md-0 p-0">
-        <nav class="c-custom-main-nav navbar navbar-expand-md p-0">
-          {{{customtopnavhtml}}}
-        </nav>
-      </div>
-      {{/customtopnavhtml}}
+      <div id="navBar" class="c-container row no-gutters justify-content-start align-items-center">
 
-      <div class="c-nav-user nav ml-md-auto align-items-center justify-content-center">
+        {{> theme_space/navbar-btn }}
+        
+        {{#customlogotopbar}}
+        <div class="logo d-sm-none d-lg-inline pl-md-0 pr-md-2">
+            <a href="{{#customrooturl}}{{customrooturl}}{{/customrooturl}}{{^customrooturl}}{{{ config.wwwroot }}}{{/customrooturl}}"><img src="{{customlogotopbar}}" alt="{{sitename}}"/></a>
+        </div>
+        {{/customlogotopbar}}
 
-          <div class="search-box d-block">
-          {{{ output.search_box }}}
+        {{#customtopnavhtml}}
+        <div class="col-lg-auto s-custom-main-nav text-md-left mx-sm-0 mx-lg-4 mt-sm-3 mt-md-0 p-0">
+          <div class="c-custom-main-nav">
+            {{{customtopnavhtml}}}
           </div>
+        </div>
+        {{/customtopnavhtml}}
 
-          <!-- navbar_plugin_output -->
-          <div class="top-icons-nav c-menu-sep mr-md-3">{{{ output.navbar_plugin_output }}}</div>
+        <div class="c-nav-user nav ml-md-auto align-items-center justify-content-sm-end justify-content-lg-center">
 
-          {{#ShowCustomNav}}<div class="c-custom-nav-container mr-md-3 c-menu-sep">{{> theme_space/custom-nav }}</div>{{/ShowCustomNav}}
+            <div class="search-box d-block">
+            {{{ output.search_box }}}
+            </div>
 
-          <!-- user_menu -->
-          <div class="c-user-menu">
-              {{{ output.user_menu }}}
-          </div>
+            <!-- navbar_plugin_output -->
+            <div class="top-icons-nav c-menu-sep mr-sm-2 mr-lg-3">{{{ output.navbar_plugin_output }}}</div>
 
+            {{#ShowCustomNav}}<div class="c-custom-nav-container ml-0 mr-lg-3 c-menu-sep">{{> theme_space/custom-nav }}</div>{{/ShowCustomNav}}
+
+            <!-- user_menu -->
+            <div class="c-user-menu mr-sm-4 mr-md-5 mr-lg-0">
+                {{{ output.user_menu }}}
+            </div>
+
+        </div>
+        <!-- search_box -->
       </div>
-      <!-- search_box -->
     </div>
   </div>
-</div>

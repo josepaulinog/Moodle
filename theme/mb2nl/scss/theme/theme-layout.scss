@@ -51,6 +51,9 @@
 }
 
 #page-content {
+
+	position: relative;
+
 	> div[role="main"] {
 		@include clearfix();
 	}
@@ -146,6 +149,7 @@
 		border: 0;
 		overflow: visible;
 		min-width: 0;
+		@include mb2_border_radius(0);
 	}
 }
 
@@ -171,7 +175,7 @@
 @media only screen and (min-width: $tablet_width){
 
 	.sidebar-col {
-		.hide-sidebars & {
+		.hide-sidebars.noediting & {
 			display: none;
 		}
 
@@ -211,13 +215,141 @@
 	display: none !important;
 }
 
-.hiddenel {
+.hidden1 {
 	opacity: .4;
 
-	.hiddenel {
+	.hidden1 {
 		opacity: 1;
 	}
 }
+
+
+
+/* Change layout for page builder */
+.builderpage {
+
+	#main-content {
+		padding: 0;
+		min-height: 100px;
+
+		> .container-fluid {
+		    max-width: 100%;
+		    padding: 0;
+
+			> .row {
+			    display: block;
+			    margin: 0;
+			}
+		}
+
+		.no-overflow {
+			overflow: visible;
+		}
+	}
+
+	#maincontent {
+		height: auto;
+	}
+
+	div[role="main"] {
+		> h2,
+		> .modified {
+			display: none;
+		}
+	}
+
+	.content-col {
+	    display: block;
+	    max-width: 100%;
+	    width: 100%;
+	    padding: 0 !important;
+
+		.generalbox {
+		    padding: 0 !important;
+
+			+br {
+				display: none;
+			}
+		}
+	}
+
+	#page-content {
+		> #user-notifications {
+			.alert {
+			    max-width: 800px;
+			    margin: 10px auto;
+			}
+		}
+	}
+
+	.fixed-bar,
+	.sidebar-col,
+	.panel-link,
+	.activity-navigation,
+	.theme-cbanner,
+	#page-header {
+		display: none;
+	}
+
+
+	#frontpage-available-course-list,
+	#frontpage-category-names,
+	#frontpage-category-combo,
+	#frontpage-course-list,
+	&.pagelayout-frontpage #site-news-forum {
+	    width: 100%;
+	    max-width: 1240px;
+	    padding-left: 15px;
+	    padding-right: 15px;
+	    margin-left: auto;
+	    margin-right: auto;
+		margin-top: 3rem;
+	}
+
+}
+
+
+/* Edit page link */
+
+.builder-links {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    display: block;
+    font-size: .85rem;
+    z-index: 3;
+    padding: 0 .6rem;
+    background-color: rgba(0,0,0,.35);
+	@include mb2_border_radius(999px);
+
+	a {
+	    display: inline-block;
+	    width: 2rem;
+	    height: 2rem;
+	    line-height: 2rem;
+	    text-align: center;
+	    color: #fff!important;
+	}
+
+
+	.nobuilderpage & {
+		top: 48px;
+    	right: 0;
+
+		.buildpage-moodle,
+		.buildpage-fp {
+		    display: none;
+		}
+	}
+
+	.nobuilderpage.pagelayout-frontpage & {
+		top: 0;
+	}
+
+}
+
+
+
 
 
 
@@ -251,5 +383,29 @@
 	.container-fluid {
 		max-width: 98%;
 	}
+
+}
+
+
+/* Order on small screens */
+
+@media only screen and (max-width: $tablet_width){
+
+	.moborder1 {
+		order: 1;
+	}
+
+	.moborder2 {
+		order: 2;
+	}
+
+	.moborder3 {
+		order: 3;
+	}
+
+	.moborder4 {
+		order: 4;
+	}
+
 
 }

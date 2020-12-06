@@ -64,6 +64,7 @@ else
      		<section id="region-main" class="content-col <?php echo $contentCol; ?>">
             	<div id="page-content">
 					<?php echo theme_mb2nl_panel_link(); ?>
+					<?php echo theme_mb2nl_check_plugins(); ?>
 					<?php if ($PAGE->pagetype === 'user-profile') : ?>
 						<?php echo $OUTPUT->context_header(); ?>
 					<?php endif; ?>

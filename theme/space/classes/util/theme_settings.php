@@ -47,7 +47,7 @@ class theme_settings {
 
       $templatecontext = [];
       $sidebaritems = [
-        'SidebarCustomBox', 'SidebarCustomNav', 'showmycourses', 'hiddensidebar', 'showsidebarlogo', 'SidebarCustomHTML', 'SidebarCustomNavigationLinks'
+        'SidebarCustomBox', 'SidebarCustomNav', 'showmycourses', 'hiddensidebar', 'showsidebarlogo', 'SidebarCustomHTML', 'SidebarCustomNavigationLinks', 'customrooturl'
       ];
   
       foreach ($sidebaritems as $setting) {
@@ -57,7 +57,7 @@ class theme_settings {
       }
   
       $sidebaritemshtml = [
-        'SidebarCustomHeading', 'SidebarCustomText', 'SidebarCustomNavTitle'
+        'SidebarCustomHeading', 'SidebarCustomText', 'SidebarCustomNavTitle', 'SidebarButtonIconOpen', 'SidebarButtonIconClose'
       ];
   
       foreach ($sidebaritemshtml as $setting) {
@@ -76,8 +76,27 @@ class theme_settings {
   public function login_block() {
       $theme = theme_config::load('space');
 
-      $templatecontext['loginbg'] = $theme->setting_file_url('loginbg', 'loginbg');
-      $templatecontext['showlbg'] = $theme->settings->showlbg;
+      $templatecontext = [];
+
+      $loginfiles = [
+        'loginbg'
+      ];
+  
+      foreach ($loginfiles as $setting) {
+        if (!empty($theme->setting_file_url($setting, $setting))) {
+            $templatecontext[$setting] = $theme->setting_file_url($setting,$setting);
+        }
+      }
+      
+      $loginitems = [
+        'showlbg'
+      ];
+  
+      foreach ($loginitems as $setting) {
+        if (!empty($theme->settings->$setting)) {
+            $templatecontext[$setting] = $theme->settings->$setting;
+        }
+      }
 
       return $templatecontext;
   }
@@ -164,7 +183,7 @@ class theme_settings {
        $templatecontext = [];
 
        $slideritems = [
-        'sliderenabled', 'sliderfwenabled', 'sliderclickable', 'sliderintervalenabled', 'sliderinterval', 'rtlslider'
+        'sliderenabled', 'sliderfwenabled', 'sliderclickable', 'sliderintervalenabled', 'sliderinterval', 'rtlslider', 'imgslidesonly'
        ];
    
        foreach ($slideritems as $setting) {
@@ -180,6 +199,7 @@ class theme_settings {
            $slidertitle = "slidertitle{$i}";
            $slidersubtitle = "slidersubtitle{$i}";
            $slidercap = "slidercap{$i}";
+           $mobileheroslideheight = "mobileheroslideheight{$i}";
            $sliderhtml = "sliderhtml{$i}";
            $sliderurl = "sliderurl{$i}";
 
@@ -205,7 +225,11 @@ class theme_settings {
            }
 
            if (!empty($theme->settings->$slidercap)) {
-            $templatecontext['slides'][$j]['caption'] = $theme->settings->$slidercap;
+            $templatecontext['slides'][$j]['caption'] = format_text(($theme->settings->$slidercap),FORMAT_HTML, array('noclean' => true));
+           }
+
+           if (!empty($theme->settings->$mobileheroslideheight)) {
+            $templatecontext['slides'][$j]['slideheight'] = $theme->settings->$mobileheroslideheight;
            }
 
            if (!empty($theme->settings->$sliderhtml)) {
@@ -257,7 +281,7 @@ class theme_settings {
       }
       
       if (!empty($theme->settings->$logosurl)) {
-        $templatecontext['logos'][$j]['logosurl'] = format_text(($theme->settings->$logosurl),FORMAT_HTML, array('noclean' => true));
+        $templatecontext['logos'][$j]['logosurl'] = $theme->settings->$logosurl;
       }
 
       if (!empty($theme->settings->$logosname)) {
@@ -296,7 +320,7 @@ class theme_settings {
 
     foreach ($customnavhtml as $setting) {
       if (!empty($theme->settings->$setting)) {
-        format_text(($templatecontext[$setting] = $theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
+        $templatecontext[$setting] = format_text(($theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
       }
     }    
 
@@ -309,7 +333,7 @@ class theme_settings {
 
     $templatecontext = [];
     $hero = [
-      'herofwenabled', 'heroshadow', 'heroboxshadow', 'herovideoenabled', 'showherologo', 'heroimgenabled'
+      'herofwenabled', 'herovideofwenabled', 'heroshadow', 'heroboxshadow', 'herovideoenabled', 'showherologo', 'heroimgenabled', 'heroimgonly'
     ];
 
     foreach ($hero as $setting) {
@@ -319,7 +343,7 @@ class theme_settings {
     }
 
     $herohtml = [
-      'HeroHeading', 'HeroText', 'HeroText2', 'HeroLabel', 'HeroURL', 'HeroLabel2', 'HeroURL2'
+      'HeroHeading', 'HeroText', 'HeroText2', 'HeroLabel', 'HeroURL', 'HeroLabel2', 'HeroURL2', 'herovideocontent'
     ];
 
     foreach ($herohtml as $setting) {
@@ -329,7 +353,7 @@ class theme_settings {
     }
 
     $herofiles = [
-      'heroimg', 'herovideomp4', 'herovideoogv', 'herovideowebm', 'heroshadowimg', 'heroshadowimg'
+      'heroimg', 'herovideomp4',  'herovideowebm', 'heroshadowimg', 'heroshadowimg'
     ];
 
     foreach ($herofiles as $setting) {
@@ -362,7 +386,7 @@ class theme_settings {
 
     foreach ($blockcategorieshtml as $setting) {
       if (!empty($theme->settings->$setting)) {
-         format_text(($templatecontext[$setting] = $theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
+         $templatecontext[$setting] = format_text(($theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
       }
     }
 
@@ -376,7 +400,7 @@ class theme_settings {
     $templatecontext = [];
 
     $block1 = [
-      'FPHTMLBlock1', 'ShowFPBlock1Intro', 'FPBlock1FooterContent', 'FPHTMLBlock1IntroProperties'
+      'FPHTMLBlock1', 'ShowFPBlock1Intro', 'FPHTMLBlock1IntroProperties'
     ];
 
     foreach ($block1 as $setting) {
@@ -386,7 +410,7 @@ class theme_settings {
     }
 
     $block1html = [
-      'FPBlock1Title', 'FPBlock1Content'
+      'FPBlock1Title', 'FPBlock1Content', 'FPBlock1FooterContent'
     ];
 
     foreach ($block1html as $setting) {
@@ -401,6 +425,7 @@ class theme_settings {
       $fpblock1icon = "FPHTMLBlock1Icon{$i}";
       $fpblock1heading = "FPHTMLBlock1Heading{$i}";
       $fpblock1itemproperties = "FPHTMLBlock1ItemProperties{$i}";
+      $fpblock1itemblockproperties = "FPHTMLBlock1ItemBlockProperties{$i}";
       $fpblock1text = "FPHTMLBlock1Text{$i}";
 
       $FPBlock1No = $i;
@@ -411,8 +436,12 @@ class theme_settings {
         $templatecontext['block1'][$j]['FPHTMLBlock1Icon'] = format_text(($theme->settings->$fpblock1icon),FORMAT_HTML, array('noclean' => true));
       }
 
+      if (!empty($theme->settings->$fpblock1itemblockproperties)) {
+        $templatecontext['block1'][$j]['FPHTMLBlock1ItemBlockProperties'] = format_text(($theme->settings->$fpblock1itemblockproperties),FORMAT_HTML, array('noclean' => true));
+      }
+
       if (!empty($theme->settings->$fpblock1itemproperties)) {
-        $templatecontext['block1'][$j]['FPHTMLBlock1ItemProperties'] = $theme->settings->$fpblock1itemproperties;
+        $templatecontext['block1'][$j]['FPHTMLBlock1ItemProperties'] = format_text(($theme->settings->$fpblock1itemproperties),FORMAT_HTML, array('noclean' => true));
       }
 
       if (!empty($theme->settings->$fpblock1heading)) {
@@ -469,11 +498,16 @@ class theme_settings {
 			$FPBlock2Label = "FPHTMLBlock2Label{$i}";
       $FPBlock2URL = "FPHTMLBlock2URL{$i}";
       $FPBlock2ItemProperties = "FPHTMLBlock2ItemProperties{$i}";
+      $FPBlock2ItemBlockProperties = "FPHTMLBlock2ItemBlockProperties{$i}";
       $FPBlock2No = $i;
       $templatecontext['block2'][$j]['FPHTMLBlock2Count'] = $FPBlock2No;
 
       if (!empty($theme->settings->$FPBlock2ShowImage)) {
         $templatecontext['block2'][$j]['FPHTMLBlock2ShowImage'] = format_text(($theme->settings->$FPBlock2ShowImage),FORMAT_HTML, array('noclean' => true));
+      }
+
+      if (!empty($theme->settings->$FPBlock2ItemBlockProperties)) {
+        $templatecontext['block2'][$j]['FPHTMLBlock2ItemBlockProperties'] = format_text(($theme->settings->$FPBlock2ItemBlockProperties),FORMAT_HTML, array('noclean' => true));
       }
 
       if (!empty($theme->settings->$FPBlock2ItemProperties)) {
@@ -497,7 +531,7 @@ class theme_settings {
       }
 
       if (!empty($theme->settings->$FPBlock2URL)) {
-        $templatecontext['block2'][$j]['FPHTMLBlock2URL'] = format_text(($theme->settings->$FPBlock2URL),FORMAT_HTML, array('noclean' => true));
+        $templatecontext['block2'][$j]['FPHTMLBlock2URL'] = $theme->settings->$FPBlock2URL;
       }
 
       //image
@@ -532,7 +566,7 @@ class theme_settings {
 
     foreach ($block3html as $setting) {
       if (!empty($theme->settings->$setting)) {
-          format_text(($templatecontext[$setting] = $theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
+          $templatecontext[$setting] = format_text(($theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
       }
     }
 
@@ -562,7 +596,7 @@ class theme_settings {
 
     foreach ($block4html as $setting) {
       if (!empty($theme->settings->$setting)) {
-          format_text(($templatecontext[$setting] = $theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
+         $templatecontext[$setting] = format_text(($theme->settings->$setting),FORMAT_HTML, array('noclean' => true));
       }
     }
 
@@ -774,7 +808,7 @@ public function block12() {
 
     $templatecontext = [];
     $topbarcustomblock = [
-      'ShowTopBarText'
+      'ShowTopBarUserName'
     ];
 
     foreach ($topbarcustomblock as $setting) {
@@ -796,8 +830,29 @@ public function block12() {
     if (!empty($image = $theme->setting_file_url('customlogotopbar', 'customlogotopbar'))) {
       $templatecontext['customlogotopbar'] = $image;
     }
+
+    if (!empty($image = $theme->setting_file_url('mobiletopbarlogo', 'mobiletopbarlogo'))) {
+      $templatecontext['mobiletopbarlogo'] = $image;
+    }
     
     return $templatecontext;
+  }
+
+    public function frontpage_elements() {
+      $theme = theme_config::load('space');
+
+      $templatecontext = [];
+      $headelements = [
+        'displaynavdrawerfp'
+      ];
+
+      foreach ($headelements as $setting) {
+        if (!empty($theme->settings->$setting)) {
+            $templatecontext[$setting] = $theme->settings->$setting;
+        }
+      }
+
+      return $templatecontext;
   }
 
   public function head_elements() {
@@ -806,16 +861,26 @@ public function block12() {
     $templatecontext = [];
     $headelements = [
       'googlefonturl', 'googlefontname', 'ShowLoader', 'CustomWebFont', 'CustomWebFontSH', 'CustomWebFontHTML',
-      'customfontregularname', 'customfontregulareot', 'customfontregularwoff', 'customfontregularwoff2',
-      'customfontregularttf', 'customfontregularsvg', 'customfontlightname', 'customfontlighteot', 'customfontlightwoff',
-      'customfontlightwoff2', 'customfontlightttf', 'customfontlightsvg', 'customfontmediumname', 'customfontmediumeot',
-      'customfontmediumwoff', 'customfontmediumwoff2', 'customfontmediumttf', 'customfontmediumsvg', 'customfontboldname',
-      'customfontboldeot', 'customfontboldwoff', 'customfontboldwoff2', 'customfontboldttf', 'customfontboldsvg', 'showauthorinfo', 'additionalheadhtml', 'additionalcustomfont'
+      'customfontregularname', 'customfontlightname', 'customfontmediumname', 'customfontboldname', 'showauthorinfo', 'additionalheadhtml', 'additionalcustomfont'
     ];
 
     foreach ($headelements as $setting) {
       if (!empty($theme->settings->$setting)) {
           $templatecontext[$setting] = $theme->settings->$setting;
+      }
+    }
+
+    $fontshead = [
+      'customfontregulareot', 'customfontregularwoff', 'customfontregularwoff2',
+      'customfontregularttf', 'customfontregularsvg', 'customfontlighteot', 'customfontlightwoff',
+      'customfontlightwoff2', 'customfontlightttf', 'customfontlightsvg', 'customfontmediumeot',
+      'customfontmediumwoff', 'customfontmediumwoff2', 'customfontmediumttf', 'customfontmediumsvg',
+      'customfontboldeot', 'customfontboldwoff', 'customfontboldwoff2', 'customfontboldttf', 'customfontboldsvg'
+    ];
+
+    foreach ($fontshead as $setting) {
+      if (!empty($theme->setting_file_url($setting, $setting))) {
+          $templatecontext[$setting] = $theme->setting_file_url($setting,$setting);
       }
     }
 

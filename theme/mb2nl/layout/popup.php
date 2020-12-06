@@ -22,14 +22,11 @@
  *
  */
 
-
 defined('MOODLE_INTERNAL') || die();
-
 
 $customLoginPage = theme_mb2nl_is_login($PAGE, true);
 $pageBgImg = $customLoginPage ? theme_mb2nl_theme_setting($PAGE, 'loginbgimage', '', true) : theme_mb2nl_theme_setting($PAGE, 'pbgimage', '', true);
 $isPageBg = $pageBgImg !='' ? ' style="background-image:url(\'' . $pageBgImg . '\');"' : '';
-
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
@@ -42,7 +39,7 @@ echo $OUTPUT->doctype() ?>
 	<?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body <?php echo $OUTPUT->body_attributes(theme_mb2nl_body_cls($PAGE)) . $isPageBg; ?>>
+<body <?php echo $OUTPUT->body_attributes(theme_mb2nl_body_cls()) . $isPageBg; ?>>
 <div id="page-outer">
 <div id="page">
     <div id="page-b">

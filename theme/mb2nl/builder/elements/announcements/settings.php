@@ -215,4 +215,4 @@ $mb2_settings = array(
 );
 
 
-define('LOCAL_MB2BUILDER_SETTINGS_ANNOUNCEMENTS', serialize($mb2_settings));
+define('LOCAL_MB2BUILDER_SETTINGS_ANNOUNCEMENTS', serialize( $mb2_settings ) );

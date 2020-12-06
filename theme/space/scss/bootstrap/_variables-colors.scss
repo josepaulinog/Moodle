@@ -44,13 +44,15 @@ $blue-300:    #BACDF7 !default;
 $blue-200:    #D4DEF8 !default;
 $blue-100:    #F0F4FE !default;
 
-$red-900:       #611818 !default;
-$red-800:       #891B1B !default;
-$red-700:       #B82020 !default;
-$red-600:       #DC3030 !default;
-$red-500:       #E46464 !default;
-$red-300:       #F5AAAA !default;
-$red-200:       #FCE8E8 !default;
+$red-900:       #8F0043 !default;
+$red-800:       #AB003B !default;
+$red-700:       #E11027 !default;
+$red-600:       #F01E1E !default;
+$red-500:       #F55D68 !default;
+$red-400:       #f66671 !default;
+$red-300:       #f89299 !default;
+$red-200:       #fbbdc2 !default;
+$red-100:       #fee9eb !default;
 
 $yellow-900:    #A57903 !default;
 $yellow-800:    #E5A802 !default;
@@ -245,7 +247,9 @@ $drawer-nav-item-icon-active: $gray-600 !default;
 $drawer-heading: $body-color-light !default;
 $drawer-text: $body-color-secondary !default;
 $drawer-hr: $border-color !default;
-
+$drawer-link: $body-color-secondary !default;
+$drawer-link-hover: $theme-color-3 !default;
+$drawer-link-hover-bg: $drawer-nav-box-bg !default;
 
 //Footer
 $footer-bg: $body-bg!default;

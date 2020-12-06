@@ -16,13 +16,35 @@
 }}
 
 {{#sliderenabled}}
-<div class="c-heroimg {{#showherologo}}c-hero-with-logo{{/showherologo}}{{^showherologo}}c-hero-without-logo{{/showherologo}}  {{#sliderfwenabled}}siema-container--fw{{/sliderfwenabled}}">
+<div class="c-heroimg {{#sliderfwenabled}}c-hero-container--fw{{/sliderfwenabled}} {{#heroboxshadow}}c-hero-box-shadow {{heroshadowstyle}}{{/heroboxshadow}}">
 
-  <div class="siema-container">
+  <div class="c-hero-container">
 
       <div class="hero-slider">
       {{#slides}}
-        <div class="c-hero-slider-item" style="background-image: url({{{ image }}});">
+
+        {{#imgslidesonly}}
+        <div class="c-hero-slider-item">
+        {{#sliderclickable}}<a href="{{url}}">{{/sliderclickable}}
+          
+          {{^sliderhtml}}
+          <div class="c-hero-content">
+            {{#subtitle}}<h5 class="h5">{{{ subtitle }}}</h5>{{/subtitle}}
+            {{#title}}<h3 class="h1">{{{ title }}}</h3>{{/title}}
+            {{#caption}}<div class="h3">{{{ caption }}}</div>{{/caption}}
+          </div>
+          {{/sliderhtml}}
+
+          {{{ sliderhtml }}}
+
+          <img src="{{{ image }}}" alt="" class="c-hero-img w-100 d-inline" />
+          
+        {{#sliderclickable}}</a>{{/sliderclickable}}
+        </div>
+        {{/imgslidesonly}}
+
+        {{^imgslidesonly}}
+        <div class="c-hero-slider-item c-hero-slider-item--h" style="background-image: url({{{ image }}}); {{#slideheight}}height: {{slideheight}};{{/slideheight}}">
         {{#sliderclickable}}<a href="{{url}}">{{/sliderclickable}}
           
           {{^sliderhtml}}
@@ -39,6 +61,8 @@
           
         {{#sliderclickable}}</a>{{/sliderclickable}}
         </div>
+        {{/imgslidesonly}}
+
       {{/slides}}
       </div>
     </div>
@@ -51,11 +75,11 @@
     mode: 'carousel',
     slideBy: 1,
     mouseDrag: true,
+    autoHeight: true,
     controlsText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
-    loop: false,
+    {{#sliderloop}}loop: true,{{/sliderloop}}
+    {{#sliderintervalenabled}}autoplayButtonOutput: false, autoplay: true, autoplayTimeout: {{sliderinterval}},{{/sliderintervalenabled}}
     controls: true
-  });
+  });  
 </script>
-
-
 {{/sliderenabled}}

@@ -86,7 +86,9 @@
 //
 
 .nav-tabs-container {
-  overflow-x: auto;
+  @include media-breakpoint-between(sm,md) {
+    overflow-x: auto;
+  }
 }
 
 .nav-tabs {

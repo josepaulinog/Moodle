@@ -224,90 +224,90 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $temp->add($setting);
 
 
-$sectionsArr = array('as'=>get_string('asstyle','theme_mb2nl'),'bc'=>get_string('bcstyle','theme_mb2nl'),'ac'=>get_string('acstyle','theme_mb2nl'));
-
-foreach ($sectionsArr as $k=>$section)
-{
-
-	$setting = new admin_setting_configmb2start('theme_mb2nl/start' . $k . 'style', $section);
-	$setting->set_updatedcallback('theme_reset_all_caches');
-	$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'padding';
-		$title = get_string('sectionpadding','theme_mb2nl');
-		$setting = new admin_setting_configtext($name, $title, get_string('sectionpaddingdesc','theme_mb2nl'), '40,10');
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$setting = new admin_setting_configmb2spacer('theme_mb2nl/bcspacer');
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'scheme';
-		$title = get_string('colorscheme','theme_mb2nl');
-		$setting = new admin_setting_configselect($name, $title, '', 'light', $colorSchemeOpt);
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgpre';
-		$title = get_string('pbgpre','theme_mb2nl');
-		$setting = new admin_setting_configselect($name, $title, '', '', $bgPredefinedOpt);
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgcolor';
-		$title = get_string('bgcolor','theme_mb2nl');
-		$setting = new admin_setting_configmb2color($name, $title, get_string('pbgdesc','theme_mb2nl'), '');
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgimage';
-		$title = get_string('bgimage','theme_mb2nl');
-		$setting = new admin_setting_configstoredfile($name, $title, get_string('pbgdesc','theme_mb2nl'), $k . 'bgimage');
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgrepeat';
-		$title = get_string('bgrepeat','theme_mb2nl');
-		$setting = new admin_setting_configselect($name, $title, '', 'no-repeat', $bgRepearOpt);
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgpos';
-		$title = get_string('bgpos','theme_mb2nl');
-		$setting = new admin_setting_configselect($name, $title, '', 'center center', $bgPositionOpt);
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgattach';
-		$title = get_string('bgattachment','theme_mb2nl');
-		$setting = new admin_setting_configselect($name, $title, '', 'scroll', $bgAttOpt);
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-		$name = 'theme_mb2nl/' . $k . 'bgsize';
-		$title = get_string('bgsize','theme_mb2nl');
-		$setting = new admin_setting_configselect($name, $title, '', 'cover', $bgSizeOpt);
-		$setting->set_updatedcallback('theme_reset_all_caches');
-		$temp->add($setting);
-
-
-	$setting = new admin_setting_configmb2end('theme_mb2nl/end' . $k . 'style');
-	$setting->set_updatedcallback('theme_reset_all_caches');
-	$temp->add($setting);
-
-
-}
+// $sectionsArr = array('as'=>get_string('asstyle','theme_mb2nl'),'bc'=>get_string('bcstyle','theme_mb2nl'),'ac'=>get_string('acstyle','theme_mb2nl'));
+//
+// foreach ($sectionsArr as $k=>$section)
+// {
+//
+// 	$setting = new admin_setting_configmb2start('theme_mb2nl/start' . $k . 'style', $section);
+// 	$setting->set_updatedcallback('theme_reset_all_caches');
+// 	$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'padding';
+// 		$title = get_string('sectionpadding','theme_mb2nl');
+// 		$setting = new admin_setting_configtext($name, $title, get_string('sectionpaddingdesc','theme_mb2nl'), '40,10');
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$setting = new admin_setting_configmb2spacer('theme_mb2nl/bcspacer');
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'scheme';
+// 		$title = get_string('colorscheme','theme_mb2nl');
+// 		$setting = new admin_setting_configselect($name, $title, '', 'light', $colorSchemeOpt);
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgpre';
+// 		$title = get_string('pbgpre','theme_mb2nl');
+// 		$setting = new admin_setting_configselect($name, $title, '', '', $bgPredefinedOpt);
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgcolor';
+// 		$title = get_string('bgcolor','theme_mb2nl');
+// 		$setting = new admin_setting_configmb2color($name, $title, get_string('pbgdesc','theme_mb2nl'), '');
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgimage';
+// 		$title = get_string('bgimage','theme_mb2nl');
+// 		$setting = new admin_setting_configstoredfile($name, $title, get_string('pbgdesc','theme_mb2nl'), $k . 'bgimage');
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgrepeat';
+// 		$title = get_string('bgrepeat','theme_mb2nl');
+// 		$setting = new admin_setting_configselect($name, $title, '', 'no-repeat', $bgRepearOpt);
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgpos';
+// 		$title = get_string('bgpos','theme_mb2nl');
+// 		$setting = new admin_setting_configselect($name, $title, '', 'center center', $bgPositionOpt);
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgattach';
+// 		$title = get_string('bgattachment','theme_mb2nl');
+// 		$setting = new admin_setting_configselect($name, $title, '', 'scroll', $bgAttOpt);
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 		$name = 'theme_mb2nl/' . $k . 'bgsize';
+// 		$title = get_string('bgsize','theme_mb2nl');
+// 		$setting = new admin_setting_configselect($name, $title, '', 'cover', $bgSizeOpt);
+// 		$setting->set_updatedcallback('theme_reset_all_caches');
+// 		$temp->add($setting);
+//
+//
+// 	$setting = new admin_setting_configmb2end('theme_mb2nl/end' . $k . 'style');
+// 	$setting->set_updatedcallback('theme_reset_all_caches');
+// 	$temp->add($setting);
+//
+//
+// }
 
 
 

@@ -29,6 +29,22 @@
 
     Example context (json):
     {
+        "id": 1,
+        "name": "Sample event name",
+        "normalisedeventtype": "course",
+        "course": {
+            "id": 1
+        },
+        "canedit": true,
+        "candelete": true,
+        "isactionevent": true,
+        "icon": {
+            "key": "i/courseevent",
+            "component": "core",
+            "alttext": "Some course event"
+        },
+        "editurl": "#",
+        "url": "#"
     }
 }}
 <div class="calendar-event-box calendar_event_{{eventtype}}" {{!
@@ -36,20 +52,22 @@
     }} data-course-id="{{course.id}}"{{!
     }} data-event-id="{{id}}"{{!
     }} class="event"{{!
-    }} data-eventtype-{{calendareventtype}}="1"{{!
+    }} data-event-component="{{component}}"{{!
+    }} data-event-eventtype="{{eventtype}}"{{!
+    }} data-eventtype-{{normalisedeventtype}}="1"{{!
     }} data-event-title="{{name}}"{{!
     }} data-event-count="{{eventcount}}"{{!
     }}>
     <div class="calendar-event-row">
         <div class="calendar-event-content">
-            <div class="calendar-event-settings pull-right">
+            <div class="calendar-event-settings">
                 {{#canedit}}
                     {{#candelete}}
-                        <a href="{{deleteurl}}" class="btn btn-sm btn-secondary" data-action="delete">
+                        <a href="{{deleteurl}}" class="btn btn-sm btn-secondary mt-sm-0 mb-sm-1 my-md-0" data-action="delete">
                             {{#pix}}t/delete, core, {{#str}}delete{{/str}}{{/pix}}
                         </a>
                     {{/candelete}}
-                    <a href="{{editurl}}" class="btn btn-sm btn-secondary" data-action="edit">
+                    <a href="{{editurl}}" class="btn btn-sm btn-secondary mt-sm-0 mb-sm-3 my-md-0" data-action="edit">
                         {{#pix}}t/edit, core, {{#str}}edit{{/str}}{{/pix}}
                     </a>
                 {{/canedit}}
@@ -65,12 +83,6 @@
         </div>
         <div class="calendar-event-desc">
 
-            {{#location}}
-            <p>
-              {{#pix}} i/location, core, {{#str}} location {{/str}} {{/pix}}
-              {{{.}}}
-            </p>
-            {{/location}}
             {{#iscategoryevent}}
                   <p class="cal-categoryevent">
                     {{#pix}} i/categoryevent, core, {{#str}} category {{/str}} {{/pix}}
@@ -89,17 +101,28 @@
             {{/groupname}}
 
             <p>{{{description}}}</p>
-            {{#iscourseevent}}
-                <div><a href="{{url}}">{{course.fullname}}</a></div>
-            {{/iscourseevent}}
-            {{> core_calendar/event_subscription}}
-            {{#isactionevent}}
-                <a href="{{url}}">{{#str}} gotoactivity, core_calendar {{/str}}</a>
-            {{/isactionevent}}
-            {{#groupname}}
-                <div><a href="{{url}}">{{{course.fullname}}}</a></div>
-                <div>{{{groupname}}}</div>
-            {{/groupname}}
+
+            <div class="d-sm-block d-md-inline-flex align-items-center">
+                {{#location}}
+                <div class="d-inline-flex align-items-center badge badge-light">
+                {{#pix}} i/location, core, {{#str}} location {{/str}} {{/pix}}
+                <span class="ml-2">{{{.}}}</span>
+                </div>
+                {{/location}}
+                {{#iscourseevent}}
+                    <div><a href="{{url}}" class="badge badge-link badge-special">{{course.fullname}} <i class="fas fa-caret-right ml-1"></i></a></div>
+                {{/iscourseevent}}
+                {{> core_calendar/event_subscription}}
+                {{#isactionevent}}
+                    <a href="{{url}}" class="badge badge-link badge-secondary">{{#str}} gotoactivity, core_calendar {{/str}} <i class="fas fa-caret-right ml-1"></i></a>
+                {{/isactionevent}}
+                {{#groupname}}
+                    <div><a href="{{url}}" class="badge badge-link badge-light">{{{course.fullname}}}</a></div>
+                    <div>{{{groupname}}}</div>
+                {{/groupname}}           
+            </div>
+
+
         </div>
     </div>
 </div>

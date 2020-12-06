@@ -18,16 +18,15 @@
     Page navbar.
 }}
 
-  <div class="d-sm-inline d-md-none">
-      <button type="button" class="sidebar-btn" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">
-        <i class="fas fa-equals" id="mobileSidebarBtn"></i>
-        <i class="fas fa-times hidden" id="mobileSidebarBtnClose"></i>
-      </button>
+    
+  <div class="d-sm-inline d-lg-none">
+      <button type="button" class="sidebar-btn" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav"></button>
   </div>
 
-  <div class="d-sm-inline d-md-none">
-      <button type="button" class="mobile-topbar-btn">
+  <div class="d-sm-inline d-lg-none">
+      <button id="showMobileTopBar" type="button" class="mobile-topbar-btn">
         <i class="fas fa-th-large" id="mobileTopBarBtn"></i>
         <i class="fas fa-times hidden" id="mobileTopBarCloseBtn"></i>
       </button>
   </div>
+

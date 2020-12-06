@@ -87,9 +87,9 @@ $string['loading'] = 'Loading...';
 
 
 // Check plugins
-$string['mb2slider_plugin'] = '<strong>Mb2 Slider</strong> block must be installed. Please see <a href="https://mb2themes.com/docs/new-learning/#slider_installation" target="_blank">documentation</a>.';
-$string['mb2shortcodes_filter_plugin'] = '<strong>Mb2 Shortcodes Filter</strong> plugin must be <strong>installed</strong> and <strong><u>activated</u></strong>. Please see <a href="https://mb2themes.com/docs/new-learning/#sc_filter" target="_blank">documentation</a>.';
-$string['mb2shortcodes_button_plugin'] = '<strong>Mb2 Shortcodes Button</strong> plugin must be installed. Please see <a href="https://mb2themes.com/docs/new-learning/#sc_button" target="_blank">documentation</a>.';
+
+$string['mb2shortcodes_filter_plugin'] = '<div class="filter-message"><p>Everything works great, but one little thing have to be done.</p><p><strong>Mb2 Shortcodes FILTER</strong> plugin must be:</p><ol><li>Installed (<em>Site administration &rarr; Plugins &rarr; Install plugins</em>)</li><li>Activated (<em>Site administration &rarr; Plugins &rarr; Filters &rarr; Manage filters</em>)</li></ol></div>';
+$string['urltolink_filter_plugin'] = '<div class="filter-message urltolink"><p>One more thing have to be done:</p><ol><li>Go to: <em>Site administration &rarr;  Plugins &rarr; Filters &rarr; Manage filters</em></li><li>Move <strong>Mb2 Shortcodes</strong> filter above <strong>Convert URLs into links and images</strong> filter.</li></ol></div>';
 $string['mb2slides_plugin'] = '<strong>Mb2 Slides</strong> plugin must be installed. Please see <a href="https://mb2themes.com/docs/new-learning/#slider_installation" target="_blank">documentation</a>.';
 $string['mb2slides_plugin_empty'] = 'Mb2 Slides plugin is installed! Go to plugin page to <a href="{$a->link}">Manage slides</a>.';
 
@@ -141,7 +141,6 @@ $string['certificate'] = 'Certificate';
 $string['register'] = 'Register';
 $string['strftimedatemonthabbr'] = '%d %b %Y';
 
-
 // Settings tabs
 $string['configtitle'] = 'New Learning';
 $string['settingsgeneral'] = 'General';
@@ -152,7 +151,6 @@ $string['settingsfonts'] = 'Fonts';
 $string['settingstypography'] = 'Typography';
 $string['settingsstyle'] = 'Style';
 $string['allsettings'] = 'All settings';
-
 
 // Settings panel
 $string['documentation'] = 'Documentation';
@@ -220,21 +218,23 @@ $string['slider'] = 'Slider';
 
 
 // Settings navigation
-$string['navatype'] = 'Animation Type';
+$string['navatype'] = 'Animation type';
 $string['stickynav'] = 'Sicky navigation';
 $string['stickymobilenav'] = 'Sticky navigation on mobile';
 $string['navatypefade'] = 'Fade';
 $string['navatypeslide'] = 'Slide';
-$string['navaspeed'] = 'Animation Speed (ms)';
-$string['navddwidth'] = 'Dropdown Items Width (px)';
-$string['langinmenu'] = 'Languages in Menu';
-$string['mycinmenu'] = 'My Courses in Menu';
-$string['myclimit'] = 'Course Name Words Limit';
+$string['navaspeed'] = 'Animation speed (ms)';
+$string['navddwidth'] = 'Dropdown items width (px)';
+$string['langinmenu'] = 'Languages in menu';
+$string['mycinmenu'] = 'My courses in menu';
+$string['mychidden'] = 'Hidden courses';
+$string['mycexpierd'] = 'Expierd courses';
+$string['myclimit'] = 'Course name words limit';
 $string['navicon'] = 'Icon Navigation';
-$string['urlnw'] = 'Open in a New Window';
-$string['navcls'] = 'Menu Item Class';
+$string['urlnw'] = 'Open in a new window';
+$string['navcls'] = 'Menu item class';
 $string['navclsdesc'] = 'You may set different css class for different menu items and then styled it. Use "itemLabel:cssClass", e.g. "Courses:myCustoClass". Classess for each menu item must be placed in a new line.';
-$string['mainmenu'] = 'Main Menu';
+$string['mainmenu'] = 'Main menu';
 $string['naviconsdesc'] = 'Each line consists separated by pipe characters (|):<br>text::icon name|optional url::"1" to open link in a new window|language code or comma-separated codes|"1" to show text for logged in users only or "2" to show text for none logged in users only.<br>For example:<pre>Link with icon::fa-life-ring|http://example.com
 Link with icon open in a new window::fa-link|http://example.com::1
 English text::fa-flag||en
@@ -330,9 +330,6 @@ $string['pbgdesc'] = 'To see page background color or image you need ot use \'Bo
 $string['strip1'] = 'Strip left light';
 $string['strip2'] = 'Strip left dark';
 $string['pbgpre'] = 'Predefined background';
-$string['bcstyle'] = 'Before content';
-$string['acstyle'] = 'After content';
-$string['asstyle'] = 'After slider';
 $string['colorscheme'] = 'Color scheme';
 $string['sectionpadding'] = 'Top,bottom padding';
 $string['sectionpaddingdesc'] = 'Comma separated padding top and bottom in pixels, e.g. \'20,20\'.';
@@ -399,3 +396,8 @@ $string['panellinkincontent'] = 'Deprecated';
 $string['stickyheader'] = 'Deprecated';
 $string['region-banner-top'] = 'Deprecated';
 $string['region-banner-bottom'] = 'Deprecated';
+$string['mb2slider_plugin'] = 'Deprecated';
+$string['mb2shortcodes_button_plugin'] = 'Deprecated';
+$string['bcstyle'] = 'Deprecated';
+$string['acstyle'] = 'Deprecated';
+$string['asstyle'] = 'Deprecated';

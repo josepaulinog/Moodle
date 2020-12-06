@@ -1,9 +1,34 @@
 .border-hor {
 	border-color: $color_border;
+	border-style: solid;
+	height: 1px;
+	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-ms-box-sizing: content-box;
 
 	&.light {
 		border-color: rgba(255,255,255,.1);
 	}
+
+	&.border-dotted {
+		border-style: dotted;
+	}
+
+	&.border-dashed {
+		border-style: dashed;
+	}
+
+	&.double1 {
+		height: 5px;
+	}
+
+	&.double0 {
+		border-bottom: 0 !important;
+	}
+
+	border-left: 0 !important;
+	border-right:  0 !important;
 }
 
 

@@ -1,13 +1,24 @@
 <?php
 
 $capabilities = array(
-
-    'local/mb2builder:view' => array(
-        'riskbitmask' => RISK_SPAM | RISK_XSS,
+    'local/mb2builder:viewpages' => array(
         'captype' => 'write',
-        'contextlevel' => CONTEXT_MODULE,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW,
-        ),
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array()
+    ),
+    'local/mb2builder:viewlayouts' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array()
+    ),
+    'local/mb2builder:managepages' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(),
+    ),
+    'local/mb2builder:managelayouts' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(),
     )
 );

@@ -1,7 +1,25 @@
 
 
-.theme-boxicon.type-1 {
+.theme-boxicon-readmore {
+	.linkbtn0 & {
+		display: none;
+	}
+}
 
+.box-desc {
+	.desc0 & {
+		display: none;
+	}
+
+	color: $textcolor;
+
+	.dark & {
+		color: #fff;
+	}
+}
+
+
+.theme-boxicon.type-1 {
 
 	.theme-boxicon-icon {
 		display: block;
@@ -101,6 +119,7 @@
 	.dark1 & {
 		.theme-boxicon-icon {
 			color: rgba(255,255,255,.8);
+			background-color: rgba(255,255,255,.1);
 		}
 	}
 
@@ -135,10 +154,9 @@
 		position: absolute;
 		left: 0;
 		display: block;
-		background-color: rgba($accent1, 80%);
+		background-color: $accent1;
 		width: 46px;
 		text-align: center;
-		font-size: 17px;
 		color: #fff;
 		@include mb2_transition1(all, .25s);
 	}
@@ -155,16 +173,12 @@
 	.theme-boxicon-icon {
 		position: absolute;
 		left: 0;
-		top: 50%;
-		margin-top: -23px;
-		height: 46px;
-		line-height: 46px;
+		top: 4px;
+		height: 48px;
+		width: 48px;
+		line-height:48px;
+		font-size: 26px;
 		@include mb2_border_radius(999px);
-	}
-
-	.dir-rtl & {
-		padding-right: 63px;
-		padding-left: 0;
 	}
 }
 
@@ -175,6 +189,10 @@
 
 	background-color: lighten($color_gray3, 3%);
 
+	.dark & {
+		background-color: rgba(255,255,255,.1);
+	}
+
 	.theme-boxicon-content {
 		padding: 10px 10px 10px 62px;
 	}
@@ -183,6 +201,7 @@
 		left: 0;
 		top: 0;
 		bottom: 0;
+		font-size: 34px;
 
 		i {
 			position: absolute;
@@ -211,72 +230,83 @@
 
 	&:hover {
 		.theme-boxicon-icon {
-			background-color: $accent1;
+			background-color: rgba( $accent1, .8);
 		}
 	}
 
 	&.color-info {
 		.theme-boxicon-icon {
-			background-color: rgba($color_info, 80%);
+			background-color: $color_info;
 		}
 		&:hover {
 			.theme-boxicon-icon {
-				background-color: $color_info;
+				background-color: rgba($color_info, .8);
+			}
+		}
+	}
+
+	&.color-secondary {
+		.theme-boxicon-icon {
+			background-color: $accent3;
+		}
+		&:hover {
+			.theme-boxicon-icon {
+				background-color: rgba($accent3, .8);
 			}
 		}
 	}
 
 	&.color-warning {
 		.theme-boxicon-icon {
-			background-color: rgba($color_warning, 80%);
+			background-color: $color_warning;
 		}
 		&:hover {
 			.theme-boxicon-icon {
-				background-color: $color_warning;
+				background-color: rgba($color_warning, .8);
 			}
 		}
 	}
 
 	&.color-success {
 		.theme-boxicon-icon {
-			background-color: rgba($color_success, 80%);
+			background-color: $color_success;
 		}
 		&:hover {
 			.theme-boxicon-icon {
-				background-color: $color_success;
+				background-color: rgba($color_success, .8);
 			}
 		}
 	}
 
 	&.color-danger {
 		.theme-boxicon-icon {
-			background-color: rgba($color_danger, 80%);
+			background-color: $color_danger;
 		}
 		&:hover {
 			.theme-boxicon-icon {
-				background-color: $color_danger;
+				background-color: rgba($color_danger, .8);
 			}
 		}
 	}
 
 	&.color-inverse {
 		.theme-boxicon-icon {
-			background-color: rgba($accent2, 80%);
+			background-color: $accent2;
 		}
 		&:hover {
 			.theme-boxicon-icon {
-				background-color: $accent2;
+				background-color: rgba($accent2, .8);
 			}
 		}
 	}
 
 	&.color-gray {
 		.theme-boxicon-icon {
-			background-color: rgba($color_gray1, 80%);
+			background-color: $color_gray1;
 		}
 		&:hover {
 			.theme-boxicon-icon {
-				background-color: $color_gray1;
+				background-color: rgba($color_gray1, .8);
 			}
 		}
 	}

@@ -39,6 +39,15 @@
           border-radius: $radius;
 }
 
+@mixin mb2_border_radius_imp($radius) {
+  -webkit-border-radius: $radius !important;
+     -moz-border-radius: $radius !important;
+      -ms-border-radius: $radius !important;
+          border-radius: $radius !important;
+}
+
+
+
 
 @mixin mb2_transition1($type, $speed){
 	-webkit-transition: $type $speed ease-in-out;
@@ -63,31 +72,6 @@
 }
 
 
-
-@mixin mb2_font_fa() {
-	display: inline-block;
-	font: normal normal normal 14px/1 FontAwesome;
-	font-size: inherit;
-	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-
-@mixin mb2_font_7stroke() {
-	display: inline-block;
-	font-family: 'Pe-icon-7-stroke';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
 
 
 @mixin mb2_trabsform_scale($size){

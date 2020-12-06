@@ -32,14 +32,19 @@
       {{/hasnavbar}}
 
       <div class="w-100 row no-gutters align-items-center c-header-content">
-        {{#contextheader}}<div class="page-title mb-0">{{{contextheader}}}</div>{{/contextheader}}
+        {{#contextheader}}<div class="page-title">{{{contextheader}}}</div>{{/contextheader}}
 
-        <div class="settings-menu">
+        <div id="settingsMenu" class="settings-menu d-inline-flex">
           {{#settingsmenu}}
           <div id="headerBtn" class="header-settings-menu-box">
               {{{settingsmenu}}}
           </div>
           {{/settingsmenu}}
+          {{#headeractions}}
+          <div class="header-actions-container ml-1" data-region="header-actions-container">
+            <div class="header-action">{{{.}}}</div>
+          </div>
+          {{/headeractions}}
           {{{pageheadingbutton}}}
         </div>
 

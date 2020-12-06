@@ -72,6 +72,21 @@ if ($hassiteconfig && has_capability('local/mb2notices:view', context_system::in
 	$setting = new admin_setting_configselect( $name, $title, '', 'editingteacher', Mb2noticesHelper::get_roles_to_select() );
 	$page->add($setting);
 
+	$name = 'local_mb2notices/rolecustom1';
+	$title = get_string('rolecustom','local_mb2notices', array( 'num'=> 1 ) );
+	$setting = new admin_setting_configselect( $name, $title, '', '', Mb2noticesHelper::get_roles_to_select() );
+	$page->add($setting);
+
+	$name = 'local_mb2notices/rolecustom2';
+	$title = get_string('rolecustom','local_mb2notices', array( 'num'=> 2 ) );
+	$setting = new admin_setting_configselect( $name, $title, '', '', Mb2noticesHelper::get_roles_to_select() );
+	$page->add($setting);
+
+	$name = 'local_mb2notices/rolecustom3';
+	$title = get_string('rolecustom','local_mb2notices', array( 'num'=> 3 ) );
+	$setting = new admin_setting_configselect( $name, $title, '', '', Mb2noticesHelper::get_roles_to_select() );
+	$page->add($setting);
+
 	$name = 'local_mb2notices/canclose';
 	$title = get_string('canclose','local_mb2notices');
 	$setting = new admin_setting_configcheckbox($name, $title, '', 0);

@@ -33,9 +33,30 @@
 }
 
 
+@mixin mb2_button_border($color: $btncolor) {
+
+    border-color: $color;
+    color: #000 !important;
+    background-color: transparent !important;
+
+    .dark & {
+        color: #fff !important;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: #fff !important;
+        background-color: darken( $color, 5% ) !important;
+        border-color: darken( $color, 5% );
+    }
+
+}
+
+
 @mixin mb2_button($color: $btncolor) {
 	display: inline-block;
-  	font-weight: inherit !important;
+  	//font-weight: inherit;
   	cursor: pointer;
 	@include mb2_transition1(all, .15s);
 	@include button-variant($color, darken($color,5%));
@@ -55,18 +76,17 @@
 
 	/* Bordered buttons */
 
-	&.btn-border {
-		background-color: transparent !important;
-		@include mb2_border_radius(.22rem);
-		border-width: 1px;
-		font-weight: $fwheadings !important;
+	&.btnborder1 {
+		@include mb2_button_border( $btncolor );
+        @include mb2_border_radius( .22rem );
+        border-width: 1px;
 	}
 
 
 	/* Bordered rounded */
 
-	&.btn-rounded {
-		@include mb2_border_radius(1.5rem);
+	&.rounded1 {
+		@include mb2_border_radius(999px);
 	}
 
 	.icon {

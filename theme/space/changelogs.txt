@@ -1,6 +1,174 @@
 CHANGELOG
 Space Moodle Theme
 - - - -
+## [1.11.7] November 28, 2020
++ Added: Mailto link into the footer
++ Improvements: User Tour Modal UI
++ Minor bug fixes
+
+## [1.11.6] November 21, 2020
++ Improvements: Notification, Login as UI Improvements
++ Improvements: Better UI support for Course Module navigation (https://moodle.org/plugins/block_course_modulenavigation)
++ Fixed: Button Special Hover Color
+
+## [1.11.5] November 17, 2020
++ Fixed: Bug on the Participants Page (role buttons)
++ New: Course Management Page UI
+
+## [1.11.4] November 12, 2020
++ Improvements: Notification pop-ups
++ Improvements: Quiz Module UI
++ Fixed: ATTO Editor Full Screen Support - https://moodle.org/plugins/atto_fullscreen
++ Fixed: Messages (message break words)
++ Minor bug fixes
+
+## [1.11.3] November 4, 2020
++ Fixed: Hero video does not fill the whole width of screen
++ Fixed: Logotypes Slider (SVG files)
++ Fixed: Calendar bug (Firefox browser)
++ Fixed: Etherpad Lite full screen mode
++ Fixed: ATTO Editor
++ Added: Optional custom SVG logo on the sign in/sign up page
++ Added: Optional, custom sidebar logo URL
++ Minor bug fixes
+
+## [1.11.2] October 17, 2020
++ Missed Forgot password link
++ Logotypes Block - URLs open on new window by default
++ Sticky Top Bar Improvements
+
+## [1.11.1] October 15, 2020
++ Hero Image bug fixes
+
+## [1.11] October 14, 2020
++ Show/Hide more teachers (Course Card)
++ Sticky Navigation Improvements
++ Removed an unnecessary menu from H5P site admin page.
++ New Backup UI
++ Quiz Improvements
++ Calendar Improvements
++ Forum Improvements
++ Hero Slider Improvements (multilang)
++ Video Hero Front Page Block
++ [Login Page ] Optional: SVG logo
++ [Login Page ] Optional: Hide Remember Password Link
++ [Login Page ] Optional: Additional Content Under Password Field
++ Minor bug fixes and UI improvements
+
+## [1.10.10] September 10, 2020
++ Login Page UI improvements
++ Added: Optional Custom Grid Breakpoints
++ Minor bug fixes
+
+## [1.10.9] September 7, 2020
++ Custom top bar logo on mobile view
++ Removed copyright icon from footer, copyright icon is optional
+
+## [1.10.8] September 5, 2020
++ UI Improvements: Calendar UI
++ Top Bar #4, #5 improvements
++ Sidebar Customization Improvements
++ RWD Improvements
+
+## [1.10.7] August 29, 2020
++ Added: vidbg.js instead jquery.vide.js
++ Added: Optional testimonial block separator
++ Fixed: Top Bar Styles - Responsivenes
++ Fixed: Custom Sidebar Icons
++ Fixed: Notifications Pop-up Position
++ Fixed: Nav bar always on top when scrolling the front page with hero video
++ UI Improvements: Top Bar Search Form
+
+## [1.10.6] August 28, 2020
++ Added Custom Close Sidebar Button
++ Hero Image added additional option - Only image)
++ Top bar responsivenes - improvements
++ Recently Accessed Items UI improvements
++ Missing Starred Items - Course overview
++ Fixed Disabled Toogle
+
+## [1.10.5.1] August 25, 2020
++ Sidebar Widget Area Increased
+
+## [1.10.5] August 25, 2020
++ Hero Slider Improvements
++ Customization Button Alignment
+
+## [1.10.4] August 24, 2020
++ Added front page Hero Slider auto-height
++ More customization options
++ RWD Improvements
++ Forum UI Improvements
++ Chat UI Improvements
++ Full Screen Atto plugin Support
++ Added missing role define icons
++ Few UI improvements
++ Added more options to the Slider (Mobile slide height, only images)
++ Page Loader Improvements
+
+## [1.10.3] August 11, 2020
++ Added few plugin icons
+
+## [1.10.2] August 11, 2020
++ Minor bug fixes
+
+## [1.10.1] August 10, 2020
++ Moodle 3.8 support
++ Admin table improvements (Site administration/Server/Tasks/Scheduled tasks)
++ Added Activity Choose Missing Search Bar (moodle 3.9)
++ Optional Nav Sidebar on the front page
++ Course Editing UI improvements (Restrict access)
++ Fixed Sidebar Custom Icon
++ Minor bug fixes
+
+## [1.10.0] August 6, 2020
++ New Calendar UI
++ New Blog UI
++ Forum UI improvements
++ Forum Grading Support
++ Local Mail Plugin UI improvements
++ FontAwesome 5.14.0
++ Improvements for Boost navigation fumbling support
++ Hidden course alert on the course page
++ Missing Icon for Download Center https://moodle.org/plugins/local_downloadcenter
++ Quiz Mod - minor bug fixes
++ Minor bug fixes
+
+## [1.9.28] July 22, 2020
++ Emoji picker icons bug fixed
++ Sidebar improvements
++ Filemanager modal - default moodle icon removed
+
+## [1.9.27] July 20, 2020
++ Hero Slider bug fixes
+
+## [1.9.26] July 18, 2020
++ Login Page RWD UI improvements
++ Z-index bug fixes
+
+## [1.9.25] July 14, 2020
++ Front page blocks translations works correctly
++ Edwiser Course Format Support
++ Notifications UI improvements
++ Improved support for boost navigation fumbling
++ Minor bug fixes
+
+## [1.9.24] June 24, 2020
++ Added optional user name on the top bar
+
+## [1.9.23] June 23, 2020
++ Moodle 3.8 (Course Activity Modal - Bug fixes)
++ Added UI support for Flexible Content Plugin
++ Custom Navigation Multi-lang bug fixes
+
+## [1.9.22] June 22, 2020
++ H5P Bug fixes
+
+## [1.9.21] June 20, 2020
++ Assignment Module Improvements
++ RWD improvements
++ Minor bug fixes
+
 ## [1.9.20] June 19, 2020
 + Minor bug fixes
 
@@ -115,7 +283,7 @@ Space Moodle Theme
 + Minor Bug fixes
 
 ## [1.8.3] January 22, 2020
-+ Added: Top Bar style #6 
++ Added: Top Bar style #6
 + Added: Sidebar navigation with submenu (Based on Default Moodle Navigation)
 + Fixed: Sidebar Courses Navigation
 + RWD Improvements
@@ -127,8 +295,8 @@ Space Moodle Theme
 + Minor Bug fixes
 
 ## [1.8.0] January 9, 2020
-+ Added: 
-  + Show/Hide sidebar 
++ Added:
+  + Show/Hide sidebar
   + Expand/Collapse "My courses"
   + Show/Hide theme author info
   + Additional top bar navigation

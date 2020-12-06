@@ -50,12 +50,11 @@ $cls = $showheadingbuttons ? 'isbutton' : 'nobutton';
 							}
 						}
 
-						if ( $showheadingbuttons )
-						{
-							echo $OUTPUT->page_heading_button();
-						}
-
-					?>
+						if ( $showheadingbuttons ) : ?>
+							<div class="header-right">
+								<?php echo $OUTPUT->page_heading_button(); ?>
+							</div>
+						<?php endif; ?>
                 </div>
             </div>
         </div>

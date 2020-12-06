@@ -94,10 +94,10 @@
 
                 {{#letter}}
                     {{#selected}}
-                        <li class="page-item active {{name}}"><span class="page-link">{{name}}</span></li>
+                        <li data-initial="{{name}}" class="page-item active {{name}}"><span class="page-link">{{name}}</span></li>
                     {{/selected}}
                     {{^selected}}
-                        <li class="page-item {{name}}"><a class="page-link" href="{{url}}">{{name}}</a></li>
+                        <li data-initial="{{name}}" class="page-item {{name}}"><a class="page-link" href="{{url}}">{{name}}</a></li>
                     {{/selected}}
                 {{/letter}}
             </ul>
@@ -106,3 +106,4 @@
 
     <hr class="hr" />
 </div>
+

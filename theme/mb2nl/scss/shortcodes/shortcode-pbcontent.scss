@@ -1,61 +1,4 @@
 
-/* Layout */
-
-.mb2-pb-content.nocarousel {
-	&.cols {
-		.mb2-pb-content-list {
-			margin-left: -15px;
-			margin-right: -15px;
-		}
-
-
-		.mb2-pb-content-item {
-			float: left;
-			padding-left: 15px;
-			padding-right: 15px;
-			margin-bottom: 30px;
-		}
-	}
-
-	&.cols.gwidth-thin {
-		.mb2-pb-content-list {
-			margin-left: -2px;
-			margin-right: -2px;
-		}
-
-
-		.mb2-pb-content-item {
-			padding-left: 2px;
-			padding-right: 2px;
-			margin-bottom: 4px;
-		}
-	}
-}
-
-
-@media only screen and (max-width:768px){
-	.mb2-pb-content {
-		&.cols.multicol {
-			.mb2-pb-content-item {
-				width: 50% !important;
-			}
-		}
-	}
-}
-
-
-@media only screen and (max-width:480px){
-	.mb2-pb-content {
-		&.cols,
-		&.cols.multicol {
-			.mb2-pb-content-item {
-				width: 100% !important;
-			}
-		}
-	}
-}
-
-
 
 /* Elements */
 
@@ -125,7 +68,7 @@
 /* ====================== PRE STYLE - NLEARNING ====================== */
 
 
-.mb2-pb-content.nlearning {
+.mb2-pb-content.prestylenlearning {
 
 	.mb2-pb-content-item-inner {
 		position: relative;

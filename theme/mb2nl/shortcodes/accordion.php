@@ -10,16 +10,19 @@ function mb2_shortcode_accordion($atts, $content= null){
 	extract(mb2_shortcode_atts( array(
 		'show_all' => 0,
 		'custom_class' => '',
+		'isicon' => 0,
+		'icon' => 'fa fa-trophy',
 		'accordion_active' => theme_mb2nl_shortcodes_global_opts('accordion', 'accordion_active', 1),
-		'margin' => '',
+		'mt' => 0,
+		'mb' => 30,
 		'parent' => 1
 		), $atts)
 	);
 
 	$output = '';
+	$style = '';
 
-
-	if(isset($GLOBALS['accordion_count']))
+	if( isset( $GLOBALS['accordion_count'] ) )
 	{
 	  $GLOBALS['accordion_count']++;
 	}
@@ -31,21 +34,30 @@ function mb2_shortcode_accordion($atts, $content= null){
 	$GLOBALS['show_all'] = $show_all;
 	$GLOBALS['accordion_active'] = $accordion_active;
 	$GLOBALS['parent'] = $parent;
+	$GLOBALS['accordionisicon'] = $isicon;
+	$GLOBALS['accordionicon'] = $icon;
 
 	$cls = $custom_class ? ' ' . $custom_class : '';
 
-	$style = $margin !='' ? ' style="margin:' . $margin . ';"' : '';
+	if ( $mt || $mb )
+	{
+		$style .= ' style="';
+		$style .= $mt ? 'margin-top:' . $mt . 'px;' : '';
+		$style .= $mb ? 'margin-bottom:' . $mb . 'px;' : '';
+		$style .= '"';
+	}
 
 	$output .= '<div class="mb2-accordion accordion' . $cls . '"' . $style;
 
-	if($parent)
+	if( $parent )
 	{
 		$output .= ' id="theme-accordion-' . $GLOBALS['accordion_count'] . '"';
 	}
 
 	$output .= '>' . mb2_do_shortcode($content) . '</div>';
 
-	unset($GLOBALS['accordion_item_count']);
+	unset( $GLOBALS['accordion_item_count'] );
+	unset( $GLOBALS['accordionisicon'] );
 
 	return $output;
 
@@ -63,6 +75,7 @@ function mb2_shortcode_accordion_item($atts, $content= null){
 		), $atts)
 	);
 
+	$icon = $icon ? $icon : $GLOBALS['accordionicon'];
 
 	// Get globals
 	$accordion_count = isset($GLOBALS['accordion_count']) ? $GLOBALS['accordion_count'] : 0;
@@ -77,8 +90,7 @@ function mb2_shortcode_accordion_item($atts, $content= null){
 		$GLOBALS['accordion_item_count'] = 1;
 	}
 
-	$col_id = 'acc_item_' . theme_mb2nl_string_url_safe($title) . '_' . $accordion_count . '_' . $GLOBALS['accordion_item_count'] . '_';
-
+	$col_id = 'acc_item_' . theme_mb2nl_string_url_safe( str_replace( '.', '', $title ) ) . '_' . $accordion_count . '_' . $GLOBALS['accordion_item_count'] . '_';
 
 	$output = '';
 	$show = '';
@@ -100,14 +112,13 @@ function mb2_shortcode_accordion_item($atts, $content= null){
 		$show = ' show';
 	}
 
-	$pref = theme_mb2nl_font_icon_prefix($icon);
-
+	$pref = theme_mb2nl_font_icon_prefix( $icon );
 
 	// Check if in title is an icon
-	if($icon)
+	if( $icon  && $GLOBALS['accordionisicon'] )
 	{
 		$is_icon = ' is-icon';
-		$title = '<i class="' . $pref . $icon . '"></i> ' . format_text($title, FORMAT_HTML);
+		$title = '<i class="' . $pref . $icon . '"></i> ' . format_text( $title, FORMAT_HTML );
 	}
 
 	$parent = isset($GLOBALS['parent']) ? $GLOBALS['parent'] : 1;

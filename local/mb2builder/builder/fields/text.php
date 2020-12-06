@@ -46,11 +46,11 @@ class LocalMb2builderText
 		}
 
 		$showon = local_mb2builder_showon_field($attr['showon']);
+		$actions = local_mb2builder_field_actions(  $attr );
 
 		$output  = '<div class="form-group  mb2-pb-form-group mb2-pb-form-group-' . $key . '">';
 		$output .= '<label>' . $attr['title'] . '</label>';
-		$output	.= '<input type="text" class="form-control mb2-pb-input mb2-pb-input-' . $key . '"' . $showon . ' data-attrname="' . $key . '" value="' .
-		$attr['default'] . '" />';
+		$output	.= '<input type="text" class="form-control mb2-pb-input mb2-pb-input-' . $key . '"' . $showon . $actions . ' data-attrname="' . $key . '" value="' .	$attr['default'] . '" />';
 
 		if ($attr['desc'])
 		{

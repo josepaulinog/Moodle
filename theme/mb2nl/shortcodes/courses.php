@@ -2,20 +2,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
 mb2_add_shortcode('courses', 'mb2_shortcode_courses');
-
 
 function mb2_shortcode_courses($atts, $content= null){
 
-	extract(mb2_shortcode_atts(array(
+	global $CFG;
+
+	$atts2 = array(
 		'limit' => 8,
 		'catids' => '',
 		'courseids' => '',
 		'excourses' => 0,
+		'mobcolumns' => 0,
 		'excats' => 0,
-		'layout' => 'cols',
-		'colnum' => 3,
+		'carousel' => 0,
+		'columns' => 3,
 		'sdots' => 0,
 		'sloop' => 0,
 		'snav' => 1,
@@ -25,97 +26,59 @@ function mb2_shortcode_courses($atts, $content= null){
 		'desclimit' => 25,
 		'titlelimit' => 6,
 		'gridwidth' => 'normal',
-		'link' => 1,
-		'readmoretext' => '',
-		'prestyle' => 0,
+		'gutter' => 'normal',
+		'linkbtn' => 0,
+		'btntext' => '',
+		'prestyle' => 'none',
 		'custom_class' => '',
 		'colors' => '',
-		'margin' => '',
+		'mt' => 0,
+		'mb' => 30,
 		'courseprices' => '',
 		'currency' => 'USD:24'
-	), $atts));
-
+	);
+	extract( mb2_shortcode_atts( $atts2, $atts ) );
 
 	$output = '';
 	$cls = '';
 	$list_cls = '';
 	$col_cls = '';
+	$style = '';
 
 	// Set column style
 	$col = 0;
 	$col_style = '';
 	$list_style = '';
-	$slider_data = '';
 
-	// Get content source
-	$items_opt = array(
-		'limit'=>$limit,
-		'catids'=>$catids,
-		'excats'=>$excats,
-		'excourses' => $excourses,
-		'courseids' => $courseids,
-		'colors'=>$colors,
-		'layout'=> $layout,
-		'col_cls' => $col_cls,
-		'link' => $link,
-		'titlelimit' => $titlelimit,
-		'desclimit' => $desclimit,
-		'colnum' => $colnum,
-		'readmoretext' => $readmoretext,
-		'courseprices' => $courseprices,
-		'currency' => $currency
-	);
-
-	$courses = mb2_shortcode_courses_get_items($items_opt);
-	$itemCount = count($courses);
-	$carousel = ($layout === 'slidercols' && $itemCount > $colnum);
-
-	// Get corousel options
-	$carousel_opt = array(
-		'colnum' => $colnum,
-		'sdots' => $sdots,
-		'sloop' => $sloop,
-		'snav' => $snav,
-		'sautoplay' => $sautoplay,
-		'spausetime' => $spausetime,
-		'sanimate' => $sanimate,
-		'gridwidth' => $gridwidth
-	);
-
+	$courseopts = theme_mb2nl_page_builder_2arrays( $atts, $atts2 );
+	$sliderdata = theme_mb2nl_shortcodes_slider_data( $courseopts );
+	$courses = mb2_shortcode_courses_get_items( $courseopts );
+	$itemCount = count( $courses );
 
 	// Carousel layout
-	if ($carousel)
+	$list_cls .= $carousel ? ' owl-carousel' : '';
+	$list_cls .= ! $carousel ? ' theme-boxes theme-col-' . $columns : '';
+	$list_cls .= ! $carousel ? ' gutter-' . $gutter : '';
+
+	$cls .= ' prestyle' . $prestyle;
+
+	if ( $mt || $mb )
 	{
-		$list_cls .= ' owl-carousel';
-		$col_cls .= ' item';
-		$slider_data = theme_mb2nl_shortcodes_slider_data($carousel_opt);
+		$style .= ' style="';
+		$style .= $mt ? 'margin-top:' . $mt . 'px;' : '';
+		$style .= $mb ? 'margin-bottom:' . $mb . 'px;' : '';
+		$style .= '"';
 	}
 
-	if ($layout === 'slidercols' && $itemCount <= $colnum)
-	{
-		$layout = 'cols';
-	}
-
-	$cls .= ' ' . $layout;
-	$cls .= ' gwidth-' . $gridwidth;
-	$cls .= $colnum > 2 ? ' multicol' : '';
-	$cls .= $prestyle ? ' ' . $prestyle : '';
-	$cls .= ($carousel) ? ' carousel' : ' nocarousel';
-
-	$output .= '<div class="mb2-pb-content mb2-pb-courses clearfix' . $cls . '">';
+	$output .= '<div class="mb2-pb-content mb2-pb-courses clearfix' . $cls . '"' . $style . '>';
 	$output .= '<div class="mb2-pb-content-inner clearfix">';
-	$output .= '<div class="mb2-pb-content-list' . $list_cls . '"' . $slider_data . '>';
+	$output .= '<div class="mb2-pb-content-list' . $list_cls . '"' . $sliderdata . '>';
 
-
-	if ($itemCount>1)
-	{
-		$output .= theme_mb2nl_shortcodes_content_template($courses, $items_opt);
-	}
-	else
+	if ( ! $itemCount )
 	{
 		$output .= get_string('nothingtodisplay');
 
-		if (in_array(theme_mb2nl_site_access(),array('admin','manager','coursecreator')))
+		if ( in_array( theme_mb2nl_site_access(), array( 'admin', 'manager', 'coursecreator' ) ) )
 		{
 			$output .= '<div>';
 			$output .= '<a href="' . new moodle_url($CFG->wwwroot . '/course/edit.php',array('category'=>theme_mb2nl_get_category()->id)) . '">' .
@@ -123,6 +86,8 @@ function mb2_shortcode_courses($atts, $content= null){
 			$output .= '</div>';
 		}
 	}
+
+	$output .= theme_mb2nl_shortcodes_content_template( $courses, $courseopts );
 
 	$output .= '</div>';
 	$output .= '</div>';
@@ -141,158 +106,149 @@ function mb2_shortcode_courses($atts, $content= null){
  * Method to get categories list
  *
  */
-function mb2_shortcode_courses_get_items ($options)
+function mb2_shortcode_courses_get_items( $options )
 {
 
 	global $CFG,$PAGE,$USER,$DB,$OUTPUT,$COURSE;
 
 	require_once($CFG->dirroot . '/course/lib.php');
-	if (!theme_mb2nl_moodle_from(2018120300))
+
+	if ( ! theme_mb2nl_moodle_from( 2018120300 ) )
     {
-        require_once($CFG->libdir. '/coursecatlib.php');
+        require_once( $CFG->libdir. '/coursecatlib.php' );
     }
 
-
-	$output = array();
 	$i = 0;
-
-	//$context = $PAGE->context;
-	$context = context_course::instance($COURSE->id);
-	$coursecat_canmanage = has_capability('moodle/category:manage', $context);
-
+	$context = context_course::instance( $COURSE->id );
+	$coursecat_canmanage = has_capability( 'moodle/category:manage', $context );
 
 	$catsArr = explode(',', str_replace(' ', '', $options['catids']));
 	$coursesArr = explode(',', str_replace(' ', '', $options['courseids']));
 	$exCats = $options['excats'];
 	$exCourses = $options['excourses'];
 
+	$coursesList = get_courses();
+	$itemCount = count( $coursesList );
 
-	$coursesList = get_courses('all');
-	$itemCount = count($coursesList);
-
-
-	if ($itemCount>0)
+	if ( $itemCount <= 0 )
 	{
-		foreach ($coursesList as $course)
-		{
-
-			// Get course category
-			if (theme_mb2nl_moodle_from(2018120300))
-			{
-				$cat = core_course_category::get($course->category, IGNORE_MISSING);
-			}
-			else
-			{
-				$cat = coursecat::get($course->category, IGNORE_MISSING);
-			}
-
-			$course->showitem = true;
-
-			// Check if some category are included/excluded
-			if ($catsArr[0])
-			{
-				$course->showitem = false;
-
-				if ($exCats === 'exclude')
-				{
-					if (!in_array($course->category,$catsArr))
-					{
-						$course->showitem = true;
-					}
-				}
-				elseif ($exCats === 'include')
-				{
-					if (in_array($course->category,$catsArr))
-					{
-						$course->showitem = true;
-					}
-				}
-			}
-
-
-			if ($coursesArr[0])
-			{
-				$course->showitem = false;
-
-				if ($exCourses === 'exclude')
-				{
-					if (!in_array($course->id,$coursesArr))
-					{
-						$course->showitem = true;
-					}
-				}
-				elseif ($exCourses === 'include')
-				{
-					if (in_array($course->id,$coursesArr))
-					{
-						$course->showitem = true;
-					}
-				}
-			}
-
-			if ($course->category == 0)
-			{
-				$course->showitem = false;
-			}
-
-			if ((!isset($cat->visible) || !$cat->visible) && !$coursecat_canmanage)
-			{
-				$course->showitem = false;
-			}
-
-			if ($course->id == 1)
-			{
-				$course->showitem = false;
-			}
-
-
-			// Get image url
-			// If attachment is empty get image from post
-			$imgUrlAtt = theme_mb2nl_shortcodes_content_get_image(array(), false, '', $course->id);
-			$imgNameAtt = theme_mb2nl_shortcodes_content_get_image(array(), true, '',  $course->id);
-
-			$moodle33 = 2017051500;
-			$placeholder_image = $CFG->version >= $moodle33 ? $OUTPUT->image_url('course-default','theme') : $OUTPUT->pix_url('course-default','theme');
-
-			$course->imgurl = $imgUrlAtt ? $imgUrlAtt : $placeholder_image;
-			$course->imgname = $imgNameAtt;
-
-
-			// Define item elements
-			$course->link = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $course->id));
-			$course->link_edit =  new moodle_url($CFG->wwwroot . '/course/edit.php', array('id' => $course->id));
-			$course->edit_text = get_string('editcoursesettings', 'core');
-			$course->title = format_text($course->fullname, FORMAT_HTML);
-			$course->description = format_text($course->summary);
-			$course->details = '&nbsp;';
-
-			if ((isset($cat->visible) && !$cat->visible) && $coursecat_canmanage)
-			{
-				$course->details = $cat->get_formatted_name() . ' (' . get_string('hidden','theme_mb2nl') . ')';
-			}
-			elseif ((isset($cat->visible) && $cat->visible))
-			{
-				$course->details = $cat->get_formatted_name();
-			}
-
-			if (isset($course->visible) && !$course->visible)
-			{
-				$course->title .= ' (' . get_string('hidden','theme_mb2nl') . ')';
-			}
-
-			$course->redmoretext = get_string('readmore', 'theme_mb2nl');
-			$price = mb2_shortcode_courses_course_price($course->id, $options);
-			$course->price = '';
-
-			if ($options['courseprices'])
-			{
-				$course->price = $price ? $price : '<span class="freeprice">' . get_string('noprice','theme_mb2nl') . '</span>';
-			}
-
-		}
+		return array();
 	}
 
+	foreach ( $coursesList as $course )
+	{
 
+		// Get course category
+		if (theme_mb2nl_moodle_from(2018120300))
+		{
+			$cat = core_course_category::get($course->category, IGNORE_MISSING);
+		}
+		else
+		{
+			$cat = coursecat::get($course->category, IGNORE_MISSING);
+		}
+
+		if ( $course->id == 1 )
+		{
+			unset( $coursesList[$course->id] );
+		}
+
+		// Check if some category are included/excluded
+		if ( $catsArr[0] )
+		{
+			if ( $exCats === 'exclude' )
+			{
+				if ( in_array( $course->category, $catsArr ) )
+				{
+					unset( $coursesList[$course->id] );
+				}
+			}
+			elseif ( $exCats === 'include' )
+			{
+				if ( ! in_array( $course->category, $catsArr ) )
+				{
+					unset( $coursesList[$course->id] );
+				}
+			}
+		}
+
+		// Check if some courses are included/excluded
+		if ( $coursesArr[0] )
+		{
+			if ( $exCourses === 'exclude' )
+			{
+				if ( in_array( $course->id, $coursesArr ) )
+				{
+					unset( $coursesList[$course->id] );
+				}
+			}
+			elseif ( $exCourses === 'include' )
+			{
+				if ( ! in_array( $course->id, $coursesArr ) )
+				{
+					unset( $coursesList[$course->id] );
+				}
+			}
+		}
+
+		if ( $course->category == 0 )
+		{
+			unset( $coursesList[$course->id] );
+		}
+
+		if ( ( ! isset( $cat->visible ) || ! $cat->visible ) && ! $coursecat_canmanage )
+		{
+			unset( $coursesList[$course->id] );
+		}
+
+
+		// Get image url
+		// If attachment is empty get image from post
+		$imgUrlAtt = theme_mb2nl_shortcodes_content_get_image( array(), false, '', $course->id );
+		$imgNameAtt = theme_mb2nl_shortcodes_content_get_image( array(), true, '',  $course->id );
+
+		$moodle33 = 2017051500;
+		$placeholder_image = $CFG->version >= $moodle33 ? $OUTPUT->image_url( 'course-default', 'theme' ) : $OUTPUT->pix_url( 'course-default', 'theme' );
+
+		$course->imgurl = $imgUrlAtt ? $imgUrlAtt : $placeholder_image;
+		$course->imgname = $imgNameAtt;
+
+
+		// Define item elements
+		$course->link = new moodle_url( $CFG->wwwroot . '/course/view.php', array('id' => $course->id ) );
+		$course->link_edit =  new moodle_url( $CFG->wwwroot . '/course/edit.php', array('id' => $course->id ) );
+		$course->edit_text = get_string( 'editcoursesettings' );
+		$course->title = format_text($course->fullname, FORMAT_HTML);
+		$course->description = format_text($course->summary, FORMAT_HTML);
+		$course->details = '&nbsp;';
+
+		if ((isset($cat->visible) && !$cat->visible) && $coursecat_canmanage)
+		{
+			$course->details = $cat->get_formatted_name() . ' (' . get_string('hidden','theme_mb2nl') . ')';
+		}
+		elseif ((isset($cat->visible) && $cat->visible))
+		{
+			$course->details = $cat->get_formatted_name();
+		}
+
+		if (isset($course->visible) && !$course->visible)
+		{
+			$course->title .= ' (' . get_string('hidden','theme_mb2nl') . ')';
+		}
+
+		$course->redmoretext = get_string('readmore', 'theme_mb2nl');
+		$price = mb2_shortcode_courses_course_price($course->id, $options);
+		$course->price = '';
+
+		if ($options['courseprices'])
+		{
+			$course->price = $price ? $price : '<span class="freeprice">' . get_string('noprice','theme_mb2nl') . '</span>';
+		}
+
+	}
+
+	// Slice course array by course limit
+	$coursesList = array_slice( $coursesList, 0, $options['limit'] );
 
 	return $coursesList;
 }

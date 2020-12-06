@@ -24,9 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020061621;
+$plugin->version   = 2020120109;
 $plugin->requires  = 2018120300;
 $plugin->component = 'theme_mb2nl';
-$plugin->release   = '3.9.0';
+$plugin->release   = '4.1.1';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->dependencies = array('theme_boost' => 2018120300);
+$plugin->dependencies = array( 'theme_boost' => 2018120300 );

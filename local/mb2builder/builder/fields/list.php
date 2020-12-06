@@ -45,12 +45,14 @@ class LocalMb2builderList
 			$attr['showon'] = '';
 		}
 
-		$showon = local_mb2builder_showon_field($attr['showon']);
+
+		$showon = local_mb2builder_showon_field( $attr['showon'] );
+		$actions = local_mb2builder_field_actions(  $attr );
 
 
 		$output  = '<div class="form-group  mb2-pb-form-group">';
 		$output .= '<label>' . $attr['title'] . '</label>';
-		$output	.= '<select class="form-control mb2-pb-input mb2-pb-input-' . $attr['type'] . ' mb2-pb-input-' . $key . '"' . $showon . ' data-attrname="' . $key . '">';
+		$output	.= '<select class="form-control mb2-pb-input mb2-pb-input-' . $attr['type'] . ' mb2-pb-input-' . $key . '"' . $showon . $actions . ' data-attrname="' . $key . '">';
 
 		foreach ($attr['options'] as $val=>$name)
 		{

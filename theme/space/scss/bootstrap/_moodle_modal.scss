@@ -32,16 +32,17 @@
     }
 
     .modal-footer {
-
       .buttons {
         padding: 0;
-        @extend .col-12;
-        @extend .row;
-        @extend .no-gutters;
+        margin-bottom: 0;
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
       }
       .singlebutton {
         @extend .col;
         padding: 0;
+        margin-bottom: 0;
 
         .btn {
           width: 100%;

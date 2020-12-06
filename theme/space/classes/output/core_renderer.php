@@ -105,8 +105,11 @@ class core_renderer extends \core_renderer {
      * @return string HTML to display the main header.
      */
     public function full_header() {
+
+        global $USER, $COURSE, $CFG;
+        
         if ($this->page->include_region_main_settings_in_header_actions() &&
-                !$this->page->blocks->is_block_present('settings')) {
+        !$this->page->blocks->is_block_present('settings')) {
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
@@ -125,7 +128,71 @@ class core_renderer extends \core_renderer {
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
         $header->headeractions = $this->page->get_header_actions();
-        return $this->render_from_template('theme_space/header', $header);
+        $html = $this->render_from_template('theme_space/header', $header);
+        // MODIFICATION START:
+        // If the setting showhintcourseguestaccess is set, a hint for users that view the course with guest access is shown.
+        // We also check that the user did not switch the role. This is a special case for roles that can fully access the course
+        // without being enrolled. A role switch would show the guest access hint additionally in that case and this is not
+        // intended.
+        if (get_config('theme_space', 'showhintcourseguestaccess') == 1
+            && is_guest(\context_course::instance($COURSE->id), $USER->id)
+            && $this->page->has_set_url()
+            && $this->page->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
+            && !is_role_switched($COURSE->id)) {
+            $html .= html_writer::start_tag('div', array('class' => 'course-guestaccess-infobox alert alert-warning'));
+            $html .= html_writer::tag('i', null, array('class' => 'fa fa-exclamation-circle fa-pull-left icon d-inline-flex mr-3'));
+            $html .= get_string('showhintcourseguestaccessgeneral', 'theme_space',
+                array('role' => role_get_name(get_guest_role())));
+            $html .= theme_space_get_course_guest_access_hint($COURSE->id);
+            $html .= html_writer::end_tag('div');
+        }
+        // MODIFICATION END.   
+        // MODIFICATION START:
+        // If the setting showhintcoursehidden is set, the visibility of the course is hidden and
+        // a hint for the visibility will be shown.
+        if (get_config('theme_space', 'showhintcoursehidden') == 1 && $COURSE->visible == false &&
+                $this->page->has_set_url() && $this->page->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
+            $html .= html_writer::start_tag('div', array('class' => 'course-hidden-infobox alert alert-warning'));
+            $html .= html_writer::tag('i', null, array('class' => 'far fa-eye-slash fa-pull-left icon d-inline-flex mr-3'));
+            $html .= get_string('showhintcoursehiddengeneral', 'theme_space', $COURSE->id);
+            // If the user has the capability to change the course settings, an additional link to the course settings is shown.
+            if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
+                $html .= html_writer::tag('div', get_string('showhintcoursehiddensettingslink',
+                    'theme_space', array('url' => $CFG->wwwroot.'/course/edit.php?id='. $COURSE->id)));
+            }
+            $html .= html_writer::end_tag('div');
+        }        
+        // MODIFICATION END.     
+        // MODIFICATION START.
+        if (get_config('theme_space', 'showhintcourseguestaccess') == 1) {
+            // Check if the user did a role switch.
+            // If not, adding this section would make no sense and, even worse,
+            // user_get_user_navigation_info() will throw an exception due to the missing user object.
+            if (is_role_switched($COURSE->id)) {
+                // Get the role name switched to.
+                $opts = \user_get_user_navigation_info($USER, $this->page);
+                $role = $opts->metadata['rolename'];
+                // Get the URL to switch back (normal role).
+                $url = new moodle_url('/course/switchrole.php',
+                    array('id'        => $COURSE->id, 'sesskey' => sesskey(), 'switchrole' => 0,
+                          'returnurl' => $this->page->url->out_as_local_url(false)));
+                $html .= html_writer::start_tag('div', array('class' => 'switched-role-infobox alert alert-info'));
+                $html .= html_writer::tag('i', null, array('class' => 'fa fa-user-circle fa-pull-left icon d-inline-flex mr-3'));
+                $html .= html_writer::start_tag('div');
+                $html .= get_string('switchedroleto', 'theme_space');
+                // Give this a span to be able to address via CSS.
+                $html .= html_writer::tag('strong', $role, array('class' => 'switched-role px-2'));
+                $html .= html_writer::end_tag('div');
+                // Return to normal role link.
+                $html .= html_writer::start_tag('div');
+                $html .= html_writer::tag('a', get_string('switchrolereturn', 'core'),
+                    array('class' => 'switched-role-backlink', 'href' => $url));
+                $html .= html_writer::end_tag('div'); // Return to normal role link: end div.
+                $html .= html_writer::end_tag('div');
+            }
+        }
+        // MODIFICATION END.
+        return $html;
     }
 
     /**
@@ -389,6 +456,7 @@ class core_renderer extends \core_renderer {
         }
 
         $returnstr .= html_writer::span(
+            html_writer::span($usertextcontents, 'usertext') .
             html_writer::span($avatarcontents, $avatarclasses),
             'userbutton'
         );
@@ -401,12 +469,12 @@ class core_renderer extends \core_renderer {
         $am->set_menu_trigger(
             $returnstr
         );
-        $am->set_action_label($usertextcontents);
+        $am->set_action_label(get_string('usermenu'));
         $am->set_alignment(action_menu::TR, action_menu::BR);
         $am->set_nowrap_on_items();
         
         $am->add('<div class="dropdown-author">' . $usertextcontents . '</div>');
-        $am->add($divider);
+        $am->add('<div class="dropdown-divider dropdown-divider-author"></div>');
 
         if ($withlinks) {
             $navitemcount = count($opts->navitems);
@@ -734,7 +802,7 @@ class core_renderer extends \core_renderer {
      * @return string
      */
     public function render_login(\core_auth\output\login $form) {
-        global $CFG, $SITE;
+        global $CFG, $SITE, $PAGE;
 
         $context = $form->export_for_template($this);
 
@@ -753,6 +821,21 @@ class core_renderer extends \core_renderer {
         $context->sitename = format_string($SITE->fullname, true,
             ['context' => context_course::instance(SITEID), "escape" => false]);
 
+        if (isset($PAGE->theme->settings->customloginlogo)) {
+            $context->customloginlogo = $PAGE->theme->setting_file_url('customloginlogo', 'customloginlogo');
+        }
+
+        if (isset($PAGE->theme->settings->hideforgotpassword)) {
+            $context->hideforgotpassword = $PAGE->theme->settings->hideforgotpassword == 1;
+         }
+
+        if (isset($PAGE->theme->settings->logininfobox)) {
+            $context->logininfobox = format_text($PAGE->theme->settings->logininfobox);
+        }
+        if (isset($PAGE->theme->settings->logininfobox2)) {
+            $context->logininfobox2 = format_text($PAGE->theme->settings->logininfobox2);
+        }     
+
         return $this->render_from_template('core/loginform', $context);
     }
 
@@ -763,7 +846,7 @@ class core_renderer extends \core_renderer {
      * @return string
      */
     public function render_login_signup_form($form) {
-        global $SITE;
+        global $SITE, $PAGE;
 
         $context = $form->export_for_template($this);
         $url = $this->get_logo_url();
@@ -773,6 +856,11 @@ class core_renderer extends \core_renderer {
         $context['logourl'] = $url;
         $context['sitename'] = format_string($SITE->fullname, true,
             ['context' => context_course::instance(SITEID), "escape" => false]);
+   
+        if (!empty($this->page->theme->settings->customloginlogo)) {
+            $url = $this->page->theme->setting_file_url('customloginlogo', 'customloginlogo');
+            $context['customloginlogo'] = $url;
+        }
 
         return $this->render_from_template('core/signup_form_layout', $context);
     }
@@ -1037,3 +1125,4 @@ class core_renderer extends \core_renderer {
         return $this->login_info(false);
     }
 }
+

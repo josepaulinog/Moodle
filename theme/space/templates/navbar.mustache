@@ -18,34 +18,24 @@
     Page navbar.
 }}
 
-    {{#showsidebarlogo}}
-    <div class="c-logo-mobile d-md-none text-center">
-      <a href="{{{ config.wwwroot }}}" class="navbar-brand {{#customlogosidebar}}has-logo{{/customlogosidebar}}{{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }} {{^ output.should_display_navbar_logo }}d-none d-sm-inline{{/ output.should_display_navbar_logo }}">
 
-          {{^ customlogosidebar}}
-            {{# output.should_display_navbar_logo }}
-                <h1 class="logo d-none d-sm-inline">
-                    <img src="{{output.get_compact_logo_url}}" alt="{{sitename}}" class="img-fluid">
-                </h1>
-            {{/ output.should_display_navbar_logo }}
-          {{/ customlogosidebar}}
-         
-
-          {{#customlogosidebar}}
-          <h1 class="logo d-none d-sm-inline">
-              <img src="{{customlogosidebar}}" alt="{{sitename}}" class="img-fluid">
+    <div class="c-logo-mobile d-lg-none text-center">
+      <a href="{{{ config.wwwroot }}}" class="navbar-brand {{#mobiletopbarlogo}}has-logo{{/mobiletopbarlogo}}{{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }} {{^ output.should_display_navbar_logo }}d-none d-sm-inline{{/ output.should_display_navbar_logo }}">
+          {{#mobiletopbarlogo}}
+          <h1 class="logo d-none d-sm-block my-0">
+              <img src="{{mobiletopbarlogo}}" alt="{{sitename}}" class="img-fluid">
           </h1>
-          {{/customlogosidebar}}
-
-          <h1 class="{{#customlogosidebar}}hidden{{/customlogosidebar}}{{^customlogosidebar}}{{# output.should_display_navbar_logo }}hidden{{/ output.should_display_navbar_logo }}{{/customlogosidebar}} site-name text-center">{{{ sitename }}}</h1>
-        
+          {{/mobiletopbarlogo}}
+          <h1 class="{{#mobiletopbarlogo}}hidden{{/mobiletopbarlogo}}{{^mobiletopbarlogo}}{{# output.should_display_navbar_logo }}hidden{{/ output.should_display_navbar_logo }}{{/mobiletopbarlogo}} site-name text-center">{{{ sitename }}}</h1>
       </a>
     </div>
-    {{/showsidebarlogo}} 
-    
-{{#topbarstyle1}}{{>theme_space/navbar-style-1}}{{/topbarstyle1}}
-{{#topbarstyle2}}{{>theme_space/navbar-style-2}}{{/topbarstyle2}}
-{{#topbarstyle3}}{{>theme_space/navbar-style-3}}{{/topbarstyle3}}
-{{#topbarstyle4}}{{>theme_space/navbar-style-4}}{{/topbarstyle4}}
-{{#topbarstyle5}}{{>theme_space/navbar-style-5}}{{/topbarstyle5}}
-{{#topbarstyle6}}{{>theme_space/navbar-style-6}}{{/topbarstyle6}}
+
+    <div id="topBarContainer">
+        {{#topbarstyle1}}{{>theme_space/navbar-style-1}}{{/topbarstyle1}}
+        {{#topbarstyle2}}{{>theme_space/navbar-style-2}}{{/topbarstyle2}}
+        {{#topbarstyle3}}{{>theme_space/navbar-style-3}}{{/topbarstyle3}}
+        {{#topbarstyle4}}{{>theme_space/navbar-style-4}}{{/topbarstyle4}}
+        {{#topbarstyle5}}{{>theme_space/navbar-style-5}}{{/topbarstyle5}}
+        {{#topbarstyle6}}{{>theme_space/navbar-style-6}}{{/topbarstyle6}}
+    </div>
+

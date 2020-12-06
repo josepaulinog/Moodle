@@ -25,7 +25,6 @@ defined('MOODLE_INTERNAL') || die();
  */
 
 $bodyattributes = $OUTPUT->body_attributes();
-
 $loginalignment = theme_space_get_setting('loginalignment');
 if ($loginalignment == 1) {
     $extraclasses[] = 'login-left';

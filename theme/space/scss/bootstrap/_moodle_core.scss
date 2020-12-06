@@ -71,9 +71,8 @@ $bg-inverse-link-color: #fff !default;
 
 #add,
 #remove,
-.centerpara,
-.mdl-align {
-    text-align: center;
+.centerpara {
+    text-align: left;
 }
 
 a.dimmed,
@@ -148,7 +147,7 @@ a.dimmed_text:visited,
     color: $red-200;
 
     border-radius: $border-radius;
-    font-size: .875rem;
+    font-size: $font-size-xs;
 }
 
 .green,
@@ -157,7 +156,7 @@ a.dimmed_text:visited,
     color: darken($green-700, 50);
 
     border-radius: $border-radius;
-    font-size: .875rem;
+    font-size: $font-size-xs;
 }
 
 .highlight {
@@ -167,7 +166,19 @@ a.dimmed_text:visited,
 }
 
 .fitem.advanced .text-info {
-    font-weight: $font-weight-bold;
+  margin-left: 4px;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+
+  display: inline-flex;
+  justify-content: center;
+
+  background-color: $gray-200;
+
+  font-weight: $font-weight-bold;
+  color: $gray-700!important;
 }
 
 .reportlink {
@@ -285,8 +296,6 @@ a.autolink.glossary:hover {
       font-size: 14px;
       color: inherit;
       opacity: 0.6;
-
-
     }
 
     &:before {
@@ -375,9 +384,20 @@ table {
   align-items: center;
 
   .usertext {
+    display: none;
     margin-right: 0.75rem!important;
+
+    .showusername & {
+      display: block;
+      @include media-breakpoint-between(sm,md) {
+      display: none;
+      }
+    }
   }
+
 }
+  
+
 
 .usermenu {
   .action-menu-trigger {
@@ -399,11 +419,20 @@ table {
   .dropdown-toggle {
     box-shadow: none;
     border: none;
-    padding: 0.5rem;
+    padding: 5px 5px 5px 10px!important;
+
+    @include media-breakpoint-between(sm,md) {
+    background-color: transparent;
+    padding: 7px 2px!important;
+    }
 
     &:hover {
       background-color: $top-bar-link-hover-bg;
       box-shadow: none;
+
+      @include media-breakpoint-between(sm,md) {
+        background-color: transparent;
+        }
     }
 
     &:after {
@@ -513,6 +542,12 @@ a.skip:active {
 .blog_entry {
   .comment-link {
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+
+    .icon {
+      display: none;
+    }
   }
 
   .audience {
@@ -806,7 +841,15 @@ table.mod_index {
 }
 
 .comment-area {
-    width: 100%;
+    background: $gray-100;
+
+    border-radius: $border-radius;
+
+    .fd {
+      a {
+        width: 100%;
+      }
+    }
 }
 
 .comment-area textarea {
@@ -879,14 +922,32 @@ table.mod_index {
 }
 
 .comment-message {
-  background-color: $white;
-  box-shadow: $box-shadow-sm;
-
-  border-radius: $border-radius;
-
   padding: 1rem;
   margin: 0.5rem 0;
 
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 30px);
+
+    width: 60px;
+    height: 1px;
+    background-color: $border-color;
+  }
+
+  .comment-messag-meta {
+    font-weight: $font-weight-sm-bold;
+    margin-bottom: 0.5rem;
+
+    .picture a {
+      &:before {
+        display: none;
+      }
+    }
+  }
 
   .picture {
       width: auto;
@@ -911,24 +972,54 @@ table.mod_index {
       margin: 1rem 0 0 0;
       padding: 0;
 
+      font-size: $font-size-sm;
+
       p {
-        margin: 0.5rem 0;
+        margin: 0 0 0.25rem 0;
         font-size: $font-size-sm;
      }
   }
 }
 
 .comment-delete {
+    opacity: 0;
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: .3em;
+    top: 9px;
+    right: 5px;
     width: auto;
+
+    display: inline-block;
+    padding: $badge-padding-y $badge-padding-x;
+    margin: 1px 4px 1px 1px;
+    font-size: $badge-font-size;
+    font-weight: $badge-font-weight;
+    line-height: 1.2;
+    text-align: center;
+    vertical-align: baseline;
+    @include border-radius($badge-border-radius);
 
     transition: $general-transition;
 
+    background-color: $red-600;
+    border-radius: $border-radius;
+
+    .comment-message:hover & {
+      opacity: 1;
+    } 
+
+    .icon {
+      font-size: 12px;
+      color: $red-200;
+    }
+
+    a:before,
+    &:before {
+      display: none;
+    }
+
     &:hover {
-      .icon { color: $red-600; }
+      background-color: $red-600;
+      .icon { color: $red-200; }
     }
 }
 
@@ -1166,34 +1257,17 @@ tr.flagged-tag a {
       a {
         position: relative;
 
-        &.edittag {
-            padding-left: 40px;
-
-            &:after {
-              @extend %fa-icon;
-              @extend .fas;
-          
-              content: fa-content($fa-var-cog);
-          
-              font-size: 14px;
-              color: inherit;
-              opacity: 0.6;
-          
-              position: absolute;
-              top: calc(50% - 7px);
-              left: 14px;
-            }
-        }
-
-        &.flagasinappropriate {  
-          padding-left: 40px;
+        &.edittag,
+        &.flagasinappropriate,
+        &.addtomyinterests,
+        &.removefrommyinterests
+        {
+          padding-left: 40px!important;
 
           &:after {
             @extend %fa-icon;
             @extend .fas;
-        
-            content: fa-content($fa-var-flag);
-        
+                
             font-size: 14px;
             color: inherit;
             opacity: 0.6;
@@ -1204,41 +1278,27 @@ tr.flagged-tag a {
           }
         }
 
-        &.addtomyinterests {
-            padding-left: 40px;
-
+        &.edittag {
             &:after {
-              @extend %fa-icon;
-              @extend .fas;
-          
+              content: fa-content($fa-var-cog);
+            }
+        }
+
+        &.flagasinappropriate {  
+          &:after {
+            content: fa-content($fa-var-flag);
+          }
+        }
+
+        &.addtomyinterests {
+            &:after {
               content: fa-content($fa-var-plus);
-          
-              font-size: 14px;
-              color: inherit;
-              opacity: 0.6;
-          
-              position: absolute;
-              top: calc(50% - 7px);
-              left: 14px;
             }
         }
 
         &.removefrommyinterests {
-            padding-left: 40px;
-
             &:after {
-              @extend %fa-icon;
-              @extend .fas;
-          
               content: fa-content($fa-var-minus);
-          
-              font-size: 14px;
-              color: inherit;
-              opacity: 0.6;
-          
-              position: absolute;
-              top: calc(50% - 7px);
-              left: 14px;
             }
         }
 
@@ -1312,7 +1372,6 @@ tr.flagged-tag a {
     li {
       display: inline-flex;
       margin-bottom: 6px;
-      text-align: center;
 
       a {
         padding: 3px 6px;
@@ -1497,7 +1556,7 @@ tr.flagged-tag a {
     float: left;
     padding-top: 20px;
 }
-$mod-indent-size: 30px;
+$mod-indent-size: 35px;
 /* Creates a series of .mod-indent-# rule declarations based on indent size and number of indent levels. */
 
 @for $i from 1 through 16 {
@@ -1514,7 +1573,7 @@ $mod-indent-size: 30px;
 
 .mediaplugin.mediaplugin_videojs {
   background-color: #000;
-  padding: 1rem;
+  padding: 10px;
   border-radius: $border-radius;
 
   div {
@@ -1551,7 +1610,10 @@ audio.mediaplugin_html5audio {
 }
 
 .mediaplugin, .mediaplugin video {
-   max-width: 1020px;
+   .section li.activity & {
+    max-width: calc(100% - 40px);
+   }
+
    
   table & {
     width: auto;
@@ -1606,6 +1668,9 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
     white-space: nowrap;
 }
 
+.initialbar {
+  text-align: left;
+}
 
 /* Moodle Dialogue Settings (moodle-core-dialogue)  */
 .moodle-dialogue-base .moodle-dialogue-lightbox {
@@ -1660,28 +1725,30 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
 }
 
 .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd {
-    margin: 0 -2rem;
-    width: calc(100% + 94px);
+    margin: 0 -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: calc(100% + 3rem);
 
     position: relative;
 
-    text-align: center;
+    text-align: left;
 
     border-radius: 5px 5px 0 0;
 
 }
 
 .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd.yui3-widget-hd {
-    padding: 1.1rem!important;
-    margin: 0 -2rem;
+    padding: 1.1rem 1.5rem!important;
+    margin: 0 -1.5rem;
 
     background: initial;
     position: relative;
-    width: calc(100% +  4rem);
+    width: calc(100% +  3rem);
     min-height: 3rem;
 
-    text-align: center;
-    font-size: $font-size-base;
+    text-align: left;
+    font-size: $font-size-sm;
     font-weight: $font-weight-sm-bold;
     line-height: 1.5;
     word-wrap: break-word;
@@ -1845,8 +1912,8 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
 .chooserdialogue .moodle-dialogue-wrap .moodle-dialogue-bd {
     padding: 0;
     background: inherit;
-    margin: 0 -30px -30px;
-    width: calc(100% + 60px);
+    margin: 0 -1.5rem -30px;
+    width: calc(100% + 3rem);
     border-radius: 0 0 5px 5px;
 }
 /* Center the submit buttons within the area */
@@ -1921,33 +1988,9 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
     margin: 0;
     padding: ($spacer / 2) 0;
     border-bottom: 1px solid $border-color;
-    position: relative;
     z-index: 1;
 
     cursor: pointer;
-}
-
-.choosercontainer #chooseform .option.selected {
-  position: relative;
-
-  color: $theme-color-9;
-
-  label {
-    border-bottom: 0;
-  }
-
-  &:before {
-    content: '';
-    background-color: $theme-color-3;
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 4px;
-    right: 4px;
-    z-index: 0;
-    border-radius: $border-radius;
-  }
 }
 
 .choosercontainer #chooseform .option .icon {
@@ -1980,7 +2023,7 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
     left: 240px;
     margin: 0;
     padding: 1.6em;
-    background-color: $modal-content-bg;
+    background-color: #fff;
     overflow-x: hidden;
     overflow-y: auto;
     line-height: 2em;
@@ -1995,6 +2038,12 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
     width: 24px;
     height: 24px;
     font-size: 24px;
+}
+
+.choosercontainer #chooseform .selected {
+  background-color: $theme-color-9;
+  margin-top: -1px;
+  padding-top: 1px;
 }
 
 @include media-breakpoint-down(xs) {
@@ -2348,37 +2397,27 @@ img#persona_signin {
 $logo-height: 120px;
 $logo-padding: 20px;
 $logo-position: -$logo-height / 2 - $logo-padding;
+$logo-position-md: -$logo-height / 2 - $logo-padding + 20px;
 
-    .c-hero-with-logo {
-      margin-top: $logo-position;
+.c-hero-with-logo {
+  margin-bottom: $logo-position;
 
-      @include media-breakpoint-only(md) {
-      margin-top: $logo-position / 2;
-      }
-
-      @include media-breakpoint-only(sm) {
-      margin-top: 0;
-      }
-      
-    }
-
-    .c-hero-without-logo {
-      margin-top: 20px;
-
-      @include media-breakpoint-between(sm, md) {
-        margin-top: 0;
-      }
-    }
-
-.c-top-logo {
-
-  position: relative;
+  @include media-breakpoint-only(md) {
+  margin-bottom: $logo-position-md;
+  }
 
   @include media-breakpoint-only(sm) {
-  #page-site-index & {
-    display: none;
+  margin-bottom: 0;
   }
-  }
+}
+
+.c-hero-without-logo {
+  margin-bottom: 0;
+  display: none;
+}
+
+.c-top-logo {
+  position: relative;
 
   .logo {
     margin-top: 30px;
@@ -2391,19 +2430,16 @@ $logo-position: -$logo-height / 2 - $logo-padding;
     border-radius: $border-radius;
     position: relative;
     z-index: 1;
+    text-align: center;
 
     box-shadow: 0 20px 50px 0 rgba(0,0,0,.25);
 
     @include media-breakpoint-between(sm, md) {
-    border-radius: 0;
     padding: 10px;
     }
 
     @include media-breakpoint-only(sm) {
-      box-shadow: none;
-      margin-top: 0;
-      width: 100%;
-      text-align: center;
+      display: none;
     }
 
     img {
@@ -2418,33 +2454,6 @@ $logo-position: -$logo-height / 2 - $logo-padding;
 
   }
 
-  .settings-menu {
-    position: absolute;
-    right: 10px;
-    top: -40px;
-    width: auto;
-
-    z-index: 1;
-
-    @include media-breakpoint-only(sm) {
-      position: absolute;
-      top: 0;
-      right: 10px;
-
-      #page-site-index & {
-        top: 0;
-      }
-    }
-  }
-}
-
-#page-header {
-  margin-bottom: 20px;
-  position: relative;
-
-    h2 {
-      margin: 0;
-    }
 }
 
 ul.dragdrop-keyboard-drag {
@@ -2630,35 +2639,243 @@ dd:after {
     }
 }
 
-.open.atto_menu > .dropdown-menu {
-    display: block;
+.editor_atto_content_wrap {
+    background-color: white;
+    color: #333;
 }
+
+.editor_atto_content {
+    padding: 4px;
+    resize: vertical;
+    overflow: auto;
+}
+
+.editor_atto_content_wrap,
+.editor_atto + textarea {
+    width: 100%;
+    padding: 0;
+}
+
+.editor_atto + textarea {
+    border-radius: 0;
+    resize: vertical;
+    margin-top: -1px;
+}
+
 div.editor_atto_toolbar {
-  padding: 0 0 7px 0!important;
-  
-  div.atto_group {
-    background-color: transparent!important;
-    border: 0!important;
-    margin: 7px 0 0 7px!important;
-  }
+    display: block;
+    background: $black;
+    min-height: 35px;
+    border: 1px solid $input-border-color;
+    width: 100%;
+    padding: 0 0 3px 0;
+}
 
-  button {
-    border: 0!important;
-    padding: 4px 7px!important;
+div.editor_atto_toolbar button {
+    padding: 6px 7px!important;
+    background: none;
+    border: 0;
+    margin: 0;
+    border-radius: 0;
+    cursor: pointer;
+    transition: $general-transition;
+}
 
-    .icon {
-        color: #fff!important;
-    }
-  }
+div.editor_atto_toolbar button + button {
+    border-left: 1px solid rgba($gray-800, 0.6);
+}
+
+div.editor_atto_toolbar button[disabled] {
+    opacity: .45;
+    background: none;
+    cursor: default;
+}
+
+.editor_atto_toolbar button:hover {
+    background-image: none;
+    background-color: $gray-700;
 }
 
 .editor_atto_toolbar button:active,
-.editor_atto_toolbar button.highlight,
-.editor_atto_toolbar button:hover {
-  background: rgba(255, 255, 255, 0.1)!important;
-  border-radius: $border-radius!important;
+.editor_atto_toolbar button.highlight {
+    background-color: $theme-color-3!important;
+    background-image: none!important;
 }
 
+/* Make firefox button sizes match other browsers */
+div.editor_atto_toolbar button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+div.editor_atto_toolbar button .icon {
+    padding: 0;
+    margin: 2px 0;
+}
+
+div.editor_atto_toolbar div.atto_group {
+    display: inline-flex;
+    border-radius: $border-radius;
+    border: 0;
+    margin: 6px 0px 3px 6px;
+    background: $gray-900;
+    overflow: hidden;
+}
+
+.editor_atto_content img {
+    resize: both;
+    overflow: auto;
+}
+
+.editor_atto {
+  z-index: 10000;
+}
+
+.atto_hasmenu {
+    /* IE8 places the images on top of each other if that is not set. */
+    white-space: nowrap;
+}
+
+.atto_menuentry .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.atto_menuentry {
+    clear: left;
+}
+
+.atto_menuentry h1,
+.atto_menuentry h2,
+.atto_menuentry p {
+    margin: 4px;
+}
+
+/*.atto_form label.sameline {
+    display: inline-block;
+    min-width: 10em;
+}*/
+
+.atto_form textarea.fullwidth,
+.atto_form input.fullwidth {
+    width: 100%;
+}
+
+.atto_form {
+    padding: 0.5rem;
+}
+
+/*.atto_form label {
+    display: block;
+    margin: 0 0 5px 0;
+}*/
+
+.atto_control {
+    position: absolute;
+    right: -6px;
+    bottom: -6px;
+    display: none;
+    cursor: pointer;
+}
+
+.atto_control .icon {
+    background-color: white;
+}
+
+div.editor_atto_content:focus .atto_control,
+div.editor_atto_content:hover .atto_control {
+    display: block;
+}
+
+.editor_atto_menu.yui3-menu-hidden {
+    display: none;
+}
+
+/* Get broken images back in firefox */
+.editor_atto_content img:-moz-broken {
+    -moz-force-broken-image-icon: 1;
+    min-width: 24px;
+    min-height: 24px;
+}
+
+/* Atto menu styling */
+.moodle-dialogue-base .editor_atto_menu .moodle-dialogue-content .moodle-dialogue-bd {
+    padding: 0;
+    z-index: 1000;
+}
+
+.editor_atto_menu .dropdown-menu > li > a {
+    margin: 3px 14px;
+}
+
+.editor_atto_menu .open ul.dropdown-menu {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.editor_atto_wrap {
+    position: relative;
+}
+/*rtl:ignore*/
+.editor_atto_wrap textarea {
+    direction: ltr;
+}
+
+.editor_atto_notification .atto_info,
+.editor_atto_notification .atto_warning {
+    display: inline-block;
+    background-color: #f2f2f2;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+.editor_atto_notification .atto_info {
+    background-color: #f2f2f2;
+}
+
+.editor_atto_notification .atto_warning {
+    background-color: #ffd700;
+}
+
+.editor_atto_toolbar,
+.editor_atto_content_wrap,
+.editor_atto + textarea {
+    box-sizing: border-box;
+}
+
+.editor_atto_content.form-control {
+    width: 100%;
+    border-top: 0;
+}
+
+/** Atto fields do not have form-control because that would break the layout of the editor.
+    So they need these extra styles to highlight the editor when there is a validation error. */
+.has-danger .editor_atto_content.form-control,
+.has-danger .editor_atto_content.form-control-danger {
+    width: 100%;
+    margin-top: 10px;
+    font-size: $font-size-xs;
+    color: $red-600;
+}
+
+.open.atto_menu > .dropdown-menu {
+    display: block;
+}
+div.editor_atto_toolbar button .icon {
+    color: $gray-100;
+}
+
+.atto_equation_library button {
+  padding: 8px!important;
+}
+
+.atto_charmap_selector button {
+    padding: 10px;
+    margin: 2px;
+}
 
 .w-auto {
     width: auto;
@@ -2856,10 +3073,6 @@ div.editor_atto_toolbar {
 .recipelink {
   margin-bottom: 2rem;
   text-align: left;
-}
-
-.ratingform {
-  margin-bottom: 2rem;
 }
 
 
@@ -3073,7 +3286,7 @@ a.wiki_newentry:link, a.wiki_newentry:visited {
     }
 
     .highlight {
-      background-color: $theme-color-8;
+      background-color: $theme-color-8!important;
       border-color: $theme-color-8;
       color: $theme-color-3;
     }
@@ -3113,12 +3326,24 @@ a.wiki_newentry:link, a.wiki_newentry:visited {
   }
 }
 
-#page-mod-quiz-view .quizinfo, #page-mod-quiz-view #page .quizgradefeedback, #page-mod-quiz-view #page .quizattempt {
+#page-mod-quiz-view .quizinfo, #page-mod-quiz-view #page .quizgradefeedback, 
+#page-mod-quiz-view #page .quizattempt {
   text-align: left;
+  margin: 1rem 0 2rem;
 }
 
 
 /* mod forum */
+.post-content-container {
+  p {
+    margin-bottom: 1.3rem;
+  }
+}
+
+.discussionlocked {
+  @extend .alert-danger;
+}
+
 #page-mod-forum-search {
   .forumsearch {
       margin-right: 0!important;
@@ -3157,12 +3382,17 @@ a.wiki_newentry:link, a.wiki_newentry:visited {
 .editor_atto_notification .atto_info, .editor_atto_notification .atto_warning {
   border-radius: $border-radius;
   font-size: $font-size-xs;
-  margin-left: 12px;
+  margin: 5px 0;
   background-color: $yellow-200!important;
   color: $yellow-900;
 
   .icon {
     color: $yellow-700;
+    margin-right: 0.25rem;
+  }
+
+  img {
+    margin-right: 0.25rem;
   }
 }
 
@@ -3373,4 +3603,102 @@ $picker-emojis-per-row: 7 !default;
     > :first-child {
         margin-top: $spacer;
     }
+}
+
+#page-mod-quiz-report .bold .reviewlink {
+  @extend .badge;
+  @extend .badge-link;
+  @extend .badge-secondary;
+}
+
+
+/* Blog */
+.blog {
+  width: 50%;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+
+  position: relative;
+
+  .blog-entry-author {
+    font-size: $font-size-xs;
+    color: $body-color-secondary;
+
+    .blog-author-picture {
+      display: inline-flex;
+      align-items: center;
+      
+      .userpicture {
+        margin-right: 10px;
+      }
+
+    }
+  }
+
+  .tag_list {
+    margin-top: 0.5rem;
+  }
+
+  .blog-entry-cover {
+    overflow: hidden;
+    width: calc(100% + 3rem);
+    margin: 0 -1.5rem 1.5rem;
+    border-radius: $border-radius;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .blog-entry-topic {
+    a {
+      display: block;
+      margin: 1rem 0;
+      font-size: 1.5rem;
+      font-weight: $font-weight-sm-bold;
+      color: $body-color;
+    }
+  }
+
+  .blog-entry-date {
+    color: $body-color-light;
+  }
+
+  .blog-entry {
+    font-size: $font-size-sm;
+  }
+
+  .blog-entry-footer {
+    padding-top: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    border-top: 1px solid $border-color;
+  }
+
+  .comment-link {
+    margin-top: 1rem;
+  }
+
+  .attachments {
+    margin-top: 1rem;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    font-size: $font-size-sm;
+
+    a {
+      margin: 0;
+      font-size: inherit;
+    }
+  }
+
+}
+
+#feedback_viewresponse_form {
+  .col-md-3 {
+    padding-right: 20px;
+  }
 }

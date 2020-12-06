@@ -27,33 +27,34 @@ defined('MOODLE_INTERNAL') || die();
 class LocalMb2builderColor
 {
 
-	static function local_mb2builder_get_input($key, $attr)
+	static function local_mb2builder_get_input( $key, $attr )
 	{
 
-		if (!isset($attr['default']))
+		if ( ! isset($attr['default'] ) )
 		{
 	 		$attr['default'] = '';
 		}
 
-		if (!isset($attr['desc']))
+		if ( ! isset( $attr['desc'] ) )
 		{
 	 		$attr['desc'] = '';
 		}
 
-		if (!isset($attr['showon']))
+		if ( ! isset( $attr['showon'] ) )
 		{
 			$attr['showon'] = '';
 		}
 
-		$showon = local_mb2builder_showon_field($attr['showon']);
 
-		$output  = '<div class="form-group  mb2-pb-form-group">';
+		$showon = local_mb2builder_showon_field( $attr['showon'] );
+		$actions = local_mb2builder_field_actions(  $attr );
+
+		$output  = '<div class="form-group mb2-pb-form-group">';
 		$output .= '<label>' . $attr['title'] . '</label><br>';
-		$output	.= '<input type="text" class="form-control mb2-pb-mb2color mb2-pb-input mb2-pb-input-' . $key . '"' . $showon . ' data-attrname="' .
-		$key . '" value="' . $attr['default'] . '" />';
+		$output	.= '<div class="mb2-pb-form-color"><input type="text" class="form-control mb2-pb-mb2color mb2-pb-input mb2-pb-input-' . $key . '"' . $showon . $actions . ' data-attrname="' . $key . '" value="' . $attr['default'] . '" /></div>';
 
 
-		if ($attr['desc'])
+		if ( $attr['desc'] )
 		{
 			$output	.= '<span class="mb2-pb-from-desc">' . $attr['desc'] . '</span>';
 		}

@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  *
  */
-function theme_mb2nl_language_list ()
+function theme_mb2nl_language_list()
 {
 
 
@@ -145,7 +145,7 @@ function theme_mb2nl_language_list ()
  * Method to get langauge list
  *
  */
-function theme_mb2nl_mycourses_list ()
+function theme_mb2nl_mycourses_list()
 {
 
 	global $PAGE;
@@ -153,7 +153,7 @@ function theme_mb2nl_mycourses_list ()
 	$courses = theme_mb2nl_get_mycourses();
 	$limit = theme_mb2nl_theme_setting($PAGE, 'myclimit', 6);
 
-	if (!count($courses))
+	if ( ! count( $courses ) )
 	{
 		return;
 	}
@@ -167,10 +167,10 @@ function theme_mb2nl_mycourses_list ()
 
 	$output .= '<ul>';
 
-	foreach ($courses as $c)
+	foreach ( $courses as $c )
 	{
-		$course_url = new moodle_url('/course/view.php?id=' . $c['id']);
-		$coursename = strip_tags(format_text($c['fullname']));
+		$course_url = new moodle_url( '/course/view.php', array( 'id' => $c['id'] ) );
+		$coursename = strip_tags( format_text( $c['fullname'] ) );
 
 		$output .= '<li class="visible' . $c['visible'] . ' ' . $c['roles'] . '">';
 		$output .= '<a href="' . $course_url . '" title="' . theme_mb2nl_wordlimit($coursename, $limit) . '">';
@@ -195,26 +195,94 @@ function theme_mb2nl_mycourses_list ()
  * Method to check if is my course list
  *
  */
-function theme_mb2nl_get_mycourses ()
+function theme_mb2nl_get_mycourses()
 {
-	global $USER;
+	global $USER, $PAGE;
 	$my_courses = enrol_get_my_courses();
 	$courses = array();
 
-	foreach ($my_courses as $c)
+	foreach ( $my_courses as $c )
 	{
 		$course_access = theme_mb2nl_site_access( $c->id );
 
-		if ( !$c->visible && !in_array( $course_access, array('admin', 'manager', 'editingteacher') ) )
+		if ( theme_mb2nl_course_passed( $c->id ) && ! theme_mb2nl_theme_setting( $PAGE, 'mycexpierd' ) )
 		{
 			continue;
 		}
 
+		// Hide hidden courses for students
+		if ( ! $c->visible )
+		{
+			if ( ! theme_mb2nl_theme_setting( $PAGE, 'mychidden' ) )
+			{
+				continue;
+			}
+
+			if ( ! in_array( $course_access, array( 'admin', 'manager', 'editingteacher' ) ) )
+			{
+				continue;
+			}
+		}
+
 		$courses[] = array( 'id' => $c->id, 'fullname' => $c->fullname, 'visible' => $c->visible,
-		'roles' => implode(' ', theme_mb2nl_get_user_course_roles($c->id, $USER->id) ) );
+		'roles' => implode(' ', theme_mb2nl_get_user_course_roles( $c->id, $USER->id ) ) );
 	}
 
 	return $courses;
+
+}
+
+
+
+/*
+ *
+ * Method to check if course is passed
+ *
+ */
+function theme_mb2nl_course_passed( $id )
+{
+	global $DB;
+
+	if ( ! $id )
+	{
+		return false;
+	}
+
+	// Get end date from database
+	$csql = 'SELECT * FROM {course} WHERE id=?';
+	if ( ! $DB->record_exists_sql( $csql, array( $id ) ) )
+	{
+		return false;
+	}
+
+	$course = $DB->get_record( 'course', array( 'id' => $id ), 'enddate', MUST_EXIST );
+
+	// Now we have to check date
+	if ( $course->enddate > 0 && $course->enddate < theme_mb2nl_get_user_date() )
+	{
+		return true;
+	}
+
+	return false;
+
+}
+
+
+
+
+
+
+/**
+ *
+ * Method to get user date and time
+ *
+ */
+function theme_mb2nl_get_user_date()
+{
+
+	$date = new DateTime( 'now', core_date::get_user_timezone_object() );
+	$time = $date->getTimestamp();
+	return $time;
 
 }
 
@@ -233,7 +301,7 @@ function theme_mb2nl_iconnav($page)
 
     $iconnavs = theme_mb2nl_theme_setting($page, 'navicons');
 
-    if ($iconnavs !='')
+    if ( $iconnavs !== '' )
     {
         return theme_mb2nl_static_content($iconnavs, true, array('listcls'=>'theme-iconnav'));
     }

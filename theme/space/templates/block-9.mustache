@@ -16,36 +16,40 @@
 }}
 
 {{#heroimgenabled}}
-<div id="heroimg" class="c-hero-container {{#herofwenabled}}c-hero--fw{{/herofwenabled}} {{heroshadowstyle}} {{#heroshadow}}c-hero-container-shadow{{/heroshadow}} {{#heroboxshadow}}c-hero-box-shadow{{/heroboxshadow}} {{#showherologo}}c-hero-with-logo{{/showherologo}}{{^showherologo}}c-hero-without-logo{{/showherologo}} mb-5">
-  <div class="{{^herovideoenabled}}c-hero{{/herovideoenabled}} {{#herovideoenabled}}c-hero-video{{/herovideoenabled}} {{^herofwenabled}}l-container{{/herofwenabled}} row no-gutters justify-content-center align-items-center" {{^herovideoenabled}}style="background-image: url({{{ heroimg }}});"{{/herovideoenabled}} {{^herovideoenabled}}style="background-image: url({{{ heroimg }}});"{{/herovideoenabled}} {{#herovideoenabled}} data-vide-bg="mp4: {{{ herovideomp4 }}}, webm: {{{ herovideowebm }}}, ogv: {{{ herovideoogv }}}, poster: {{{ heroimg }}}" data-vide-options="posterType: none, position: 0% 50%"{{/herovideoenabled}}>
+<div id="heroimg" class="c-hero-container {{^herofwenabled}}{{#heroshadow}}c-hero-container-shadow {{heroshadowstyle}}{{/heroshadow}}{{/herofwenabled}} {{#heroboxshadow}}c-hero-box-shadow {{heroshadowstyle}}{{/heroboxshadow}}">
+  <div class="c-hero {{#herofwenabled}}c-hero--fw{{/herofwenabled}} {{#heroimgonly}}c-hero-img{{/heroimgonly}} {{^herofwenabled}}l-container{{/herofwenabled}} row no-gutters justify-content-center align-items-center" {{^heroimgonly}}style="background-image: url({{{ heroimg }}});"{{/heroimgonly}}>
+    {{^heroimgonly}}
+      {{^herohtml}}
+      <div class="c-hero-content col-sm-11 col-lg-7 text-center">
 
-    {{^herohtml}}
-    <div class="c-hero-content col-sm-11 col-lg-7 text-center">
+        {{#HeroText2}}<h5 class="h5">{{{HeroText2}}}</h5>{{/HeroText2}}
+        {{#HeroHeading}}<h1 class="h1">{{{HeroHeading}}}</h1>{{/HeroHeading}}
+        {{#HeroText}}<h3 class="h3">{{{HeroText}}}</h3>{{/HeroText}}
 
-      {{#HeroText2}}<h5 class="h5">{{{HeroText2}}}</h5>{{/HeroText2}}
-      {{#HeroHeading}}<h1 class="h1">{{{HeroHeading}}}</h1>{{/HeroHeading}}
-      {{#HeroText}}<h3 class="h3">{{{HeroText}}}</h3>{{/HeroText}}
+        <div class="row mt-5 justify-content-center">
+          {{#HeroURL}}<a href="{{HeroURL}}" class="my-2 mr-2 ml-2 btn btn-cta btn-cta--primary">{{{HeroLabel}}}</a>{{/HeroURL}}
+          {{#HeroURL2}}<a href="{{HeroURL2}}" class="my-2 mr-2 ml-2 btn btn-cta btn-cta--secondary">{{{HeroLabel2}}}</a>{{/HeroURL2}}
+        </div>
 
-      <div class="row mt-5 justify-content-center">
-        {{#HeroURL}}<a href="{{{HeroURL}}}" class="my-2 mr-2 ml-2 btn btn-cta btn-cta--primary">{{{HeroLabel}}}</a>{{/HeroURL}}
-        {{#HeroURL2}}<a href="{{{HeroURL2}}}" class="my-2 mr-2 ml-2 btn btn-cta btn-cta--secondary">{{{HeroLabel2}}}</a>{{/HeroURL2}}
       </div>
+      {{/herohtml}}
 
-    </div>
-    {{/herohtml}}
+      {{{ herohtml }}}
+    {{/heroimgonly}}
 
-    {{{ herohtml }}}
-
-    <img src="{{{ heroimg }}}" alt="" width="100%" class="c-hero-img d-sm-none d-md-inline" />
+    {{#heroimgonly}}
+    <img src="{{{ heroimg }}}" alt="" width="100%" class="c-hero-img d-inline" />
+    {{/heroimgonly}}
 
   </div>
 
+  {{^herofwenabled}}
+  {{#heroshadow}}
     {{#heroshadowimg}}
     <div class="c-hero-shadow-img-box" style="background-image: url({{{heroshadowimg}}}); {{heroshadowproperties}}"></div>
     {{/heroshadowimg}}
+  {{/heroshadow}}
+  {{/herofwenabled}}
 
 </div>
-{{#herovideoenabled}}
-<script src="{{siteurl}}/theme/space/addons/vide/jquery.vide.js"></script>
-{{/herovideoenabled}}
 {{/heroimgenabled}}

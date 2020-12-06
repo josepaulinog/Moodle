@@ -60,70 +60,60 @@ function theme_space_get_extra_scss($theme) {
  * @return bool
  */
 function theme_space_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-  $theme = theme_config::load('space');
 
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'logo') {
-      return $theme->setting_file_serve('logo', $args, $forcedownload, $options);
-  } 
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'heroimg') {
-      return $theme->setting_file_serve('heroimg', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'heroshadowimg') {
-      return $theme->setting_file_serve('heroshadowimg', $args, $forcedownload, $options); 
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'herovideomp4') {
-      return $theme->setting_file_serve('herovideomp4', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'herovideoogv') {
-      return $theme->setting_file_serve('herovideoogv', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'herovideowebm') {
-      return $theme->setting_file_serve('herovideowebm', $args, $forcedownload, $options);        
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'fphtmlblock3bgimg') {
-      return $theme->setting_file_serve('fphtmlblock3bgimg', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'loginbg') {
-      return $theme->setting_file_serve('loginbg', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'customlogosidebar') {
-      return $theme->setting_file_serve('customlogosidebar', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and $filearea === 'favicon') {
-      return $theme->setting_file_serve('favicon', $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and preg_match("/^fpblock1image[1-9][0-9]?$/", $filearea) !== false) {
-    return $theme->setting_file_serve($filearea, $args, $forcedownload, $options); 
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and preg_match("/^fpblock2image[1-9][0-9]?$/", $filearea) !== false) {
-      return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and preg_match("/^teamimage[1-9][0-9]?$/", $filearea) !== false) {
-      return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and preg_match("/^logosimage[1-9][0-9]?$/", $filearea) !== false) {
-      return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-  }
-  
-  if ($context->contextlevel == CONTEXT_SYSTEM and preg_match("/^siemaSliderimage[1-9][0-9]?$/", $filearea) !== false) {
-      return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-  } 
 
-  send_file_not_found();
-  
+    if ($context->contextlevel == CONTEXT_SYSTEM and preg_match("/^sponsorsimage[1-9][0-9]?$/", $filearea) !== false ||
+        $context->contextlevel == CONTEXT_SYSTEM and preg_match("/^clientsimage[1-9][0-9]?$/", $filearea) !== false  ||
+        $context->contextlevel == CONTEXT_SYSTEM and preg_match("/^sliderimage[1-9][0-9]?$/", $filearea) !== false ) {
+        $theme = theme_config::load('space');
+        // By default, theme files must be cache-able by both browsers and proxies.
+        if (!array_key_exists('cacheability', $options)) {
+            $options['cacheability'] = 'public';
+        }
+        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+    }
+
+    if ($context->contextlevel == CONTEXT_SYSTEM && ( $filearea === 'logo' ||
+                                                      $filearea === 'customlogotopbar' ||
+                                                      $filearea === 'heroimg' ||
+                                                      $filearea === 'heroshadowimg' ||
+                                                      $filearea === 'herovideomp4' ||
+                                                      $filearea === 'herovideowebm' ||
+                                                      $filearea === 'fphtmlblock3bgimg' ||
+                                                      $filearea === 'loginbg' ||
+                                                      $filearea === 'customlogosidebar' ||
+                                                      $filearea === 'mobiletopbarlogo' ||
+                                                      $filearea === 'favicon' ||
+                                                      $filearea === 'customfontlighteot' ||
+                                                      $filearea === 'customfontlightwoff' ||
+                                                      $filearea === 'customfontlightwoff2' ||
+                                                      $filearea === 'customfontlightttf' ||
+                                                      $filearea === 'customfontlightsvg' ||
+                                                      $filearea === 'customfontregulareot' ||
+                                                      $filearea === 'customfontregularwoff' ||
+                                                      $filearea === 'customfontregularwoff2' ||
+                                                      $filearea === 'customfontregularttf' ||
+                                                      $filearea === 'customfontregularsvg' ||
+                                                      $filearea === 'customfontmediumeot' ||
+                                                      $filearea === 'customfontmediumwoff' ||
+                                                      $filearea === 'customfontmediumwoff2' ||
+                                                      $filearea === 'customfontmediumttf' ||
+                                                      $filearea === 'customfontmediumsvg' ||
+                                                      $filearea === 'customfontboldeot' ||
+                                                      $filearea === 'customfontboldwoff' ||
+                                                      $filearea === 'customfontboldwoff2' ||
+                                                      $filearea === 'customfontboldttf' ||
+                                                      $filearea === 'customfontboldsvg'
+                                                    )) {
+        $theme = theme_config::load('space');
+        // By default, theme files must be cache-able by both browsers and proxies.
+        if (!array_key_exists('cacheability', $options)) {
+            $options['cacheability'] = 'public';
+        }
+        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+    } else {
+        send_file_not_found();
+    }
 }
 
 /**
@@ -211,8 +201,13 @@ function theme_space_get_precompiled_css() {
  * @param theme_config $theme The theme config object.
  * @return array
  */
+
 function theme_space_get_pre_scss($theme) {
     global $CFG;
+
+    // MODIFICATION START.
+    require_once($CFG->dirroot . '/theme/space/locallib.php');
+    // MODIFICATION END.
 
     $scss = '';
     $configurable = [
@@ -371,8 +366,15 @@ function theme_space_get_pre_scss($theme) {
         'drawernavitemiconactive' => ['drawer-nav-item-icon-active'], 
         'drawerheading' => ['drawer-heading'],
         'drawertext' => ['drawer-text'], 
+        'drawerlink' => ['drawer-link'],
+        'drawerlinkhover' => ['drawer-link-hover'],
+        'drawerlinkhoverbg' => ['drawer-link-hover-bg'],
         'drawerhr' => ['drawer-hr'], 
+        'drawernaviconsize' => ['drawer-nav-icon-size'],   
+        'drawernaviconwidth' => ['drawer-nav-icon-width'],    
+        'drawernaviconfontsize' => ['drawer-nav-icon-font-size'], 
         'drawernavitemiconopacity' => ['drawer-nav-item-icon-opacity'], 
+        'drawerwidth' => ['drawer-width'],
         //Footer
         'footerbg' => ['footer-bg'], 
         'footertextcolor' => ['footer-text-color'],   
@@ -397,6 +399,10 @@ function theme_space_get_pre_scss($theme) {
         'h4fontsize' => ['h4-font-size'],
         'h5fontsize' => ['h5-font-size'],
         'h6fontsize' => ['h6-font-size'],
+        //Breakpoints
+        'gridbreakpointsm' => ['grid-breakpoint-sm'],
+        'gridbreakpointmd' => ['grid-breakpoint-md'],
+        'gridbreakpointlg' => ['grid-breakpoint-lg'],
         //Cards
         'coursecarddescheight' => ['course-card-desc-height'],
         'cardimgheight' => ['card-img-height'],
@@ -415,6 +421,11 @@ function theme_space_get_pre_scss($theme) {
         'heroh1size' => ['hero-h1-size'],
         'heroh3size' => ['hero-h3-size'],
         'heroh5size' => ['hero-h5-size'],
+        'heromtop' => ['heromargin-top'],
+        'herombottom' => ['heromargin-bottom'],
+        'heroimageheightlg' => ['heroimageheight-lg'],
+        'heroimageheightmd' => ['heroimageheight-md'],
+        'heroimageheightsm' => ['heroimageheight-sm'],       
         // General
         'sectionpadding' => ['section-padding'],
         'sectionpaddingsm' => ['section-padding-sm'],

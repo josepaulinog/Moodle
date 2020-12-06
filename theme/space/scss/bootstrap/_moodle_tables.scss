@@ -17,10 +17,6 @@
     display: inline-flex!important;
   }
 
-  .preventlink, .prohibitlink, .allowlink, .forbidden {
-    padding: 6px;
-  }
-
   .preventlink {
     margin-bottom: 0;
   }
@@ -227,13 +223,6 @@
 
 }
 
-  .managecompetencies {
-    td {
-      padding: 30px 10px 30px 80px!important;
-      border-radius: $border-radius;
-    }
-  }
-
   #page-mod-assign-grading {
     .path-mod-assign #page, .path-mod-assign #page-content {
       position: relative;
@@ -298,4 +287,149 @@
   // e.g SCORM tables
   table#attempts {
     min-width: max-content;
+  }
+
+  table {
+    .disabled {
+      opacity: 0.7;
+
+      td {
+        background-color: $gray-100;
+      }
+    }
+  }
+
+  #page-admin-tool-task-scheduledtasks {
+    [role="main"] {
+      overflow-x: auto; 
+    }
+
+    .admintable {
+      min-width: max-content;
+    }
+  }
+
+
+  // Unistall button
+  .table-unistall-btn {
+      display: inline-block;
+      padding: .5rem 1rem .5rem 2.5rem;
+      margin: 1px 4px 1px 1px;
+
+      background-color: $red-100;
+      color: $red-700;
+
+      font-size: $badge-font-size;
+      font-weight: $badge-font-weight;
+      line-height: 1.2;
+      text-align: center;
+      @include border-radius($badge-border-radius);
+      position: relative;
+  
+      &:after {
+        @extend %fa-icon;
+        @extend .fas;
+    
+        position: absolute;
+        top: calc(50% - 6px);
+        left: 17px;
+  
+        content: fa-content($fa-var-trash);
+  
+        font-size: 12px;
+        color: inherit;
+      }
+
+      transition: $general-transition;
+  
+      &:hover {
+        color: $red-800;
+        background-color: $red-100;
+      }
+  }
+
+  #assignfeedbackplugins,
+  #assignsubmissionplugins,
+  #toolplugins,
+  #modules,
+  #manageauthtable
+  {
+    .c2, .c5, .c6 {
+      text-align: center!important;
+    }
+  }
+
+
+  #assignsubmissionplugins,
+  #assignfeedbackplugins,
+  #modules,
+  #filterssetting
+  {
+    .c5 {
+     a {
+      @extend .table-unistall-btn;
+     } 
+    }
+  }
+
+  #commentstable {
+    .c3 {
+      a {
+       @extend .table-unistall-btn;
+      } 
+     } 
+  }
+
+  #manageauthtable {
+    .c6 {
+      a {
+       @extend .table-unistall-btn;
+      } 
+     }
+  }
+
+  #toolplugins {
+    .c2 {
+     a {
+      @extend .table-unistall-btn;
+     } 
+    }
+  }
+
+
+
+  #commentstable {
+    .c0 {
+      width: 160px;
+    }
+
+    .c1 {
+      width: 200px;
+    }
+  }
+
+
+  #core-search-areas {
+    .c5 {
+      .icon {
+        font-size: 12px;
+      }
+
+      a {
+        display: inline-flex;
+      }
+    }
+  }
+
+  #outlinetable {
+    .icon {
+      width: 30px;
+      margin-right: .5rem;
+    }
+
+    .section {
+      h3 {
+        margin: 2rem 0 0
+      }
+    }
   }

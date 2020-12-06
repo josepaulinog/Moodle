@@ -32,7 +32,7 @@ $menuPos = 1;
 $headerContent = theme_mb2nl_theme_setting($PAGE, 'headercontent');
 
 ?>
-<body <?php echo $OUTPUT->body_attributes(theme_mb2nl_body_cls($PAGE)) . $isPageBg; ?>>
+<body <?php echo $OUTPUT->body_attributes(theme_mb2nl_body_cls()) . $isPageBg; ?>>
 <?php echo $OUTPUT->standard_top_of_body_html(); ?>
 <?php if (theme_mb2nl_theme_setting($PAGE,'loadingscr',0) == 1) : ?>
 	<?php echo theme_mb2nl_loading_screen($PAGE); ?>

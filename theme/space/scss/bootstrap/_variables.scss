@@ -69,12 +69,15 @@ $paragraph-margin-bottom:   0.5rem !default;
 //
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
+$grid-breakpoint-sm: 320px !default;
+$grid-breakpoint-md: 768px !default;
+$grid-breakpoint-lg: 1200px !default;
 
 $grid-breakpoints: (
   xs: 0,
-  sm: 320px,
-  md: 768px,
-  lg: 1200px,
+  sm: $grid-breakpoint-sm,
+  md: $grid-breakpoint-md,
+  lg: $grid-breakpoint-lg,
   xl: 1600px
 ) !default;
 
@@ -442,7 +445,7 @@ $form-feedback-invalid-color:       theme-color("danger") !default;
 $zindex-dropdown:                   1000 !default;
 $zindex-sticky:                     1020 !default;
 $zindex-fixed:                      1030 !default;
-$zindex-modal-backdrop:             1040 !default;
+$zindex-modal-backdrop:             9999 !default;
 $zindex-modal:                      1050 !default;
 $zindex-popover:                    1060 !default;
 $zindex-tooltip:                    1070 !default;
@@ -620,8 +623,8 @@ $modal-footer-border-width:   $modal-header-border-width !default;
 $modal-header-padding:        1rem !default;
 
 $modal-lg:                          800px !default;
-$modal-md:                          500px !default;
-$modal-sm:                          300px !default;
+$modal-md:                          600px !default;
+$modal-sm:                          500px !default;
 
 $modal-transition:                  transform .3s ease-out !default;
 
@@ -630,8 +633,8 @@ $modal-transition:                  transform .3s ease-out !default;
 //
 // Define alert colors, border radius, and padding.
 
-$alert-padding-y:                   1rem !default;
-$alert-padding-x:                   2rem !default;
+$alert-padding-y:                   0.8rem !default;
+$alert-padding-x:                   1.25rem !default;
 $alert-margin-bottom:               .25rem !default;
 $alert-border-radius:               $border-radius !default;
 $alert-link-font-weight:            $font-weight-bold !default;
@@ -818,3 +821,25 @@ $hero-h5-size: 1rem!default;
 //General Front Page
 $section-padding: 120px!default;
 $section-padding-sm: 60px!default;
+
+
+//Drawer
+$drawer-nav-icon-size: 14px!default;
+$drawer-nav-icon-position: $drawer-nav-icon-size / 2!default;
+$drawer-nav-icon-font-size: $font-size-xs!default;
+$drawer-nav-icon-width: 30px!default;
+
+$fixed-header-y: 50px!default;
+$drawer-width-fs: 100%!default;
+$drawer-width: 250px!default;
+$drawer-padding-x: 20px!default;
+$drawer-padding-y: 20px!default;
+$drawer-offscreen-gutter: 20px!default;
+
+
+$sticky-topbar: calc(#{$drawer-width-fs} - #{$drawer-width});
+$heromargin-top: 0!default;
+$heromargin-bottom: 60px!default;
+$heroimageheight-lg: 600px!default;
+$heroimageheight-md: 500px!default;
+$heroimageheight-sm: 400px!default;

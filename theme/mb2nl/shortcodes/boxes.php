@@ -2,180 +2,63 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+mb2_add_shortcode( 'boxes', 'mb2_shortcode_boxes' );
+mb2_add_shortcode( 'boxesimg', 'mb2_shortcode_boxes' );
+mb2_add_shortcode( 'boxesicon', 'mb2_shortcode_boxes' );
+mb2_add_shortcode( 'boxescontent', 'mb2_shortcode_boxes' );
 
-mb2_add_shortcode('boxes', 'mb2_shortcode_boxes');
-mb2_add_shortcode('boxesicon', 'mb2_shortcode_boxes');
-mb2_add_shortcode('boxesimg', 'mb2_shortcode_boxes');
-mb2_add_shortcode('boxescontent', 'mb2_shortcode_boxes');
-
-
-function mb2_shortcode_boxes ($atts, $content= null){
-	extract(mb2_shortcode_atts( array(
-		'columns' =>'1', // max 5
-		'size' => '',
+function mb2_shortcode_boxes ( $atts, $content = null ){
+	extract( mb2_shortcode_atts( array(
+		'columns' => 1, // max 5
 		'type' => 1,
-		'margin' => '',
+		'mt' => 0,
+		'mb' => 0, // 0 because box item has margin bottom 30 pixels
+		'gutter' => 'normal',
+		'linkbtn' => 0,
+		'desc' => 1,
+		'btntext' => '',
+		'color' => 'primary',
 		'custom_class' => ''
-	), $atts));
-
+	), $atts ) );
 
 	$output = '';
+	$style = '';
+	$cls = '';
 
-	$GLOBALS['box_type'] = $type;
+	// Global values
+	$GLOBALS['boxlinkbtn'] = $linkbtn;
+	$GLOBALS['boxbtntext'] = $btntext;
+	$GLOBALS['boxtype'] = $type;
+	$GLOBALS['boxcolor'] = $color;
+	$GLOBALS['boxdesc'] = $desc;
 
-	$cls = $size === 'small' ? ' boxes-small' : '';
+	$cls .= ' type-' . $type;
+	$cls .= ' gutter-' . $gutter;
+	$cls .= ' theme-col-' . $columns;
 	$cls .= $custom_class ? ' ' . $custom_class : '';
 
-	$style = $margin !='' ? ' style="padding:' . $margin . ';"' : '';
-
-	$output .= '<div class="theme-boxes theme-col-' . $columns . $cls . ' clearfix"' . $style . '>';
-
-	$output .= mb2_do_shortcode($content);
-
-	$output .= '</div>';
-
-
-	return $output;
-
-	// This is require for other boxes type
-	// Icons or images
-	unset($GLOBALS['box_type']);
-
-}
-
-
-mb2_add_shortcode('boximg', 'mb2_shortcode_boximg');
-
-
-function mb2_shortcode_boximg ($atts, $content = null){
-	extract(mb2_shortcode_atts( array(
-		'image' =>'',
-		'link' =>'',
-		'type' => '',
-		'link_target' =>'',
-		'target' =>'',
-		'color' =>'',
-		'useimg' => 1
-	), $atts));
-
-
-	$output = '';
-	$title_color_span = '';
-	$istarget = $target ? $target : $link_target;
-
-	if ($type == '' && isset($GLOBALS['box_type']))
+	if ( $mt || $mb )
 	{
-		$type = $GLOBALS['box_type'];
+		$style .= ' style="';
+		$style .= $mt ? 'margin-top:' . $mt . 'px;' : '';
+		$style .= $mb ? 'margin-bottom:' . $mb . 'px;' : '';
+		$style .= '"';
 	}
 
-	$tstyle = '';
-	$style = $color!='' ? ' style="background-color:' . $color . ';"' : '';
-
-	if ($type == 2 || $type == 3)
-	{
-		$tstyle = $style;
-		$title_color_span = '<span class="theme-boximg-color"' . $tstyle . '></span>';
-	}
-
-	$boxCls = $useimg == 1 ? ' useimg' : '';
-	$boxCls .= ' type-' . $type;
-
-	$output .= '<div class="theme-box">';
-	$output .= $link !='' ? '<a href="' . $link . '" target="' . $istarget . '">' : '';
-	$output .= '<div class="theme-boximg' . $boxCls . '">';
-	$output .= $useimg == 1 ? '<div class="vtable-wrapp">' : '';
-	$output .= $useimg == 1 ? '<div class="vtable">' : '';
-	$output .= $useimg == 1 ? '<div class="vtable-cell">' : '';
-	$output .= $content ? '<h4><span class="theme-title-text">' . format_text($content, FORMAT_HTML) . '</span>' . $title_color_span . '</h4>' : '';
-	$output .= $useimg == 1 ? '</div>' : '';
-	$output .= $useimg == 1 ? '</div>' : '';
-	$output .= $useimg == 1 ? '</div>' : '';
-	$output .= $useimg == 1 ? '<img src="' . $image . '" alt="">' : '';
-	$output .= $type == 1 ? '<div class="theme-boximg-color"' . $style . '></div>' : '';
-	$output .= '<div class="theme-boximg-img" style="background-image:url(\'' . $image . '\');background-repeat:no-repeat;background-position:50% 50%;background-size:cover;"></div>';
+	$output .= '<div class="theme-boxes' . $cls . ' clearfix"' . $style . '>';
+	$output .= mb2_do_shortcode( $content );
 	$output .= '</div>';
-	$output .= $link !='' ? '</a>' : '';
-	$output .= '</div>';
+
+	// Unset global values
+	unset( $GLOBALS['boxlinkbtn'] );
+	unset( $GLOBALS['boxbtntext'] );
+	unset( $GLOBALS['boxtype'] );
+	unset( $GLOBALS['boxcolor'] );
+	unset( $GLOBALS['boxdesc'] );
 
 	return $output;
 
 }
-
-
-
-
-
-
-
-mb2_add_shortcode('boxicon', 'mb2_shortcode_boxicon');
-
-
-function mb2_shortcode_boxicon ($atts, $content = null){
-	extract(mb2_shortcode_atts( array(
-		'icon' =>'fa-rocket',
-		'type' => '',
-		'title'=> '',
-		'link' => '',
-		'color' => 'primary',
-		'link_target' =>'',
-		'target' =>'',
-		'readmore' => ''
-	), $atts));
-
-
-	$output = '';
-	$istarget = $target ? $target : $link_target;
-
-	if ($type == '' && isset($GLOBALS['box_type']))
-	{
-		$type = $GLOBALS['box_type'];
-	}
-
-	$pref = theme_mb2nl_font_icon_prefix($icon);
-
-	if (!$readmore && theme_mb2nl_check_for_tags($content, 'a'))
-	{
-		$link = 0;
-	}
-
-	$output .= '<div class="theme-box">';
-	$output .= $link ? '<a href="' . $link . '" target="' . $istarget . '">' : '';
-	$output .= '<div class="theme-boxicon type-' . $type . ' color-' . $color . '">';
-	$output .= '<div class="theme-boxicon-icon">';
-	$output .= '<i class="' . $pref . $icon . '"></i>';
-	$output .= '</div>';
-	$output .= $link ? '</a>' : '';
-	$output .= '<div class="theme-boxicon-content">';
-
-	if ($title)
-	{
-		$output .= '<h4>';
-		$output .= $link ? '<a href="' . $link . '" target="' . $istarget . '">' : '';
-		$output .= format_text($title, FORMAT_HTML);
-		$output .= $link ? '</a>' : '';
-		$output .= '</h4>';
-	}
-
-	$output .= mb2_do_shortcode(format_text($content, FORMAT_HTML));
-
-	if ($link && $readmore)
-	{
-		$output .= '<a class="theme-boxicon-readmore btn btn-primary" href="' . $link . '" target="' . $istarget . '">' . $readmore . '</a>';
-	}
-
-	$output .= '</div>';
-	$output .= '</div>';
-	$output .= '</div>';
-
-
-	return $output;
-
-}
-
-
-
-
-
 
 
 
@@ -194,19 +77,17 @@ function mb2_shortcode_boxcontent ($atts, $content = null){
 		'target' =>''
 	), $atts));
 
-
 	$output = '';
 	$istarget = $target ? $target : $link_target;
 
-	if ($type == '' && isset($GLOBALS['box_type']))
+	if ($type === '' && isset( $GLOBALS['boxtype'] ) )
 	{
-		$type = $GLOBALS['box_type'];
+		$type = $GLOBALS['boxtype'];
 	}
 
 	$pref = theme_mb2nl_font_icon_prefix($icon);
 	$boxCls = $icon !='' ? ' isicon' : ' noicon';
 	$boxCls .= $link !='' ? ' islink' : '';
-
 
 	$output .= '<div class="theme-box">';
 
@@ -221,7 +102,6 @@ function mb2_shortcode_boxcontent ($atts, $content = null){
 	$output .= '</div>';
 	$output .= '</div>';
 	$output .= '</div>';
-
 
 	return $output;
 

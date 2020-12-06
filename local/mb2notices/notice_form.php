@@ -112,9 +112,12 @@ class service_edit_form extends moodleform {
             '1' => get_string('accessusers', 'local_mb2notices'),
             '2' => get_string('accessguests', 'local_mb2notices'),
             '3' => get_string('accesstudents', 'local_mb2notices'),
-            '4' => get_string('accesteachers', 'local_mb2notices')
+            '4' => get_string('accesteachers', 'local_mb2notices'),
+            '5' => get_string('rolecustom','local_mb2notices', array( 'num'=> 1 ) ),
+            '6' => get_string('rolecustom','local_mb2notices', array( 'num'=> 2 ) ),
+            '7' => get_string('rolecustom','local_mb2notices', array( 'num'=> 3 ) )
         ) );
-        $mform->setType('attribs[cansee]', PARAM_TEXT);        
+        $mform->setType('attribs[cansee]', PARAM_TEXT);
 
         $mform->addElement('text', 'attribs[userids]', get_string('userids', 'local_mb2notices'), array( 'data-mb2showon' => 'attribs[cansee]', 'data-mb2showonval' => '1' ) );
         $mform->addHelpButton('attribs[userids]', 'userids', 'local_mb2notices');

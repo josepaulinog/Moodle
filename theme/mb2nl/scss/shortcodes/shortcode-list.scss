@@ -4,8 +4,52 @@ ul.theme-list {
 }
 
 .theme-list {
-	margin: -6px 0 0 0;
+	margin: -.2rem 0 0 0;
 	padding: 0;
+
+	&.list-col-2,
+    &.list-col-3,
+    &.list-col-4,
+    &.list-col-5 {
+        padding-left: 0;
+        margin-left: -15px;
+        margin-right: -15px;
+
+        li {
+            display: block;
+            float: left;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+
+    &.list-col-2 {
+
+        li {
+            width: 50%;
+        }
+    }
+
+    &.list-col-3 {
+
+        li {
+            width: 33.3333333333%;
+        }
+    }
+
+    &.list-col-4 {
+
+        li {
+            width: 25%;
+        }
+    }
+
+    &.list-col-5 {
+
+        li {
+            width: 20%;
+        }
+    }
 
 	&.list-center {
 		text-align: center;
@@ -19,7 +63,7 @@ ul.theme-list {
 		text-align: right;
 	}
 
-	&.list-horizontal {
+	&.horizontal1 {
 		margin-left: -10px;
 		margin-right: -10px;
 
@@ -39,8 +83,12 @@ ul.theme-list {
 	}
 
 	li {
-		margin: 0;
-		padding: 6px 0;
+		margin: 0 0 .85rem 0;
+		padding: 0;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 
@@ -96,7 +144,8 @@ ul.theme-list {
 	&.list-square,
 	&.list-circle,
 	&.list-disc,
-	&.list-number {
+	&.list-number,
+	&.list-icon {
 
 		padding-left: 15px;
 		margin-left: 15px;
@@ -106,6 +155,14 @@ ul.theme-list {
 			margin-left: 0;
 			padding-right: 15px;
 			margin-right: 15px;
+		}
+	}
+
+	&.list-icon {
+		padding-left: 0;
+
+		li>i {
+			margin-right: .45rem;
 		}
 	}
 
@@ -123,5 +180,89 @@ ul.theme-list {
 		list-style: disc;
 	}
 
+
+}
+
+
+
+/* Iconlist */
+
+.theme-listicon {
+    list-style: none;
+    padding-left: 0;
+    color: $headingscolor;
+    font-weight: $fwheadings;
+
+	.dark & {
+		color: #fff;
+	}
+
+	$iconsizeel: 2.65rem;
+
+	li {
+	    position: relative;
+	    padding-left: 3.3rem;
+	    padding-top: .85rem;
+	    padding-bottom: .85rem;
+	    margin-bottom: .4rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+		> a {
+			color: inherit !important;
+		}
+	}
+
+	.iconel {
+	    position: absolute;
+	    display: block;
+	    width: $iconsizeel;
+	    height: $iconsizeel;
+	    @include mb2_border_radius(25rem);
+	    text-align: center;
+	    line-height: $iconsizeel;
+	    left: 0;
+	    top: 50%;
+	    margin-top: ( ( $iconsizeel/2 ) * -1 );
+	    font-size: 1.2rem;
+		background-color: $accent1;
+		color: #fff;
+	}
+
+}
+
+
+
+@media only screen and (max-width: $tablet_width){
+
+    .theme-list {
+        &.list-col-3,
+        &.list-col-4,
+        &.list-col-5 {
+            li {
+                width: 50% !important;
+            }
+        }
+
+    }
+
+}
+
+
+
+@media only screen and (max-width: $phone_width){
+
+    .theme-list {
+        &.list-col-2,
+        &.list-col-3,
+        &.list-col-4,
+        &.list-col-5 {
+            li {
+                width: 100% !important;
+            }
+        }
+
+    }
 
 }

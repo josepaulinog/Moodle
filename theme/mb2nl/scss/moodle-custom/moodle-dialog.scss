@@ -36,9 +36,6 @@
 					font-size: $fsbig;
 					color: $headingscolor;
 					margin: 0;
-				}
-
-				> h3 {
 					display: inline-block;
 				}
 
@@ -150,7 +147,7 @@
 		.fp-content {
 			border: solid 4px rgba(0,0,0,.08);
 		    border-top: 0;
-			height: 390px;
+			height: 440px;
 		}
 
 
@@ -187,16 +184,6 @@
 	.fp-content-center {
 		vertical-align: top;
 	}
-
-	.mdl-align {
-		> .btn {
-			float: left;
-			margin-left: 10px;
-		}
-	}
-
-
-
 }
 
 

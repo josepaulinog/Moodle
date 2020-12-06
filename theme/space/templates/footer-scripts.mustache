@@ -1,6 +1,7 @@
+<div class="topbar-backdrop hidden"></div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
   //The first argument are the elements to which the plugin shall be initialized
   //The second argument has to be at least a empty object or a object with your desired options
   OverlayScrollbars(document.querySelectorAll('#nav-drawer'),
@@ -14,7 +15,7 @@
         touchSupport     : true
       }
   });
-  OverlayScrollbars(document.querySelectorAll('.region-main-settings-menu .dropdown-menu'),
+  OverlayScrollbars(document.querySelectorAll('.region-main-settings-menu .dropdown-menu, .course-contacts-ext-content, .dropdown-scrollable'),
   {scrollbars :
       {
         visibility       : "auto",
@@ -25,7 +26,7 @@
         touchSupport     : true
       }
   });
-  OverlayScrollbars(document.querySelectorAll('.s-courses .course-box-content-desc, .popover-region-content-container, .form-description pre, .accordion-nav-content, .c-custom-nav'),
+  OverlayScrollbars(document.querySelectorAll('.s-courses .course-box-content-desc, .form-description pre, .accordion-nav-content'),
   {scrollbars :
       {
         visibility       : "auto",
@@ -36,23 +37,39 @@
   });
 });
 
-</script>
+$(".course_category_tree").on("click", "[data-toggle='collapse'], .collapseexpand, .content .subcategories .category .info, .course_category_tree .category.with_children>.info>.categoryname, .category.with_children:not(.collapsed), .category.with_children" ,function(){
+  OverlayScrollbars(document.querySelectorAll('.course-contacts-ext-content, .course-box-content-desc'),
+  {scrollbars :
+      {
+        visibility       : "auto",
+        autoHide         : "never",
+        autoHideDelay    : 800,
+        dragScrolling    : true,
+        clickScrolling   : false,
+        touchSupport     : true
+      }
+  });
+});
 
-<script>
-var navbar = document.getElementById("navBar");
-var sticky = navbar.offsetTop;
-var stickysettingbtn = document.getElementById("headerBtn");
+window.onscroll = function() {stickyNav()};
 
-function stickyNavF() {
-  if (window.pageYOffset >= sticky) {
+var navbar = document.getElementById("topBarContainer");
+var navbarH = navbar.offsetHeight;
+var settingsBtn = document.getElementById("settingsMenu");
+var sticky = navbar.offsetTop + 300;
+
+function stickyNav() {
+  if (window.pageYOffset > sticky) {
     navbar.classList.add("sticky-nav");
-    if(stickysettingbtn != null) { stickysettingbtn.classList.add("sticky-btn"); }
+    settingsBtn.classList.add("sticky");
+    settingsBtn.style.top = 10 + navbarH + "px";
   } else {
     navbar.classList.remove("sticky-nav");
-    if(stickysettingbtn != null) { stickysettingbtn.classList.remove("sticky-btn"); }
+    settingsBtn.classList.remove("sticky")
+    settingsBtn.style.top = "-15px";
   }
 }
-window.onscroll = function() {stickyNavF()};
+
 </script>
 
 {{#js}}
@@ -75,10 +92,10 @@ require(['jquery'], function($) {
   });
 
   var mobileTopBar = $(".s-top-container"),
-      mobileTopBarToggle = $("#mobileTopBarBtn, #mobileTopBarCloseBtn");
-      mobileSidebarToggle = $(" #mobileSidebarBtnClose, #mobileSidebarBtn");
+      mobileTopBarBtn = $("#showMobileTopBar");
+      mobileTopBarToggle = $("#mobileTopBarBtn, #mobileTopBarCloseBtn, .topbar-backdrop");
 
-  mobileTopBarToggle.on("click", function(e) {
+  mobileTopBarBtn.on("click", function(e) {
      e.preventDefault();
      mobileTopBar.toggleClass("show");
      mobileTopBarToggle.toggleClass("hidden");
@@ -88,11 +105,6 @@ require(['jquery'], function($) {
       sidebarToggle = $(".sidebar-btn, .sidebar-btn--close");
       pageWrapper = $("#page-wrapper, #page-footer .c-container");
       topBarWrapper = $(".s-top");
-
-  mobileSidebarToggle.on("click", function(e) {
-     e.preventDefault();
-     mobileSidebarToggle.toggleClass("hidden");
-  });
 
   /*
    * Bootstrap Cookie Alert by Wruczek
@@ -149,26 +161,21 @@ require(['jquery'], function($) {
   })();
 
 
-  //Back to top button
-  var btn = $('#backToTop');
-
-  $(window).scroll(function() {
-    if ($(window).scrollTop() > 300) {
-      btn.addClass('show');
-    } else {
-      btn.removeClass('show');
-    }
-  });
-
-  btn.on('click', function(e) {
-    e.preventDefault();
-    $('html, body').animate({scrollTop:0}, '300');
-  });
-
-
 });
+
 {{/js}}
 
 <script src="{{siteurl}}/theme/space/addons/bootstrapnavbar/bootstrap-4-navbar.min.js"></script>
+
+{{#herovideoenabled}}
+<script src="{{siteurl}}/theme/space/addons/vidbg/vidbg.js"></script>
+<script>
+var instance = new vidbg('.c-hero-container--video', {
+  mp4: '{{{ herovideomp4 }}}',
+  webm: '{{{ herovideowebm }}}',
+  poster: '{{{ heroimg }}}',
+})
+</script>
+{{/herovideoenabled}}
 
 {{{ additionalfooterhtml }}}

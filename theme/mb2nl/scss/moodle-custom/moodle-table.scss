@@ -6,6 +6,7 @@
 		z-index: 2;
 		margin-top: 1.3rem;
 		@include mb2_border_radius(.15rem);
+		clear: both;
 
 		&.wider {
 			border: solid 1px $color_box_border;
@@ -24,6 +25,12 @@
 					}
 				}
 			}
+		}
+	}
+
+	.attendancereporttable {
+		.theme-table-wrap {
+			position: static;
 		}
 	}
 

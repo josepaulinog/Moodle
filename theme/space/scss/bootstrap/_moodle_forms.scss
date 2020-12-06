@@ -68,6 +68,8 @@
     border: 1px solid $border-color;
     border-radius: $border-radius;
     box-shadow: inset 1px 1px 4px 0 rgba(0,0,0,.13);
+
+    p { margin-bottom: 1.3rem !important; }
 }
 
 .form-control.atto_h5p_url {
@@ -240,7 +242,7 @@ fieldset.coursesearchbox {
   }
 
   label {
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
 
     #page-site-index & {
       width: 100%;
@@ -298,11 +300,26 @@ fieldset.coursesearchbox {
 .availability-field {
     label {
         display: inline-flex;
+        align-items: center;
+        margin-right: 0.5rem;
+
+        font-size: $font-size-xs;
     }
     .availability-group label {
         vertical-align: top;
         align-self: center;
     }
+
+    .col-form-label {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-sm-bold;
+    }
+}
+
+.availability-connector {
+  .label {
+    margin: 10px 10px 10px 0;
+  }
 }
 
 .availability-eye {
@@ -312,11 +329,120 @@ fieldset.coursesearchbox {
 .availability-inner,
 .availability-plugincontrols {
     float: left;
-    @include border-radius($card-border-radius);
-    border: $card-border-width solid $card-border-color;
-    padding: 1rem;
-    margin-top: 0.5rem;
+    padding: 0;
+    margin: 0.25rem;
+
+    .label {
+      font-size: $font-size-xs;
+      padding: 0.25rem 0.5rem;
+      border-radius: $border-radius;
+    }
 }
+
+.availability-list {
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 10px;
+
+  font-size: $font-size-sm;
+}
+
+.availability-header {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  font-weight: $font-weight-sm-bold;
+  background-color: $gray-100;
+  border-radius: $border-radius;
+  padding: 5px 20px;
+
+  input,
+  select {
+    padding-top: .375rem;
+    padding-bottom: .375rem;
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    margin: 0.25rem;
+    font-size: $font-size-xs!important;
+  }
+}
+
+.availability-eye {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px!important;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+
+  background-color: $gray-100;
+}
+
+.availability-none {
+  margin-top: 0;
+  padding: 10px 20px;
+
+  background-color: $red-100;
+  color: $red-600;
+
+  border-radius: $border-radius;
+}
+
+.availability-item {
+  border: 1px solid $theme-color-6;
+  border-radius: $border-radius;
+  padding: 10px;
+
+  font-size: $font-size-sm;
+
+  .availability-group {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .availability-plugincontrols {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    input,
+    select {
+      padding-top: .375rem;
+      padding-bottom: .375rem;
+      padding-left: 0.65rem;
+      padding-right: 0.65rem;
+      margin: 0.25rem;
+      font-size: $font-size-xs!important;
+    }
+  }
+}
+
+.availability-delete {
+  margin-right: 10px;
+  padding: 0!important;
+  text-align: center;
+  line-height: 28px;
+
+  background-color: $gray-100;
+  width: 30px;
+  height: 30px;
+
+  border-radius: 30px;
+
+  transition: $general-transition;
+  
+  &:hover {
+    background-color: $gray-200;
+  }
+
+  img {
+    width:9px;
+  }
+}
+
 .availability-plugincontrols,
 .availability-childlist .availability-inner {
     margin-left: .625rem;
@@ -365,7 +491,7 @@ table.form-autocomplete-suggestions,
     overflow: auto;
 
     margin: 0;
-    padding: $spacer;
+    padding: 10px;
 
     position: absolute;
     z-index: $zindex-fixed!important;
@@ -386,23 +512,31 @@ fieldset {
       overflow: auto;
 
       margin: 0;
-      padding: $spacer;
+      padding: 10px;
 
       position: absolute;
       z-index: 1;
 
       box-shadow: 0 .5rem 1rem rgba($dropdown-box-shadow, .175);
 
-      li {
         img {
           width: 20px;
           height: 20px;
           border-radius: 20px;
           margin-right: 10px;
         }
-      }
+
   }
 }
+
+  .form-autocomplete-selection {
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      margin-right: 10px;
+    }    
+  }
 
 
 .form-autocomplete-suggestions li {
@@ -434,17 +568,44 @@ fieldset {
     vertical-align: middle;
 }
 
-.form-autocomplete-selection [data-active-selection=true] {
-    padding: 0.5em;
-    font-size: large;
-}
-
 .form-autocomplete-selection {
-  height: 36px;
-  margin-bottom: 10px;
+  height: max-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
 
   input[type=text] {
     margin-bottom: 0;
+  }
+}
+
+.form-autocomplete-downarrow {
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+
+  background-color: $gray-200;
+  color: $gray-800;
+
+  .icon {
+    font-size: $font-size-xs;  
+  }
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $theme-color-9;
+
+    .icon {
+      color: $theme-color-3;
+    }
   }
 }
 
@@ -511,10 +672,31 @@ textarea[data-auto-rows] {
 
 // We dont' use the mixin because it's expensive.
 [data-fieldtype="modgrade"] {
-    background-color: $card-bg;
+    border: 1px solid $border-color;
     @include border-radius($card-border-radius);
-    border: $card-border-width solid $card-border-color;
-    padding: $card-spacer-x;
+    padding: 10px 20px 12px!important;
+
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    br + label {
+      width: auto!important;
+    }
+
+    br {
+      display: none;
+    }
+
+    input,
+    select {
+      padding-top: .375rem;
+      padding-bottom: .375rem;
+      padding-left: 0.65rem;
+      padding-right: 0.65rem;
+      margin: 0.25rem;
+      font-size: $font-size-xs!important;
+    }
 }
 
 /** Atto fields do not have form-control because that would break the layout of the editor.
@@ -562,8 +744,6 @@ textarea[data-auto-rows] {
         border: 1px solid $btn-secondary-border;
         border-radius: $border-radius;
 
-        box-shadow: 0 2px 1px 0 $btn-secondary-shadow;
-
         font-size: $font-size-base;
         color: $btn-secondary-text;
         text-decoration: none;
@@ -578,7 +758,7 @@ textarea[data-auto-rows] {
           text-decoration: none;
           background-color: $btn-secondary-bg-hover;
           border-color: $btn-secondary-border-hover;
-          box-shadow: 0 1px 1px $btn-secondary-shadow, 0 2px 2px $btn-secondary-shadow, 0 4px 4px $btn-secondary-shadow, 0 6px 8px $btn-secondary-shadow, 0 8px 16px $btn-secondary-shadow;
+   
           color: $btn-secondary-text-hover;
         }
 
@@ -669,7 +849,7 @@ textarea[data-auto-rows] {
 
     .btn-icon {
       position: absolute;
-      top: calc(50% - 17px);
+      top: calc(50% - 14px);
       right: 50px;
     }
   }
@@ -714,11 +894,9 @@ textarea[data-auto-rows] {
   }
 
   div.editor_atto_toolbar button {
-    padding: 4px!important;
-
     .icon {
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
@@ -765,6 +943,7 @@ textarea[data-auto-rows] {
 
 .editor_atto_content {
   min-height: 100px!important;
+  overflow: auto;
 }
 
 /* mod for popup */
@@ -807,14 +986,6 @@ textarea[data-auto-rows] {
   display: block;
   width: 100%;
   margin: 1rem 0 0 0;
-}
-
-#id_modstandardgrade [data-fieldtype="modgrade"] {
-  padding: 2 * $spacer;
-
-  .form-group, label {
-    margin-bottom: 1rem;
-  }
 }
 
 #page-mod-feedback-edit {
@@ -933,6 +1104,10 @@ textarea[data-auto-rows] {
 .atto_form.atto_media>.tab-content {
   overflow-x: unset;
   max-height: inherit;
+}
+
+.atto_form {
+  padding: 0;
 }
 
 
@@ -1254,6 +1429,11 @@ textarea[data-auto-rows] {
 		}
 	}
 }
+
+  :disabled + span.ios-switch-control-indicator {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 
 .list-group{
 	&:first-child .list-group-control:first-child {

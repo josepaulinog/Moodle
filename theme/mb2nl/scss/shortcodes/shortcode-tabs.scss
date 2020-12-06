@@ -14,9 +14,16 @@
 		list-style: none !important;
 		border-bottom-color: $accent1;
 		border-bottom-width: 2px;
+		background-color: transparent;
+		border-bottom-style: solid;
+		display: block;
+		padding: 0;
 
 		.nav-item {
 			margin-bottom: 0;
+			display: inline-block;
+			vertical-align: middle;
+			flex: none;
 		}
 
 		.nav-link {
@@ -25,11 +32,13 @@
 			color: $headingscolor;
 			margin-right: .3rem;
 			padding: .35rem .7rem;
+			margin-top: 0;
+		    margin-bottom: 0;
 			@include mb2_border_radius(.15rem .15rem 0 0);
 
 			&.active {
-				background-color: $accent1;
-				border-color: $accent1;
+				background-color: $accent1 !important;
+				border-color: $accent1 !important;
 				color: #fff !important
 			}
 		}
@@ -41,6 +50,20 @@
 	}
 
 }
+
+
+.theme-tabs {
+	.dark & {
+		.nav-tabs {
+			.nav-link {
+				background-color: rgba(255,255,255,.28);
+			    border-color: transparent;
+			    color: #fff;
+			}
+		}
+	}
+}
+
 
 
 @media only screen and (min-width: $tablet_width){
@@ -133,15 +156,26 @@
 			display: block;
 
 			.nav-item {
-				display: inline-block;
+				display: inline-block !important;
+				flex: none !important;
 			}
 
 			.nav-link {
 				margin: .3rem;
-				@include mb2_border_radius(.15rem);
+				@include mb2_border_radius_imp( .15rem );
 			}
 		}
 	}
 
 
+}
+
+
+
+.theme-tabs {
+	&.isicon0 {
+		.nav-link i {
+			display: none;
+		}
+	}
 }

@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_mb2builder';
-$plugin->version = 2020061621;
-$plugin->requires = 2014051200;
-$plugin->release = '1.6.2';
+$plugin->version = 2020102820;
+$plugin->requires = 2018120300; // Moodle 3.6
+$plugin->release = '2.0.8';
 $plugin->maturity = MATURITY_STABLE;

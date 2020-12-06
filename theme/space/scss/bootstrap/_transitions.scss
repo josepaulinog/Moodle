@@ -1,13 +1,13 @@
 // stylelint-disable selector-no-qualifying-type
 
 .fade {
-  opacity: 0;
   @include transition($transition-fade);
 
-  &.show {
-    opacity: 1;
+  &:not(.show) {
+    opacity: 0;
   }
 }
+
 
 .collapse {
   display: none;
@@ -15,6 +15,10 @@
   transition: $general-transition;
   &.show {
     display: block;
+  }
+
+  &:not(.show) {
+    display: none;
   }
 }
 

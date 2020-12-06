@@ -24,16 +24,26 @@
             </div>
             {{/hasregionmainsettingsmenu}}
             <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}}>
-                <section data-region="blocks-main-top-widget" class="blocks-main-top-widget d-print-none">
-                {{{ maintopwidgets }}}
-                </section>
                 {{#hasregionmainsettingsmenu}}
                 <div class="region_main_settings_menu_proxy"></div>
                 {{/hasregionmainsettingsmenu}}
                 {{{ output.course_content_header }}}
+
+                {{#hastopblocks}}
+                <section data-region="blocks-main-top-widget" class="blocks-main-top-widget d-print-none">
+                {{{ maintopwidgets }}}
+                </section>
+                {{/hastopblocks}}
+
                 {{{ output.main_content }}}
                 {{{ output.activity_navigation }}}
                 {{{ output.course_content_footer }}}
+
+                {{#hasbottomblocks}}
+                <section data-region="blocks-main-footer-widget" class="blocks-main-footer-widget d-print-none">
+                {{{ mainfwidgets }}}
+                </section>
+                {{/hasbottomblocks}}
             </section>
 
             {{#hasblocks}}

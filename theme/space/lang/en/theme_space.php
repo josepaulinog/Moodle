@@ -17,7 +17,7 @@
 /**
  * Language file.
  *
- * @package   theme_space
+ * @package   theme_alpha
  * @copyright 2018 - 2020 Marcin Czaja - Rosea Themes
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -163,7 +163,7 @@ defined('MOODLE_INTERNAL') || die();
     $string['HR40'] = '<div class="d-block text-center"><hr /><br />Course card<br /></div>';
     $string['HR40_desc'] = '<br /><img src="https://assets.rosea.io/space/docs/general-course-card.jpg" class="img-fluid rounded mt-3" /><br /><br />';
 
-    $string['HR41'] = '<div class="d-block text-center"><hr /><br />Typography - Theme Settings<br /></div>';
+    $string['HR41'] = '<div class="d-block text-center"><hr /><br />Typography Settings<br /><br /></div>';
     $string['HR41_desc'] = '';
 
     $string['HR42'] = '<div class="d-block text-center"><hr /><br /><small>Buttons and UI</small><br />General Settings</div>';
@@ -172,7 +172,7 @@ defined('MOODLE_INTERNAL') || die();
     $string['HR43'] = '<div class="d-block text-center"><hr /><br /><small>Theme Styles</small><br />Presets</div>';
     $string['HR43_desc'] = 'Please contact me via <a href="https://themeforest.net/item/space-moodle-template/22579922/support" target="_blank">support page</a> if you need more details.';
 
-    $string['HR44'] = '<div class="d-block text-center"><hr /><br />Hero Video</div>';
+    $string['HR44'] = '<div class="d-block text-center">Hero Video</div>';
     $string['HR44_desc'] = 'Please contact me via <a href="https://themeforest.net/item/space-moodle-template/22579922/support" target="_blank">support page</a> if you need help.';
 
     $string['HR45'] = '<div class="d-block text-center"><hr /><br />Customization<br />Color and Font Size</div><br /><img src="https://assets.rosea.io/space/docs/hero-customization.jpg" class="img-fluid rounded mt-3" alt="Hero Image"/><br />';
@@ -196,6 +196,9 @@ defined('MOODLE_INTERNAL') || die();
     $string['HR51'] = '<div class="d-block text-center"><hr /><br />Calendar Events Color</div><br /><img src="https://assets.rosea.io/space/docs/calendar.png" class="img-fluid rounded mt-3" alt="Custom Modal"/>';
     $string['HR51_desc'] = '<br />';
 
+    $string['HR52'] = '<div class="d-block text-center"><hr /><br />Layout Breakpoints<br /><div class="badge badge-danger">Only for developers</div><br /></div>';
+    $string['HR52_desc'] = '';
+
     $string['HRFooter'] = '<div class="d-block text-center"><hr /><br />Footer</div>';
     $string['HRFooter_desc'] = '';
 
@@ -207,9 +210,9 @@ defined('MOODLE_INTERNAL') || die();
     <strong>Go to:</strong> Dashboard → Site administration → Development → Purge all cache</div>
 	<a class="btn btn-secondary" href="https://docs.space.rosea.io" target="_blank"><i class="fas fa-book mr-2"></i>  Documentation</a> <a class="mx-2 btn btn-secondary" href="https://themeforest.net/item/space-moodle-template/22579922/support" target="_blank"><i class="far fa-life-ring mr-2"></i>  Theme Support</a>';
     $string['currentinparentheses'] = '(current)';
-    $string['configtitle'] = 'Space (1.9.20)';
+    $string['configtitle'] = 'Space (1.11.7)';
     $string['nobootswatch'] = 'None';
-    $string['pluginname'] = 'Space (1.9.20)';
+    $string['pluginname'] = 'Space (1.11.7)';
 
 
     $string['block1settings'] = 'Block #1';
@@ -243,16 +246,32 @@ defined('MOODLE_INTERNAL') || die();
     $string['showlbg'] = '✓ Show Background Image';
     $string['showlbg_desc'] = 'Turn on to show up background image on the login page';
     $string['loginbg'] = 'Login Background Image';
-    $string['loginbg_desc'] = '<div class="badge badge-info">Recommended size: 1920x1080px</div><div class="badge badge-success"><strong>Remember</strong> to check the fied: <strong>"Show Background Image"</strong>.</div>';
+    $string['loginbg_desc'] = '<div class="badge badge-secondary">Recommended size: 1920x1080px</div><div class="badge badge-success"><strong>Remember</strong> to check the fied: <strong>"Show Background Image"</strong>.</div><hr class="hr-bold"/>';
 
     $string['loginalignment'] = 'Login Box Position';
     $string['loginalignment_desc'] = 'You can display the login box on the left, right or on the middle.';
     $string['loginalignment-left'] = 'Left';
     $string['loginalignment-center'] = 'Center';
-    $string['loginalignment-right'] = 'Rignt';
+    $string['loginalignment-right'] = 'Right';
+
+    $string['customloginlogo'] = 'Custom Logo<br />on the Login Page';
+    $string['customloginlogo_desc'] = '<strong>Recommendation:</strong> SVG files or png files with transparent background.';
+
+    $string['hideforgotpassword'] = '× Hide Remember password Link';
+    $string['hideforgotpassword_desc'] = '';
+
+    $string['logininfobox'] = '(1) Additional Content<br />under password input field.';
+    $string['logininfobox_desc'] = 'Sample<br /><pre><code>&#x3C;div class=&#x22;mt-3&#x22;&#x3E;
+    &#x3C;p class=&#x22;small&#x22;&#x3E;Sample text&#x3C;/p&#x3E;
+&#x3C;/div&#x3E;</code></pre>';
+
+    $string['logininfobox2'] = '(2) Additional Content<br />bottom of the page.';
+    $string['logininfobox2_desc'] = 'Sample<br /><pre><code>&#x3C;div class=&#x22;mt-3&#x22;&#x3E;
+    &#x3C;p class=&#x22;small&#x22;&#x3E;Sample text&#x3C;/p&#x3E;
+&#x3C;/div&#x3E;</code></pre>';
 
     $string['ShowLoader'] = 'Page loader';
-    $string['ShowLoader_desc'] = "Turn on page load. The loader uses default primary color.";
+    $string['ShowLoader_desc'] = "Turn on page loader. The loader uses default primary color.";
 
     $string['CustomWebFont'] = 'Use custom Web Font (not Google Fonts)';
     $string['CustomWebFont_desc'] = "Turn on custom web font instead Google Fonts";
@@ -426,12 +445,16 @@ defined('MOODLE_INTERNAL') || die();
     $string['siemaSlidersettings'] = 'Hero Slider';
     $string['sliderenabled'] = '✓ Turn on Slider';
     $string['sliderenabled_desc'] = '';
+    $string['imgslidesonly'] = '✓ Images Only<br />(fully responsive)';
+    $string['imgslidesonly_desc'] = '';
     $string['sliderfwenabled'] = 'Full width slider';
     $string['sliderfwenabled_desc'] = 'Slider container will have full width instead of max-width: 1440px';
     $string['sliderintervalenabled'] = 'Enable slider interval';
     $string['sliderintervalenabled_desc'] = 'Turn on slider auto play.';
+    $string['sliderloop'] = 'Enable slider loop';
+    $string['sliderloop_desc'] = '';
     $string['sliderclickable'] = 'Enable clickable slider';
-    $string['sliderclickable_desc'] = 'Image is a link';
+    $string['sliderclickable_desc'] = 'Each slide will be clickable.';
     $string['rtlslider'] = 'Enable RTL Slider';
     $string['rtlslider_desc'] = '';
     $string['sliderinterval'] = 'Slider interval';
@@ -456,8 +479,11 @@ defined('MOODLE_INTERNAL') || die();
     $string['showherologo'] = '✓ Show logo on the frontpage';
     $string['showherologo_desc'] = '<div class="alert alert-warning"><strong>Go to</strong> Dashboard → Site administration → Appearance → Logos. <br /><strong>Recommendation:</strong> Logo height: 120px</div>';
 
-    $string['heroboxshadow'] = 'Show Hero/Slider Box Shadow';
+    $string['heroboxshadow'] = 'Show Hero/Slider<br />Box Shadow';
     $string['heroboxshadow_desc'] = '';
+
+    $string['heroimgonly'] = '✓ Hero Image Only (fully responsive)';
+    $string['heroimgonly_desc'] = '';
 
     /***
     *
@@ -485,8 +511,15 @@ defined('MOODLE_INTERNAL') || die();
     $string['SidebarCustomText'] = 'Sidebar Custom Text';
     $string['SidebarCustomText_desc'] = 'You can add whatever you want using HTML';
 
-    $string['SidebarButtonIcon'] = 'Sidebar Button Icon';
-    $string['SidebarButtonIcon_desc'] = 'More icons you can find here: <a href="https://fontawesome.com/icons">FontAwesome</a>';
+    $string['SidebarButtonIconOpen'] = 'Sidebar Button Icon';
+    $string['SidebarButtonIconOpen_desc'] = 'Add class <strong>opened</strong>. You can use custom SVG icon or FontAwesome. More icons you can find here: <a href="https://fontawesome.com/icons">FontAwesome</a>';
+
+    $string['SidebarButtonIconClose'] = 'Sidebar Close Button Icon';
+    $string['SidebarButtonIconClose_desc'] = 'Add class <strong>closed</strong>. You can use custom SVG icon or FontAwesome. More icons you can find here: <a href="https://fontawesome.com/icons">FontAwesome</a>';
+
+
+    $string['customrooturl'] = 'Custom Root URL';
+    $string['customrooturl_desc'] = '';
 
     $string['SidebarCustomNav'] = '✓ Turn on<br />Sidebar Custom Navigation';
     $string['SidebarCustomNav_desc'] = 'Select to turn on Custom Sidebar Navigation Box';
@@ -509,8 +542,8 @@ defined('MOODLE_INTERNAL') || die();
     *   Settings - Hero Image
     *
     ***/
-    $string['frontpagesettings'] = 'Hero Image/Video';
-
+    $string['frontpagesettings'] = 'Hero Image';
+    $string['herovideosettings'] = 'Hero Video';
 
 
     /***
@@ -518,16 +551,16 @@ defined('MOODLE_INTERNAL') || die();
     *   Hero
     *
     ***/
-    $string['heroimg'] = 'Hero Image<br /><span class="badge badge-info mx-0">1320px x 600px</span>';
+    $string['heroimg'] = 'Hero Image<br /><span class="badge badge-secondary mx-0">1320px x 600px</span>';
     $string['heroimg_desc'] = '';
 
-    $string['heroimgenabled'] = '✓ Turn on <br />Hero Image/Video';
+    $string['heroimgenabled'] = '✓ Turn on <br />Hero Image';
     $string['heroimgenabled_desc'] = '';
 
     $string['herofwenabled'] = 'Full width Hero Image';
     $string['herofwenabled_desc'] = '';
 
-    $string['heroshadow'] = 'Show Shadow Behind Hero Image';
+    $string['heroshadow'] = 'Show Solid Shadow<br />Behind Hero Image';
     $string['heroshadow_desc'] = '';
 
     $string['heroshadowtype'] = '<small>Shadow Behind</small><br />Hero Image<br />Image or Solid Background';
@@ -548,14 +581,17 @@ defined('MOODLE_INTERNAL') || die();
     $string['heroshadowimg'] = '<small>Shadow Behind<br />Hero Image</small><br />Image';
     $string['heroshadowimg_desc'] = '';
 
-    $string['heroshadowimgproperties'] = '<small>Shadow Behind<br />Hero Image</small><br />Image Properties';
+    $string['heroshadowimgproperties'] = '<small>Shadow Behind Hero Image</small><br />Image Properties';
     $string['heroshadowimgproperties_desc'] = '';
 
-    $string['heroshadowtopmargin'] = '<small>Shadow Behind<br />Hero Image</small><br />Top Margin';
+    $string['heroshadowtopmargin'] = '<small>Shadow Behind Hero Image</small><br />Top Margin';
     $string['heroshadowtopmargin_desc'] = '';
 
-    $string['heroshadowheight'] = '<small>Shadow Behind<br />Hero Image</small><br />Height';
+    $string['heroshadowheight'] = '<small>Shadow Behind Hero Image</small><br />Height';
     $string['heroshadowheight_desc'] = '';
+
+    $string['herovideofwenabled'] = 'Full width Hero Video';
+    $string['herovideofwenabled_desc'] = '';
 
     $string['herovideoenabled'] = 'Turn on Hero Video';
     $string['herovideoenabled_desc'] = '<div class="badge badge-danger mb-2"><strong>Important</strong></div> You have to add: <strong>mp4, ogv, webm</strong> and <strong>hero image</strong> which will be a placeholder.';
@@ -563,11 +599,11 @@ defined('MOODLE_INTERNAL') || die();
     $string['herovideomp4'] = '<small>Hero</small><br />Video Background<br />(mp4)';
     $string['herovideomp4_desc'] = '';
 
-    $string['herovideoogv'] = '<small>Hero</small><br />Video Background<br />(ogv)';
-    $string['herovideoogv_desc'] = '';
-
     $string['herovideowebm'] = '<small>Hero</small><br />Video Background<br />(webm)';
-    $string['herovideowebm_desc'] = '';    
+    $string['herovideowebm_desc'] = '';   
+    
+    $string['herovideocontent'] = '<small>Hero</small><br />Video Content';
+    $string['herovideocontent_desc'] = '';   
     
     $string['HeroHeading'] = '<small>Hero</small><br />Title';
     $string['HeroHeading_desc'] = 'CSS Class: <br /><div class="badge badge-light">.c-hero .h1, .c-hero-video .h1, .c-heroimg .h1</div>';
@@ -604,6 +640,21 @@ defined('MOODLE_INTERNAL') || die();
 
     $string['HeroHTML'] = '<small>Hero</small><br />HTML';
     $string['HeroHTML_desc'] = '';
+
+    $string['heromtop'] = '<small>Hero Image</small><br />Margin Top';
+    $string['heromtop_desc'] = '';
+
+    $string['herombottom'] = '<small>Hero Image</small><br />Margin Bottom';
+    $string['herombottom_desc'] = '';
+
+    $string['heroimageheightlg'] = '<small>Hero Image Height</small><br />Desktop View';
+    $string['heroimageheightlg_desc'] = '';
+
+    $string['heroimageheightmd'] = '<small>Hero Image Height</small><br />Tablet View';
+    $string['heroimageheightmd_desc'] = '';
+
+    $string['heroimageheightsm'] = '<small>Hero Image Height</small><br />Mobile View';
+    $string['heroimageheightsm_desc'] = '';
 
 
     /***
@@ -683,6 +734,10 @@ defined('MOODLE_INTERNAL') || die();
     $string['FPHTMLBlock1ItemProperties'] = ' | Column Size<br />Properties<br /><small>for developers</small>';
     $string['FPHTMLBlock1ItemProperties_desc'] = '<div class="badge badge-danger">Please, don\'t change it if you don\'t know CSS/Bootstrap</div><br />Code snippet: <pre>col-sm-11 col-md-6 col-lg-4 py-5 px-sm-3 px-md-5</pre>';
 
+    $string['FPHTMLBlock1ItemBlockProperties'] = ' | Block<br />Properties<br /><small>for developers</small>';
+    $string['FPHTMLBlock1ItemBlockProperties_desc'] = '<div class="badge badge-danger">Please, don\'t change it if you don\'t know CSS/Bootstrap</div><br />Code snippet: <pre>class="m-2 p-3" style="background: #ccc;"</pre>';
+
+
     $string['FPHTMLBlock1Heading'] = ' | Heading';
     $string['FPHTMLBlock1Heading_desc'] = '';
 
@@ -751,6 +806,9 @@ defined('MOODLE_INTERNAL') || die();
     $string['FPHTMLBlock2ItemProperties'] = ' | Column Size<br />Properties<br /><small>for developers</small>';
     $string['FPHTMLBlock2ItemProperties_desc'] = '<div class="badge badge-danger">Please, don\'t change it if you don\'t know CSS/Bootstrap</div><br />Code snippet: <pre>col-sm-12 col-md-6 my-5 p-sm-3 p-md-5</pre>';
 
+    $string['FPHTMLBlock2ItemBlockProperties'] = ' | Block<br />Properties<br /><small>for developers</small>';
+    $string['FPHTMLBlock2ItemBlockProperties_desc'] = '<div class="badge badge-danger">Please, don\'t change it if you don\'t know CSS/Bootstrap</div><br />Code snippet: <pre>class="m-2 p-3" style="background: #ccc;"</pre>';
+
     $string['FPBlock2FooterContent'] = '<small>Block #2</small><br />Footer Content';
     $string['FPBlock2FooterContent_desc'] = '.';
 
@@ -816,14 +874,13 @@ defined('MOODLE_INTERNAL') || die();
     *
     ***/
     $string['topbarsettings'] = 'Top Bar';
-    $string['ShowTopBarText'] = '✓ Show Top Bar Text';
-    $string['ShowTopBarText_desc'] = 'Turn on custom text on the top of the site.';
+    $string['ShowTopBarUserName'] = '✓ Show Top Bar User Name';
+    $string['ShowTopBarUserName_desc'] = 'Display your user name instead hidden user name inside dropdown.';
     $string['TopBarText'] = 'Top Bar Text';
     $string['TopBarText_desc'] = 'You can add custom text or html
     <br><strong>Code snippet: </strong> <pre><code>&lt;i class=&quot;fas fa-phone&quot;&gt;&lt;/i&gt;&lt;strong&gt;Need help?&lt;/strong&gt; +48 888 932 322</code></pre>';
     $string['customtopnavhtml'] = 'Custom Top Navigation #1 <br />(on the left)';
-    $string['customtopnavhtml_desc'] = '<img src="https://assets.rosea.io/space/docs/topbar-custom-nav-1.png" class="img-fluid rounded my-3" /> Example:<br /><pre><code>&#x3C;nav class=&#x22;navbar navbar-expand-lg p-0&#x22;&#x3E;
-    &#x3C;div class=&#x22;collapse navbar-collapse&#x22; id=&#x22;navbarSupportedContent&#x22;&#x3E;
+    $string['customtopnavhtml_desc'] = '<img src="https://assets.rosea.io/space/docs/topbar-custom-nav-1.png" class="img-fluid rounded my-3" /> Example:<br /><pre><code>&#x3C;nav class=&#x22;navbar p-0&#x22;&#x3E;
       &#x3C;ul class=&#x22;navbar-nav&#x22;&#x3E;
         &#x3C;li class=&#x22;nav-item&#x22;&#x3E;&#x3C;a class=&#x22;nav-link&#x22; href=&#x22;YOUR_URL&#x22; target=&#x22;_blank&#x22;&#x3E;Space Theme&#x3C;/a&#x3E;&#x3C;/li&#x3E;
         &#x3C;li class=&#x22;nav-item&#x22;&#x3E;&#x3C;a class=&#x22;nav-link&#x22; href=&#x22;YOUR_URL/course&#x22;&#x3E;Courses&#x3C;/a&#x3E;&#x3C;/li&#x3E;
@@ -844,7 +901,6 @@ defined('MOODLE_INTERNAL') || die();
             &#x3C;/div&#x3E;
         &#x3C;/li&#x3E;
       &#x3C;/ul&#x3E;
-    &#x3C;/div&#x3E;
   &#x3C;/nav&#x3E;</code></pre><br />
   
   <strong>With multiple submenus</strong>
@@ -913,14 +969,15 @@ defined('MOODLE_INTERNAL') || die();
   <hr class="hr-bold" />';
 
     $string['topbarstyle'] = 'Top Bar style';
-    $string['topbarstyle_desc'] = 'You can change top bar style.';
+    $string['topbarstyle_desc'] = '';
     $string['topbarstyle-1'] = 'style1';
     $string['topbarstyle-2'] = 'style2';
     $string['topbarstyle-3'] = 'style3';
     $string['topbarstyle-4'] = 'style4';
     $string['customlogotopbar'] = '✓ Top Bar Logo';
-    $string['customlogotopbar_desc'] = 'Upload custom logo.';
-
+    $string['customlogotopbar_desc'] = '';
+    $string['mobiletopbarlogo'] = '✓ Mobile<br />Top Bar Logo';
+    $string['mobiletopbarlogo_desc'] = '';
     /***
     *
     *   Settings - Custom Nav
@@ -1143,56 +1200,56 @@ defined('MOODLE_INTERNAL') || die();
     $string['CustomWebFontSH_desc'] = '';
 
     $string['customfontlightname'] = 'Custom Font Name (light)';
-    $string['customfontlightname_desc'] = 'URL address with https:// or http://';
+    $string['customfontlightname_desc'] = '';
     $string['customfontlighteot'] = 'light (*.eot)';
-    $string['customfontlighteot_desc'] = 'URL address with https:// or http://';
+    $string['customfontlighteot_desc'] = '';
     $string['customfontlightwoff'] = 'light (*.woff)';
-    $string['customfontlightwoff_desc'] = 'URL address with https:// or http://';
+    $string['customfontlightwoff_desc'] = '';
     $string['customfontlightwoff2'] = 'light (*.woff2)';
-    $string['customfontlightwoff2_desc'] = 'URL address with https:// or http://';
+    $string['customfontlightwoff2_desc'] = '';
     $string['customfontlightttf'] = 'light (*.ttf)';
-    $string['customfontlightttf_desc'] = 'URL address with https:// or http://';
+    $string['customfontlightttf_desc'] = '';
     $string['customfontlightsvg'] = 'light (*.svg)';
-    $string['customfontlightsvg_desc'] = 'URL address with https:// or http://';
+    $string['customfontlightsvg_desc'] = '';
 
     $string['customfontregularname'] = 'Custom Font Name (regular)';
-    $string['customfontregularname_desc'] = 'URL address with https:// or http://';
+    $string['customfontregularname_desc'] = '';
     $string['customfontregulareot'] = 'regular (*.eot)';
-    $string['customfontregulareot_desc'] = 'URL address with https:// or http://';
+    $string['customfontregulareot_desc'] = '';
     $string['customfontregularwoff'] = 'regular (*.woff)';
-    $string['customfontregularwoff_desc'] = 'URL address with https:// or http://';
+    $string['customfontregularwoff_desc'] = '';
     $string['customfontregularwoff2'] = 'regular (*.woff2)';
-    $string['customfontregularwoff2_desc'] = 'URL address with https:// or http://';
+    $string['customfontregularwoff2_desc'] = '';
     $string['customfontregularttf'] = 'regular (*.ttf)';
-    $string['customfontregularttf_desc'] = 'URL address with https:// or http://';
+    $string['customfontregularttf_desc'] = '';
     $string['customfontregularsvg'] = 'regular (*.svg)';
-    $string['customfontregularsvg_desc'] = 'URL address with https:// or http://';
+    $string['customfontregularsvg_desc'] = '';
 
     $string['customfontmediumname'] = 'Custom Font Name (medium)';
     $string['customfontmediumname_desc'] = '';
     $string['customfontmediumeot'] = 'medium (*.eot)';
-    $string['customfontmediumeot_desc'] = 'URL address with https:// or http://';
+    $string['customfontmediumeot_desc'] = '';
     $string['customfontmediumwoff'] = 'medium (*.woff)';
-    $string['customfontmediumwoff_desc'] = 'URL address with https:// or http://';
+    $string['customfontmediumwoff_desc'] = '';
     $string['customfontmediumwoff2'] = 'medium (*.woff2)';
-    $string['customfontmediumwoff2_desc'] = 'URL address with https:// or http://';
+    $string['customfontmediumwoff2_desc'] = '';
     $string['customfontmediumttf'] = 'medium (*.ttf)';
-    $string['customfontmediumttf_desc'] = 'URL address with https:// or http://';
+    $string['customfontmediumttf_desc'] = '';
     $string['customfontmediumsvg'] = 'medium (*.svg)';
-    $string['customfontmediumsvg_desc'] = 'URL address with https:// or http://';
+    $string['customfontmediumsvg_desc'] = '';
 
     $string['customfontboldname'] = 'Custom Font Name (bold)';
     $string['customfontboldname_desc'] = '';
     $string['customfontboldeot'] = 'bold (*.eot)';
-    $string['customfontboldeot_desc'] = 'URL address with https:// or http://';
+    $string['customfontboldeot_desc'] = '';
     $string['customfontboldwoff'] = 'bold (*.woff)';
-    $string['customfontboldwoff_desc'] = 'URL address with https:// or http://';
+    $string['customfontboldwoff_desc'] = '';
     $string['customfontboldwoff2'] = 'bold (*.woff2)';
-    $string['customfontboldwoff2_desc'] = 'URL address with https:// or http://';
+    $string['customfontboldwoff2_desc'] = '';
     $string['customfontboldttf'] = 'bold (*.ttf)';
-    $string['customfontboldttf_desc'] = 'URL address with https:// or http://';
+    $string['customfontboldttf_desc'] = '';
     $string['customfontboldsvg'] = 'bold (*.svg)';
-    $string['customfontboldsvg_desc'] = 'URL address with https:// or http://';
+    $string['customfontboldsvg_desc'] = '';
 
 
     $string['slotblock1'] = 'Block #1';
@@ -1202,7 +1259,7 @@ defined('MOODLE_INTERNAL') || die();
     $string['slotblock2_desc'] = '';
 
     $string['slotblock3'] = 'Block #3';
-    $string['slotblock3_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['slotblock3_desc'] = '';
 
     $string['slotblock4'] = 'Block #4';
     $string['slotblock4_desc'] = '';
@@ -1217,54 +1274,60 @@ defined('MOODLE_INTERNAL') || die();
     $string['slotblock5_desc'] = '';
 
     $string['slotblock8'] = 'Main Moodle Block';
-    $string['slotblock8_desc'] = 'E.g Available courses, Course categories and more default blocks.';
+    $string['slotblock8_desc'] = 'E.g Available courses, Course categories and more default blocks.<br /><br />';
 
-    $string['slotblock9'] = 'Hero Image/Video';
-    $string['slotblock9_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['slotblock9'] = 'Hero Image';
+    $string['slotblock9_desc'] = '';
 
     $string['slotblock10'] = 'Block FAQ';
-    $string['slotblock10_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['slotblock10_desc'] = '';
 
-    $string['slotblock11'] = 'Block #11';
+    $string['slotblock11'] = 'Block #11<br /><small>Course List</small>';
     $string['slotblock11_desc'] = '';
 
     $string['slotblock12'] = 'Testimonials';
     $string['slotblock12_desc'] = '';
 
     $string['slotblock13'] = 'Hero Slider';
-    $string['slotblock13_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['slotblock13_desc'] = '';
+
+    $string['slotblock14'] = 'Hero Video';
+    $string['slotblock14_desc'] = '';
 
     $string['showfpblock1hr'] = 'Show Block #1<br />Bottom separator';
-    $string['showfpblock1hr_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['showfpblock1hr_desc'] = '';
 
     $string['showfpblock2hr'] = 'Show Block #2<br />Bottom separator';
-    $string['showfpblock2hr_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['showfpblock2hr_desc'] = '';
 
     $string['showfpblock4hr'] = 'Show Block #4<br />Bottom separator';
-    $string['showfpblock4hr_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['showfpblock4hr_desc'] = '';
 
     $string['showfpblock6hr'] = 'Show Block #5 - Categories Block<br />Bottom separator';
-    $string['showfpblock6hr_desc'] = '<hr class="mb-0 mt-4"/>';
+    $string['showfpblock6hr_desc'] = '';
 
     $string['showfpblock7hr'] = 'Show Block Logotypes<br />Bottom separator';
-    $string['showfpblock7hr_desc'] = '<hr class="mb-0 mt-4"/>';   
+    $string['showfpblock7hr_desc'] = '';   
 
     $string['showfpblockteamhr'] = 'Show Block Team<br />Bottom separator';
-    $string['showfpblockteamhr_desc'] = '<hr class="mb-0 mt-4"/>';   
+    $string['showfpblockteamhr_desc'] = '';   
 
     $string['showfpblock8hr'] = 'Show Main Moodle Block<br />Bottom separator';
-    $string['showfpblock8hr_desc'] = '<hr class="mb-0 mt-4"/>';   
+    $string['showfpblock8hr_desc'] = '';   
 
     $string['showfpblock10hr'] = 'Show FAQ<br />Bottom separator';
-    $string['showfpblock10hr_desc'] = '<hr class="mb-0 mt-4"/>';   
+    $string['showfpblock10hr_desc'] = '';   
 
     $string['showfpblock11hr'] = 'Show Course list<br />Bottom separator';
-    $string['showfpblock11hr_desc'] = '<hr class="mb-0 mt-4"/>';   
+    $string['showfpblock11hr_desc'] = '<br />';   
 
     $string['showfpblock12hr'] = 'Show Testimonials<br />Bottom separator';
-    $string['showfpblock12hr_desc'] = '<hr class="mb-0 mt-4"/>';   
+    $string['showfpblock12hr_desc'] = '<br />';   
 
-    $string['hintro'] = '<div class="d-block text-center"><br /><br />Space Moodle Theme<br /><small>by Rosea Themes</small><br /><div class="badge badge-info">version 1.9.20</div>';
+    $string['showfpblock12hr'] = 'Show Testimonials<br />Bottom separator';
+    $string['showfpblock12hr_desc'] = ''; 
+
+    $string['hintro'] = '<div class="d-block text-center"><br /><br />Space Moodle Theme<br /><small>by Rosea Themes</small><br /><div class="badge badge-info">version 1.11.7</div>';
     $string['hintro_desc'] = '<div class="col-sm-12 col-md-8 my-sm-2 my-md-5 mx-auto"><a class="btn btn-secondary mb-1" href="https://docs.space.rosea.io" target="_blank"><i class="fas fa-book mr-2"></i>  Documentation</a>
     <a class="mx-2 mb-1 btn btn-secondary" href="https://themeforest.net/item/space-moodle-template/22579922/support" target="_blank"><i class="far fa-life-ring mr-2"></i>  Theme Support</a></div><hr /></div>';
 
@@ -1552,9 +1615,29 @@ defined('MOODLE_INTERNAL') || die();
     $string['drawertext'] = 'Sidebar Text';
     $string['drawertext_desc'] = ''; 
 
+    $string['drawerlink'] = 'Sidebar Link';
+    $string['drawerlink_desc'] = ''; 
+
+    $string['drawerlinkhover'] = 'Sidebar Link Hover';
+    $string['drawerlinkhover_desc'] = ''; 
+
+    $string['drawerlinkhoverbg'] = 'Sidebar Link Hover Background';
+    $string['drawerlinkhoverbg_desc'] = ''; 
+
     $string['drawerhr'] = 'Sidebar Border/Separator';
     $string['drawerhr_desc'] = ''; 
 
+    $string['drawerwidth'] = 'Drawer Width';
+    $string['drawerwidth_desc'] = ''; 
+
+    $string['drawernaviconfontsize'] = 'Drawer Navigation Font Size';
+    $string['drawernaviconfontsize_desc'] = ''; 
+
+    $string['drawernaviconsize'] = 'Drawer Navigation Icon Size';
+    $string['drawernaviconsize_desc'] = ''; 
+
+    $string['drawernaviconwidth'] = 'Drawer Navigation Icon Width';
+    $string['drawernaviconwidth_desc'] = ''; 
 
 
     $string['caleventcategorycolor'] = '<small>Calendar Event </small><br />Category Color';
@@ -1576,40 +1659,49 @@ defined('MOODLE_INTERNAL') || die();
 
     //Course Card
     $string['cardimgheight'] = 'Course Card<br />Image Height';
-    $string['cardimgheight_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 220px</span><br /><br />How to translate <strong>"Get access"</strong>? <a href="http://docs.space.rosea.io/docs/translations/" target="_blank">Documentation →</a>'; 
+    $string['cardimgheight_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 220px</span><br /><br />How to translate <strong>"Get access"</strong>? <a href="http://docs.space.rosea.io/docs/translations/" target="_blank" class="badge badge-link badge-light">Documentation →</a>'; 
 
     $string['coursecarddescheight'] = 'Course Card<br />Description<br />Content Height';
-    $string['coursecarddescheight_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 160px</span>'; 
+    $string['coursecarddescheight_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 160px</span>'; 
 
     $string['borderradius'] = '<small>Global</small><br />UI Elements Radius';
-    $string['borderradius_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 5px</span>'; 
+    $string['borderradius_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 5px</span>'; 
+
+    $string['gridbreakpointlg'] = '<small>Breakpoint</small><br />Desktop';
+    $string['gridbreakpointlg_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1400px</span>'; 
+
+    $string['gridbreakpointmd'] = '<small>Breakpoint</small><br />Tablet';
+    $string['gridbreakpointmd_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1024px</span>'; 
+
+    $string['gridbreakpointsm'] = '<small>Breakpoint</small><br />Mobile';
+    $string['gridbreakpointsm_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 767px</span>'; 
 
     $string['fontsizelg'] = '<small>Body</small><br />Font size<br />(large)';
-    $string['fontsizelg_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 0.875rem</span>';
+    $string['fontsizelg_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 0.875rem</span>';
 
     $string['fontsizebase'] = '<small>Body</small><br />Font size<br />(base)';
-    $string['fontsizebase_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 1rem</span>';
+    $string['fontsizebase_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1rem</span>';
     
     $string['fontsizesm'] = '<small>Body</small><br />Font size<br />small)';
-    $string['fontsizesm_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 0.875rem</span>';
+    $string['fontsizesm_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 0.875rem</span>';
 
     $string['fontsizexs'] = '<small>Body</small><br />Font size<br />(extra small)';
-    $string['fontsizexs_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 0.75rem</span>';
+    $string['fontsizexs_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 0.75rem</span>';
 
     $string['h2fontsize'] = 'Heading (h2)';
-    $string['h2fontsize_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 1.75rem</span>';
+    $string['h2fontsize_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1.75rem</span>';
 
     $string['h3fontsize'] = 'Heading (h3)';
-    $string['h3fontsize_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 1.5rem</span>';
+    $string['h3fontsize_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1.5rem</span>';
 
     $string['h4fontsize'] = 'Heading (h4)';
-    $string['h4fontsize_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 1.125rem</span>';
+    $string['h4fontsize_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1.125rem</span>';
 
     $string['h5fontsize'] = 'Heading (h5)';
-    $string['h5fontsize_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 1.05rem</span>';
+    $string['h5fontsize_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 1.05rem</span>';
 
     $string['h6fontsize'] = 'Heading (h6)';
-    $string['h6fontsize_desc'] = '<span class="badge badge-info"><strong>Example:</strong> 0.875rem</span>';
+    $string['h6fontsize_desc'] = '<span class="badge badge-secondary"><strong>Example:</strong> 0.875rem</span>';
 
     /***
     *
@@ -1658,9 +1750,9 @@ defined('MOODLE_INTERNAL') || die();
     *   HTML Block 11
     *
     ***/
-    $string['block11settings'] = 'Courses List';
-    $string['hfpblock11'] = '<br />Courses List';
-    $string['hfpblock11_desc'] = '<strong>Courses list</strong>. Custom Courses List on the front page. Up to 200 courses.<br /><img src="https://assets.rosea.io/space/docs/space-settings-block11.jpg" class="img-fluid rounded mt-4" />';
+    $string['block11settings'] = 'Course List';
+    $string['hfpblock11'] = '<br />Course List';
+    $string['hfpblock11_desc'] = 'Custom Course List on the front page. Up to 200 courses.<br /><img src="https://assets.rosea.io/space/docs/space-settings-block11.jpg" class="img-fluid rounded mt-4" />';
 
     $string['fpblock11'] = '✓ Turn on';
     $string['fpblock11_desc'] = '';
@@ -1812,3 +1904,26 @@ defined('MOODLE_INTERNAL') || die();
     $string['privacy:metadata:preference:draweropennav'] = 'The user\'s preference for hiding or showing the drawer menu navigation.';
     $string['privacy:drawernavclosed'] = 'The current preference for the navigation drawer is closed.';
     $string['privacy:drawernavopen'] = 'The current preference for the navigation drawer is open.';
+
+
+    $string['backtotop'] = 'Back to top';
+    $string['showhintcoursehiddensetting'] = 'Show hint in hidden courses';
+    $string['showhintcoursehiddensetting_desc'] = 'With this setting a hint will appear in the course header as long as the visibility of the course is hidden. This helps to identify the visibility state of a course at a glance without the need for looking at the course settings.';
+    $string['showhintcoursehiddensettingslink'] = 'You can change the visibility in the <a href="{$a->url}">course settings</a>.';
+    $string['showhintcoursehiddengeneral'] = 'This course is currently <strong>hidden</strong>. Only enrolled teachers can access this course when hidden.';
+   
+    $string['showhintcourseguestaccesssetting'] = 'Show hint for guest access';
+    $string['showhintcourseguestaccesssetting_desc'] = 'With this setting a hint will appear in the course header when a user is accessing it with the guest access feature. If the course provides an active self enrolment, a link to that page is also presented to the user.';
+    $string['showhintcourseguestaccessgeneral'] = 'You are currently viewing this course as <strong>{$a->role}</strong>.';
+    $string['showhintcourseguestaccesslink'] = 'To have full access to the course, you can <a href="{$a->url}">self enrol into this course</a>.';
+
+    // ...Switch role information.
+    $string['switchedroleto'] = 'You are viewing this course currently with the role:';
+
+    $string['boostfumblingnav'] = 'Boost navigation fumbling';
+    $string['boostfumblingnav_desc'] = 'This option will remove Space in-build course section. <br /> <a href="https://moodle.org/plugins/local_boostnavigation" target="_blank">Download Boost navigation fumbling →</a>';
+
+    $string['displaynavdrawerfp'] = 'Display Navigation Sidebar<br />on the front page';
+    $string['displaynavdrawerfp_desc'] = 'This option will display navigation sidebar on the front page.';
+
+    $string['teachers'] = 'Teachers';

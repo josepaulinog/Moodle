@@ -2,124 +2,119 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-mb2_add_shortcode('tabs', 'mb2_shortcode_tab');
-mb2_add_shortcode('tab_item', 'mb2_shortcode_tab_item');
+mb2_add_shortcode('tabs', 'mb2_shortcode_tabs');
+mb2_add_shortcode('tab_item', 'mb2_shortcode_tabs_item');
+mb2_add_shortcode('tabs_item', 'mb2_shortcode_tabs_item');
 
-function mb2_shortcode_tab($atts, $content = null ) {
-
-	$unique = mt_rand();
+function mb2_shortcode_tabs($atts, $content = null ) {
 
 	extract( mb2_shortcode_atts( array(
 		  'tabpos' => 'top',
-		  'height'=>'200',
+		  'height'=> 100,
+		  'isicon' => 0,
+		  'icon' => 'fa fa-trophy',
 		  'custom_class' => '',
-		  'margin' => ''
+		  'mt' => 0,
+		  'mb' => 30
 	), $atts ));
 
-
-	$regex = '\\[(\\[?)(tab_item)\\b([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*+(?:\\[(?!\\/\\2\\])[^\\[]*+)*+)\\[\\/\\2\\])?)(\\]?)';
-	preg_match_all("/$regex/is",$content,$match);
-	$content = $match[0];
-
-
-	// Define tabs style
-	$style = ' style="';
-	$style .= 'min-height:' . $height . 'px;';
-	$style .= $margin !='' ? 'margin:' . $margin . 'px;' : '';
-	$style .= '"';
-
-
-	$cls = $tabpos;
-	$cls .= $custom_class ? ' ' . $custom_class : '';
-
-
-	$output = '<div class="theme-tabs tabs ' . $cls . '"' . $style . '>';
+	$GLOBALS['mb2pbtabicon'] = $icon;
+	$unique = uniqid('tab-');
+	$output = '';
+	$icontag = '';
+	$style = '';
+	$cls = '';
 	$i = -1;
 
+	// We have to check if user use old or new tabs shortcode
+	$tabsname = preg_match( '@tab_item@', $content ) ? 'tab_item' : 'tabs_item';
 
-	$output .= '<ul class="nav nav-tabs">';
+	// Get tab content for sortable elements
+	$regex = '\\[(\\[?)(' . $tabsname . ')\\b([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*+(?:\\[(?!\\/\\2\\])[^\\[]*+)*+)\\[\\/\\2\\])?)(\\]?)';
+	preg_match_all( "/$regex/is", $content, $match );
+	$content = $match[0];
 
-	foreach($content as $c)
+	if ( $mt || $mb )
 	{
-		$i++;
-		$unique_id = 'tab_' . $unique . '_' . $i;
-		preg_match('/\[tab_item ([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)/', $c, $matchattr);
-		$attr = shortcode_parse_atts($matchattr[1]);
-
-		$tab_selected = 'false';
-		$title = $attr['title'];
-		$icon = isset($attr['icon']) ? $attr['icon'] : '';
-
-		if ($i == 0)
-		{
-			$tab_selected = 'true';
-		}
-
-		if($icon){
-
-			// Check what is the icon and set prefix
-			// and set preffix
-			$isfa = preg_match('@fa-@', $icon);
-			$isglyphicon = preg_match('@glyphicon-@', $icon);
-
-			if ($isfa)
-			{
-				$iconpref = 'fa ';
-			}
-			elseif($isglyphicon)
-			{
-				$iconpref = 'glyphicon ';
-			}
-			else
-			{
-				$iconpref = '';
-			}
-
-			$title = '<i class="'. $iconpref . $icon . '"></i> ' . $title;
-
-		}
-
-		$output .= '<li class="nav-item"><a class="nav-link'. (($i==0) ? ' active' : '') .'" id="' . $unique_id . '_tab" href="#' . $unique_id
-		. '" data-toggle="tab" role="tab" aria-controls="' . $unique_id . '" aria-selected="' . $tab_selected . '">' . format_text($title, FORMAT_HTML) . '</a></li>';
-		$content[$i] = str_replace('[tab_item ','[tab_item '.(($i==0) ? 'class="active"' : '') . ' id="' . $unique_id . '" ', $content[$i]);
-
+		$style .= ' style="';
+		$style .= $mt ? 'margin-top:' . $mt . 'px;' : '';
+		$style .= $mb ? 'margin-bottom:' . $mb . 'px;' : '';
+		$style .= '"';
 	}
 
+	$height = $height ? ' style="min-height:' . $height . 'px"' : '';
+
+	$cls .= $tabpos;
+	$cls .= ' isicon' . $isicon;
+	$cls .= $custom_class ? ' ' . $custom_class : '';
+
+	$output .= '<div class="theme-tabs tabs ' . $cls . '"' . $style . '>';
+	$output .= '<ul class="nav nav-tabs">';
+
+	foreach( $content as $c )
+	{
+		$i++;
+		$unique_id = $unique . $i;
+		$tab_selected = $i == 0 ? 'true' : 'false'; // We need word 'true' or 'false' for data attribute
+		$activecls = $i == 0 ? ' active' : '';
+		$tabattr = $i == 0 ? ' custom_class="active"' : '';
+
+		// Get attributes of tab items
+		preg_match('/\[' . $tabsname .' ([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)/', $c, $matchattr);		
+		$attributes = shortcode_parse_atts( $matchattr[1] );
+		$attr['pbid'] = ( isset( $attributes['pbid'] ) && $attributes['pbid'] ) ? $attributes['pbid'] : '';
+		$attr['title'] = ( isset( $attributes['title'] ) && $attributes['title'] ) ? $attributes['title'] : 'Tab';
+		$attr['icon'] = ( isset( $attributes['icon'] ) && $attributes['icon'] ) ? $attributes['icon'] : '';
+
+		// Defaine global icon
+		$icon = $attr['icon'] ? $attr['icon'] : $icon;
+
+		if( $icon )
+		{
+			$pref = theme_mb2nl_font_icon_prefix( $icon );
+			$icontag = '<i class="'. $pref . $icon . '"></i> ';
+		}
+
+		$output .= '<li class="nav-item">';
+		$output .= '<a class="nav-link'. $activecls .'" href="#' . $unique_id . '" data-toggle="tab" role="tab" aria-controls="' . $unique_id . '" aria-selected="' . $tab_selected . '">';
+		$output .= '<span class="tab-text">' . $icontag . format_text( $attr['title'], FORMAT_HTML ) . '</span>';
+		$output .= '</a>';
+		$output .= '</li>';
+
+		$content[$i] = str_replace( '[' . $tabsname . ' ','[' . $tabsname . $tabattr . ' tabid="' . $unique_id . '" ', $content[$i] );
+	}
 
 	$output .= '</ul>';
 	$output .= '<div class="tab-content">';
 
-
-	foreach($content as $c){
-		$output .= mb2_do_shortcode($c);
+	foreach( $content as $c ){
+		$output .= mb2_do_shortcode( $c );
 	}
 
-
 	$output .= '</div>';
 	$output .= '</div>';
 
-
+	unset( $GLOBALS['mb2pbtabicon'] );
 	return $output;
 
 }
 
 
 
-
-function mb2_shortcode_tab_item( $atts, $content = null ) {
+function mb2_shortcode_tabs_item( $atts, $content = null ) {
 	extract( mb2_shortcode_atts( array(
 		'title' => '',
-		'id' =>'',
+		'id' => '',
+		'tabid' => '',
 		'icon' => '',
-		'class' =>''
+		'custom_class' => ''
 	), $atts ) );
 
-	$isclass = $class ? ' ' .$class : '';
+	$cls = $custom_class ? ' ' . $custom_class : '';
+	$id = $tabid ? $tabid : $id;
 
-	$output = '<div class="tab-pane' . $isclass . '" id="' . $id . '" role="tabpanel" aria-labelledby="' . $id . '">';
-
-	$output .= mb2_do_shortcode($content);
-
+	$output = '<div class="tab-pane' . $cls . '" id="' . $id . '" role="tabpanel" aria-labelledby="' . $id . '">';
+	$output .= mb2_do_shortcode( $content );
 	$output .= '</div>';
 
 	return $output;

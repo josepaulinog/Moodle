@@ -224,3 +224,29 @@ function theme_mb2nl_get_style_vars()
 	return $vars;
 
 }
+
+
+
+
+/*
+ *
+ * Method to get main scss content
+ *
+ */
+function theme_mb2nl_get_scss_content()
+{
+    global $CFG, $PAGE;
+
+    $scss = '';
+
+	// Header style
+	//$scss .= file_get_contents( $CFG->dirroot . '/theme/mb2nl/scss/theme/theme-header' . theme_mb2nl_theme_setting( $PAGE, 'headerstyle' ) . 'scss' );
+
+	// Get main scss file
+	$scss .= file_get_contents( $CFG->dirroot . '/theme/mb2nl/scss/style.scss' );
+
+	// Footer style
+	$scss .= file_get_contents( $CFG->dirroot . '/theme/mb2nl/scss/theme/theme-footer' . theme_mb2nl_theme_setting( $PAGE, 'footerstyle' ) . '.scss' );
+
+    return $scss;
+}

@@ -67,18 +67,29 @@ $temp->add($setting);
 	$setting = new admin_setting_configmb2spacer($name);
 	$temp->add($setting);
 
-
 	$name = 'theme_mb2nl/mycinmenu';
 	$title = get_string('mycinmenu','theme_mb2nl');
 	$setting = new admin_setting_configcheckbox($name,$title,'',1);
 	$temp->add($setting);
 
+	$name = 'theme_mb2nl/mychidden';
+	$title = get_string('mychidden','theme_mb2nl');
+	$setting = new admin_setting_configcheckbox($name,$title,'',0);
+	$temp->add($setting);
+
+	$name = 'theme_mb2nl/mycexpierd';
+	$title = get_string('mycexpierd','theme_mb2nl');
+	$setting = new admin_setting_configcheckbox($name,$title,'',0);
+	$temp->add($setting);
 
 	$name = 'theme_mb2nl/myclimit';
 	$title = get_string('myclimit','theme_mb2nl');
 	$setting = new admin_setting_configtext($name,$title,'',6);
 	$temp->add($setting);
 
+	$name = 'theme_mb2nl/navspacer5fb';
+	$setting = new admin_setting_configmb2spacer($name);
+	$temp->add($setting);
 
 	$name = 'theme_mb2nl/langinmenu';
 	$title = get_string('langinmenu','theme_mb2nl');

@@ -53,6 +53,17 @@
 			margin: 0 0 1.3rem 0;
 			padding: 1rem;
 
+			.card-body {
+				background-color: transparent;
+				@include mb2_box_shadow(0 0 0, rgba(255,255,255,0));
+				padding: 0;
+			}
+
+			dt {
+				color: $headingscolor;
+				font-weight: $fwheadings;
+			}
+
 			h3 {
 				font-size: $fsbig;
 				font-weight: $fwheadings;

@@ -26,15 +26,21 @@ defined('MOODLE_INTERNAL') || die();
 
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
 require_once($CFG->libdir . '/behat/lib.php');
+// MODIFICATION Start: Require own locallib.php.
+require_once($CFG->dirroot . '/theme/space/locallib.php');
+// MODIFICATION END.
+
+$bodyattributes = $OUTPUT->body_attributes([]);
+$siteurl = $CFG->wwwroot;
 
 if (isloggedin()) {
     $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
 } else {
-    $navdraweropen = false;
+    $navdraweropen = true;
 }
 
 $extraclasses = [];
-if ($navdraweropen ) {
+if ($navdraweropen) {
     $extraclasses[] = 'drawer-open-left';
 }
 
@@ -72,6 +78,10 @@ $templatecontext = [
     'mainfwidgets' => $blockshtml4,
     'sidebartopblocks' => $blockshtml5,   
     'hasblocks' => $hasblocks,
+    'hasmaintopwidgets' => !empty($blockshtml3),
+    'hasmainfwidgets' => !empty($blockshtml4),
+    'hassidebarblocks' => !empty($blockshtml2),
+    'hassidebartopblocks' => !empty($blockshtml5),
     'navdraweropen' => $navdraweropen,
     'bodyattributes' => $bodyattributes,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
@@ -86,8 +96,14 @@ $templatecontext = [
 ];
 
 // Improve space navigation.
-theme_space_extend_flat_navigation($PAGE->flatnav);
-$templatecontext['flatnavigation'] = $PAGE->flatnav;
+$boostfumblingnav = theme_space_get_setting('boostfumblingnav');
+if (!$boostfumblingnav) { 
+    theme_space_extend_flat_navigation($PAGE->flatnav);
+}
+$nav = $PAGE->flatnav;
+$templatecontext['flatnavigation'] = $nav;
+$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+
 $themesettings = new \theme_space\util\theme_settings();
 
 $templatecontext = array_merge($templatecontext, $themesettings->head_elements());

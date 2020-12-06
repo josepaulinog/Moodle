@@ -33,7 +33,7 @@
     #chat-input-area table.generaltable,
     #chat-input-area table.generaltable td.cell {
         border: 0;
-        padding: 3px 15px;
+        padding: 3px 15px!important;
         white-space: nowrap;
         margin-bottom: 0;
     }
@@ -102,7 +102,11 @@
   
   @extend .alert-info;
 
-  td { padding: 1rem; }
+  td { padding: 10px; }
+
+  img.userpicture {
+      margin: 0;
+  }
 }
 
 .chat-message {
@@ -149,5 +153,40 @@
 #enterlink {
     .btn-action {
         padding: 0;
+    }
+}
+
+#page-mod-chat-report {
+    [role="main"] {
+        .list-group {
+            .list-group-item {
+                padding: 20px;
+                margin-bottom: 0.5rem;
+                border: 1px solid $border-color;
+                border-radius: $border-radius;
+
+                div {
+                    padding: 0!important;
+                }
+
+                p {
+                    margin-top: 10px;
+                    text-align: left;
+                    display: inline-flex;
+
+                    a:first-of-type {
+                        @extend .badge;
+                        @extend .badge-link;
+                        @extend .badge-secondary;
+                    }
+
+                    a:last-of-type {
+                        @extend .badge;
+                        @extend .badge-link;
+                        @extend .badge-danger;
+                    }
+                }
+            }
+        }
     }
 }

@@ -47,11 +47,13 @@ class LocalMb2builderEditor
 		}
 
 		$showon = local_mb2builder_showon_field($attr['showon']);
+		$actions = local_mb2builder_field_actions(  $attr );
+
 
 		$output  = '<div class="form-group  mb2-pb-form-group">';
 		$output .= '<label>' . $attr['title'] . '</label>';
 		$output .= self::local_mb2builder_get_input_editor();
-		$output .= '<textarea class="mb2-pb-editor-input mb2-pb-input mb2-pb-input-' . $key . '"' . $showon .' data-attrname="' . $key . '" rows="4">' . $attr['default'] . '</textarea>';
+		$output .= '<textarea class="mb2-pb-editor-input mb2-pb-input mb2-pb-input-' . $key . '"' . $showon . $actions . ' data-attrname="' . $key . '" rows="4">' . $attr['default'] . '</textarea>';
 
 		if ($attr['desc'])
 		{
@@ -159,15 +161,16 @@ class LocalMb2builderEditor
 		$output .= '<p>';
 		$output .= '<label>' . get_string('alignment','editor') . '</label>';
 		$output .= '<select name="mb2_pb_editor_image_align">';
-		$output .= '<option value="">' . get_string('none','core') . '</option>';
+		$output .= '<option value="img-align-none">' . get_string('none','core') . '</option>';
 		$output .= '<option value="img-align-left">' . get_string('left','editor') . '</option>';
 		$output .= '<option value="img-align-right">' . get_string('right','editor') . '</option>';
 		$output .= '<option value="img-align-center">' . get_string('center','local_mb2builder') . '</option>';
 		$output .= '</select>';
 		$output .= '</p>';
 		$output .= '<div class="element-image-buttons">';
-		$output .= '<a href="#" class="mb2-pb-editor-image-save color-success"><strong>' . get_string('save', 'admin') . '</strong></a> | ';
-		$output .= '<a href="#" class="mb2-pb-editor-image-cancel color-danger"><strong>' . get_string('cancel') . '</strong></a>';
+		$output .= '<a href="#" class="mb2-pb-editor-image-save color-success"><strong>' . get_string( 'save', 'admin' ) . '</strong></a> | ';
+		$output .= '<a href="#" class="mb2-pb-editor-image-remove color-danger"><strong>' . get_string( 'remove' ) . '</strong></a> | ';
+		$output .= '<a href="#" class="mb2-pb-editor-image-cancel color-danger"><strong>' . get_string( 'cancel' ) . '</strong></a>';
 		$output .= '</div>';
 		$output .= '</div>';
 

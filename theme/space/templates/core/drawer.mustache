@@ -33,15 +33,13 @@
 }}
 <div
     id="{{$drawerid}}drawer-{{uniqid}}{{/drawerid}}"
-    class="{{$drawerclasses}}{{/drawerclasses}}message-drawer drawer {{^show}}hidden{{/show}}"
+    class="{{$drawerclasses}}{{/drawerclasses}} message-drawer drawer {{^show}}hidden{{/show}}"
     aria-expanded="{{#show}}true{{/show}}{{^show}}false{{/show}}"
-    aria-hidden="{{#show}}false{{/show}}{{^show}}true{{/show}}"
+    {{^show}}aria-hidden="true"{{/show}}
     data-region="right-hand-drawer"
     role="region"
-    tabindex="-1"
+    tabindex="0"
 >
     {{$drawercontent}}{{/drawercontent}}
-    
-    
 </div>
 <div class="message-drawer-backdrop {{^show}}hidden{{/show}}" role="region" aria-expanded="{{#show}}true{{/show}}{{^show}}false{{/show}}" aria-hidden="{{#show}}false{{/show}}{{^show}}true{{/show}}" data-region="right-hand-drawer" tabindex="-1"></div>

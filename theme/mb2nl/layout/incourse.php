@@ -27,12 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 $sidebar = theme_mb2nl_isblock($PAGE, 'side-pre');
 $sidebarPos = theme_mb2nl_theme_setting($PAGE, 'sidebarpos', 'right');
 
-if ($sidebar)
+if ( $sidebar )
 {
 	$contentCol = 'col-md-9';
 	$sideCol = 'col-md-3';
 
-	if ($sidebarPos === 'left' || $sidebarPos === 'classic')
+	if ( $sidebarPos === 'left' || $sidebarPos === 'classic' )
 	{
 		$contentCol .= ' order-2';
 		$sideCol .= ' order-1';
@@ -46,19 +46,20 @@ else
 ?>
 <?php echo $OUTPUT->theme_part('head'); ?>
 <?php echo $OUTPUT->theme_part('header'); ?>
-<?php echo $OUTPUT->theme_part('region_slider'); ?>
+<?php //echo $OUTPUT->theme_part('region_slider'); ?>
 <?php echo $OUTPUT->theme_part('page_header'); ?>
 <?php echo $OUTPUT->theme_part('site_menu'); ?>
 <?php echo $OUTPUT->theme_part('course_banner'); ?>
-<?php echo $OUTPUT->theme_part('region_after_slider'); ?>
-<?php echo $OUTPUT->theme_part('region_before_content'); ?>
+<?php //echo $OUTPUT->theme_part('region_after_slider'); ?>
+<?php //echo $OUTPUT->theme_part('region_before_content'); ?>
 <?php echo theme_mb2nl_notice(); ?>
 <div id="main-content">
     <div class="container-fluid">
         <div class="row">
      		<section id="region-main" class="content-col <?php echo $contentCol; ?>">
             	<div id="page-content">
-					<?php echo theme_mb2nl_panel_link(); ?>
+					<?php echo theme_mb2nl_panel_link() . theme_mb2nl_page_builder_pagelink(); ?>
+					<?php echo theme_mb2nl_check_plugins(); ?>
                 	<?php echo $OUTPUT->course_content_header(); ?>
 					<?php if (theme_mb2nl_isblock($PAGE, 'content-top')) : ?>
                 		<?php echo $OUTPUT->blocks('content-top', theme_mb2nl_block_cls($PAGE, 'content-top','none')); ?>
@@ -80,7 +81,7 @@ else
 	</div>
 </div>
 <?php echo theme_mb2nl_moodle_from(2018120300) ? $OUTPUT->standard_after_main_region_html() : '' ?>
-<?php echo $OUTPUT->theme_part('region_after_content'); ?>
+<?php //echo $OUTPUT->theme_part('region_after_content'); ?>
 <?php echo $OUTPUT->theme_part('region_adminblock'); ?>
 <?php echo $OUTPUT->theme_part('region_bottom'); ?>
 <?php echo $OUTPUT->theme_part('region_bottom_abcd'); ?>

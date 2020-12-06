@@ -22,24 +22,20 @@
  *
  */
 
-defined('MOODLE_INTERNAL') || die(); 
+defined('MOODLE_INTERNAL') || die();
 
 
 echo $OUTPUT->doctype();
 
 ?>
 <?php echo $OUTPUT->theme_part('head'); ?>
-    <body <?php echo $OUTPUT->body_attributes(); ?>>
-		<?php echo $OUTPUT->standard_top_of_body_html() ?>
-        <div id="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="page-content">
-                	<?php echo $OUTPUT->main_content(); ?>
-                </div>
-            </div>
-        </div> </div> </div>
-        <?php echo $OUTPUT->standard_end_of_body_html() ?>
-    </body>
+<body <?php echo $OUTPUT->body_attributes(); ?>>
+<?php echo $OUTPUT->standard_top_of_body_html() ?>
+<div id="main-content">
+<div id="page-content">
+<?php echo $OUTPUT->main_content(); ?>
+</div> 
+</div>
+<?php echo $OUTPUT->standard_end_of_body_html() ?>
+</body>
 </html>

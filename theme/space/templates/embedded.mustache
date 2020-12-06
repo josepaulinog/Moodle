@@ -32,12 +32,12 @@
          }
     }
 }}
-{{> theme_space/head }}
+{{> theme_space/head-clean }}
 
 <body {{{ output.body_attributes }}}>
 {{> core/local/toast/wrapper}}
 {{{ output.standard_top_of_body_html }}}
-<div id="page">
+<div id="page-box">
     <div id="page-content">
         {{{ output.main_content }}}
     </div>
@@ -46,5 +46,9 @@
 </body>
 </html>
 {{#js}}
-require(['theme_space/loader']);
+M.util.js_pending('theme_space/loader');
+require(['theme_space/loader'], function() {
+    M.util.js_complete('theme_space/loader');
+});
 {{/js}}
+

@@ -247,4 +247,4 @@ $mb2_settings = array(
 );
 
 
-define('LOCAL_MB2BUILDER_SETTINGS_COURSES', serialize($mb2_settings));
+define('LOCAL_MB2BUILDER_SETTINGS_COURSES', serialize( $mb2_settings ) );

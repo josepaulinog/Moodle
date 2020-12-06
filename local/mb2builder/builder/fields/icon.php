@@ -48,15 +48,18 @@ class LocalMb2builderIcon
 		}
 
 		$showon = local_mb2builder_showon_field($attr['showon']);
+		$actions = local_mb2builder_field_actions(  $attr );
+		$removetext = $attr['default'] ? get_string('resettodefault','local_mb2builder') : get_string('remove','local_mb2builder');
 
 		$output  = '<div class="form-group mb2-pb-form-group">';
 		$output .= '<label>' . $attr['title'] . '</label><br>';
-		$output .= '<div><i style="display:none;position:relative;top:4px;margin-right:7px;font-size:30px;" class="' . $attr['default'] . '"></i></div>';
+		$output .= '<div><i style="display:none;font-size:48px;margin-bottom:6px;" class="' . $attr['default'] . '"></i></div>';
+		$output .= '<div class="mb2-pb-form-buttons">';
 		$output .= '<a href="#" class="mb2-pb-select-icon btn btn-xs btn-success" data-toggle="modal" data-target="#mb2-pb-modal-font-icons">' .
 		get_string('selecticon','local_mb2builder') . '</a> ';
-		$output .= '<a href="#" class="mb2-pb-remove-icon btn btn-xs btn-danger">' . get_string('remove','local_mb2builder') . '</a>';
-		$output	.= '<input type="hidden" class="form-control mb2-pb-input mb2-pb-input-type-' . $attr['type'] . ' mb2-pb-input-' . $key . '"' .
-		$showon . ' data-attrname="' . $key . '" value="' . $attr['default'] . '" />';
+		$output .= '<a href="#" class="mb2-pb-remove-icon btn btn-xs btn-danger">' . $removetext . '</a>';
+		$output .= '</div>';
+		$output	.= '<input type="hidden" class="form-control mb2-pb-input mb2-pb-input-type-' . $attr['type'] . ' mb2-pb-input-' . $key . '"' .	$showon . $actions . ' data-attrname="' . $key . '" value="' . $attr['default'] . '" />';
 
 		if ($attr['desc'])
 		{

@@ -39,7 +39,7 @@ class theme_mb2nl_core_course_renderer extends core_course_renderer {
 	protected function coursecat_coursebox(coursecat_helper $chelper, $course, $additionalclasses = '')
 	{
 
-	    global $CFG, $USER;
+	    global $CFG, $USER, $PAGE;
 
 		if (!isset($this->strings->summary))
 		{
@@ -87,7 +87,7 @@ class theme_mb2nl_core_course_renderer extends core_course_renderer {
 		));
 
 		// Collapsed course list
-        if (!$showInfoBox)
+        if ( ! $showInfoBox )
 		{
             $nametag = 'div';
 
@@ -96,6 +96,12 @@ class theme_mb2nl_core_course_renderer extends core_course_renderer {
 			// Course name
 			$coursename = theme_mb2nl_is_mlang($chelper->get_course_formatted_name($course)) ?
 				format_text($chelper->get_course_formatted_name($course)) : $chelper->get_course_formatted_name($course);
+
+			if ( theme_mb2nl_theme_setting( $PAGE, 'shortnamecourse') )
+			{
+				$coursename .= ' <span class="cshortname">' . $course->shortname . '</span>';
+			}
+
 			$coursenamelink = html_writer::link(new moodle_url('/course/view.php', array('id' => $course->id)),
 			$coursename, array('class' => $course->visible ? '' : 'dimmed'));
 			$content .= html_writer::tag($nametag, $coursenamelink, array('class' => 'coursename'));
@@ -291,8 +297,14 @@ class theme_mb2nl_core_course_renderer extends core_course_renderer {
 			$content .= html_writer::start_tag('div', array('class' => 'course-content'));
 
 			// Course heading
-			$coursename = theme_mb2nl_is_mlang($chelper->get_course_formatted_name($course)) ?
-			format_text($chelper->get_course_formatted_name($course)) : $chelper->get_course_formatted_name($course);
+			$coursename = theme_mb2nl_is_mlang( $chelper->get_course_formatted_name( $course ) ) ?
+			format_text($chelper->get_course_formatted_name($course)) : $chelper->get_course_formatted_name( $course );
+
+			if ( theme_mb2nl_theme_setting( $PAGE, 'shortnamecourse') )
+			{
+				$coursename .= ' <span class="cshortname">' . $course->shortname . '</span>';
+			}
+
 			$coursenamelink = html_writer::link(new moodle_url('/course/view.php', array('id' => $course->id)), $coursename);
 			$content .= html_writer::start_tag('div', array('class' => 'course-heading'));
 			$content .= html_writer::tag('h3', $coursenamelink, array('class' => 'coursename'));

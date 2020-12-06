@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_mb2notices';
-$plugin->version = 2020041711;
+$plugin->version =  2020062517;
 $plugin->requires = 2014051200;
-$plugin->release = '1.1.0';
+$plugin->release = '1.2.0';
 $plugin->maturity = MATURITY_STABLE;

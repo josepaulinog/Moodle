@@ -34,5 +34,6 @@ $templatecontext = [
 
 $themesettings = new \theme_space\util\theme_settings();
 $templatecontext = array_merge($templatecontext, $themesettings->head_elements());
+$templatecontext = array_merge($templatecontext, $themesettings->fonts());
 
 echo $OUTPUT->render_from_template('theme_space/maintenance', $templatecontext);

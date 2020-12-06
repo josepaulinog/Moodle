@@ -117,3 +117,30 @@ pre {
 [aria-selected="false"] {
     font-weight: inherit;
 }
+
+
+ul,
+ol {
+    padding-left: 2rem;
+}
+
+
+@media only screen and ( max-width: $tablet_width ){
+
+	.mobcenter1 {
+
+		text-align: center !important;
+
+		.align-center,
+		.align-left,
+		.align-right {
+			text-align: center !important;
+		}
+
+	}
+
+}
+
+.upper1 {
+	text-transform: uppercase;
+}

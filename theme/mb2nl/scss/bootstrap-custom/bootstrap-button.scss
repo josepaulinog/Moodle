@@ -20,14 +20,18 @@ a[data-action="addstandardtag"],
 		margin-right: 5px;
 	}
 
-	&.btn-full {
+	&.btn-full,
+	&.fw1 {
 		width: 100%;
 	}
 
-	&.btn-border {
+	&.btnborder1 {
 		color: $btncolor !important;
 	}
 }
+
+
+
 
 
 .btn-primary,
@@ -37,8 +41,8 @@ input.btn-primary,
 button.btn-primary {
 	@include button-variant( $accent1, $accent1);
 
-	&.btn-border {
-		color: $accent1 !important;
+	&.btnborder1 {
+		@include mb2_button_border( $accent1 );
 	}
 
 	&.btn-secondary {
@@ -48,11 +52,12 @@ button.btn-primary {
 }
 
 
+
 .btn-success {
   	@include button-variant($color_success, $color_success);
 
-	&.btn-border {
-		color: $color_success !important;
+	&.btnborder1 {
+		@include mb2_button_border( $color_success );
 	}
 }
 
@@ -60,16 +65,16 @@ button.btn-primary {
   	@include button-variant($color_warning, $color_warning);
 	color: #fff !important;
 
-	&.btn-border {
-		color: $color_warning !important;
+	&.btnborder1 {
+		@include mb2_button_border( $color_warning );
 	}
 }
 
 .btn-info {
   	@include button-variant($color_info, $color_info);
 
-	&.btn-border {
-		color: $color_info !important;
+	&.btnborder1 {
+		@include mb2_button_border( $color_info );
 	}
 }
 
@@ -78,8 +83,8 @@ button.btn-primary {
 .btn[name="cancel"] {
   	@include button-variant($color_danger, $color_danger);
 
-	&.btn-border {
-		color: $color_danger !important;
+	&.btnborder1 {
+		@include mb2_button_border( $color_danger );
 	}
 }
 
@@ -88,16 +93,30 @@ input.btn-inverse,
 button.btn-inverse {
   	@include button-variant($accent2, $accent2);
 
-	&.btn-border {
-		color: $accent2 !important;
+	&.btnborder1 {
+		@include mb2_button_border( $accent2 );
 	}
 }
 
 
+.btn-primary,
+.btn-inverse,
+.btn-danger,
+.btn-info,
+.btn-warning,
+.btn-success {
+	.dark &.btnborder1 {
+		color: #fff !important;
+	}
+}
 
+
+.btn-xlg {
+  	@include button-size(1rem, 2.7rem, 1.35rem, (1.35rem * $lhtime), .15rem);
+}
 
 .btn-lg {
-  	@include button-size(.58rem, 1.8rem, $fsbig, $fsbig_lh, .15rem);
+  	@include button-size(.7rem, 2rem, 1.2rem, (1.2rem * $lhtime), .15rem);
 }
 
 .btn-sm {
@@ -217,7 +236,8 @@ input[type="submit"].addcancel {
 	+ .btn {
 		margin-left: .2rem;
 
-		&.btn-full {
+		&.btn-full,
+		&.fw1 {
 			margin-left: 0;
 		}
 	}
@@ -226,5 +246,36 @@ input[type="submit"].addcancel {
 		border: 0 !important;
 		background-color: transparent !important;
 		border-radius: 0;
+	}
+}
+
+
+
+/* Page builder style */
+
+.mb2pb-button {
+	display: inline-block;
+	vertical-align: top;
+
+	&.fw1,
+	&.center1 {
+		display: block;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+
+		.btn {
+			margin-left: 0 !important;
+			margin-right: 0 !important;
+		}
+	}
+
+	&.center1 {
+		text-align: center;
+	}
+
+	&.fw1 {
+		.btn {
+			width: 100%;
+		}
 	}
 }

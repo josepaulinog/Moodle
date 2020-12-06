@@ -12,17 +12,19 @@ function mb2_list_fnc($atts, $content= null){
 		'horizontal' => 0,
 		'align' => 'left',
 		'custom_class' => '',
+		'columns' => 1,
 		'margin' => ''
 		), $atts)
 	);
 
-
+	$cls = '';
 	$GLOBALS['icon'] = $icon;
 
 	// Define list class
-	$cls = $horizontal == 1 ? ' list-horizontal' : '';
+	$cls .= ' horizontal' . $horizontal;
 	$cls .= ' list-' . $align;
 	$cls .= $style ? ' list-' . $style : '';
+	$cls .= ' list-col-' . $columns;
 	$cls .= $custom_class ? ' ' . $custom_class : '';
 
 	$list_tag = 'ul';

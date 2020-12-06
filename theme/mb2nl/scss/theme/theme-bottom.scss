@@ -6,9 +6,24 @@
 	padding-top: 18px;
 }
 
+#bottom-abcd {
+	padding-top: 60px;
+
+	.block {
+		margin-bottom: 60px !important;
+
+		>.header,
+		.card-title {
+			margin-bottom: 1.8rem;
+		}
+	}
+}
+
+
+
 
 #bottom {
-	background-image: url([[pix:theme|svg/strip2_white8]]);
+	background-image: url([[pix:theme|svg/strip1_white8]]);
 	border-bottom: solid 1px rgba(255,255,255,.08);
 }
 

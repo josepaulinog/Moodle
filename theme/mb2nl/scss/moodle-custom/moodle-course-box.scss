@@ -163,7 +163,8 @@
 /* Course grid layout */
 
 .category-browse,
-.frontpage-course-list-all {
+.frontpage-course-list-all,
+.frontpage-course-list-enrolled {
 
 	@include clearfix();
 
@@ -271,7 +272,8 @@
 
 
 	.category-browse,
-    .frontpage-course-list-all {
+    .frontpage-course-list-all,
+	.frontpage-course-list-enrolled {
 
         .hide-sidebars.course-layout-grid &,
         .nosidebar-case.course-layout-grid & {
@@ -287,7 +289,8 @@
 
 @media only screen and (max-width: $phone_width){
 	.category-browse,
-    .frontpage-course-list-all {
+    .frontpage-course-list-all,
+	.frontpage-course-list-enrolled {
 
         .course-layout-grid & {
 

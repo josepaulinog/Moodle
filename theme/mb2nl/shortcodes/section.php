@@ -19,13 +19,14 @@ function mb2_shortcode_section ($atts, $content= null)
 		'sectionlang' => '',
 		'pb' => 0,
 		'sectionaccess' => 0,
-		'custom_class' => ''
+		'custom_class' => ''		
 	), $atts));
 
 	$output = '';
 	$bg_image_style = $bgimage ? ' style="background-image:url(\'' . $bgimage . '\');"' : '';
 	$cls = $custom_class ? ' ' . $custom_class : '';
 	$cls .= ' pre-bg' . $prbg;
+	$cls .= ' hidden' . $sectionhidden;
 	$cls .= ' ' . $scheme;
 
 	$lang_arr = explode(',', $sectionlang);
@@ -36,26 +37,21 @@ function mb2_shortcode_section ($atts, $content= null)
 		return ;
 	}
 
-	if ($sectionhidden && !is_siteadmin())
+	if ( $sectionhidden && ! is_siteadmin() )
 	{
 		return ;
 	}
 
-	if ($sectionhidden && is_siteadmin())
+	if ( $sectionaccess == 1 )
 	{
-		$cls .= ' hiddenel';
-	}
-
-	if ($sectionaccess == 1)
-	{
-		if (!isloggedin() || isguestuser())
+		if ( ! isloggedin() || isguestuser() )
 		{
 			return ;
 		}
 	}
-	elseif ($sectionaccess == 2)
+	elseif ( $sectionaccess == 2 )
 	{
-		if (isloggedin() && !isguestuser())
+		if ( isloggedin() && ! isguestuser() )
 		{
 			return ;
 		}

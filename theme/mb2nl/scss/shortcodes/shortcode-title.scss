@@ -3,15 +3,42 @@
 .theme-title {
 	position: relative;
 
+	.title {
+		margin: 0;
+	}
+
 	&.title-right {
 		text-align: right;
+	}
+
+	&.title-left {
+		text-align: left;
 	}
 
 	&.title-center {
 		text-align: center;
 	}
 
+	.text_to_html {
+		display: inline-block;
+	}
+
+	.title-subtext {
+		display: block;
+		margin-top: 7px;
+	}
+
+	&.issubtext0 {
+		.title-subtext {
+			display: none;
+		}
+	}
+
 }
+
+
+
+
 
 
 
@@ -26,6 +53,10 @@ Default style
 	padding-bottom: 10px;
 	margin-bottom: 20px;
 
+	.mb2pb-title & {
+		margin-bottom: 0;
+	}
+
 	.title {
 		margin: 0;
 		font-size: 2.2em;
@@ -33,11 +64,6 @@ Default style
 
 	&.title-s .title {
 		font-size: $fsheading3
-	}
-
-	.title-subtext {
-		display: block;
-		margin-top: 7px;
 	}
 
 	&:after {
@@ -48,10 +74,6 @@ Default style
 		width: 60px;
 		height: 1px;
 		border-bottom: solid 3px $accent1;
-	}
-
-	&.title-s:after {
-		border-bottom-width: 2px;
 	}
 
 	&.title-right:after {
@@ -77,30 +99,57 @@ Style 2
 
 .theme-title.style-2 {
 
+	overflow: hidden;
 	margin-bottom: 20px;
+
+	.mb2pb-title & {
+		margin-bottom: 0;
+	}
 
 	.title {
 		position: relative;
 		font-size: 2.2em;
 
-		&:after {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 50%;
-			margin-top: -2px;
-			width: 100%;
-			height: 5px;
-			border-top: solid 1px $color_border;
-			border-bottom:  solid 1px $color_border;
-		}
-
 		> span {
-			background-color: #fff;
 			position: relative;
 			z-index: 1;
 			padding-right: 15px;
+			display: inline-block;
+
+			&:before,
+			&:after {
+				display: block;
+			    content: '';
+			    width: 2000px;
+			    height: 6px;
+				border-top: solid 1px $color_border;
+				border-bottom:  solid 1px $color_border;
+			    position: absolute;
+			    top: 50%;
+			    margin-top: -3px;
+			}
+
+			&:before {
+			    right: 100%;
+			}
+
+			&:after {
+			    left: 100%;
+			}
 		}
+	}
+
+	.dark & {
+
+		.title {
+			> span {
+				&:before,
+				&:after {
+					border-color: rgba(255,255,255,.15);
+				}
+			}
+		}
+
 	}
 
 	&.title-right {
@@ -122,6 +171,163 @@ Style 2
 
 	&.title-s .title {
 		font-size: $fsheading3
+	}
+
+}
+
+
+/* Heading shortcode in page builder */
+
+.mb2pb-heading {
+	.heading {
+		margin-bottom: 0;
+	}
+}
+
+.heading {
+	.text_to_html {
+		display: inline-block;
+	}
+
+	&.heading-center {
+		text-align: center;
+	}
+
+	&.heading-left {
+		text-align: left;
+	}
+
+	&.heading-right {
+		text-align: right;
+	}
+}
+
+
+
+.align-center {
+
+	.theme-title.style-1.title-none {
+		&:after {
+			left: 50% !important;
+			margin-left: -30px !important;
+		}
+	}
+
+	.theme-title.style-2.title-none {
+		.title {
+			> span {
+				padding-left: 15px !important;
+				padding-right: 15px !important;
+			}
+		}
+	}
+
+}
+
+.align-right {
+
+	.theme-title.style-1.title-none {
+		&:after {
+			left: auto !important;
+			right: 0 !important;
+			margin-left: 0 !important;
+		}
+	}
+
+	.theme-title.style-2.title-none {
+		.title {
+			> span {
+				padding-left: 15px !important;
+				padding-right: 0 !important;
+			}
+		}
+	}
+
+}
+
+
+
+@media only screen and (max-width: $tablet_width){
+
+	.title,
+	.heading {
+
+		&.hsize-6 {
+			font-size: 5.2rem !important;
+		}
+
+		&.hsize-5 {
+			font-size: 4.2rem !important;
+		}
+
+		&.hsize-4 {
+			font-size: 3.5rem !important;
+		}
+
+		&.hsize-3 {
+			font-size: 3rem !important;
+		}
+
+	}
+
+
+
+	.mobcenter1 {
+
+		.theme-title.style-1 {
+
+			text-align: center !important;
+
+			&:after {
+				left: 50% !important;
+				margin-left: -30px !important;
+			}
+		}
+
+		.theme-title.style-2 {
+
+			text-align: center !important;
+
+			.title {
+				> span {
+					padding-left: 15px !important;
+					padding-right: 15px !important;
+				}
+			}
+		}
+
+
+		.heading {
+			text-align: center !important;
+		}
+
+	}
+
+}
+
+
+@media only screen and (max-width: $phone_width){
+
+	.title,
+	.heading {
+
+		&.hsize-6 {
+			font-size: 4.5rem !important;
+		}
+
+		&.hsize-5 {
+			font-size: 3.5rem !important;
+		}
+
+		&.hsize-4 {
+			font-size: 3rem !important;
+		}
+
+		&.hsize-3,
+		&.hsize-2 {
+			font-size: 2rem !important;
+		}
+
 	}
 
 }

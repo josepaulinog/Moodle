@@ -26,11 +26,13 @@
 
   <div class="col-12 row no-gutters justify-content-sm-center justify-content-md-start py-0 px-1">
     {{#block1}}
-    <div id="block1-{{FPHTMLBlock1Count}}" class="{{FPHTMLBlock1ItemProperties}} {{^FPHTMLBlock1ItemProperties}}col-sm-11 col-md-6 col-lg-4 py-5 px-sm-0 px-md-5{{/FPHTMLBlock1ItemProperties}}">
-      {{#image}}<img src="{{{image}}}" alt="{{{FPHTMLBlock1Heading}}}" class="img-fluid"/>{{/image}}
-      {{^image}}{{#FPHTMLBlock1Icon}}<div class="c-special-box-icon">{{{FPHTMLBlock1Icon}}}</div>{{/FPHTMLBlock1Icon}}{{/image}}
-      {{#FPHTMLBlock1Heading}}<h3 class="c-block1-title">{{{FPHTMLBlock1Heading}}}</h3>{{/FPHTMLBlock1Heading}}
-      {{#FPHTMLBlock1Text}}<div class="c-special-box-desc">{{{FPHTMLBlock1Text}}}</div>{{/FPHTMLBlock1Text}}
+    <div id="block1-{{FPHTMLBlock1Count}}" class="{{FPHTMLBlock1ItemProperties}} {{^FPHTMLBlock1ItemProperties}}col-sm-11 col-md-6 col-lg-4{{/FPHTMLBlock1ItemProperties}}">
+      <div {{^FPHTMLBlock1ItemBlockProperties}}class="p-3 m-3"{{/FPHTMLBlock1ItemBlockProperties}} {{{FPHTMLBlock1ItemBlockProperties}}}>
+        {{#image}}<img src="{{{image}}}" alt="{{FPHTMLBlock1Heading}}" class="img-fluid"/>{{/image}}
+        {{^image}}{{#FPHTMLBlock1Icon}}<div class="c-special-box-icon">{{{FPHTMLBlock1Icon}}}</div>{{/FPHTMLBlock1Icon}}{{/image}}
+        {{#FPHTMLBlock1Heading}}<h3 class="c-block1-title">{{{FPHTMLBlock1Heading}}}</h3>{{/FPHTMLBlock1Heading}}
+        {{#FPHTMLBlock1Text}}<div class="c-special-box-desc">{{{FPHTMLBlock1Text}}}</div>{{/FPHTMLBlock1Text}}
+      </div>
     </div>
     {{/block1}}
   </div>

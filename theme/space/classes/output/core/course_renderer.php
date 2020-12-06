@@ -310,30 +310,60 @@ class course_renderer extends \core_course_renderer {
         if ($course->has_course_contacts()) {
             $content .= html_writer::start_tag('div', array('class' => 'course-contacts'));
 
+            $i = 0;
+
             $instructors = $course->get_course_contacts();
             foreach ($instructors as $key => $instructor) {
                 $name = $instructor['username'];
+                
                 $url = $CFG->wwwroot.'/user/profile.php?id='.$key;
                 $picture = $this->get_user_picture($DB->get_record('user', array('id' => $key)));
 
                 $content .= "<a href='{$url}' title='{$name}' class='c-courses-contact' data-toggle='tooltip' title='{$name}'>";
                 $content .= "<img src='{$picture}' class='c-courses-teacher-avatar rounded-circle' alt='{$name}' />";
                 $content .= "</a>";
+
+                if (++$i > 2) {
+                    $idtemp = "box-" . rand();
+                    $content .= "<a href='#$idtemp' class='course-contacts-toggle-btn show-course-contacts-btn' data-toggle='collapse' aria-expanded='false' data-target='#$idtemp'></a>";
+                   
+                    $content .= "<div id='$idtemp' class='course-contacts-ext collapse'>";
+                    $content .= "<a href='#$idtemp' class='course-contacts-toggle-btn close close-course-contacts-btn' data-toggle='collapse' aria-expanded='false' data-target='#$idtemp'></a>";
+        
+                    $content .= "<h6 class='course-contacts-ext-title ml-3 my-3'>" . get_string('teachers', 'theme_space') . "</h6>";
+                    $content .= html_writer::start_tag('div', array('class' => 'course-contacts-ext-content'));
+                    $content .= html_writer::start_tag('ul', array('class' => 'course-contacts-ext-list'));
+                    $instructors = $course->get_course_contacts();
+                    foreach ($instructors as $key => $instructor) {
+                        $name = $instructor['username'];
+                        $url = $CFG->wwwroot.'/user/profile.php?id='.$key;
+                        $picture = $this->get_user_picture($DB->get_record('user', array('id' => $key)));
+        
+                        $content .= "<li><a href='{$url}' title='{$name}' class='c-courses-contact' title='{$name}'>";
+                        $content .= "<img src='{$picture}' class='c-courses-teacher-avatar rounded-circle' alt='{$name}' /><span class='c-courses-teacher-name'>{$name}</span>";
+                        $content .= "</a></li>";
+                    }
+                    $content .= html_writer::end_tag('ul'); // Ends course-contacts-ext-list.
+                    $content .= html_writer::end_tag('div'); // Ends course-contacts-ext-content.
+                    $content .= html_writer::end_tag('div'); // Ends course-contacts-ext.
+                break;
+                }
             }
 
             $content .= html_writer::end_tag('div'); // Ends course-contacts.
+
         }
 
         // Display course category if necessary (for example in search results).
-        if ($chelper->get_show_courses() == self::COURSECAT_SHOW_COURSES_EXPANDED_WITH_CAT) {
+
             if ($cat = core_course_category::get($course->category, IGNORE_MISSING)) {
-                $content .= html_writer::start_tag('div', array('class' => 'coursecat small'));
-                $content .= get_string('category').': '.
+                $content .= html_writer::start_tag('div', array('class' => 'coursecat'));
+                $content .=
                     html_writer::link(new moodle_url('/course/index.php', array('categoryid' => $cat->id)),
-                        $cat->get_formatted_name(), array('class' => $cat->visible ? '' : 'dimmed'));
+                        $cat->get_formatted_name(), array('class' => $cat->visible ? '' : 'dimmed'), array('class' => 'paging paging-showall'));
                 $content .= html_writer::end_tag('div'); // End coursecat.
             }
-        }
+  
 
         $content .= html_writer::start_tag('div', array('class' => 'courses-view-course-item-footer col-12 align-self-end'));
 
@@ -438,7 +468,7 @@ class course_renderer extends \core_course_renderer {
             if (!empty($categorycontent)) {
                 $classes[] = 'with_children collapsed';
                 // Category content loaded with children.
-                $this->categoryexpandedonload = false;
+                $this->categoryexpandedonload = true;
             }
         }
 

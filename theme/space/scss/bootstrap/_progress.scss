@@ -27,8 +27,27 @@
 .progress-bar-striped {
   @include gradient-striped();
   background-size: $progress-height $progress-height;
+  font-weight: $font-weight-sm-bold;
+  font-size: 11px;
+  color: $white;
 }
 
 .progress-bar-animated {
   animation: progress-bar-stripes $progress-bar-animation-timing;
+}
+
+.progress-sm {
+  height: 10px;
+}
+
+.progress-bar-text {  
+  margin-top: 5px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+}
+
+table {
+  .progress {
+    margin: 0;
+  }
 }

@@ -3,8 +3,8 @@
 
   .section {
     .dropdown-toggle {
-      padding: 10px 20px;
-      font-size: 12px;
+      padding: .35rem 1.7rem .35rem .75rem;
+      font-size: $font-size-xs;
     }
   }
 
@@ -20,20 +20,37 @@
   }
 
 
+
+  .dropdown-divider-author {
+    .showusername & {
+      display: none;
+    }
+  }
+  
 // The dropdown menu
 .dropdown-author {
   max-width: 200px;
   padding: 5px;
+  margin: 0 auto;
   font-size: $font-size-sm;
   font-weight: $font-weight-sm-bold;
   color: $dropdown-text;
   text-align: center;
   white-space: normal;
 
+  .showusername & {
+    display: none;
+
+    @include media-breakpoint-only(sm) {
+    display: block;
+    }
+  }
+  
   @include media-breakpoint-only(sm) {
     max-width: 100%;
   }
 
+  .meta.viewingas,
   .meta.role {
     position: relative;
     display: block;
@@ -100,6 +117,11 @@
   background-color: $dropdown-bg;
   box-shadow: 2px 11px 54px 0 rgba($dropdown-shadow,.6);
 
+  .c-lang-menu & {
+    min-width: 180px;
+    width: 180px;
+  }
+
   .currentlink  {
     display: block;
 
@@ -119,6 +141,10 @@
       color: $dropdown-link-color;
 
       transition: $general-transition;
+
+      .c-lang-menu & {
+        padding: 0.4rem 0.5rem;
+      }
 
       &:hover {
         background-color: $dropdown-link-hover-bg;
@@ -147,7 +173,6 @@
         color: $dropdown-text;
         font-size: $font-size-sm;
         opacity: 0.6;
-        line-height: 1.5;
       }
 
       &:hover, &.active {
@@ -195,7 +220,9 @@
     }
 
     .icon {
+      width: 20px;
       display: inline-flex;
+      align-self: center;
       margin: 0 7px 0 0!important;
       color: $dropdown-link-color;
       opacity: 0.7;
@@ -203,8 +230,7 @@
 
     .menu-action-text {
       display: inline-flex;
-      width: calc(100% - 30px);
-      line-height: 1.5;
+      width: calc(100% - 35px);
     }
 
   }
@@ -288,11 +314,11 @@
         }
 
         span {
-          color: $red-200!important;
+          color: $red-100!important;
         }
 
         .icon {
-          color: $red-200!important;
+          color: $red-100!important;
           opacity: 0.6;
         }
       }
@@ -355,7 +381,7 @@
 
   clear: both!important;
   font-weight: $font-weight-sm-bold!important;
-  color: $dropdown-link-color;
+  color: $dropdown-link-color!important;
   text-align: inherit; // For `<button>`s
   white-space: nowrap; // prevent links from randomly breaking onto new lines
   background-color: transparent; // For `<button>`s
@@ -364,6 +390,11 @@
   box-shadow: none;
 
   transition: $general-transition;
+
+  max-width: 280px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     color: $dropdown-link-hover-color!important;
@@ -388,6 +419,13 @@
       background-image: none;
     }
   }
+
+  .icon {
+    display: inline-flex;
+    background-color: transparent;
+    width: auto;
+    height: auto;
+  }
 }
 
 .dropdown-menu.show {
@@ -411,6 +449,6 @@
 }
 
 .editor_atto_menu .dropdown-menu>li>a {
-  margin: 0;
+  margin: 0!important;
   border-radius: $border-radius;
 }

@@ -64,7 +64,8 @@
                         <span class="sr-only">
                                 {{#str}}aria:coursename, core_course{{/str}}
                             </span>
-                        {{$coursename}}{{/coursename}}
+                            {{^visible}}<div class="d-block"><span class="tag tag-danger mb-2">{{#str}} hiddenfromstudents {{/str}}</span></div>{{/visible}}
+                            {{$coursename}}{{/coursename}}
                     </a>
                 </div>
                 {{$menu}}{{/menu}}

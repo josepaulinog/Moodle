@@ -50,31 +50,32 @@ function theme_mb2nl_user_bookmarks()
 
 	$output .= '<ul class="theme-bookmarks dropdown-list">';
 
-	foreach ($tempbookmarks as $b)
+	foreach ( $tempbookmarks as $b )
 	{
-		$b_arr = explode(';',$b);
-		$blink = new moodle_url($CFG->wwwroot . trim($b_arr[0]), array());
-		$title = isset($b_arr[1]) ? $b_arr[1] : '';
+		$b_arr = explode( ';', $b );
+		$b_arr0 = isset( $b_arr[0] ) ? $b_arr[0] : '';
+		$blink = new moodle_url( $b_arr0, array() );
+		$title = isset( $b_arr[1] ) ? $b_arr[1] : '';
 
-		if (trim($b_arr[0]))
+		if ( $b_arr0 )
 		{
-			$output .= '<li data-url="' . trim($b_arr[0]) . '">';
+			$output .= '<li data-url="' . $b_arr0 . '">';
 			$output .= '<a class="bookmark-link" href="' . $blink . '">';
 			$output .= trim($title);
 			$output .= '</a>';
 			$output .= '<span class="theme-bookmarks-action">';
-			$output .= '<a href="#" class="theme-bookmarks-form bookmark-edit" data-url="' . trim($b_arr[0]) . '" data-mb2bktitle="' . trim($title) . '"' . $bookmark_manage_attr . '><i class="fa fa-pencil"></i></a>';
-			$output .= '<a href="#" class="theme-bookmarks-form bookmark-delete" data-url="' . trim($b_arr[0]) . '" data-mb2bktitle="' . trim($title) . '"><i class="fa fa-times"></i></a>';
+			$output .= '<a href="#" class="theme-bookmarks-form bookmark-edit" data-url="' . $b_arr0 . '" data-mb2bktitle="' . trim($title) . '"' . $bookmark_manage_attr . '><i class="fa fa-pencil"></i></a>';
+			$output .= '<a href="#" class="theme-bookmarks-form bookmark-delete" data-url="' . $b_arr0 . '" data-mb2bktitle="' . trim($title) . '"><i class="fa fa-times"></i></a>';
 			$output .= '</span>';
 			$output .= '</li>';
 
-			$url_arr[] = trim($b_arr[0]);
+			$url_arr[] = $b_arr0;
 		}
 	}
 
-	$is_bokmarked = in_array(trim($bookmarkurl), $url_arr);
+	$is_bokmarked = in_array( trim( $bookmarkurl ), $url_arr );
 
-	if ($is_bokmarked)
+	if ( $is_bokmarked )
 	{
 		$bookmark_manage_attr = '';
 		$bookmark_addremove = ' bookmark-delete';
@@ -149,7 +150,6 @@ function theme_mb2nl_user_bookmarks_modal ()
     $output .= '</div>';
     $output .= '</div>';
     $output .= '</div>';
-
 
     return $output;
 

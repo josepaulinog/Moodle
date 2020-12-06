@@ -28,7 +28,7 @@ echo $OUTPUT->doctype();
 
 $themeFaicon = theme_mb2nl_theme_setting($PAGE,'favicon','', true);
 $vafIcon = $themeFaicon !='' ? $themeFaicon : $OUTPUT->favicon();
-
+//mb2-pb-modal modal fade ui-draggable show
 // Get boost theme amd files
 $inline_js = 'require([\'theme_boost/loader\']);';
 if ( theme_mb2nl_moodle_from(2020061500) ) // Moodle 3.9+

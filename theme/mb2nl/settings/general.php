@@ -251,6 +251,10 @@ $temp->add($setting);
 	$setting = new admin_setting_configmb2spacer($name);
 	$temp->add($setting);
 
+	$name = 'theme_mb2nl/shortnamecourse';
+	$title = get_string( 'shortnamecourse' );
+	$setting = new admin_setting_configcheckbox($name, $title,'',0);
+	$temp->add($setting);
 
 	$name = 'theme_mb2nl/coursebtn';
 	$title = get_string('coursebtn','theme_mb2nl');
@@ -351,6 +355,15 @@ $temp->add($setting);
 
 $setting = new admin_setting_configmb2start('theme_mb2nl/startfooter', get_string('footer','theme_mb2nl'));
 $temp->add($setting);
+
+	$footerstyleOptions = array(
+		''=>get_string( 'default','theme_mb2nl' )
+	);
+	$name = 'theme_mb2nl/footerstyle';
+	$title = get_string('style','theme_mb2nl');
+	$setting = new admin_setting_configselect( $name, $title, '', '', $footerstyleOptions );
+	$setting->set_updatedcallback( 'theme_reset_all_caches' );
+	$temp->add( $setting );
 
 	$name = 'theme_mb2nl/foottext';
 	$title = get_string('foottext','theme_mb2nl');

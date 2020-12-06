@@ -18,9 +18,17 @@
     Page header.
 }}
 
-    <div data-region="drawer-toggle" class="d-sm-none d-md-inline ml-md-0 mr-md-3">
-        <button type="button" class="sidebar-btn" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">
-          {{#SidebarButtonIcon}}<i class="{{{SidebarButtonIcon}}}" id="sidebarBtn"></i>{{/SidebarButtonIcon}}
-          {{^SidebarButtonIcon}}<i class="fas fa-equals" id="sidebarBtn"></i>{{/SidebarButtonIcon}}  
+    <div data-region="drawer-toggle" class="d-sm-none d-lg-inline">
+        <button id="sidebarBtn" type="button" class="sidebar-btn ml-md-0 mr-md-3" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">
+          {{#SidebarButtonIconOpen}}
+          {{{SidebarButtonIconOpen}}}
+          {{^SidebarButtonIconClose}}<i class="fas fa-arrow-left closed"></i>{{/SidebarButtonIconClose}}
+          {{#SidebarButtonIconClose}}{{{SidebarButtonIconClose}}}{{/SidebarButtonIconClose}}
+          {{/SidebarButtonIconOpen}}
+
+          {{^SidebarButtonIconOpen}}
+          <i class="fas fa-equals opened"></i>
+          <i class="fas fa-arrow-left closed"></i>
+          {{/SidebarButtonIconOpen}}  
         </button>
     </div>

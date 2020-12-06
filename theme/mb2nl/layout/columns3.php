@@ -85,9 +85,7 @@ elseif ($sidePre || $sidePost)
             <section id="region-main" class="content-col <?php echo $contentCol; ?>">
                 <div id="page-content">
 					<?php echo theme_mb2nl_panel_link(); ?>
-                	<?php if (is_siteadmin()) : ?>
-                    	<?php echo theme_mb2nl_check_plugins(); ?>
-                    <?php endif; ?>
+                	<?php echo theme_mb2nl_check_plugins(); ?>
 					<?php echo $OUTPUT->course_content_header(); ?>
 					<?php if (theme_mb2nl_isblock($PAGE, 'content-top')) : ?>
                 		<?php echo $OUTPUT->blocks('content-top', theme_mb2nl_block_cls($PAGE, 'content-top','none')); ?>

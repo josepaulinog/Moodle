@@ -18,43 +18,45 @@
     Page navbar.
 }}
 
-<div id="topBar2" class="s-top s-top--sidebar justify-content-center mt-md-0">
 
-  {{> theme_space/navbar-mobile }}
-  
-  <div class="s-top-container">
-    <div id="navBar" class="c-container row no-gutters justify-content-start align-items-center">
+  <div id="topBar2" class="s-top s-top--sidebar justify-content-center mt-md-0 {{#ShowTopBarUserName}}showusername{{/ShowTopBarUserName}} {{#customtopnavhtml}}topbar-customtopnav{{/customtopnavhtml}} {{#TopBarText}}topbar-text{{/TopBarText}}">
 
-      {{> theme_space/navbar-btn }}
+    {{> theme_space/navbar-mobile }}
+    
+    <div class="s-top-container">
+      <div id="navBar" class="c-container row no-gutters justify-content-start align-items-center">
 
-      {{#customlogotopbar}}
-      <div class="logo c-menu-sep d-sm-none d-md-inline pl-md-0 pr-md-2 ml-md-3 mr-md-2">
-          <a href="{{{ config.wwwroot }}}"><img src="{{customlogotopbar}}" alt="{{sitename}}" /></a>
+        {{> theme_space/navbar-btn }}
+
+        {{#customlogotopbar}}
+        <div class="logo c-menu-sep d-sm-none d-lg-inline pl-md-0 pr-md-2 ml-md-3 mr-md-2">
+            <a href="{{#customrooturl}}{{customrooturl}}{{/customrooturl}}{{^customrooturl}}{{{ config.wwwroot }}}{{/customrooturl}}"><img src="{{customlogotopbar}}" alt="{{sitename}}" /></a>
+        </div>
+        {{/customlogotopbar}}
+        {{#TopBarText}}<div class="c-top-text mr-lg-3 ml-lg-4 py-lg-0 pr-lg-3 pl-lg-0 text-sm-center text-lg-left">{{{TopBarText}}}</div>{{/TopBarText}}
+
+        <div class="c-nav-user nav ml-md-auto align-items-center justify-content-sm-end justify-content-lg-center pr-0">
+
+            <div class="search-box d-block">
+            {{{ output.search_box }}}
+            </div>
+
+            <!-- navbar_plugin_output -->
+            <div class="top-icons-nav c-menu-sep mr-lg-3">{{{ output.navbar_plugin_output }}}</div>
+
+            {{#output.render_lang_menu}}<div class="c-lang-menu c-menu-sep d-sm-none d-lg-inline">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
+
+            {{#ShowCustomNav}}<div class="c-custom-nav-container mr-lg-3 c-menu-sep">{{> theme_space/custom-nav }}</div>{{/ShowCustomNav}}
+
+            <!-- user_menu -->
+            <div class="c-user-menu">
+                {{{ output.user_menu }}}
+            </div>
+
+        </div>
+        <!-- search_box -->
       </div>
-      {{/customlogotopbar}}
-      {{#ShowTopBarText}}<div class="c-top-text mr-md-3 ml-md-4 py-md-0 pr-md-3 pl-md-0">{{{TopBarText}}}</div>{{/ShowTopBarText}}
-
-      <div class="c-nav-user nav ml-md-auto align-items-center justify-content-center">
-
-          <div class="search-box d-block">
-          {{{ output.search_box }}}
-          </div>
-
-          <!-- navbar_plugin_output -->
-          <div class="top-icons-nav c-menu-sep mr-md-3">{{{ output.navbar_plugin_output }}}</div>
-
-          {{#output.render_lang_menu}}<div class="c-lang-menu c-menu-sep">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
-
-          {{#ShowCustomNav}}<div class="c-custom-nav-container mr-md-3 c-menu-sep">{{> theme_space/custom-nav }}</div>{{/ShowCustomNav}}
-
-          <!-- user_menu -->
-          <div class="c-user-menu">
-              {{{ output.user_menu }}}
-          </div>
-
-      </div>
-      <!-- search_box -->
     </div>
+
   </div>
 
-</div>

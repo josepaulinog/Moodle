@@ -31,27 +31,41 @@ defined('MOODLE_INTERNAL') || die();
  *
  * Method to set body class
  *
- *
  */
-function theme_mb2nl_body_cls($page)
+function theme_mb2nl_body_cls()
 {
-	global $PAGE, $USER, $COURSE;
+	global $CFG, $PAGE, $USER, $COURSE;
 	$output = array();
 
 	// Page layout
-	$output[] = 'theme-l' . theme_mb2nl_theme_setting($page, 'layout', 'fw');
+	$output[] = 'theme-l' . theme_mb2nl_theme_setting($PAGE, 'layout', 'fw');
 
 	// Header style
-	$output[] = 'header-' . theme_mb2nl_theme_setting($page, 'headerstyle', 'light');
+	$output[] = 'header-' . theme_mb2nl_theme_setting($PAGE, 'headerstyle', 'light');
+
+	if ( ! $PAGE->user_is_editing() )
+	{
+		$output[] = 'noediting';
+	}
+
+	// Add front page builder class
+	if ( theme_mb2nl_has_builderpage() )
+	{
+		$output[] = 'builderpage';
+	}
+	else
+	{
+		$output[] = 'nobuilderpage';
+	}
 
 	// Icon nav menu class
-	if (theme_mb2nl_theme_setting($page, 'navicons') !='')
+	if ( theme_mb2nl_theme_setting( $PAGE, 'navicons') )
 	{
 		$output[] = 'isiconmenu';
 	}
 
 	// Custom login page
-	if (theme_mb2nl_is_login($page, true))
+	if ( theme_mb2nl_is_login( $PAGE, true ) )
 	{
 		$output[] = 'custom-login';
 	}
@@ -78,30 +92,30 @@ function theme_mb2nl_body_cls($page)
 	}
 
 	// Custom page classess
-	if (theme_mb2nl_page_cls($page))
+	if (theme_mb2nl_page_cls($PAGE))
 	{
-		$output[] = theme_mb2nl_page_cls($page);
+		$output[] = theme_mb2nl_page_cls($PAGE);
 	}
 
 	// Custom course pages class
-	if (theme_mb2nl_page_cls($page, true))
+	if (theme_mb2nl_page_cls($PAGE, true))
 	{
-		$output[] = theme_mb2nl_page_cls($page, true);
+		$output[] = theme_mb2nl_page_cls($PAGE, true);
 	}
 
 	// Custom course class
-	if (theme_mb2nl_course_cls($page))
+	if (theme_mb2nl_course_cls($PAGE))
 	{
-		$output[] = theme_mb2nl_course_cls($page);
+		$output[] = theme_mb2nl_course_cls($PAGE);
 	}
 
 	// Fixed navigation
-	if ( theme_mb2nl_theme_setting( $page, 'stickynav' ) )
+	if ( theme_mb2nl_theme_setting( $PAGE, 'stickynav' ) )
 	{
 		$output[] = 'sticky-nav';
 	}
 
-	if ( theme_mb2nl_theme_setting( $page, 'stickymobilenav') )
+	if ( theme_mb2nl_theme_setting( $PAGE, 'stickymobilenav') )
 	{
 		$output[] = 'sticky-nav-mobile';
 	}
@@ -111,9 +125,9 @@ function theme_mb2nl_body_cls($page)
 	}
 
 	// Course category theme
-	if (theme_mb2nl_courselist_cls($page))
+	if (theme_mb2nl_courselist_cls($PAGE))
 	{
-		$output[] = theme_mb2nl_courselist_cls($page);
+		$output[] = theme_mb2nl_courselist_cls($PAGE);
 	}
 
 	// Theme hidden region mode
@@ -129,18 +143,18 @@ function theme_mb2nl_body_cls($page)
 	}
 
 	// Page predefined background
-	if (!theme_mb2nl_is_login($page, true) && theme_mb2nl_theme_setting($page, 'pbgpre') !='')
+	if (!theme_mb2nl_is_login($PAGE, true) && theme_mb2nl_theme_setting($PAGE, 'pbgpre') !='')
 	{
-		$output[] = 'pre-bg' . theme_mb2nl_theme_setting($page, 'pbgpre');
+		$output[] = 'pre-bg' . theme_mb2nl_theme_setting($PAGE, 'pbgpre');
 	}
 
 	// Login page predefined background
-	if (theme_mb2nl_is_login($page, true) && theme_mb2nl_theme_setting($page, 'loginbgpre') !='')
+	if (theme_mb2nl_is_login($PAGE, true) && theme_mb2nl_theme_setting($PAGE, 'loginbgpre') !='')
 	{
-		$output[] = 'pre-bg' . theme_mb2nl_theme_setting($page, 'loginbgpre');
+		$output[] = 'pre-bg' . theme_mb2nl_theme_setting($PAGE, 'loginbgpre');
 	}
 
-	if (theme_mb2nl_theme_setting($page,'sidebarbtn') == 2)
+	if (theme_mb2nl_theme_setting($PAGE,'sidebarbtn') == 2)
 	{
 		$output[] = 'hide-sidebars';
 	}
@@ -175,7 +189,7 @@ function theme_mb2nl_body_cls($page)
 
 	$output[] = theme_mb2nl_midentify();
 
-	if (theme_mb2nl_theme_setting($page,'editingfw'))
+	if (theme_mb2nl_theme_setting($PAGE,'editingfw'))
 	{
 		$output[] = 'editing-fw';
 	}
@@ -209,7 +223,7 @@ function theme_mb2nl_is_frontpage_empty()
 		return false;
 	}
 
-	if (!is_dir($CFG->dirroot . '/local/mb2builder'))
+	if ( ! theme_mb2nl_check_builder() != 1 )
 	{
 		return false;
 	}
@@ -222,7 +236,7 @@ function theme_mb2nl_is_frontpage_empty()
 		return false;
 	}
 
-	if ((isloggedin() && !isguestuser()))
+	if ( ( isloggedin() && ! isguestuser() ) )
 	{
 		if (($CFG->frontpageloggedin === 'none' || $CFG->frontpageloggedin === ''))
 		{
@@ -329,7 +343,7 @@ function theme_mb2nl_theme_scripts ($page, $attribs = array())
 	$page->requires->js(theme_mb2nl_theme_dir() . '/mb2nl/assets/inview.js');
 
 	// Animate number plugin: https://github.com/aishek/jquery-animateNumber
-	$page->requires->js(theme_mb2nl_theme_dir() . '/mb2nl/assets/animateNumber.js');
+	// $page->requires->js(theme_mb2nl_theme_dir() . '/mb2nl/assets/animateNumber.js');
 
 	// https://github.com/js-cookie/js-cookie
 	$page->requires->js(theme_mb2nl_theme_dir() . '/mb2nl/assets/js.cookie.js');
@@ -619,32 +633,12 @@ function theme_mb2nl_random_image ($dir, $pixDirName, $attribs = array('jpg','jp
  *
  *
  */
-function theme_mb2nl_font_icon ($page, $attribs = array())
+function theme_mb2nl_font_icon( $page, $attribs = array() )
 {
 
-	$output = '';
-
-	//$faIcons = theme_mb2nl_theme_setting($page, 'ficonfa', 1);
-	$ficon7stroke = theme_mb2nl_theme_setting($page, 'ficon7stroke', 1);
-	$glyphIcons = theme_mb2nl_theme_setting($page, 'ficonglyph', 1);
-
-	// Font awesome is loaded by Boost theme, so we do not need it
-	// if ($faIcons == 1)
-	// {
-	// 	$page->requires->css(theme_mb2nl_theme_dir() . '/mb2nl/assets/font-awesome/css/font-awesome.min.css');
-	// }
-
-	if ($ficon7stroke == 1)
-	{
-		$page->requires->css(theme_mb2nl_theme_dir() . '/mb2nl/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.min.css');
-	}
-
-	if ($glyphIcons == 1)
-	{
-		$page->requires->css(theme_mb2nl_theme_dir() . '/mb2nl/assets/bootstrap/css/glyphicons.min.css');
-	}
-
-	return $output;
+	$page->requires->css( theme_mb2nl_theme_dir() . '/mb2nl/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.min.css');
+	$page->requires->css( theme_mb2nl_theme_dir() . '/mb2nl/assets/bootstrap/css/glyphicons.min.css');
+	$page->requires->css( theme_mb2nl_theme_dir() . '/mb2nl/assets/LineIcons/LineIcons.min.css');
 
 }
 
@@ -791,13 +785,12 @@ function theme_mb2nl_page_cls ($page, $course = false)
 
 	$isPage = $page->pagetype === 'mod-page-view';
 
-
-	if ($course)
+	if ( $course )
 	{
 		$pageId = $isPage ? $page->course->id : 0;
 		$output .= theme_mb2nl_line_classes(theme_mb2nl_theme_setting($page, 'coursecls'), $pageId);
 	}
-	else
+	elseif ( isset( $page->cm->id ) )
 	{
 		$pageId = $isPage ? $page->cm->id : 0;
 		$output .= theme_mb2nl_line_classes(theme_mb2nl_theme_setting($page, 'pagecls'), $pageId);
@@ -1073,17 +1066,17 @@ function theme_mb2nl_string_url_safe($string)
 {
 
 	// Remove any '-' from the string since they will be used as concatenaters
-	$output = str_replace('-', ' ', $string);
+	$output = str_replace( '-', ' ', $string );
 
 	// Trim white spaces at beginning and end of alias and make lowercase
-	$output = trim(mb_strtolower($output));
+	$output = trim( mb_strtolower( $output ) );
 
 	// Remove any duplicate whitespace, and ensure all characters are alphanumeric
 	//$output = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $output);
-   $output = preg_replace('#[^\w\d_\-\.]#iu', '-', $output);
+   	$output = preg_replace( '#[^\w\d_\-\.]#iu', '-', $output );
 
 	// Trim dashes at beginning and end of alias
-	$output = trim($output, '-');
+	$output = trim( $output, '-' );
 
 	return $output;
 
@@ -1550,11 +1543,14 @@ function theme_mb2nl_midentify ($vars = array())
 function theme_mb2nl_wordlimit($string, $limit = 999, $end = '...')
 {
 
-	$output = $string;
-
 	if ( $limit >= 999 )
 	{
-		return $output;
+		return $string;
+	}
+
+	if ( $limit == 0 )
+	{
+		return;
 	}
 
 	$content_limit = strip_tags( $string );
@@ -1596,28 +1592,6 @@ function theme_mb2nl_moodle_from ($version)
 
 
 
-/*
- *
- * Method to get all plugins array
- *
- *
- */
-function theme_mb2nl_plugins_arr()
-{
-
-	global $CFG;
-
-	$output = array(
-		//'mb2slider'=>array('text'=>get_string('mb2slider_plugin','theme_mb2nl'),'file'=>$CFG->dirroot . '/blocks/mb2slider/block_mb2slider.php'),
-		'mb2shortcodes_filter'=>array('text'=>get_string('mb2shortcodes_filter_plugin','theme_mb2nl'),'file'=>$CFG->dirroot . '/filter/mb2shortcodes/filter.php'),
-		//'mb2shortcodes_button'=>array('text'=>get_string('mb2shortcodes_button_plugin','theme_mb2nl'),'file'=>$CFG->dirroot . '/lib/editor/atto/plugins/mb2shortcodes/ajax.php')
-	);
-
-	return $output;
-
-}
-
-
 
 
 
@@ -1629,28 +1603,22 @@ function theme_mb2nl_plugins_arr()
  function theme_mb2nl_check_plugins()
  {
 
- 	$output = '';
- 	$plugins = theme_mb2nl_plugins_arr();
- 	$show_alert = 0;
+	 if ( ! is_siteadmin() )
+	 {
+		 return;
+	 }
 
- 	foreach ($plugins as $id=>$plugin)
- 	{
+	 if ( ! theme_mb2nl_check_shortcodes_filter() )
+	 {
+		 return get_string( 'mb2shortcodes_filter_plugin', 'theme_mb2nl' );
+	 }
 
- 		$show_alert = !file_exists($plugin['file']);
+	 if ( ! theme_mb2nl_check_urltolink_filter() )
+	 {
+		 return get_string( 'urltolink_filter_plugin', 'theme_mb2nl' );
+	 }
 
- 		if ($id === 'mb2shortcodes_filter')
- 		{
- 			$show_alert = !theme_mb2nl_check_shortcodes_filter();
- 		}
-
- 		if ($show_alert)
- 		{
- 			$output .= '<div class="alert alert-warning" role="alert">' . $plugin['text'] . '</div>';
- 		}
-
- 	}
-
- 	return $output;
+	 return;
 
  }
 
@@ -1666,20 +1634,42 @@ function theme_mb2nl_plugins_arr()
 function theme_mb2nl_check_shortcodes_filter()
 {
 	global $DB;
-	$filters = array();
 
-	// Get array of active filters
-	$dbfilters = $DB->get_records('filter_active', array('active'=> 1), '', 'filter');
+	$sql = 'SELECT * FROM {filter_active} WHERE ' . $DB->sql_like('filter', '?') . ' AND active = ?';
+	return $DB->record_exists_sql( $sql, array( 'mb2shortcodes', 1 ) );
 
-	foreach ($dbfilters as $f)
+}
+
+
+
+
+
+/*
+ *
+ * Method to check if urltolink filter is enabled and below shortcodes filter
+ *
+ */
+function theme_mb2nl_check_urltolink_filter()
+{
+	global $DB;
+
+	// Chect if urltolink filter plugin is active
+	$sql = 'SELECT * FROM {filter_active} WHERE ' . $DB->sql_like('filter', '?') . ' AND active = ?';
+
+	// Make sure that urltolink filter is enabled
+	// If not it's ok, so return true
+	if ( ! $DB->record_exists_sql( $sql, array( 'urltolink', 1 ) ) )
 	{
-		if (isset($f->filter))
-		{
-			$filters[] = $f->filter;
-		}
+		return true;
 	}
 
-	if (in_array('mb2shortcodes', $filters))
+	// Urltolink filter is enabled, so we have to check oreding of the filters
+	$mb2shortcodes = $DB->get_record( 'filter_active', array( 'filter' => 'mb2shortcodes' ), 'sortorder', MUST_EXIST );
+	$urltolink = $DB->get_record( 'filter_active', array( 'filter' => 'urltolink' ), 'sortorder', MUST_EXIST );
+
+	// In this case shortcodes filter is above urltolink filter
+	// This is ok, so we returns true
+	if ( $mb2shortcodes->sortorder < $urltolink->sortorder )
 	{
 		return true;
 	}
@@ -2314,5 +2304,31 @@ function theme_mb2nl_get_role_shortname( $roleid = null )
 			return $role->shortname;
 		}
 	}
+
+}
+
+
+/*
+ *
+ * Method to check which version of page builder user using
+ *
+ */
+function theme_mb2nl_check_builder()
+{
+	global $CFG;
+
+	// In this case user doesn't install page builder
+	if ( ! is_dir( $CFG->dirroot . '/local/mb2builder' ) )
+	{
+		return false;
+	}
+
+	// In this case user use old version of page builder
+	if ( ! is_file( $CFG->dirroot . '/local/mb2builder/customize.php' ) )
+	{
+		return 1;
+	}
+
+	return 2;
 
 }

@@ -195,6 +195,15 @@
 	}
 
 
+	&.editing {
+		#gridshadebox_content {
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+
 	/* Remove stupid cursors */
 
 	div#gridshadebox_overlay {

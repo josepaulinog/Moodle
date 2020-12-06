@@ -49,17 +49,19 @@ class LocalMb2builderImage
 		}
 
 		$showon = local_mb2builder_showon_field($attr['showon']);
+		$actions = local_mb2builder_field_actions(  $attr );
 
 		$output  = '<div class="form-group mb2-pb-form-group">';
 		$output .= '<label>' . $attr['title'] . '</label><br>';
-		$output .= '<img class="mb2-pb-preview-image" src="' . $attr['default'] . '" alt=""/>';
+		$output .= '<img style="display:none;" class="mb2-pb-preview-image" src="' . $attr['default'] . '" alt=""/>';
 		$output .= '<span class="mb2-pb-video-image"></span>';
 		$output .= '<span class="mb2-pb-desc-image">' . $attr['default'] . '</span>';
+		$output .= '<div class="mb2-pb-form-buttons">';
 		$output .= '<a href="#" class="mb2-pb-image-select btn btn-xs btn-success" data-toggle="modal" data-target="#mb2-pb-modal-images">' .
 		get_string('selectimage','local_mb2builder') . '</a> ';
 		$output .= '<a href="#" class="mb2-pb-remove-image btn btn-xs btn-danger">' . get_string('remove','local_mb2builder') . '</a>';
-		$output	.= '<input type="hidden" name="mb2_pb_input_image_url" class="form-control mb2-pb-input mb2-pb-input-type-' . $attr['type'] . ' mb2-pb-input-' . $key . '"' .
-		$showon . ' data-attrname="' . $key . '" value="' . $attr['default'] . '" />';
+		$output .= '</div>';
+		$output	.= '<input type="hidden" name="mb2_pb_input_image_url" class="form-control mb2-pb-input mb2-pb-input-type-' . $attr['type'] . ' mb2-pb-input-' . $key . '"' . $showon . $actions . ' data-attrname="' . $key . '" value="' . $attr['default'] . '" />';
 
 		if ($attr['desc'])
 		{

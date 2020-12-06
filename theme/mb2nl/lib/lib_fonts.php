@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  * Method to get Google webfonts
  *
  */
-function theme_mb2nl_google_fonts ($page, $attribs = array())
+function theme_mb2nl_google_fonts($page, $attribs = array())
 {
 
 	$output = '';

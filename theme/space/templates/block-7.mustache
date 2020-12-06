@@ -29,8 +29,8 @@
     <div class="{{#logosslider}}logos-slider pb-5{{/logosslider}} {{^logosslider}}col-12 row justify-content-center align-items-center{{/logosslider}} text-center mt-4">
       {{#logos}}
       <div class="c-logos-item col-sm-6 {{logosno}} text-center p-3 my-2">
-          {{#logosurl}}<a href="{{{logosurl}}}">{{/logosurl}}
-              {{#image}}<img src="{{{image}}}" alt="{{{logosname}}}" class="c-logos-img"/>{{/image}}
+          {{#logosurl}}<a href="{{logosurl}}" target="_blank">{{/logosurl}}
+              {{#image}}<img src="{{{image}}}" alt="{{logosname}}" class="c-logos-img"/>{{/image}}
           {{#logosurl}}</a>{{/logosurl}}
       </div>
       {{/logos}}

@@ -5,27 +5,31 @@
 
 	position: relative;
 	text-align: center;
-	padding: 75px 10px;
+	padding: 0;
 	overflow: hidden;
 
 	.boxes-small & {
 		padding: 38px 10px;
 	}
 
-	h4 {
+	.box-title {
 		z-index: 3;
 		position: relative;
 		color: #fff;
 		margin: 0;
 
-		.theme-title-text {
+		.box-title-text {
 			position: relative;
 			z-index: 3;
+		}
+
+		.theme-boximg-color {
+			display: none;
 		}
 	}
 
 
-	&.type-1 {
+	.type-1 & {
 		h4 {
 			margin: 0 10px;
 
@@ -44,15 +48,19 @@
 		}
 	}
 
-	&.type-2,
-	&.type-3 {
-		h4 {
-			padding: 10px;
+	.type-2 &,
+	.type-3 & {
+		.box-title {
+			padding: 18px 10px;
 		}
 	}
 
 
-	.theme-boximg-img,
+
+	.theme-boximg-img{
+		@include mb2_transition1(all, .25s);
+	}
+
 	.theme-boximg-color {
 		position: absolute;
 		width: 100%;
@@ -60,20 +68,39 @@
 		top: 0;
 		left: 0;
 		z-index: 1;
-		@include mb2_transition1(all, .25s);
 	}
 
 
 	.theme-boximg-color {
-		background-color: $accent1;
-		opacity: .6;
+		background-color: rgba($accent1, .6);
 		z-index: 2;
 	}
 
-	&.type-2,
-	&.type-3 {
+	&.opcolor {
 		.theme-boximg-color {
-			opacity: .75;
+			opacity: .6;
+		}
+	}
+
+	.type-2 & {
+
+		.theme-boximg-color {
+			display: none;
+		}
+
+		.box-title {
+			.theme-boximg-color {
+				display: block;
+			}
+		}
+
+	}
+
+	&.opcolor {
+		.box-title {
+			.theme-boximg-color {
+				opacity: .75;
+			}
 		}
 	}
 
@@ -97,33 +124,33 @@
 
 
 
-	&.useimg {
-		padding: 0;
+	.vtable-wrapp {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 3;
 
-		.vtable-wrapp {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 3;
+		.vtable {
+			display: table;
+			height: 100%;
+			width: 100%;
 
-			.vtable {
-				display: table;
-				height: 100%;
-				width: 100%;
-
-				.vtable-cell {
-					display: table-cell;
-					vertical-align: middle;
-				}
+			.vtable-cell {
+				display: table-cell;
+				vertical-align: middle;
 			}
 		}
 	}
 
 
-	&.useimg.type-3 {
+	.type-3 & {
+		text-align: inherit;
+
 		.vtable-wrapp {
+			bottom: -1px;
+
 			.vtable {
 				.vtable-cell {
 					vertical-align: bottom;

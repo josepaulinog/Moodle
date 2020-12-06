@@ -533,6 +533,9 @@ Moodle 3.8
 	font-weight: 400;
 	content: "\f14a";
 }
+.grader-grading-panel .grader-grading-panel-display > h4#send-student-notifications-setting::before {
+    content: "\f0f3";
+}
 .grader-grading-panel .grader-grading-panel-display > h4 > img {
 	display: none;
 }

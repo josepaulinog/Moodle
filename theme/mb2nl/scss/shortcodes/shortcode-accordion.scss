@@ -38,3 +38,11 @@
 
 	@include mb2_collabsible_item();
 }
+
+.card-header {
+	.isicon0 & {
+		i {
+			display: none;
+		}
+	}
+}

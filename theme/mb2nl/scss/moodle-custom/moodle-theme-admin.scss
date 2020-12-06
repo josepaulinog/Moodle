@@ -104,3 +104,17 @@
 		border-bottom-width: .3rem;
 	 }
 }
+
+.filter-message {
+    width: 100%;
+	padding: 2rem 2rem 1rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #e0f2e9;
+	margin-bottom: 30px;
+
+	&.urltolink {
+		background-color: #f1e3df;
+	}
+
+}

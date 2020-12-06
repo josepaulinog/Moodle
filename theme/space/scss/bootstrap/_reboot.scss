@@ -81,7 +81,7 @@ body {
 
 *:focus {
   outline: unset;
-  box-shadow: inset 0 0 0 2px rgba($theme-color-3,.25);
+  box-shadow: 0 0 0 2px rgba($theme-color-3,.25);
   border-radius: $border-radius;
 }
 
@@ -426,10 +426,8 @@ legend {
   width: 100%;
   max-width: 100%; // 1
   padding: 0;
-  margin-bottom: .5rem;
-  font-size: 1.15rem;
+  margin-bottom: .25rem;
   font-weight: $font-weight-sm-bold;
-  line-height: 1.3;
   color: inherit; // 2
   white-space: normal; // 1
 }
@@ -494,3 +492,4 @@ template {
 [hidden] {
   display: none !important;
 }
+

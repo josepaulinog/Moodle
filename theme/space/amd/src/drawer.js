@@ -60,8 +60,6 @@ define(['jquery', 'core/custom_interaction_events', 'core/log', 'core/pubsub'],
                 M.util.set_user_preference(preference, 'false');
             }
 
-            drawer.on('mousewheel DOMMouseScroll', this.preventPageScroll);
-
             if (!hidden) {
                 body.addClass('drawer-open-' + side);
                 trigger.attr('aria-expanded', 'true');

@@ -267,7 +267,7 @@
     font-size: $font-size-xs;
     font-weight: normal!important;
     padding-top: 5px;
-    padding-left: 45px!important;
+    padding-left: 38px!important;
 }
 
 // Set up grades layout.
@@ -294,7 +294,6 @@
 
     td.column-name {
         padding-left: 24px;
-        vertical-align: middle;
     }
 
     .category input[type="text"],
@@ -395,8 +394,6 @@
         .leveleven {
             background-color: $table-bg;
             font-weight: $font-weight-base;
-
-            vertical-align: middle;
         }
     }
 }
@@ -549,7 +546,7 @@ div.singleselect  {
 
   .pagination-letter, .pagination {
     .page-link {
-      padding: 14px 16px;
+      padding: 12px 13px;
       font-size: 12px;
       @include media-breakpoint-only(sm) {
         padding: 8px;
@@ -573,7 +570,6 @@ div.singleselect  {
 .path-grade-report-grader .gradeparent .user.cell {
   width: 300px;
   align-items: center;
-  display: inline-flex;
 }
 
 .path-mod-assign [data-region="grade-panel"] .popout>.col-md-3 {

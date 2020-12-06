@@ -1,5 +1,6 @@
 .breadcrumb,
-.coursefilesbreadcrumb {
+.coursefilesbreadcrumb,
+.adminpagepath {
   display: flex;
   flex-wrap: wrap;
 
@@ -27,10 +28,26 @@
 
 }
 
+  .adminpagepath {
+    width: 100%;
+    padding: 5px 1.5rem;
+
+    background-color: $gray-100;
+    border-radius: $border-radius;
+
+    .adminpagepath-item + .adminpagepath-item {
+      &:before {
+        display: inline-block; // Suppress underlining of the separator in modern browsers
+        padding-right: 0.4375rem;
+        padding-left: 0.4375rem;
+    
+        content: "-";
+      }
+    }
+  }
+
   #page-navbar, .page-title {
     @include media-breakpoint-only(sm) {
-      margin: 0 auto;
-
       div {
         display: block!important;
         width: 100%;
@@ -47,6 +64,12 @@
     padding-left: 0.4375rem;
 
     content: "-";
+  }
+
+  &.dimmed_text {
+    &:before {
+      background-color: transparent;
+    }
   }
 
   a {

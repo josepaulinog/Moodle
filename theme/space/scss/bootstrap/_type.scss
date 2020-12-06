@@ -21,6 +21,12 @@ h4, .h4 { font-size: $h4-font-size; font-weight: $font-weight-sm-bold;}
 h5, .h5 { font-size: $h5-font-size; font-weight: $font-weight-sm-bold; }
 h6, .h6 { font-size: $h6-font-size; font-weight: $font-weight-sm-bold;}
 
+h3 {
+  .admin & {
+    font-weight: $font-weight-bold;
+  }
+}
+
 .lead {
   font-size: $lead-font-size;
   font-weight: $lead-font-weight;
@@ -83,6 +89,11 @@ hr {
   margin-bottom: $hr-margin-y;
   border: 0;
   border-top: $hr-border-width solid $hr-border-color;
+
+  .dataprivacy-main & {
+    padding: 0;
+    margin: 5px 0;
+  }
 }
 
 .hr-small {
@@ -196,4 +207,14 @@ label {
       margin: 2rem 0 0.5rem;
     }
   }
+}
+
+.text-danger,
+.warning {
+  color: $red-600;
+}
+
+.success,
+.text-success {
+  color: $green-700;
 }

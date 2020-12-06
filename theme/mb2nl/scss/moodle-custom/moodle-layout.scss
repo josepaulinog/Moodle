@@ -1,4 +1,11 @@
 
+
+.no-overflow {
+	.block & {
+		overflow: visible;
+	}
+}
+
 #user-notifications {
 	clear: both;
 }

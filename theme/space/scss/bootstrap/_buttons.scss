@@ -14,6 +14,10 @@
   }
 }
 
+.btn.dropdown-toggle {
+  padding-right: 25px!important;
+}
+
 #installfromrepobox {
   .btn-icon {
     position: relative;
@@ -59,10 +63,6 @@
 .section-handle.moodle-core-dragdrop-draghandle,
 .filepicker-filename a,
 .forumpost .footer a,
-#page-admin-roles-permissions .preventlink,
-#page-admin-roles-permissions .preventlink .forbidden,
-#page-admin-roles-permissions .allowlink,
-#page-admin-roles-permissions .prohibitlink,
 table.form-autocomplete-suggestions,
 .form-autocomplete-suggestions a,
 fieldset .form-autocomplete-suggestions a,
@@ -91,26 +91,22 @@ td .commands a,
 .notification-area .content-area .footer a,
 #changenumsections a,
 #page-admin-grade-edit-letter-index #region-main .mdl-align a,
-#page-admin-setting-webservicetokens [role="main"] fieldset a,
 .logselecform input[type="submit"],
 #page-mod-forum-subscribers .subscribertable tr td.actions .actionbutton,
 input.form-submit,
 #id_addidnumbers,
-.section-modchooser-link a,
 /* btn-xs */
 .editquestion a,
-#page-mod-quiz-attempt .questionflag,
+.questionflag,
 .iconcol a,
 .addbloglink a,
 .progress-actions a,
 .dropdown-toggle,
 .backlink a,
 .action-menu .dropdown-toggle,
-.section-modchooser .section-modchooser-link a,
 .feedback_mapped_courses .mdl-align a,
 #buttonscell input[type="submit"],
 .typesummary .helplinkpopup,
-#page-mod-quiz-edit .editing_section,
 #page-mod-glossary-view .commands a.icon,
 #page-mod-glossary-showentry .commands a.icon,
 .comment-area .fd a,
@@ -127,7 +123,6 @@ input.form-submit,
 .flagasinappropriate,
 .removefrommyinterests,
 .edittag,
-[data-action="delete-competency-link"],
 #participants td a[role="button"],
 .usp-finish [type="submit"],
 .bookprev,
@@ -138,7 +133,6 @@ input.form-submit,
 .edit_pages_box .addlinks a,
 .newlink a,
 .book_toc_numbered .action-list a,
-.activity .action-menu-item a,
 .checkforupdates [type="submit"],
 .continuebutton [type="submit"],
 #page-mod-quiz-report .toggleincludeauto a,
@@ -148,7 +142,6 @@ input.form-submit,
 #enabletemplateeditor,
 .itemnav a,
 .section-navigation a,
-.availability-delete,
 .cancel a,
 .usp-search-btn,
 .block_blog_menu [type="submit"],
@@ -156,8 +149,6 @@ input.form-submit,
 .tag-backtoallitems a,
 .tool_dataprivacy a,
 [data-region="actions"] p a,
-.path-mod-forum .discussion-nav .next-discussion,
-.path-mod-forum .discussion-nav .prev-discussion,
 .c-lang-menu .dropdown-toggle,
 .qtype_multichoice_clearchoice a,
 .usertour a,
@@ -177,11 +168,12 @@ input.form-submit,
 .addcomponent,
 .o-standard-footer-html a,
 .felement .btn-action,
-.helplink a,
 .editprofile span a,
 .userenrolment .col_role .addrole .assignrolelink,
 .unassignrolelink,
-.custompages-add
+.custompages-add,
+.postratingmenusubmit,
+#page-mod-forum-index .subscription .helplink a
 {
   display: inline-block;
   text-align: center;
@@ -198,6 +190,14 @@ input.form-submit,
 
   text-decoration: none;
   @include transition($btn-transition);
+
+  @include media-breakpoint-only(sm) {
+  word-break: break-word;
+  }
+
+  .icon {
+    margin-right: 0.25rem;
+  }
 
   &:hover {
     text-decoration: none;
@@ -272,16 +272,13 @@ input.form-submit,
 .notification-area .content-area .footer a,
 #changenumsections a,
 #page-admin-grade-edit-letter-index #region-main .mdl-align a,
-#page-admin-setting-webservicetokens [role="main"] fieldset a,
 .logselecform input[type="submit"],
 #page-mod-forum-subscribers .subscribertable tr td.actions .actionbutton,
 input.form-submit, #id_addidnumbers,
-.section-modchooser-link a,
 .addbloglink a,
 .progress-actions a,
 .discussionsubscription a,
 .block .footer a,
-.section-modchooser .section-modchooser-link a,
 .mod_quiz-next-nav,
 .newlink a,
 .checkforupdates [type="submit"],
@@ -304,9 +301,10 @@ input.form-submit, #id_addidnumbers,
 [data-action="addstandardtag"],
 .addcomponent,
 .editprofile span a,
-#page-mod-quiz-attempt .questionflag,
+.questionflag,
 .custompages-add,
-.section-modchooser-link
+.postratingmenusubmit,
+#buttonscell input[type="submit"]
 {
   color: $btn-primary-text!important;
 
@@ -329,8 +327,27 @@ input.form-submit, #id_addidnumbers,
 }
 
       .section-modchooser-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        
+        margin-top: 1rem;
+        line-height: 1;
         width: 100%;
-        display: block;
+
+        &.btn-link {
+          background-color: $gray-100!important;
+
+          &:hover {
+            background-color: $theme-color-9!important;
+            color: $theme-color-3;
+          }
+        }
+
+        .icon {
+          font-size: 18px;
+          color: inherit;
+        }
 
         a:hover {
           text-decoration: none;
@@ -349,20 +366,6 @@ input.form-submit, #id_addidnumbers,
 
       }
 
-      .comment-delete {
-        padding: 0.5rem;
-
-        a {
-          &:before {
-            display: none;
-          }
-        }
-
-        .icon {
-          font-size: 14px;
-          color: $btn-secondary-text;
-        }
-      }
 
       .forumpost .footer a {
         &:before {
@@ -379,13 +382,11 @@ input.form-submit, #id_addidnumbers,
 .resettable a,
 #page-course-switchrole [role="main"] .m-b-1:last-of-type a,
 #removecontrols #remove,
-[data-action="delete-competency-link"],
 .submit_buttons [name="cancel"],
 .usertour a,
 .fp-file-delete,
 .tagdeleteselected,
 [data-action="cancel-review-request"],
-.qtype_multichoice_clearchoice a,
 .unassignrolelink
 {
   color: $btn-reset-text!important;
@@ -412,29 +413,30 @@ input.form-submit, #id_addidnumbers,
 }
 
 
-.btn-special {
-  background-color: $btn-special-bg;
-  border: $btn-special-border-width solid $btn-special-border;
-  color: $btn-special-text;
+.btn-special,
+.settings-menu .btn-secondary
+{
+  background-color: $btn-special-bg!important;
+  border: $btn-special-border-width solid $btn-special-border!important;
+  color: $btn-special-text!important;
 
   box-shadow: 0 1px 1px rgba($btn-special-shadow,0.15),
               0 2px 2px rgba($btn-special-shadow,0.15),
               0 4px 4px rgba($btn-special-shadow,0.15),
-              0 8px 8px rgba($btn-special-shadow,0.15);
+              0 8px 8px rgba($btn-special-shadow,0.15)!important;
 
   &:hover {
-    border-color: $btn-special-border-hover;
+    background-color: $btn-special-bg-hover!important;
+    border-color: $btn-special-border-hover!important;
     box-shadow: 0 1px 3px rgba($btn-special-border-hover,0.25),
                 0 2px 5px rgba($btn-special-border-hover,0.25),
                 0 4px 7px rgba($btn-special-border-hover,0.25),
-                0 8px 9px rgba($btn-special-border-hover,0.25);
+                0 8px 9px rgba($btn-special-border-hover,0.25)!important;
   
-    a { color: $btn-special-text-hover; }
+    a { color: $btn-special-text-hover!important; }
     
   }
 }
-
-
 
 .btn-cta {
   display: inline-block;
@@ -444,7 +446,7 @@ input.form-submit, #id_addidnumbers,
 
   border-radius: $border-radius;
 
-  padding: 1.25rem 2rem;
+  padding: 1rem 2rem;
 
   font-size: $font-size-base;
   font-weight: $font-weight-sm-bold;
@@ -523,10 +525,6 @@ input.form-submit, #id_addidnumbers,
 .section-handle.moodle-core-dragdrop-draghandle,
 .filepicker-filename a,
 .forumpost .footer a,
-#page-admin-roles-permissions .preventlink,
-#page-admin-roles-permissions .preventlink .forbidden,
-#page-admin-roles-permissions .allowlink,
-#page-admin-roles-permissions .prohibitlink,
 table.form-autocomplete-suggestions,
 .form-autocomplete-suggestions a,
 fieldset .form-autocomplete-suggestions a,
@@ -546,7 +544,6 @@ td .commands a,
 .action-menu .dropdown-toggle,
 .feedback_mapped_courses .mdl-align a,
 .typesummary .helplinkpopup,
-#page-mod-quiz-edit .editing_section,
 #page-mod-glossary-view .commands a.icon,
 #page-mod-glossary-showentry .commands a.icon,
 .comment-area .fd a,
@@ -568,7 +565,6 @@ td .commands a,
 .submitbtns .arrow_link,
 .edit_pages_box .addlinks a,
 .book_toc_numbered .action-list a,
-.activity .action-menu-item a,
 #page-mod-quiz-report .toggleincludeauto a,
 .paging-morelink,
 .userpicture a:not(:first-child),
@@ -577,14 +573,11 @@ table .btn,
 .path-user .node_category .viewmore a,
 .itemnav a,
 .section-navigation a
-.availability-delete,
 .section-navigation a,
 .usp-search-btn,
 .notesgroup p a,
 .tag-backtoallitems a,
 .tool_dataprivacy a,
-.path-mod-forum .discussion-nav .next-discussion,
-.path-mod-forum .discussion-nav .prev-discussion,
 .c-lang-menu .dropdown-toggle,
 .yui3-widget-buttons .yui3-button:not(.closebutton),
 .editquestion a,
@@ -599,8 +592,10 @@ table .btn,
 .export-actions a,
 .fp-dlg-butcancel,
 .o-standard-footer-html a,
-.helplink a,
-.userenrolment .col_role .addrole .assignrolelink
+.userenrolment .col_role .addrole .assignrolelink,
+.btn-inverse,
+#page-mod-forum-index .subscription .helplink a,
+.qtype_multichoice_clearchoice a
 {
   background-color: $btn-secondary-bg;
   border: $btn-secondary-border-width solid $btn-secondary-border;
@@ -625,6 +620,10 @@ table .btn,
     box-shadow: inset 0 0 0 2px rgba($theme-color-3,.25);
   }
 }
+
+    table a.btn-secondary {
+      color: $btn-secondary-text;
+    }
 
     .editprofile span a {
       width: 100%;
@@ -688,13 +687,6 @@ table .btn,
           margin-right: 0.5rem;
           font-size: 12px;
         }
-      }
-    }
-
-    .availability-delete {
-      img {
-        width: 18px;
-        height: auto;
       }
     }
 
@@ -775,9 +767,13 @@ table .btn,
             }
 
 
-    #showall a {
-      margin-top: 1rem;
-    }
+            #showall a {
+              margin-top: 1rem;
+        
+              &.hidden {
+                display: none;
+              }
+            }
 
 // Future-proof disabling of clicks on `<a>` elements
 a.btn.disabled,
@@ -837,10 +833,6 @@ fieldset:disabled a.btn {
 table .comment-link,
 .generaltable td .btn,
 .tool_dataprivacy-expand-all,
-#page-admin-roles-permissions .preventlink,
-#page-admin-roles-permissions .preventlink .forbidden,
-#page-admin-roles-permissions .allowlink,
-#page-admin-roles-permissions .prohibitlink,
 #page-admin-roles-permissions .role_buttons input[type="button"],
 #page-admin-user-profile-index a[title="Edit"],
 #page-admin-user-profile-index a[title="Delete"],
@@ -848,27 +840,22 @@ table .comment-link,
 #page-admin-roles-permissions .confirmation-buttons .btn,
 table a.btn-primary,
 .typesummary .helplinkpopup,
-#page-mod-quiz-edit .editing_section,
 .recipelink a,
 .addtomyinterests,
 .flagasinappropriate,
 .removefrommyinterests,
 .edittag,
-[data-action="delete-competency-link"],
 .edit_pages_box .addlinks a,
 .newlink a,
 .book_toc_numbered .action-list a,
-.activity .action-menu-item a,
 .forumpost .link a,
 .itemnav a,
 .table td .btn-link,
 .discussionsubscription a,
 [data-type="subscription-toggle"],
-.path-mod-forum .discussion-nav .next-discussion,
-.path-mod-forum .discussion-nav .prev-discussion,
 .c-lang-menu .dropdown-toggle,
 .editquestion a,
-#page-mod-quiz-attempt .questionflag,
+.questionflag,
 .path-mod-quiz .othernav a,
 #page-admin-tool-oauth2-issuers .btn,
 #page-admin-tool-usertours-configure .btn-action,
@@ -881,17 +868,24 @@ table a.btn-primary,
 .qtype_multichoice_clearchoice a,
 .editprofile span a,
 .userenrolment .col_role .addrole .assignrolelink,
-.unassignrolelink
+.unassignrolelink,
+.usertour a,
+.tool_dataprivacy a,
+.o-standard-footer-html a,
+#theme_switch_link a,
+.s-footer .helplink a,
+.region-main-settings-menu .action-menu .dropdown-toggle
 {
-  @include button-size($btn-padding-y-sm, 1rem, $font-size-xs, $btn-line-height-sm, $border-radius);
+  @include button-size($btn-padding-y-sm, 1rem, $font-size-xs!important, $btn-line-height-sm!important, $border-radius);
 
   .icon {
     font-size: $font-size-xs;
+    padding: 0;
+    background-color: transparent;
   }
 }
 
 .btn-xs,
-a.action-icon,
 .grading-report .btn,
 td .commands a,
 .gradereport-grader-table td .btn,
@@ -900,12 +894,21 @@ td .commands a,
 #participants td a[role=button],
 #page-course-management .btn-action
 {
-  @include button-size(.25rem, .35rem, 0.75rem, $btn-line-height-sm, $border-radius);
+  @include button-size(.30rem, .45rem, 0.75rem, $btn-line-height-sm, $border-radius);
 
   .icon {
     font-size: $font-size-xs;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
   }
 }
+
+    a.action-icon {
+      &:hover {
+        text-decoration: none;
+      }
+    }
 
     #previewcontrols {
       .btn {
@@ -920,14 +923,6 @@ td .commands a,
     .movecategory [role="button"],
     .movefield [role="button"] {
       margin-right: 10px;
-    }
-
-    .activity .action-menu-item a {
-        margin-left: 0.25rem;
-        i {
-          font-size: 1rem;
-          line-height: 1.2;
-        }
     }
 
     .gradereport-grader-table {
@@ -1033,24 +1028,6 @@ table {
     margin: 1.5px 0;
     color: $white!important;
   }
-}
-
-.section-modchooser-link {
-
-  .icon {
-    font-size: 15px;
-  }
-
-  a {
-    width: 100%;
-
-    margin-top: $spacer;
-    margin-bottom: 2 * $spacer;
-
-      &:before {
-        display: none;
-      }
-    }
 }
 
 .btn-icon {
@@ -1176,8 +1153,7 @@ table {
     }
   }
 
-  .add-sections,
-  .section-modchooser-link
+  .add-sections
   {
     .icon {
       margin-right: 0.5rem;
@@ -1219,19 +1195,38 @@ table {
 
   }
 
-  .activity .action-menu-item a {
-      &.cm-edit-action {
-        line-height: 1.6;
-      }
-  }
-
   @include media-breakpoint-only(sm) {
     .c-lang-menu .dropdown-toggle {
       display: block;
-      margin: 10px 0;
+      margin: 10px auto;
     }
   }
 
+
+      .aabtn.cm-edit-action {
+        margin-left: 10px;
+        background-color: $gray-100;
+        border-radius: 30px;
+
+        width: 30px;
+        height: 30px;
+
+        display: inline-grid;
+        align-content: center;
+        justify-content: center;
+
+        transition: $general-transition;
+
+        &:hover {
+          background-color: $gray-200;
+        }
+
+        .icon {
+          margin: 0;
+          font-size: $font-size-xs;
+          color: $gray-900;
+        }
+      }
 
       .btn-action {
         padding: 5px;
@@ -1239,10 +1234,6 @@ table {
         font-size: inherit;
 
         transition: $general-transition;
-
-        .icon {
-          margin-right: 5px;
-        }
 
         &:hover {
           color: $link-hover-color;
@@ -1254,6 +1245,12 @@ table {
           margin: 9px 12px;
           font-size: 1rem;
           line-height: 2;
+
+          .format-grid & {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 2.4;
+          }
         }
  
         select, .custom-select {
@@ -1278,12 +1275,20 @@ table {
         .mdl-left {
           a {
             padding: 14px 20px 14px 40px;
+
+            .format-grid & {
+              padding: 7px 20px 7px 40px;
+            }
           }
         }
 
         .mdl-right {
           a {
             padding: 14px 40px 14px 20px;
+
+            .format-grid & {
+              padding: 7px 40px 7px 20px;
+            }
           }
         }
   
@@ -1292,8 +1297,8 @@ table {
             padding: 5px 10px;
             min-width: 100px;
             width: max-content;
-            right: 60px;
-            top: 12px;
+            right: 50px;
+            top: calc(50% - 13px);
                 
             display: block;
     
@@ -1304,6 +1309,7 @@ table {
   
             color: $white;
             font-size: 11px;
+            line-height: 1.5;
           }
         }
   
@@ -1312,8 +1318,8 @@ table {
             padding: 5px 10px;
             min-width: 100px;
             width: max-content;
-            left: 60px;
-            top: 12px;
+            left: 50px;
+            top: calc(50% - 13px);
                 
             display: block;
     
@@ -1324,6 +1330,7 @@ table {
   
             color: $white;
             font-size: 11px;
+            line-height: 1.5;
           }
         }
   
@@ -1340,10 +1347,154 @@ table {
       }
 
       [data-role="deletecategory"] {
-        color: $red-600;
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+  
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+  
+        transition: $general-transition;
+
+        color: $red-600!important;
+        background-color: $red-100!important;
+
+        .icon {
+          font-size: 12px;
+        }
+
+        &:hover {
+          color: $red-200!important;
+          background-color: $red-600!important;            
+        }
+      }
+
+      [data-action="delete-competency-link"],
+      table .menu-action {
+        a:not(.dropdown-toggle) {
+          .fa-trash {
+            width: 30px;
+            height: 30px;
+      
+            border-radius: 30px;
+            font-size: 12px;
+      
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+      
+            transition: $general-transition;
+  
+            color: $red-600!important;
+            background-color: $red-100!important;
+  
+            &:hover {
+              color: $red-200!important;
+            background-color: $red-600!important;            
+            }
+          }
+        }
       }
 
       .section-handle.moodle-core-dragdrop-draghandle {
         width: 100%;
-        margin-bottom: 10px;
+        margin: 0 0 10px;
+      }
+
+      #page-admin-roles-permissions .allowlink,
+      #page-admin-roles-permissions .preventlink,
+      #page-admin-roles-permissions .preventlink .forbidden {
+        display: inline-block;
+        padding: $badge-padding-y $badge-padding-x;
+        margin: 2px;
+
+        background-color: $gray-100;
+        font-size: $badge-font-size;
+        font-weight: $badge-font-weight;
+        line-height: 1.2;
+        text-align: center;
+        color: $gray-900;
+
+        width: 30px;
+        height: 30px;
+
+        align-items: center;
+        justify-content: center;
+        @include border-radius($badge-border-radius);
+            
+        .icon {
+          font-size: 0.75rem;
+        }
+
+        &.badge-link {
+          &:hover {
+            background-color: $gray-200;
+            color: $gray-900;
+          }
+        }
+      }
+
+      #page-admin-roles-permissions .prohibitlink {
+        display: inline-block;
+        padding: $badge-padding-y $badge-padding-x;
+        margin: 2px;
+
+        background-color: $theme-color-9;
+
+        font-size: $badge-font-size;
+        font-weight: $badge-font-weight;
+        line-height: 1.2;
+        text-align: center;
+        color: $theme-color-3;
+
+        width: 30px;
+        height: 30px;
+
+        align-items: center;
+        justify-content: center;
+        @include border-radius($badge-border-radius);
+            
+        .icon {
+          font-size: 0.75rem;
+        }
+
+
+      
+        &.badge-link {
+          &:hover {
+            background-color: $theme-color-8;
+            color: $theme-color-3;
+          }
+        }    
+      }
+
+
+      #comments_delete {
+        display: block;
+      }
+
+      [data-action="delete-competency-link"] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 30px;
+        height: 30px;
+
+        border-radius: 30px;
+
+        background-color: $red-100;
+
+        transition: $general-transition;
+
+        i {
+          font-size: $font-size-xs;
+          color: $red-600;
+        }
+
+        &:hover {
+          background-color: $red-600;
+          i { color: $red-200; }
+        }
       }

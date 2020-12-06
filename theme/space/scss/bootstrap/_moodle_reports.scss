@@ -15,25 +15,37 @@
 
 .helplinkpopup {
   background-color: $theme-color-9;
-  padding: $spacer 1.5 * $spacer;
+  padding: 6px 12px 6px 6px;
 
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   color: $theme-color-3!important;
 
   border-radius: $border-radius;
 
-  display: block;
-  margin-bottom: 2 * $spacer;
-  margin-top: 2 * $spacer;
+  margin-bottom: $spacer;
+  margin-top: $spacer;
 
   .icon {
     position: relative;
     margin-right: 0.5rem!important;
+    font-size: $font-size-xs;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: $theme-color-9!important;
+    background-color: $theme-color-3;
   }
 }
 
 .environmenttable {
   .helplinkpopup {
     margin: 0;
+    padding: 6px 10px;
+    display: block!important;
+  }
+
+  .warn {
+    font-size: $font-size-xs;
   }
 }

@@ -34,9 +34,9 @@
     }
 }}
 
-<ul class="list-group mb-3">
+<ul class="course-list-group mb-3">
 {{#courses}}
-    <li class="list-group-item course-listitem {{#isfavourite}}list-group-item--favourite{{/isfavourite}}"
+    <li class="course-list-item {{#isfavourite}}course-list-item--favourite{{/isfavourite}}"
         data-region="course-content"
         data-course-id="{{{id}}}">
         <div class="d-block">
@@ -44,7 +44,7 @@
                 <a href="{{viewurl}}" class="coursename">{{> core_course/favouriteicon }}{{#showshortname}}<span class="sr-only">{{#str}}aria:courseshortname, core_course{{/str}}</span><div class="text-muted muted">{{{shortname}}}</div>{{/showshortname}}<span class="sr-only">{{#str}}aria:coursename, core_course{{/str}}</span>{{{fullname}}}</a>
             </div>
             {{#hasprogress}}
-            <div class="mt-2 pr-5">
+            <div class="mt-3 pr-5">
                 {{> block_myoverview/progress-bar}}
             </div>
             {{/hasprogress}}

@@ -163,7 +163,7 @@ if ( ! class_exists( 'Mb2noticesHelper' ) )
             }
 
             // Sort array by role name
-            asort($select_roles);
+            asort( $select_roles );
 
             return $select_roles;
 
@@ -453,6 +453,39 @@ if ( ! class_exists( 'Mb2noticesHelper' ) )
                 $teacherroleid = self::get_role_id( $opt->roleteacher );
 
                 if ( ! user_has_role_assignment( $USER->id, $teacherroleid ) )
+                {
+                    return false;
+                }
+            }
+
+            // Notice for customrole 1
+            elseif ( $attribs->cansee == 5 )
+            {
+                $rolecustom1id = self::get_role_id( $opt->rolecustom1 );
+
+                if ( ! user_has_role_assignment( $USER->id, $rolecustom1id ) )
+                {
+                    return false;
+                }
+            }
+
+            // Notice for customrole 2
+            elseif ( $attribs->cansee == 6 )
+            {
+                $rolecustom2id = self::get_role_id( $opt->rolecustom2 );
+
+                if ( ! user_has_role_assignment( $USER->id, $rolecustom2id ) )
+                {
+                    return false;
+                }
+            }
+
+            // Notice for customrole 3
+            elseif ( $attribs->cansee == 5 )
+            {
+                $rolecustom3id = self::get_role_id( $opt->rolecustom3 );
+
+                if ( ! user_has_role_assignment( $USER->id, $rolecustom3id ) )
                 {
                     return false;
                 }

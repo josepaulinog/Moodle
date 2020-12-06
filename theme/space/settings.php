@@ -32,6 +32,35 @@ if ($ADMIN->fulltree) {
             $setting = new admin_setting_heading($name, $heading, format_text(get_string('hintro_desc', 'theme_space'), FORMAT_MARKDOWN));
             $page->add($setting);
 
+            $name = 'theme_space/displaynavdrawerfp';
+            $title = get_string('displaynavdrawerfp', 'theme_space');
+            $description = get_string('displaynavdrawerfp_desc', 'theme_space');
+            $default = 0;
+            $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+            $page->add($setting);
+
+            // Setting to display a hint to the hidden visibility of a course.
+            $name = 'theme_space/showhintcoursehidden';
+            $title = get_string('showhintcoursehiddensetting', 'theme_space');
+            $description = get_string('showhintcoursehiddensetting_desc', 'theme_space');
+            $default = 0;
+            $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+            $page->add($setting);
+
+            // Setting to display a hint to the guest accessing of a course
+            $name = 'theme_space/showhintcourseguestaccess';
+            $title = get_string('showhintcourseguestaccesssetting', 'theme_space');
+            $description = get_string('showhintcourseguestaccesssetting_desc', 'theme_space');
+            $default = 0;
+            $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+            $page->add($setting);
+
+            $name = 'theme_space/boostfumblingnav';
+            $title = get_string('boostfumblingnav', 'theme_space');
+            $description = get_string('boostfumblingnav_desc', 'theme_space');
+            $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+            $page->add($setting);
+
             // Show/hide author info
             $name = 'theme_space/showauthorinfo';
             $title = get_string('showauthorinfo', 'theme_space');
@@ -111,6 +140,34 @@ if ($ADMIN->fulltree) {
             $setting = new admin_setting_configtext($name, $title, $description,'');
             $setting->set_updatedcallback('theme_reset_all_caches');
             $page->add($setting);            
+
+
+            //HR
+            $name = 'theme_space/HR52';
+            $heading = get_string('HR52', 'theme_space');
+            $setting = new admin_setting_heading($name, $heading, format_text(get_string('HR52_desc', 'theme_space'), FORMAT_MARKDOWN));
+            $page->add($setting);
+
+            $name = 'theme_space/gridbreakpointlg';
+            $title = get_string('gridbreakpointlg', 'theme_space');
+            $description = get_string('gridbreakpointlg_desc', 'theme_space');
+            $setting = new admin_setting_configtext($name, $title, $description,'');
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);   
+
+            $name = 'theme_space/gridbreakpointmd';
+            $title = get_string('gridbreakpointmd', 'theme_space');
+            $description = get_string('gridbreakpointmd_desc', 'theme_space');
+            $setting = new admin_setting_configtext($name, $title, $description,'');
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);   
+
+            $name = 'theme_space/gridbreakpointsm';
+            $title = get_string('gridbreakpointsm', 'theme_space');
+            $description = get_string('gridbreakpointsm_desc', 'theme_space');
+            $setting = new admin_setting_configtext($name, $title, $description,'');
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);   
 
 
             //HR
@@ -868,7 +925,9 @@ if ($ADMIN->fulltree) {
             "9" => "9",
             "10" => "10",
             "11" => "11",
-            "12" => "12"                   
+            "12" => "12",
+            "13" => "13",
+            "14" => "14"                   
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '1', $choices);
         $page->add($setting); 
@@ -889,10 +948,34 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '1', $choices);
         $page->add($setting);  
+
+        // BLOCK #13
+        $name = 'theme_space/slotblock14';
+        $title = get_string('slotblock14', 'theme_space');
+        $description = get_string('slotblock14_desc', 'theme_space');
+        $choices = array(
+            "1" => "1",
+            "2" => "2",
+            "3" => "3",
+            "4" => "4",
+            "5" => "5",
+            "6" => "6",
+            "7" => "7",
+            "8" => "8",
+            "9" => "9",
+            "10" => "10",
+            "11" => "11",
+            "12" => "12",
+            "13" => "13",
+            "14" => "14"                   
+        );        
+        $setting = new admin_setting_configselect($name, $title, $description, '14', $choices);
+        $page->add($setting); 
 
         $name = 'theme_space/slotblock1';
         $title = get_string('slotblock1', 'theme_space');
@@ -910,7 +993,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '3', $choices);
         $page->add($setting);
@@ -939,7 +1023,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '4', $choices);
         $page->add($setting);
@@ -968,7 +1053,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '8', $choices);
         $page->add($setting);
@@ -989,7 +1075,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '5', $choices);
         $page->add($setting);
@@ -1018,7 +1105,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '2', $choices);
         $page->add($setting);       
@@ -1047,7 +1135,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '9', $choices);
         $page->add($setting);
@@ -1076,7 +1165,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '7', $choices);
         $page->add($setting);
@@ -1105,7 +1195,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '5', $choices);
         $page->add($setting); 
@@ -1135,7 +1226,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                    
+          "13" => "13",
+          "14" => "14"                    
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '10', $choices);
         $page->add($setting); 
@@ -1165,7 +1257,8 @@ if ($ADMIN->fulltree) {
           "10" => "10",
           "11" => "11",
           "12" => "12",
-          "13" => "13"                   
+          "13" => "13",
+          "14" => "14"                   
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '11', $choices);
         $page->add($setting); 
@@ -1194,9 +1287,19 @@ if ($ADMIN->fulltree) {
             "9" => "9",
             "10" => "10",
             "11" => "11",
-            "12" => "12"                   
+            "12" => "12",
+            "13" => "13",
+            "14" => "14"                   
         );        
         $setting = new admin_setting_configselect($name, $title, $description, '12', $choices);
+        $page->add($setting); 
+
+        // Show/hide HR
+        $name = 'theme_space/showfpblock12hr';
+        $title = get_string('showfpblock12hr', 'theme_space');
+        $description = get_string('showfpblock12hr_desc', 'theme_space');
+        $default = 0;
+        $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
         $page->add($setting); 
 
 
@@ -1208,8 +1311,7 @@ if ($ADMIN->fulltree) {
     *
     ***/
     $page = new admin_settingpage('theme_space_loginpage', get_string('loginpagesettings', 'theme_space'));
-
-
+        
 				$name = 'theme_space/loginalignment';
 				$title = get_string('loginalignment', 'theme_space');
 				$description = get_string('loginalignment_desc', 'theme_space');
@@ -1220,6 +1322,14 @@ if ($ADMIN->fulltree) {
 				$setting = new admin_setting_configselect($name, $title, $description, $default, $options);
 				$setting->set_updatedcallback('theme_reset_all_caches');
 				$page->add($setting);
+        
+        $name = 'theme_space/customloginlogo';
+				$title = get_string('customloginlogo', 'theme_space');
+				$description = get_string('customloginlogo_desc', 'theme_space');
+				$opts = array('accepted_types' => array('.png', '.jpg', '.gif', '.svg'));
+				$setting = new admin_setting_configstoredfile($name, $title, $description, 'customloginlogo', 0, $opts);
+				$setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
 
 				$name = 'theme_space/showlbg';
 				$title = get_string('showlbg', 'theme_space');
@@ -1227,7 +1337,7 @@ if ($ADMIN->fulltree) {
 				$default = 0;
 				$setting = new admin_setting_configcheckbox($name, $title, $description, $default);
 				$page->add($setting);
-
+        
 				$name = 'theme_space/loginbg';
 				$title = get_string('loginbg', 'theme_space');
 				$description = get_string('loginbg_desc', 'theme_space');
@@ -1236,6 +1346,26 @@ if ($ADMIN->fulltree) {
 				$setting->set_updatedcallback('theme_reset_all_caches');
 				$page->add($setting);
 
+        $name = 'theme_space/hideforgotpassword';
+				$title = get_string('hideforgotpassword', 'theme_space');
+				$description = get_string('hideforgotpassword_desc', 'theme_space');
+				$default = 0;
+				$setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+				$page->add($setting);
+
+        $name = 'theme_space/logininfobox';
+        $title = get_string('logininfobox', 'theme_space');
+        $description = get_string('logininfobox_desc', 'theme_space');
+        $default = '';
+        $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+        $page->add($setting);
+
+        $name = 'theme_space/logininfobox2';
+        $title = get_string('logininfobox2', 'theme_space');
+        $description = get_string('logininfobox2_desc', 'theme_space');
+        $default = '';
+        $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+        $page->add($setting);
 
 	  $settings->add($page);
 
@@ -1255,7 +1385,7 @@ if ($ADMIN->fulltree) {
           *
           ***/
 
-          // Enable or disable Hero Image/Video
+          // Enable or disable Hero Image
           $name = 'theme_space/heroimgenabled';
           $title = get_string('heroimgenabled', 'theme_space');
           $description = get_string('heroimgenabled_desc', 'theme_space');
@@ -1281,6 +1411,12 @@ if ($ADMIN->fulltree) {
           $description = get_string('heroimg_desc', 'theme_space');
           $opts = array('accepted_types' => array('.png', '.jpg', '.gif', '.webp', '.tiff', '.svg'), 'maxfiles' => 1);
           $setting = new admin_setting_configstoredfile($name, $title, $description, 'heroimg', 0, $opts);
+          $page->add($setting);
+
+          $name = 'theme_space/heroimgonly';
+          $title = get_string('heroimgonly', 'theme_space');
+          $description = get_string('heroimgonly_desc', 'theme_space');
+          $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
           $page->add($setting);
 
           $name = 'theme_space/HeroHeading';
@@ -1339,46 +1475,45 @@ if ($ADMIN->fulltree) {
           $setting = new admin_setting_configtextarea($name, $title, $description, $default);
           $page->add($setting);
 
-
-          // Video
-          $name = 'theme_space/HR44';
-          $heading = get_string('HR44', 'theme_space');
-          $setting = new admin_setting_heading($name, $heading, format_text(get_string('HR44_desc', 'theme_space'), FORMAT_MARKDOWN));
-          $page->add($setting);
-          
-          $name = 'theme_space/herovideoenabled';
-          $title = get_string('herovideoenabled', 'theme_space');
-          $description = get_string('herovideoenabled_desc', 'theme_space');
-          $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+          $name = 'theme_space/heromtop';
+          $title = get_string('heromtop', 'theme_space');
+          $description = get_string('heromtop_desc', 'theme_space');
+          $default = '';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $setting->set_updatedcallback('theme_reset_all_caches');
           $page->add($setting);
 
-          $name = 'theme_space/herovideomp4';
-          $title = get_string('herovideomp4', 'theme_space');
-          $description = get_string('herovideomp4_desc', 'theme_space');
-          $opts = array('accepted_types' => array('.mp4'), 'maxfiles' => 1);
-          $setting = new admin_setting_configstoredfile($name, $title, $description, 'herovideomp4', 0, $opts);
-          $page->add($setting);
-
-          $name = 'theme_space/herovideoogv';
-          $title = get_string('herovideoogv', 'theme_space');
-          $description = get_string('herovideoogv_desc', 'theme_space');
-          $opts = array('accepted_types' => array('.ogv'), 'maxfiles' => 1);
-          $setting = new admin_setting_configstoredfile($name, $title, $description, 'herovideoogv', 0, $opts);
-          $page->add($setting);
-
-          $name = 'theme_space/herovideowebm';
-          $title = get_string('herovideowebm', 'theme_space');
-          $description = get_string('herovideowebm_desc', 'theme_space');
-          $opts = array('accepted_types' => array('.webm'), 'maxfiles' => 1);
-          $setting = new admin_setting_configstoredfile($name, $title, $description, 'herovideowebm', 0, $opts);
+          $name = 'theme_space/herombottom';
+          $title = get_string('herombottom', 'theme_space');
+          $description = get_string('herombottom_desc', 'theme_space');
+          $default = '';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $setting->set_updatedcallback('theme_reset_all_caches');
           $page->add($setting);
 
 
-          $name = 'theme_space/heroboxshadow';
-          $title = get_string('heroboxshadow', 'theme_space');
-          $description = get_string('heroboxshadow_desc', 'theme_space');
-          $default = 1;
-          $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+          $name = 'theme_space/heroimageheightlg';
+          $title = get_string('heroimageheightlg', 'theme_space');
+          $description = get_string('heroimageheightlg_desc', 'theme_space');
+          $default = '';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);
+
+          $name = 'theme_space/heroimageheightmd';
+          $title = get_string('heroimageheightmd', 'theme_space');
+          $description = get_string('heroimageheightmd_desc', 'theme_space');
+          $default = '';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);
+
+          $name = 'theme_space/heroimageheightsm';
+          $title = get_string('heroimageheightsm', 'theme_space');
+          $description = get_string('heroimageheightsm_desc', 'theme_space');
+          $default = '';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $setting->set_updatedcallback('theme_reset_all_caches');
           $page->add($setting);
           
            //Shadow
@@ -1493,6 +1628,48 @@ if ($ADMIN->fulltree) {
     $settings->add($page);
 
 
+    $page = new admin_settingpage('theme_space_herovideo', get_string('herovideosettings', 'theme_space'));
+              // Video
+              $name = 'theme_space/HR44';
+              $heading = get_string('HR44', 'theme_space');
+              $setting = new admin_setting_heading($name, $heading, format_text(get_string('HR44_desc', 'theme_space'), FORMAT_MARKDOWN));
+              $page->add($setting);
+              
+              $name = 'theme_space/herovideoenabled';
+              $title = get_string('herovideoenabled', 'theme_space');
+              $description = get_string('herovideoenabled_desc', 'theme_space');
+              $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+              $page->add($setting);
+
+              $name = 'theme_space/herovideofwenabled';
+              $title = get_string('herovideofwenabled', 'theme_space');
+              $description = get_string('herovideofwenabled_desc', 'theme_space');
+              $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+              $page->add($setting);
+
+              $name = 'theme_space/herovideocontent';
+              $title = get_string('herovideocontent', 'theme_space');
+              $description = get_string('herovideocontent_desc', 'theme_space');
+              $default = '';
+              $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+              $page->add($setting);
+
+              $name = 'theme_space/herovideomp4';
+              $title = get_string('herovideomp4', 'theme_space');
+              $description = get_string('herovideomp4_desc', 'theme_space');
+              $opts = array('accepted_types' => array('.mp4'), 'maxfiles' => 1);
+              $setting = new admin_setting_configstoredfile($name, $title, $description, 'herovideomp4', 0, $opts);
+              $page->add($setting);
+    
+              $name = 'theme_space/herovideowebm';
+              $title = get_string('herovideowebm', 'theme_space');
+              $description = get_string('herovideowebm_desc', 'theme_space');
+              $opts = array('accepted_types' => array('.webm'), 'maxfiles' => 1);
+              $setting = new admin_setting_configstoredfile($name, $title, $description, 'herovideowebm', 0, $opts);
+              $page->add($setting);
+    
+    $settings->add($page);
+
     $page = new admin_settingpage('theme_space_siemaSlider', get_string('siemaSlidersettings', 'theme_space'));
 
               // Enable or disable Slideshow settings.
@@ -1502,10 +1679,22 @@ if ($ADMIN->fulltree) {
               $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
               $page->add($setting);
 
+              $name = 'theme_space/imgslidesonly';
+              $title = get_string('imgslidesonly', 'theme_space');
+              $description = get_string('imgslidesonly_desc', 'theme_space');
+              $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+              $page->add($setting);
+
               $name = 'theme_space/sliderfwenabled';
               $title = get_string('sliderfwenabled', 'theme_space');
               $description = get_string('sliderfwenabled_desc', 'theme_space');
               $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+              $page->add($setting);
+
+              $name = 'theme_space/sliderloop';
+              $title = get_string('sliderloop', 'theme_space');
+              $description = get_string('sliderloop_desc', 'theme_space');
+              $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
               $page->add($setting);
 
               $name = 'theme_space/sliderintervalenabled';
@@ -1719,13 +1908,20 @@ if ($ADMIN->fulltree) {
             $setting = new admin_setting_confightmleditor($name, $fpblock1index . $title, $description, $default);
             $page->add($setting);
 
+            $name = 'theme_space/FPHTMLBlock1ItemBlockProperties' . $fpblock1index;
+            $title = get_string('FPHTMLBlock1ItemBlockProperties', 'theme_space');
+            $description = get_string('FPHTMLBlock1ItemBlockProperties_desc', 'theme_space');
+            $default = '';
+            $setting = new admin_setting_configtext($name, $fpblock1index . $title, $description, $default);
+            $page->add($setting);
+
             $name = 'theme_space/FPHTMLBlock1ItemProperties' . $fpblock1index;
             $title = get_string('FPHTMLBlock1ItemProperties', 'theme_space');
             $description = get_string('FPHTMLBlock1ItemProperties_desc', 'theme_space');
             $default = '';
             $setting = new admin_setting_configtext($name, $fpblock1index . $title, $description, $default);
             $page->add($setting);
-            
+
         }
 
 
@@ -1863,6 +2059,14 @@ if ($ADMIN->fulltree) {
               $default = '';
               $setting = new admin_setting_configtext($name, $fpblock2index . $title, $description, $default);
 
+              $page->add($setting);
+
+              $name = 'theme_space/FPHTMLBlock2ItemBlockProperties' . $fpblock2index;
+              $title = get_string('FPHTMLBlock2ItemBlockProperties', 'theme_space');
+              $description = get_string('FPHTMLBlock2ItemBlockProperties_desc', 'theme_space');
+              $default = '';
+              $setting = new admin_setting_configtext($name, $fpblock2index . $title, $description, $default);
+  
               $page->add($setting);
 
               $name = 'theme_space/FPHTMLBlock2ItemProperties' . $fpblock2index;
@@ -2551,14 +2755,14 @@ if ($ADMIN->fulltree) {
 
         for ($fpblock11index = 1; $fpblock11index <= $fpblock11count; $fpblock11index++) {
 
-            $name = 'theme_space/showfpblock11subsection' . $fpblock11index;;
+            $name = 'theme_space/showfpblock11subsection' . $fpblock11index;
             $title = get_string('showfpblock11subsection', 'theme_space');
             $description = get_string('showfpblock11subsection_desc', 'theme_space');
             $default = 0;
             $setting = new admin_setting_configcheckbox($name, $fpblock11index . $title, $description, $default);
             $page->add($setting);
     
-            $name = 'theme_space/fpblock11subsectioncontent' . $fpblock11index;;
+            $name = 'theme_space/fpblock11subsectioncontent' . $fpblock11index;
             $title = get_string('fpblock11subsectioncontent', 'theme_space');
             $description = get_string('fpblock11subsectioncontent_desc', 'theme_space');
             $default = '';
@@ -2784,18 +2988,24 @@ if ($ADMIN->fulltree) {
           $setting = new admin_setting_configstoredfile($name, $title, $description, 'customlogotopbar', 0, $opts);
           $page->add($setting);
 
+          $name = 'theme_space/mobiletopbarlogo';
+          $title = get_string('mobiletopbarlogo', 'theme_space');
+          $description = get_string('mobiletopbarlogo_desc', 'theme_space');
+          $opts = array('accepted_types' => array('.png', '.jpg', '.svg', 'gif'));
+          $setting = new admin_setting_configstoredfile($name, $title, $description, 'mobiletopbarlogo', 0, $opts);
+          $page->add($setting);
+
+          $name = 'theme_space/ShowTopBarUserName';
+          $title = get_string('ShowTopBarUserName', 'theme_space');
+          $description = get_string('ShowTopBarUserName_desc', 'theme_space');
+          $default = '0';
+          $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+          $page->add($setting);
+
           //HR
           $name = 'theme_space/HRTopBar';
           $heading = get_string('HRTopBar', 'theme_space');
           $setting = new admin_setting_heading($name, $heading, format_text(get_string('HRTopBar_desc', 'theme_space'), FORMAT_MARKDOWN));
-          $page->add($setting);
-
-          // Show Top Bar Text
-          $name = 'theme_space/ShowTopBarText';
-          $title = get_string('ShowTopBarText', 'theme_space');
-          $description = get_string('ShowTopBarText_desc', 'theme_space');
-          $default = '0';
-          $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
           $page->add($setting);
 
           // Top Bar Text
@@ -2888,21 +3098,35 @@ if ($ADMIN->fulltree) {
           $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
           $page->add($setting);      
 
+          $name = 'theme_space/customrooturl';
+          $title = get_string('customrooturl', 'theme_space');
+          $description = get_string('customrooturl_desc', 'theme_space');
+          $default = '';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $page->add($setting);
+
           $name = 'theme_space/customlogosidebar';
           $title = get_string('customlogosidebar', 'theme_space');
           $description = get_string('customlogosidebar_desc', 'theme_space');
-          $opts = array('accepted_types' => array('.png', '.jpg', '.svg'));
+          $opts = array('accepted_types' => array('.png', '.jpg', '.svg', '.gif'));
           $setting = new admin_setting_configstoredfile($name, $title, $description, 'customlogosidebar', 0, $opts);
           $page->add($setting);
 
           // Sidebar Button
-          $name = 'theme_space/SidebarButtonIcon';
-          $title = get_string('SidebarButtonIcon', 'theme_space');
-          $description = get_string('SidebarButtonIcon_desc', 'theme_space');
-          $default = 'fas fa-equals';
+          $name = 'theme_space/SidebarButtonIconOpen';
+          $title = get_string('SidebarButtonIconOpen', 'theme_space');
+          $description = get_string('SidebarButtonIconOpen_desc', 'theme_space');
+          $default = '<i class="fas fa-indent opened"></i>';
           $setting = new admin_setting_configtext($name, $title, $description, $default);
           $page->add($setting);
-  
+ 
+          $name = 'theme_space/SidebarButtonIconClose';
+          $title = get_string('SidebarButtonIconClose', 'theme_space');
+          $description = get_string('SidebarButtonIconClose_desc', 'theme_space');
+          $default = '<i class="fas fa-outdent closed"></i>';
+          $setting = new admin_setting_configtext($name, $title, $description, $default);
+          $page->add($setting);
+
 
           $name = 'theme_space/SidebarCustomHTML';
           $title = get_string('SidebarCustomHTML', 'theme_space');
@@ -3085,11 +3309,60 @@ if ($ADMIN->fulltree) {
           $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
           $setting->set_updatedcallback('theme_reset_all_caches');
           $page->add($setting);    
-  
+    
+          $name = 'theme_space/drawerlink';
+          $title = get_string('drawerlink', 'theme_space');
+          $description = get_string('drawerlink_desc', 'theme_space');
+          $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);  
+    
+          $name = 'theme_space/drawerlinkhover';
+          $title = get_string('drawerlinkhover', 'theme_space');
+          $description = get_string('drawerlinkhover_desc', 'theme_space');
+          $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);  
+    
+          $name = 'theme_space/drawerlinkhoverbg';
+          $title = get_string('drawerlinkhoverbg', 'theme_space');
+          $description = get_string('drawerlinkhoverbg_desc', 'theme_space');
+          $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);  
+
           $name = 'theme_space/drawerhr';
           $title = get_string('drawerhr', 'theme_space');
           $description = get_string('drawerhr_desc', 'theme_space');
           $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);
+
+          $name = 'theme_space/drawernaviconsize';
+          $title = get_string('drawernaviconsize', 'theme_space');
+          $description = get_string('drawernaviconsize_desc', 'theme_space');
+          $setting = new admin_setting_configtext($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);
+
+          $name = 'theme_space/drawernaviconwidth';
+          $title = get_string('drawernaviconwidth', 'theme_space');
+          $description = get_string('drawernaviconwidth_desc', 'theme_space');
+          $setting = new admin_setting_configtext($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);
+
+          $name = 'theme_space/drawernaviconfontsize';
+          $title = get_string('drawernaviconfontsize', 'theme_space');
+          $description = get_string('drawernaviconfontsize_desc', 'theme_space');
+          $setting = new admin_setting_configtext($name, $title, $description, '');
+          $setting->set_updatedcallback('theme_reset_all_caches');
+          $page->add($setting);
+
+          $name = 'theme_space/drawerwidth';
+          $title = get_string('drawerwidth', 'theme_space');
+          $description = get_string('drawerwidth_desc', 'theme_space');
+          $setting = new admin_setting_configtext($name, $title, $description, '');
           $setting->set_updatedcallback('theme_reset_all_caches');
           $page->add($setting);
 
@@ -3587,36 +3860,41 @@ if ($ADMIN->fulltree) {
         $name = 'theme_space/customfontlighteot';
         $title = get_string('customfontlighteot', 'theme_space');
         $description = get_string('customfontlighteot_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.eot'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontlighteot', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontlightwoff';
         $title = get_string('customfontlightwoff', 'theme_space');
         $description = get_string('customfontlightwoff_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontlightwoff', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontlightwoff2';
         $title = get_string('customfontlightwoff2', 'theme_space');
         $description = get_string('customfontlightwoff2_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff2'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontlightwoff2', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontlightttf';
         $title = get_string('customfontlightttf', 'theme_space');
         $description = get_string('customfontlightttf_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.ttf'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontlightttf', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontlightsvg';
         $title = get_string('customfontlightsvg', 'theme_space');
         $description = get_string('customfontlightsvg_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.svg'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontlightsvg', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
 
@@ -3638,36 +3916,41 @@ if ($ADMIN->fulltree) {
         $name = 'theme_space/customfontregulareot';
         $title = get_string('customfontregulareot', 'theme_space');
         $description = get_string('customfontregulareot_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.eot'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontregulareot', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontregularwoff';
         $title = get_string('customfontregularwoff', 'theme_space');
         $description = get_string('customfontregularwoff_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontregularwoff', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontregularwoff2';
         $title = get_string('customfontregularwoff2', 'theme_space');
         $description = get_string('customfontregularwoff2_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff2'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontregularwoff2', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontregularttf';
         $title = get_string('customfontregularttf', 'theme_space');
         $description = get_string('customfontregularttf_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.ttf'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontregularttf', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontregularsvg';
         $title = get_string('customfontregularsvg', 'theme_space');
         $description = get_string('customfontregularsvg_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.svg'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontregularsvg', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         //HR
@@ -3687,36 +3970,41 @@ if ($ADMIN->fulltree) {
         $name = 'theme_space/customfontmediumeot';
         $title = get_string('customfontmediumeot', 'theme_space');
         $description = get_string('customfontmediumeot_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.eot'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontmediumeot', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontmediumwoff';
         $title = get_string('customfontmediumwoff', 'theme_space');
         $description = get_string('customfontmediumwoff_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontmediumwoff', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontmediumwoff2';
         $title = get_string('customfontmediumwoff2', 'theme_space');
         $description = get_string('customfontmediumwoff2_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff2'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontmediumwoff2', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontmediumttf';
         $title = get_string('customfontmediumttf', 'theme_space');
         $description = get_string('customfontmediumttf_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.ttf'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontmediumttf', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontmediumsvg';
         $title = get_string('customfontmediumsvg', 'theme_space');
         $description = get_string('customfontmediumsvg_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.svg'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontmediumsvg', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         //HR
@@ -3736,36 +4024,41 @@ if ($ADMIN->fulltree) {
         $name = 'theme_space/customfontboldeot';
         $title = get_string('customfontboldeot', 'theme_space');
         $description = get_string('customfontboldeot_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.eot'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontboldeot', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontboldwoff';
         $title = get_string('customfontboldwoff', 'theme_space');
         $description = get_string('customfontboldwoff_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontboldwoff', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontboldwoff2';
         $title = get_string('customfontboldwoff2', 'theme_space');
         $description = get_string('customfontboldwoff2_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.woff2'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontboldwoff2', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontboldttf';
         $title = get_string('customfontboldttf', 'theme_space');
         $description = get_string('customfontboldttf_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.ttf'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontboldttf', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         $name = 'theme_space/customfontboldsvg';
         $title = get_string('customfontboldsvg', 'theme_space');
         $description = get_string('customfontboldsvg_desc', 'theme_space');
-        $default = '';
-        $setting = new admin_setting_configtext($name, $title, $description, $default);
+        $opts = array('accepted_types' => array('.svg'), 'maxfiles' => 1);
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'customfontboldsvg', 0, $opts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
                     
     $settings->add($page);

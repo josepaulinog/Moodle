@@ -106,6 +106,7 @@ function theme_mb2nl_course_panel($name = '')
 	$boxes = theme_mb2nl_teacher_boxes();
 	$is_course = (isset($COURSE->id) && $COURSE->id > 1);
 	$course_access = theme_mb2nl_site_access();
+    $cls = '';
 
 
 	foreach ($boxes as $k=>$box)
@@ -161,15 +162,21 @@ function theme_mb2nl_course_panel($name = '')
 					$icon = isset($link['icon']) ? '<img src="' . $link['icon'] . '" alt="">' : '';
 
 
-					if ($allowEdit)
+                    // Check custom class
+                    if ( isset( $link['class'] ) )
+                    {
+                        $cls = ' class="' . $link['class'] . '"';
+                    }
+
+					if ( $allowEdit )
 					{
-						if (!$link['url'])
+						if ( ! $link['url'] )
 						{
 							$output .= '<li>' . $icon . '<span class="nolink-item">' . $link['title'] . '</span>'. $details . '</li>';
 						}
 						else
 						{
-							$output .= '<li><a href="' . $link['url'] . '">' . $icon . $link['title'] . $details . '</a></li>';
+							$output .= '<li><a href="' . $link['url'] . '"' . $cls . '>' . $icon . $link['title'] . $details . '</a></li>';
 						}
 					}
 				}
@@ -750,7 +757,7 @@ function theme_mb2nl_links_course()
 	$competenciesStr = $ifm31 ? get_string('competencies','competency') : '';
 
 	$links = array(
-        array('url'=>new moodle_url('/course/view.php',array('id' => $COURSE->id, 'sesskey'=> sesskey(), 'edit'=> $PAGE->user_is_editing() ? 'off' : 'on', 'return'=> $PAGE->url->out_as_local_url() )),'title'=> $PAGE->user_is_editing() ? get_string('turneditingoff') : get_string('turneditingon') ),
+        array('url'=>new moodle_url('/course/view.php',array('id' => $COURSE->id, 'sesskey'=> sesskey(), 'edit'=> $PAGE->user_is_editing() ? 'off' : 'on', 'return'=> $PAGE->url->out_as_local_url() )),'title'=> $PAGE->user_is_editing() ? get_string('turneditingoff') : get_string('turneditingon'), 'class' => 'save-location' ),
 		array('url'=>new moodle_url('/course/edit.php',array('id' => $COURSE->id)),'title'=>get_string('editcoursesettings')),
 		array('url'=>new moodle_url('/course/completion.php',array('id' => $COURSE->id)),'title'=>get_string('coursecompletion')),
 		array('url'=>new moodle_url('/admin/tool/lp/coursecompetencies.php',array('courseid' => $COURSE->id)),'title'=>$competenciesStr,'showif'=>$ifm31),

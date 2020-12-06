@@ -910,7 +910,7 @@
     }
 
     .control-area {
-        padding: 1rem;
+        padding: 0;
         box-sizing: border-box;
         display: inline-flex;
         width: 300px;
@@ -983,7 +983,7 @@
 
             box-sizing: border-box;
             border-bottom: 1px solid $border-color;
-            padding: 2rem;
+            padding: 1rem 2rem 2rem;
 
             .image-container {
                 display: inline-block;
@@ -1031,7 +1031,7 @@
                 & + .empty-text {
                     display: block;
                     text-align: left;
-                    padding: 1rem;
+                    padding: 0 1rem 1rem;
                 }
             }
         }
@@ -1301,9 +1301,11 @@ $message-drawer-width: 430px;
   }
   .btn-link {
       font-size: $font-size-xs;
-
-      &:hover,
       &:focus {
+          box-shadow: none;
+      }
+
+      &:hover {
           background-color: $theme-color-9;
           color: $theme-color-3;
           text-decoration: none;
@@ -1403,9 +1405,7 @@ $message-drawer-width: 430px;
           box-shadow: none;
           background-color: transparent;
 
-          border-top:0;
-          border-left: 0;
-          border-right: 0;
+          border-radius: $border-radius;
           border-bottom: 1px solid $border-color;
           margin-bottom: 0;
 
@@ -1517,8 +1517,6 @@ $message-drawer-width: 430px;
     border-radius: 25px;
 
     font-size: $font-size-sm;
-
-    word-break: break-all;
   }
 }
 
@@ -1619,7 +1617,7 @@ $message-drawer-width: 430px;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 99998;
+  z-index: 10001;
 
   background-color: rgba(#000, .60);
 

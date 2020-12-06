@@ -2,8 +2,6 @@
 
 
 .comment-link {
-  margin-top: 2rem;
-
   .icon {
     height: 13px;
     font-size: 12px;
@@ -167,6 +165,10 @@
   .icons {
     padding-right: 0!important;
   }
+}
+
+.path-mod-glossary .printicon {
+  background-image: none;
 }
 
 .path-mod-glossary .entrybox {

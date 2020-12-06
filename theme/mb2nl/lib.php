@@ -25,17 +25,18 @@ defined('MOODLE_INTERNAL') || die();
 
 
 require (__DIR__ . '/lib/lib_access.php');
+require (__DIR__ . '/lib/lib_other.php');
 require (__DIR__ . '/lib/lib_block.php');
 require (__DIR__ . '/lib/lib_course_banner.php');
 require (__DIR__ . '/lib/lib_bookmarks.php');
 require (__DIR__ . '/lib/lib_course_panel.php');
-require (__DIR__ . '/lib/lib_page_builder.php');
 require (__DIR__ . '/lib/lib_shortcodes.php');
 require (__DIR__ . '/lib/lib_fonts.php');
 require (__DIR__ . '/lib/lib_forms.php');
 require (__DIR__ . '/lib/lib_scss.php');
 require (__DIR__ . '/lib/lib_menu.php');
-require (__DIR__ . '/lib/lib_other.php');
 require (__DIR__ . '/lib/lib_site_menu.php');
 require (__DIR__ . '/lib/lib_slider.php');
 require (__DIR__ . '/lib/lib_notice.php');
+require (__DIR__ . '/lib/lib_page_builder.php');
+require (__DIR__ . '/lib/lib_page_builder2.php');

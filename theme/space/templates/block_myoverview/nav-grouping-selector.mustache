@@ -33,7 +33,7 @@
         "displaygroupinginprogress": true,
         "displaygroupingfuture": true,
         "displaygroupingpast": true,
-        "displaygroupingstarred": true,
+        "displaygroupingfavourites": true,
         "displaygroupinghidden": true,
         "displaygroupingselector": true
     }
@@ -88,12 +88,12 @@
               </li>
           {{/customfieldvalues}}
       {{/displaygroupingcustomfield}}
-      {{#displaygroupingstarred}}
+      {{#displaygroupingfavourites}}
       <li class="nav-item">
           <a data-toggle="tab" role="tab" class="nav-link {{#active}}active{{/active}} {{#favourites}}active{{/favourites}}" href="#" data-filter="grouping" data-value="favourites"  data-pref="favourites" aria-label="{{#str}} aria:favourites, block_myoverview {{/str}}" aria-controls="courses-view-{{uniqid}}">
               {{#str}} favourites, block_myoverview {{/str}}
           </a>
-      {{/displaygroupingstarred}}
+      {{/displaygroupingfavourites}}
       {{#displaygroupinghidden}}
       <li class="nav-item">
           <a data-toggle="tab" role="tab" class="nav-link {{#active}}active{{/active}} {{#hidden}}active{{/hidden}}" href="#" data-filter="grouping" data-value="hidden"  data-pref="hidden" aria-label="{{#str}} aria:hiddencourses, block_myoverview {{/str}}" aria-controls="courses-view-{{uniqid}}">

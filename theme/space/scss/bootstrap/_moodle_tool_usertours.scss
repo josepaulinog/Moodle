@@ -33,6 +33,10 @@ div[data-flexitour="step-background-fader"],
 [data-flexitour="step-backdrop"] {
     // The step container, and the target background should be at the same z-index.
     z-index: ($flexitour-base-zindex + 2);
+
+    &:focus {
+        box-shadow: none;
+    }
 }
 
 span[data-flexitour="container"] {
@@ -43,6 +47,7 @@ span[data-flexitour="container"] {
          * 2) ensure that the focus border touches the modal.
          */
         margin: 0;
+        max-width: 400px;
     }
 
     div[data-role="arrow"] {

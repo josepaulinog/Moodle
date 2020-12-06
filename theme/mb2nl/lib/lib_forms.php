@@ -165,16 +165,16 @@ function theme_mb2nl_login_form ()
 		}
 
 		$loginLink = theme_mb2nl_theme_setting($PAGE,'loginlink',1) == 2 ? $CFG->wwwroot . '/login/forgot_password.php' : $CFG->wwwroot . '/login/index.php';
-		$loginText = theme_mb2nl_theme_setting($PAGE,'logintext')  !='' ? theme_mb2nl_theme_setting($PAGE,'logintext') : get_string('logininfo','theme_mb2nl');
+		$loginText = theme_mb2nl_theme_setting($PAGE,'logintext') ? theme_mb2nl_theme_setting($PAGE,'logintext') : get_string('logininfo','theme_mb2nl');
 		$output .= '<p class="login-info"><a href="' . $loginLink . '">' . $loginText . '</a></p>';
 
 	}
-	elseif(isloggedin() && !isguestuser())
+	elseif( isloggedin() && ! isguestuser() )
 	{
 
 		$m27 = 2014051220; // Last formal release of Moodle 2.7
-		$output .= ($CFG->version > $m27) ? $OUTPUT->user_menu() : $OUTPUT->login_info();
-		$output .= $OUTPUT->user_picture($USER, array('size' => 80, 'class' => 'welcome_userpicture'));
+		$output .= ( $CFG->version > $m27 ) ? $OUTPUT->user_menu() : $OUTPUT->login_info();
+		$output .= $OUTPUT->user_picture( $USER, array( 'size' => 80, 'class' => 'welcome_userpicture' ) );
 
 	}
 

@@ -75,22 +75,22 @@
                     {{/hasregionmainsettingsmenu}}
                     {{{ output.course_content_header }}}
 
-                    {{#hasblocks}}
+                    {{#hasmaintopwidgets}}
                     <section data-region="blocks-main-top-widget" class="blocks-main-top-widget d-print-none">
                     {{{ maintopwidgets }}}
                     </section>
-                    {{/hasblocks}}
+                    {{/hasmaintopwidgets}}
 
                     {{{ output.main_content }}}
 
                     {{{ output.activity_navigation }}}
                     {{{ output.course_content_footer }}}
 
-                    {{#hasblocks}}
+                    {{#hasmainfwidgets}}
                     <section data-region="blocks-main-footer-widget" class="blocks-main-footer-widget d-print-none">
                     {{{ mainfwidgets }}}
                     </section>
-                    {{/hasblocks}}
+                    {{/hasmainfwidgets}}
 
                 </section>
                 {{#hasblocks}}
@@ -114,6 +114,9 @@
 M.util.js_pending('theme_space/loader');
 require(['theme_space/loader'], function() {
     M.util.js_complete('theme_space/loader');
+});
+require(['theme_space/backtotop'], function(mod) {
+    mod.init();
 });
 
 M.util.js_pending('theme_space/drawer');

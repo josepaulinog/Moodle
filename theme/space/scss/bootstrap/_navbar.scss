@@ -53,7 +53,7 @@
 
 
   .c-logo {
-    margin: 0 0 -10px;
+    margin: 0;
   }
 
 
@@ -62,8 +62,8 @@
     font-size: 18px!important;
 
     #nav-drawer & {
-        margin-bottom: 2rem!important;
-        margin-top: 2px!important;
+        margin-bottom: 16px!important;
+        margin-top: 4px!important;
 
         @include media-breakpoint-between(sm,md) {
           margin-top: 8px!important;
@@ -103,9 +103,8 @@
     float: none;
     top: auto;
 
-    @include media-breakpoint-only(sm) {
+    @include media-breakpoint-between(sm,md) {
     position: relative;
-    top: auto!important;
     left: 0!important;
     }
   }
@@ -194,6 +193,10 @@
 
           .dropdown-menu {
             position: absolute;
+
+            @include media-breakpoint-between(sm,md) {
+            position: relative;
+            }
           }
 
           .dropdown-menu-right {

@@ -73,25 +73,23 @@ elseif($sidePre || $sidePost)
 <?php echo $OUTPUT->theme_part('head'); ?>
 <?php echo $OUTPUT->theme_part('header'); ?>
 <?php echo theme_mb2nl_slider(); ?>
-<?php echo $OUTPUT->theme_part('region_slider'); ?>
+<?php //echo $OUTPUT->theme_part('region_slider'); ?>
 <?php //echo is_siteadmin() ? $OUTPUT->theme_part('page_header') : ''; ?>
 <?php echo $OUTPUT->theme_part('site_menu'); ?>
 <?php echo $OUTPUT->theme_part('course_banner'); ?>
-<?php echo $OUTPUT->theme_part('region_after_slider'); ?>
-<?php echo $OUTPUT->theme_part('region_before_content'); ?>
+<?php //echo $OUTPUT->theme_part('region_after_slider'); ?>
+<?php //echo $OUTPUT->theme_part('region_before_content'); ?>
 <?php echo theme_mb2nl_notice(); ?>
 <div id="main-content">
     <div class="container-fluid">
         <div class="row">
             <section id="region-main" class="content-col <?php echo $contentCol; ?>">
                 <div id="page-content">
-					<?php echo theme_mb2nl_panel_link(); ?>
+					<?php echo theme_mb2nl_panel_link() . theme_mb2nl_page_builder_pagelink(); ?>
 					<?php if (theme_mb2nl_frontpage_courses() && theme_mb2nl_theme_setting($PAGE, 'courseswitchlayout')) : ?>
 						<?php echo theme_mb2nl_course_layout_switcher(); ?>
 					<?php endif; ?>
-					<?php if (is_siteadmin()) : ?>
-                    	<?php echo theme_mb2nl_check_plugins(); ?>
-                    <?php endif; ?>
+					<?php echo theme_mb2nl_check_plugins(); ?>
                 	<?php echo $OUTPUT->course_content_header(); ?>
 					<?php if (theme_mb2nl_isblock($PAGE, 'content-top')) : ?>
                 		<?php echo $OUTPUT->blocks('content-top', theme_mb2nl_block_cls($PAGE, 'content-top','none')); ?>
@@ -118,13 +116,16 @@ elseif($sidePre || $sidePost)
     </div>
 </div>
 <?php
-
-	$builder = get_config('local_mb2builder');
-	$builderfptext = isset($builder->builderfptext) ? json_decode($builder->builderfptext) : array();
-	echo theme_mb2nl_page_builder_content($builderfptext);
+	// If user use old page builder display the content
+	if ( theme_mb2nl_check_builder() == 1 )
+	{
+		$builder = get_config('local_mb2builder');
+		$builderfptext = isset( $builder->builderfptext ) ? json_decode( $builder->builderfptext ) : array();
+		echo theme_mb2nl_page_builder_content( $builderfptext );
+	}
 ?>
 <?php echo theme_mb2nl_moodle_from(2018120300) ? $OUTPUT->standard_after_main_region_html() : '' ?>
-<?php echo $OUTPUT->theme_part('region_after_content'); ?>
+<?php //echo $OUTPUT->theme_part('region_after_content'); ?>
 <?php echo $OUTPUT->theme_part('region_adminblock'); ?>
 <?php echo $OUTPUT->theme_part('region_bottom'); ?>
 <?php echo $OUTPUT->theme_part('region_bottom_abcd'); ?>

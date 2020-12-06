@@ -25,13 +25,16 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-$regionArr = explode(',', theme_mb2nl_theme_setting($PAGE,'regionnogrid'));
-$regionGrid = !in_array('bottom', $regionArr);
-
+$regionArr = explode( ',', theme_mb2nl_theme_setting( $PAGE, 'regionnogrid' ) );
+$regionGrid = ! in_array( 'bottom', $regionArr );
+$builderpage = theme_mb2nl_has_builderpage();
+$isblock = theme_mb2nl_isblock( $PAGE, 'bottom' );
+$shwregion = ( $builderpage && ! $isblock ) ? 0 : 1;
 ?>
-<?php echo theme_mb2nl_notice('bottom'); ?>
+<?php echo theme_mb2nl_notice( 'bottom' ); ?>
+<?php if ( $shwregion ) : ?>
 <div id="bottom" class="dark1">
-	<?php if (theme_mb2nl_isblock($PAGE, 'bottom')) : ?>
+	<?php if ( $isblock ) : ?>
 		<?php if ($regionGrid) : ?>
             <div class="container-fluid">
             <div class="row">
@@ -45,3 +48,4 @@ $regionGrid = !in_array('bottom', $regionArr);
         <?php endif; ?>
     <?php endif; ?>
 </div>
+<?php endif; ?>

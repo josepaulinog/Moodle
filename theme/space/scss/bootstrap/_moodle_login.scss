@@ -3,22 +3,43 @@
     max-height: 100px;
 }
 
+.pagelayout-login {
+  .modal {
+    padding: 0;
+    position: relative; 
+    box-shadow: none;
+  }
+
+  @include media-breakpoint-up(md) {
+  .card-content {
+    margin: 2rem auto;
+  }
+  }
+
+  .modal-header h4 {
+    text-align: left;
+    padding: 0 0 1.5rem 0;
+  }
+}
+
 .login-box {
   margin: 60px auto;
   padding: 2rem;
 
   background-color: $body-bg;
-  box-shadow: $box-shadow;
   border-radius: $border-radius;
   width: 100%;
-  max-width: max-content;
+  max-width: 700px;
+
+  @include media-breakpoint-only(sm) {
+  margin-top: 0;
+  }
 
   #page-login-index & {
   max-width: 500px;
 
-  @media (max-width: 780px) {
-  max-width: 100%;
-  margin: 60px 0 0;
+  @include media-breakpoint-only(md) {
+  max-width: 400px;
   }
 
   @include media-breakpoint-only(sm) {
@@ -128,7 +149,7 @@
 
       border-radius: 0;
 
-      @media (max-width: 780px) {
+      @include media-breakpoint-only(md) {
         margin: 60px 0 0;
       }
     }
@@ -147,7 +168,7 @@
   }
 
 
-@media (max-width: 780px) {
+@include media-breakpoint-only(md) {
   #page-login-signup {
 
     [data-groupname="buttonar"] {

@@ -44,6 +44,7 @@ function theme_mb2nl_site_menu()
 	// Additional menu items
 	$siteMenuIems[] = 'buildfrontpage';
 	$siteMenuIems[] = 'turneditingcourse';
+	$siteMenuIems[] = 'editpage';
 
 	$course_access = theme_mb2nl_site_access();
 	$can_manage = array('admin','manager','editingteacher','teacher');
@@ -104,11 +105,20 @@ function theme_mb2nl_site_menu_items()
 	$m27 = 2014051220; // Last formal release of Moodle 2.7
 
 	// Check if is frontpage
-	$isfp = ($PAGE->pagetype === 'site-index');
-	$isds = ($PAGE->pagetype !== 'my-index');
+	$isfp = ( $PAGE->pagetype === 'site-index' );
+	$isds = ( $PAGE->pagetype !== 'my-index' );
 
 	// Check if front page builde can be use
-	$ispb = ($isfp && is_dir($CFG->dirroot . '/local/mb2builder'));
+	// We don't need this link since page builder version 2
+	$ispb = 0;
+	$checkbuilder = theme_mb2nl_check_builder();
+	if ( $isfp && $checkbuilder == 1 )
+	{
+		$ispb = 1;
+	}
+
+	// Check if is page added to the front page
+	$isFpPage = ( $PAGE->pagetype === 'mod-page-view' && $COURSE->id == 1);
 
 	// Check is is course page or admin pages
     $showmanage = (
@@ -146,12 +156,19 @@ function theme_mb2nl_site_menu_items()
 			'text' => get_string('editcoursesettings'),
 			'link' => new moodle_url($CFG->wwwroot . '/course/edit.php',array('id'=>$COURSE->id))
 		),
+		'editpage' => array(
+			'access' => array('admin','manager','editingteacher'),
+			'course' => $isFpPage,
+			'icon' => 'fa fa-edit',
+			'text' => get_string('editsettings'),
+			'link' => isset( $PAGE->cm->id ) ? new moodle_url( $CFG->wwwroot . '/course/modedit.php',array( 'update' => $PAGE->cm->id, 'return' => 1 )) : ''
+		),
 		'turneditingcourse' => array(
 			'access' => array('admin','manager','editingteacher'),
 			'course' => ($isCourse || $isfp),
-			'icon' => theme_mb2anl_site_menu_turnediting_text(true),
-			'text' => theme_mb2anl_site_menu_turnediting_text(),
-			'link' => theme_mb2anl_site_menu_turnediting_url()
+			'icon' => theme_mb2nl_site_menu_turnediting_text(true),
+			'text' => theme_mb2nl_site_menu_turnediting_text(),
+			'link' => theme_mb2nl_site_menu_turnediting_url()
 		),
 		'editcategory' => array(
 			'access' => array('admin','manager'),
@@ -194,7 +211,7 @@ function theme_mb2nl_site_menu_items()
 			'shown' => !$isfp,
 			'icon' => 'fa fa-home',
 			'text' => get_string('sitehome'),
-			'link' => new moodle_url($CFG->wwwroot . '/?redirect=0')
+			'link' => new moodle_url( $CFG->wwwroot, array( 'redirect' => 0 ) )
 		),
       	'editfrontpage' => array(
 			'access' => array('admin','manager'),
@@ -247,7 +264,7 @@ function theme_mb2nl_site_menu_items()
  * Method to set course editing link
  *
  */
-function theme_mb2anl_site_menu_turnediting_url()
+function theme_mb2nl_site_menu_turnediting_url()
 {
 
 	global $CFG, $COURSE, $USER, $PAGE;
@@ -273,7 +290,7 @@ function theme_mb2anl_site_menu_turnediting_url()
  * Method to set course editing text
  *
  */
-function theme_mb2anl_site_menu_turnediting_text( $icon = false )
+function theme_mb2nl_site_menu_turnediting_text( $icon = false )
 {
 
 	global $USER, $PAGE, $COURSE;

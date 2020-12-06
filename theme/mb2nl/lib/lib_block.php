@@ -115,10 +115,10 @@ function theme_mb2nl_admin_regions ()
 
 	$regions = array(
 		'adminblock',
-		'after-slider',
-		'before-content',
-		'after-content',
-		'slider',
+		//'after-slider',
+		//'before-content',
+		//'after-content',
+		//'slider',
 		'content-top',
 		'content-bottom',
 		'bottom',

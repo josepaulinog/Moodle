@@ -77,7 +77,7 @@ table {
         .actions {
             position: absolute;
             right: 0;
-            top: 0;
+            top: 5px;
             display: flex;
 
             @include media-breakpoint-only(sm) {
@@ -174,10 +174,24 @@ table {
                 .inplaceeditable {
                   position: relative;
                   display: inline-flex;
+                  align-items: center;
                   width: 100%;
 
                   .quickeditlink {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 30px;
+
+                    margin: 0 10px;
                     display: inline-flex;
+                    align-items: center;
+
+                    background-color: $theme-color-9;
+
+                    .icon {
+                        font-size: $font-size-xs;
+                        color: $theme-color-3;
+                    }
                   }
                 }
             }
@@ -187,13 +201,18 @@ table {
                 height: 100%;
 
                 position: absolute;
-                left: 0;
+                left: -30px;
                 top: 0;
 
                 background: $gray-200;
                 border-radius: $border-radius;
 
                 cursor: move;
+
+                @include media-breakpoint-between(sm, md) {
+                left: -10px;
+                z-index: 3;
+                }
 
                 .icon {
                   color: $gray-900;
@@ -210,7 +229,6 @@ table {
                  * Add appropriate padding such that nothing overlaps the
                  * absolute positioned move icon.
                  */
-                padding-left: 2rem;
                 width: 100%;
             }
         }
@@ -238,8 +256,8 @@ table {
 
 .section li.activity {
     margin: 0 2px 0;
-    padding-bottom: 1.5 * $spacer;
-    padding-top: 1.5 * $spacer;
+    padding-bottom: 1.25 * $spacer;
+    padding-top: 1.25 * $spacer;
 
     border-bottom: 1px solid $border-color;
 
@@ -255,6 +273,12 @@ table {
 	    &:hover {
 		    box-shadow: none;
 	    }
+    }
+
+    .dndupload-progress-outer {
+        margin-top: 10px;
+        margin-left: 70px;
+        width: calc(100% - 70px);
     }
 
     &:last-child {
@@ -284,8 +308,11 @@ table {
 .section .activity {
 
   #page-site-index & {
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0 0 5px;
+
+    > div {
+        padding: 0!important;
+    }
   }
 
   .activityinstance {
@@ -302,10 +329,11 @@ table {
    padding-left: 71px;
    padding-right: 4rem;
 
-   @include media-breakpoint-only(sm) {
-     padding-left: 45px;
-     padding-right: 0;
-   }
+    @include media-breakpoint-only(sm) {
+    margin-top: 10px!important;
+    padding-left: 0;
+    padding-right: 0;
+    }
 
    #page-site-index & {
        padding-right: 0;
@@ -356,14 +384,23 @@ table {
     bottom: 0;
 }
 
-.course-content .section-summary {
-    border-bottom: 1px solid $border-color;
-    list-style: none;
-
-    &:last-of-type {
-      border-bottom: none;
+.course-content {
+    .section-summary {
+        border-bottom: 1px solid $border-color;
+        list-style: none;
+    
+        &:last-of-type {
+          border-bottom: none;
+        }
     }
-}
+} 
+
+    .course-sections {
+        .section-summary {
+            border-bottom: 0;
+        }
+    }
+
 
 .course-content .section-summary .section-title a {
     font-weight: $font-weight-sm-bold;
@@ -401,10 +438,11 @@ table {
 }
 
 .course-content .single-section .section-navigation {
-    display: block;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
     padding: 0.5rem;
-
-    overflow: hidden;
 
     background-color: $gray-100;
     border-radius: $border-radius;
@@ -418,11 +456,9 @@ table {
 
 .course-content .single-section .section-navigation .mdl-left {
     font-weight: normal;
-    float: left;
     margin-right: 1em;
 
     @include media-breakpoint-only(sm) {
-      float: none;
       margin: 0.5rem 0;
       a { width: 50%; }
     }
@@ -449,11 +485,9 @@ table {
 
 .course-content .single-section .section-navigation .mdl-right {
     font-weight: normal;
-    float: right;
     margin-left: 1em;
 
     @include media-breakpoint-only(sm) {
-      float: none;
       margin: 0.5rem 0;
       a { width: 50%; }
     }
@@ -498,10 +532,13 @@ table {
       }   
 }
 
-.single-section {
-    .section-navigation .mdl-left a,
-    .section-navigation .mdl-right a {
-        padding: 23px 22px;
+.format-topics {
+    .single-section {
+        .section-navigation .mdl-left a,
+        .section-navigation .mdl-right a {
+            padding: 17px 21px;
+            color: inherit;
+        }
     }
 }
 
@@ -525,6 +562,11 @@ table {
       }   
 }
 
+        #next-activity-link,
+        #prev-activity-link {
+            @extend .text-truncate;
+        }
+
 .course-content .single-section .section-navigation .mdl-bottom {
     margin-top: 0;
 }
@@ -547,6 +589,10 @@ table {
     li.section {
         padding-top: $spacer;
         padding-bottom: $spacer;
+
+        .format-topics & {
+            padding: $spacer 0 0;
+        }
 
         .content {
             margin: 0;
@@ -622,8 +668,20 @@ table {
     padding-bottom: 13rem;
 }
 
-.jumpmenu .form-inline {
-    display: block;
+.jumpmenu {
+    width: 100px;
+
+    .custom-select {
+        width: 130px;
+        font-size: $font-size-xs;
+        padding: 7px 1.9rem 7px 1rem;
+    }
+}
+
+.section-title-container {
+    + li {
+        padding-top: 0;
+    }
 }
 
 @include media-breakpoint-only(sm) {
@@ -699,7 +757,31 @@ table {
 }
 
 .path-course-view .unread {
-    margin-left: 30px;
+    position: absolute;
+
+    top: -12px;
+    left: 70px;
+
+    font-size: $font-size-xs;
+    background-color: $green-700;
+    color: $green-100;
+    padding: 3px 7px;
+    border-radius: $border-radius;
+
+    transition: $general-transition;
+
+    .remui-format-list & {
+        top: -24px;
+        left: 0;
+    }
+
+    &:hover {
+        background-color: $green-600; 
+    }
+
+    a {
+        color: $green-100;
+    }
 }
 
 .path-course-view .block.drag .header {
@@ -711,7 +793,8 @@ table {
 }
 
 .path-course-view .single-section .completionprogress {
-    margin-right: 5px;
+    margin-right: 15px;
+    float: right;
 }
 
 .path-site li.activity > div,
@@ -846,20 +929,12 @@ span.editinstructions {
     padding: 6px;
     border: 1px solid $state-info-border;
     text-align: center;
-    background: $state-info-bg;
-    color: $state-info-text;
+    font-size: $font-size-sm;
+    background: $theme-color-9;
+    border-radius: $border-radius;
+    color: $theme-color-3;
     z-index: 1; // Required in order to have this above relatively positioned course content@mixin
 
-    @include box-shadow(2px 2px 5px 1px #ccc);
-    @include border-radius(8px);
-}
-
-.dndupload-preview {
-    color: #909090;
-    border: 1px dashed #909090;
-    list-style: none;
-    margin-top: .2em;
-    padding: .3em;
 }
 
 .dndupload-progress-outer {
@@ -1151,6 +1226,12 @@ span.editinstructions {
 
 .course_category_tree .category.with_children.collapsed>.info>.categoryname {
     background-image: none!important;
+
+    .spinner {
+        margin-left: 10px;
+        width: 11px;
+        height: auto;
+    }
 }
 
 .course_category_tree .category.with_children > .info > .categoryname {
@@ -1174,6 +1255,27 @@ span.editinstructions {
       right: 3px;
     }
 
+}
+
+.category.with_children:not(.collapsed) {
+    position: relative;
+    z-index: 1;
+
+    &:after {
+        content: '';
+        background-color: $body-bg;
+        border: 2px solid $theme-color-8;
+        box-shadow: $box-shadow-sm;
+
+        position: absolute;
+        z-index: -1;
+        top: -15px;
+        bottom: -5px;
+        left: -15px;
+        right: -15px;
+
+        border-radius: $border-radius;
+    }
 }
 
 .course_category_tree .category.with_children.collapsed > .info > .categoryname {
@@ -1315,8 +1417,7 @@ span.editinstructions {
 
         &[data-selected='1'] {
             color: $theme-color-3;
-            background-color: $theme-color-9;
-            border-color: $theme-color-7;
+            border: 2px solid $theme-color-6;
 
             .categoryname, .course-count {
                 color: $theme-color-3!important;
@@ -1352,7 +1453,6 @@ span.editinstructions {
                 margin-top: 0;
                 margin-bottom: 0;
                 margin-right: 10px;
-                float: left;
 
                 &:before {
                   display: none;
@@ -1373,7 +1473,7 @@ span.editinstructions {
                 }
 
                 .action-hide {
-                    display: inline;
+                    display: inline-flex;
                 }
             }
 
@@ -1397,7 +1497,7 @@ span.editinstructions {
 
                 .item-actions {
                     .action-show {
-                        display: inline;
+                        display: inline-flex;
                     }
 
                     .action-hide {
@@ -1436,6 +1536,7 @@ span.editinstructions {
 
             .coursename {
                 display: inline-block;
+                max-width: 420px;
             }
         }
 
@@ -1458,7 +1559,7 @@ span.editinstructions {
         margin: 1rem;
 
         .pagination {
-            margin: 0!important;
+            margin: 10px 0!important;
         }
 
         .listitem.collapsed > ul.ml {
@@ -1490,14 +1591,37 @@ span.editinstructions {
         }
 
         .course-count {
-            margin-left: 1rem;
-            margin-right: 0.5rem;
-            display: flex;
-            align-items: center;
-            color: $body-color-secondary;
+            margin-left: 0.25rem;
+            margin-bottom: 0;
 
+            display: inline-flex;
+            align-items: center;
+            padding: $badge-padding-y $badge-padding-x;
+            font-size: $badge-font-size;
+            font-weight: $badge-font-weight;
+            text-align: left;
+            @include border-radius($badge-border-radius);
+          
+            // Empty badges collapse automatically
+            &:empty {
+              display: none;
+            }
+          
+            .icon {
+              font-size: 0.75rem;
+              margin-right: 0.75rem!important;
+              line-height: 1.5;
+            }
+          
+            i {
+              font-size: 0.75rem;
+            }
+
+            @extend .badge-secondary;
+            
             .icon {
               margin-left: 0.5rem;
+              margin-right: 0!important;
               line-height: 1.5;
             }
         }
@@ -1557,9 +1681,18 @@ span.editinstructions {
 }
 
 .jsenabled #course-category-listings #course-listing .listitem .drag-handle {
-    padding: 3px 12px;
-    margin: 0;
+    background: $theme-color-9;
+    padding: 8px 10px;
+    margin-right: 10px;
+    
+    border-radius: 5px;
+
     cursor: move !important;
+
+    i {
+        font-size: 12px;
+        color: $theme-color-3;
+    }
 }
 
 .listing-pagination-totals {
@@ -1703,8 +1836,10 @@ span.editinstructions {
 
   .card-body .action-menu-item {
     position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
     padding: 0 5px;
-    line-height: 2.1;
   }
 }
 
@@ -1714,6 +1849,7 @@ span.editinstructions {
     margin-bottom: 0.5rem;
     box-shadow: $box-shadow-sm;
     border: 1px solid $border-color;
+    border-radius: $border-radius;
 
     .clearfix {
         display: inline-flex;
@@ -1810,9 +1946,86 @@ span.editinstructions {
   text-align: left!important;
 }
 
+.course-item-actions {
+    a {
+        padding: 4px;
+    
+        .icon {
+            font-size: $font-size-sm;
+        }
+    }
+}
+
+
 #course-category-listings .item-actions .menubar {
     display: inline-flex!important;
     align-items: center;
+}
+
+#page-course-management .card-body .action-menu-item,
+.course-item-actions.item-actions {
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-left: 0.25rem;
+        background-color: $gray-100;
+        width: 30px;
+        height: 30px;
+
+        border-radius: 30px;
+
+        i {
+            font-size: 11px;
+            color: $gray-900;
+        }
+      
+        &:hover {
+            background-color: $gray-300;
+        }
+
+        &.action-delete {
+            background-color: $red-100;
+            position: absolute;
+            right: 5px;
+
+            &:hover {
+                background-color: $red-600;
+                i { color: $red-100; }
+            }
+            
+            i {
+                color: $red-600;
+            }
+        }
+
+        &.action-show {
+            background-color: $yellow-200;
+
+            &:hover {
+                background-color: $yellow-400;
+                i { color: $yellow-200; }
+            }
+
+            i {
+                color: $yellow-900!important;
+            }
+        }        
+
+        &.action-hide {
+            background-color: $green-100;
+
+            &:hover {
+                background-color: $green-700;
+                i { color: $green-100; }
+            }
+
+            i {
+                color: $green-700;
+            }            
+        }
+    }
 }
 
 
@@ -1836,8 +2049,25 @@ span.editinstructions {
     }
 }
 
-.vjs-icon-play:before, .video-js .vjs-play-control .vjs-icon-placeholder:before, .video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+.vjs-icon-play:before, 
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
     position: absolute;
     top: calc(50% - 22px);
     border: 0!important;
+}
+
+.optionsummary {
+    div, h5 {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .summary-header {
+        .icon {
+            margin-right: 10px;
+            width: 60px;
+            height: 60px;
+        }
+    }
 }

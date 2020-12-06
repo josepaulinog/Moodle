@@ -70,6 +70,7 @@
 
 				&.hidden {
 					opacity: .5;
+					display: block !important;
 				}
 
 				.content {
@@ -103,6 +104,16 @@
 
 										a {
 											color: inherit;
+										}
+									}
+
+									.contentafterlink {
+									    margin-top: 0;
+									    font-size: $fssmall;
+									    color: $textcolor_lighten;
+
+										p {
+											margin-top: 0;
 										}
 									}
 

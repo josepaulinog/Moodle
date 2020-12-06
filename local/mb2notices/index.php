@@ -206,6 +206,18 @@ foreach ($sortorder_items as $item)
     {
         $visibletotext = get_string( 'accesteachers', 'local_mb2notices' );
     }
+    elseif ( $attribs->cansee == 5 )
+    {
+        $visibletotext = get_string('rolecustom','local_mb2notices', array( 'num'=> 1 ) );
+    }
+    elseif ( $attribs->cansee == 6 )
+    {
+        $visibletotext = get_string('rolecustom','local_mb2notices', array( 'num'=> 2 ) );
+    }
+    elseif ( $attribs->cansee == 7 )
+    {
+        $visibletotext = get_string('rolecustom','local_mb2notices', array( 'num'=> 3 ) );
+    }
 
     $visibletoitem = $visibletotext;
 

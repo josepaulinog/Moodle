@@ -66,56 +66,62 @@
 
   .action-menu-item {
     position: absolute;
-    top: -1px;
-    left: -1px;
-    line-height: 1;
+    top: 5px;
+    right: 61px;
+    line-height: 1.25;
+    z-index: 4;
 
     .category-item-actions & {
       position: relative;
       top: auto;
       left: auto;
     }
-
-      .editing_move,
-      .moodle-core-dragdrop-draghandle {
-          margin-bottom: 1rem;
-          display: block;
-
-          cursor: move;
-
-          background-color: $theme-color-3;
-          padding: 9px 10px;
-          border-radius: $border-radius;
-          box-shadow: 
-          0 1px 1px rgba($theme-color-3,0.1), 
-          0 2px 2px rgba($theme-color-3,0.2), 
-          0 4px 4px rgba($theme-color-3,0.3), 
-          0 6px 8px rgba($theme-color-3,0.1),
-          0 8px 16px rgba($theme-color-3,0.1);
-
-          .icon {
-            color: $theme-color-9;
-            font-size: 12px;
-          }
-       
-      }
   }
 
 
 
   .action-menu-trigger {
     .dropdown-toggle {
-      padding: 5px 14px;
+      padding: 5px 20px 5px 10px!important;
+      font-size: $font-size-sm;
+      
+      .icon {
+        font-size: $font-size-sm;
+      }
     }
   }
 
 }
+
+
+      #page-mod-quiz-edit .section .activity .editing_move,
+      .block-controls .moodle-core-dragdrop-draghandle {
+          display: block;
+
+          cursor: move;
+
+          background-color: $green-700;
+          padding: 9px 10px;
+          border-radius: $border-radius;
+
+          .icon {
+            color: $theme-color-9;
+            font-size: 12px;
+          }
+      
+      }
 
 .card-title {
   font-size: 0.9rem;
   font-weight: $font-weight-bold;
   text-align: center;
   color: $card-title;
+
+  @media only screen and (max-width : 1900px) {
+  #page-calendar-view & {
+  text-align: left;
+  }
+  }
 
   .blocks-main-top-widget &,
   .blocks-main-top-widget & {
@@ -124,10 +130,6 @@
 
   [role=main] & {
     text-align: left;
-
-    @include media-breakpoint-only(sm) {
-      text-align: center;
-    }
   }
 
   h5 {
@@ -344,8 +346,8 @@
 
 // Card image caps . Moodle 3.5
 .card-img-top {
-  width: calc(100% + 90px);
-  margin: -2rem -45px 1rem;
+  width: calc(100% + 50px);
+  margin: -2rem -25px 1rem;
 
   #page-enrol-index & {
     padding-bottom: 2rem;
@@ -530,7 +532,7 @@
 
 .summaryimage {
   width: 200px;
-  height: 200px;
+  height: 170px;
   border-radius: $border-radius;
 
   @include media-breakpoint-only(sm) {
@@ -543,7 +545,6 @@
 /* Course overview OLD ONE */
 .c-course-box {
   margin-bottom: 1rem;
-  overflow: hidden;
 
   [data-display="summary"] & {
     overflow: inherit;
@@ -551,6 +552,12 @@
 
   .coursecat {
     margin-top: 1rem;
+
+    a {
+      @extend .badge;
+      @extend .badge-link;
+      @extend .badge-secondary;
+    }
   }
 
   #page-enrol-index & {
@@ -565,10 +572,9 @@
     padding: 2rem 1.5rem 1.5rem;
 
     position: relative;
-    overflow: hidden;
 
     [data-display="summary"] & {
-      overflow: auto;
+      padding: 1rem 2rem 1.5rem;
     }
 
     .course-summaryitem & {
@@ -598,7 +604,7 @@
   }
 
   .courses-view-course-item-footer {
-    margin: 1.5rem 0 -0.5rem;
+    margin: 1rem 0 -0.5rem;
     padding: 0!important;
 
     #page-enrol-index & {
@@ -651,12 +657,14 @@
   }
 
   .course-box-desc {
-
-    padding-right: 30px;
     font-size: $font-size-sm;
     color: $body-color-secondary;
 
     word-break: break-word;
+
+    .os-scrollbar-track {
+      background-color: $gray-100;
+    }
 
     .s-courses & {
       margin-bottom: 1rem;
@@ -667,6 +675,13 @@
       overflow: hidden;
     }
   }
+
+  .os-content {
+    .course-box-desc {
+      padding-right: 30px!important;
+    }
+  }
+
 }
 
   [data-region="favourite-icon"] {
@@ -690,8 +705,8 @@
       text-align: center;
 
       .block-region & {
-        top: 5px;
-        left: 5px;
+        top: 12px;
+        left: 12px;
       }
     }
   }
@@ -758,13 +773,6 @@
           }
         }
 
-        [data-display="summary"] {
-          .coursename .icon.fa-star {
-            top: 2px;
-            left: 2px;
-          }
-        }
-
         [data-display="list"] {
 
           .coursename .icon {
@@ -774,14 +782,24 @@
           }
 
           .coursename .icon.fa-star {
-            top: -15px;
-            left: -31px;
+            top: -13px;
+            left: -29px;
 
             width: 26px;
             height: 26px;
 
             line-height: 2.2!important;
           }
+        }
+
+        [data-display="summary"] .coursename .icon.fa-star {
+          top: 2px;
+          left: 2px;
+
+          width: 26px;
+          height: 26px;
+
+          line-height: 2.2!important;
         }
 
 
@@ -808,10 +826,10 @@
   top: 15px;
   left: 22px;
 
-  width: calc(100% - 190px);
+  width: calc(100% - 3rem);
 
   a {
-    margin-left: -10px;
+    margin-left: -15px;
     margin-bottom: 5px;
 
     &:first-of-type {
@@ -820,18 +838,141 @@
   }
 
   .c-courses-teacher-avatar {
-    width: 40px;
-    height: 40px;
+    width: 40px!important;
+    height: 40px!important;
     border: 3px solid $white;
   }
 
   .c-courses-teacher-name {
     margin: 0;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-bold;
-    color: $body-color-light;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-sm-bold;
+    color: $body-color;
   }
 }
+
+
+    .show-course-contacts-btn {
+      background-color: rgba(#000, 0.6);
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+
+      position: absolute;
+      left: 90px;
+      top: calc(50% - 15px);
+
+      border: 3px solid #fff;
+
+      &:after {
+        @extend %fa-icon;
+        @extend .fas;
+    
+        position: absolute;
+        top: calc(50% - 6px);
+        left: calc(50% - 2px);
+  
+        content: fa-content($fa-var-caret-right);
+  
+        font-size: 12px;
+        color: #fff;
+      }
+    }
+
+    .course-contacts-ext {
+      background-color: $body-bg;
+      box-shadow: $box-shadow-lg;
+      border-radius: $border-radius;
+      
+      position: absolute;
+      top: -9px;
+      left: -15px;
+      right: -20px;
+      z-index: 3;
+
+      overflow-y: hidden;
+
+      .close-course-contacts-btn {
+        position: absolute;
+        z-index: 4;
+        top: 10px;
+        right: 10px;
+
+        border: 0;
+
+        width: 30px;
+        height: 30px;
+        border-radius: $border-radius;
+        background-color: $gray-100;
+
+        transition: $general-transition;
+
+        &:hover {
+          background-color: $gray-200;
+        }
+
+        &:before {
+          font-size: 14px;
+          top: calc(50% - 7px);
+        }
+
+      }
+
+      .course-contacts-ext-content {
+        margin: 10px 10px 5px 10px;
+        max-height: 245px;
+        overflow-y: auto;
+
+        .os-scrollbar-handle {
+          background-color: rgba($body-color-secondary, 0.6)!important;
+        }
+
+        .os-scrollbar-track {
+          background-color: rgba($body-color-secondary, 0.2)!important;
+        }
+      }
+
+      .course-contacts-ext-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+          padding: 0;
+          width: 100%;
+
+          display: inline-flex;
+          align-content: center;
+          justify-items: start;
+
+          font-size: $font-size-sm;
+          font-weight: $font-weight-sm-bold;
+
+          a {
+            padding: 5px;
+            width: 100%;
+
+            border-radius: $border-radius;
+            color: $card-text;
+
+            &:hover {
+              color: $theme-color-3;
+              background-color: $theme-color-9;
+            }
+
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+        .c-courses-teacher-avatar {
+          width: 30px;
+          height: 30px;
+          margin-right: 0.5rem
+        }
+      }
+    }
 
 .c-course-box-fp {
   padding: 0;
@@ -904,11 +1045,23 @@
      }
   }
 
-  .list-group-item {
+  .course-list-group {
     position: relative;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     font-size: $font-size-base;
     font-weight: $font-weight-sm-bold;
+
+    .course-list-item {
+      position: relative;
+
+      padding: 1rem 2rem;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+    }
 
     .coursename {
       margin-bottom: 0;
@@ -917,8 +1070,8 @@
 
   }
 
-      .list-group-item--favourite {
-        border: 2px solid $yellow-300;
+      .course-list-item--favourite {
+        border: 2px solid $yellow-300!important;
       }
 
   .progress-bar-text {

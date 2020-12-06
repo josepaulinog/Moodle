@@ -3,6 +3,16 @@
 	> a {
 		display: block;
 	}
+
+	opacity: 0;
+
+	.loaded & {
+		opacity: 1;
+	}
+}
+
+.mb2slides-slide-list {
+	padding: 0 !important;
 }
 
 .mb2slides-slide-item,

@@ -25,27 +25,23 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG, $PAGE;
 
-require_once( __DIR__ . '/lib.php');
-require_once( __DIR__ . '/classes/fields/mb2builder.php');
-require_once( __DIR__ . '/classes/fields/mb2buildersettings.php');
+require_once( __DIR__ . '/lib.php' );
 
-if ($hassiteconfig)
+if ( $hassiteconfig )
 {
 
-	$ADMIN->add('root', new admin_category('local_mb2builder', get_string('pluginname', 'local_mb2builder', null, true)));
-    $page = new admin_settingpage('local_mb2builder_builder', get_string('builderfp', 'local_mb2builder', null, true));
+	$ADMIN->add( 'root', new admin_category( 'local_mb2builder', get_string('pluginname', 'local_mb2builder', null, true) ) );
 
-    if ($ADMIN->fulltree)
-	{
-		$page->add (new admin_setting_configmb2builder('local_mb2builder/builderfp','','',''));
-		$page->add (new admin_setting_configtextarea('local_mb2builder/builderfptext','','',''));
-		$page->add (new admin_setting_configmb2buildersettings('local_mb2builder/buildersettings','','',''));
-    }
-
+	$page = new admin_externalpage( 'local_mb2builder_managepages', get_string('managepages', 'local_mb2builder'),
+	new moodle_url( '/local/mb2builder/index.php' ), 'local/mb2builder:managepages' );
     $ADMIN->add('local_mb2builder', $page);
 
+	$page = new admin_externalpage( 'local_mb2builder_managelayouts', get_string( 'layoutscustom', 'local_mb2builder' ),
+	new moodle_url( '/local/mb2builder/layouts.php' ), 'local/mb2builder:managelayouts' );
+	$ADMIN->add('local_mb2builder', $page);
+
 	$page = new admin_settingpage('local_mb2builder_images', get_string('images', 'local_mb2builder', null, true));
-	$page->add (new admin_setting_configstoredfile('local_mb2builder/images','','','images', 0, array('maxfiles' => 100, 'accepted_types' => array(
+	$page->add (new admin_setting_configstoredfile('local_mb2builder/images','','','images', 0, array('maxfiles' => 100, 'subdirs' => 0, 'accepted_types' => array(
 		'.jpg',
 		'.png',
 		'.gif',
@@ -63,16 +59,15 @@ if ($hassiteconfig)
 		'.avi',
 		'.mov'
 	))));
-
 	$ADMIN->add('local_mb2builder', $page);
 
+	$page = new admin_settingpage( 'local_mb2builder_options', get_string( 'options', 'local_mb2builder', null, true)  );
 
-	$page = new admin_settingpage('local_mb2builder_options', get_string('options', 'local_mb2builder', null, true));
 	$name = 'local_mb2builder/theme';
 	$title = get_string('theme','local_mb2builder');
 	$setting = new admin_setting_configtext($name, $title, '', '');
-	$page->add($setting);
 
-	$ADMIN->add('local_mb2builder', $page);
+	$page->add( $setting );
+	$ADMIN->add( 'local_mb2builder', $page );
 
 }

@@ -29,9 +29,9 @@ $THEME->name = 'mb2nl';
 
 $THEME->extrascsscallback = 'theme_mb2nl_get_pre_scss_raw';
 $THEME->prescsscallback = 'theme_mb2nl_get_pre_scss';
-$THEME->scss = 'style';
+$THEME->scss = function($theme){ return theme_mb2nl_get_scss_content( $theme) ; };
 $THEME->sheets = array();
-$THEME->parents = array('boost');
+$THEME->parents = array( 'boost' );
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
@@ -40,16 +40,11 @@ $THEME->enable_dock = false;
 $THEME->editor_sheets = array();
 
 // Define region arrays
-$fpRegions = array('side-pre','side-post','content-top','content-bottom','slider',
-'after-slider','before-content','after-content','adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
+$fpRegions = array('side-pre','side-post','content-top','content-bottom','adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
 $incourseRegions = array('side-pre','content-top','content-bottom','adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
-$defRegions = array('side-pre','side-post','content-top','content-bottom',
-'adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
-$def2ColsRegions = array('side-pre','content-top','content-bottom','adminblock','bottom','bottom-a',
-'bottom-b','bottom-c','bottom-d');
-$oneColRegion = array('content-top','content-bottom','adminblock','bottom','bottom-a','bottom-b',
-'bottom-c','bottom-d');
-
+$defRegions = array('side-pre','side-post','content-top','content-bottom','adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
+$def2ColsRegions = array('side-pre','content-top','content-bottom','adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
+$oneColRegion = array('content-top','content-bottom','adminblock','bottom','bottom-a','bottom-b','bottom-c','bottom-d');
 
 // Moodle documentation
 // https://docs.moodle.org/dev/Page_API
@@ -143,5 +138,13 @@ $THEME->layouts = array(
         'file' => 'columns3.php',
         'regions' => $defRegions,
         'defaultregion' => 'side-pre'
+    ),
+    'mb2builder' => array(
+        'file' => 'mb2builder.php',
+        'regions' => array()
+    ),
+    'mb2builder_form' => array(
+        'file' => 'mb2builder_form.php',
+        'regions' => array()
     )
 );

@@ -90,8 +90,11 @@
 			&.box-contacts {
 				> ul {
 
+					list-style: none;
 					margin: 0;
 					padding: 0;
+					max-height: 296px;
+					overflow-y: auto;
 
 					> li {
 						@include clearfix();
@@ -153,6 +156,7 @@
 		list-style: none;
 
 		ul {
+			list-style: none;
 			margin: 0;
 			list-style: none;
 			padding: 0 0 .25rem .6rem;

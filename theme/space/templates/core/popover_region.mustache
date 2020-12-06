@@ -28,14 +28,17 @@
     Context variables required for this template:
     * none
 
-    Example context (json):{}
+    Example context (json):
+    {
+    }
+
 }}
 <li class="popover-region collapsed {{$classes}}{{/classes}}"
     {{$attributes}}{{/attributes}}
     data-region="popover-region">
     <div class="popover-region-toggle nav-link"
         data-region="popover-region-toggle"
-        aria-role="button"
+        role="button"
         aria-controls="popover-region-container-{{uniqid}}"
         aria-haspopup="true"
         aria-label="{{$togglelabel}}{{#str}}showpopovermenu{{/str}}{{/togglelabel}}"
@@ -55,14 +58,14 @@
             <div class="popover-region-header-actions" data-region="popover-region-header-actions">{{$headeractions}}{{/headeractions}}</div>
         </div>
         <div class="popover-region-content-container" data-region="popover-region-content-container">
-            <div class="popover-region-content" data-region="popover-region-content" data-simplebar>
+            <div class="popover-region-content" data-region="popover-region-content">
                 {{$content}}{{/content}}
             </div>
 
         </div>
         {{$anchor}}
             {{#urls.seeall}}
-                <a class="see-all-link btn btn-sm btn-primary w-100"
+                <a class="see-all-link btn btn-sm btn-primary"
                     href="{{{.}}}">
                     <div class="popover-region-footer-container">
                         <div class="popover-region-seeall-text">{{#str}} seeall, message {{/str}}</div>

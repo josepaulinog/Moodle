@@ -54,6 +54,20 @@
         return $output;
     }
 	
+    public function favicon() {
+        global $CFG;
+
+        $theme = theme_config::load('lambda');
+        $favicon = $theme->setting_file_url('favicon', 'favicon');
+
+        if (!empty(($favicon))) {
+            $urlreplace = preg_replace('|^https?://|i', '//', $CFG->wwwroot);
+            $favicon = str_replace($urlreplace, '', $favicon);
+            return new moodle_url($favicon);
+        }
+        return parent::favicon();
+    }
+	
 	    /*
      * This renders the navbar.
      * Uses bootstrap compatible html.
@@ -414,7 +428,6 @@
 
         $showcoursemenu = false;
         $showusermenu = false;
-		$participantsmenu = false;
 
         // We are on the course home page.
         if (($context->contextlevel == CONTEXT_COURSE) &&
@@ -475,17 +488,16 @@
         } else {
 			$items = $this->page->navbar->get_items();
             $navbarnode = end($items);
-			if ($navbarnode && ($navbarnode->key === 'participants')) {
-				$participantsmenu = true;
-                $node = $this->page->settingsnav->find('users', navigation_node::TYPE_CONTAINER);
-                if ($node) {
-                    // Build an action menu based on the visible nodes from this navigation tree.
-                    $this->build_action_menu_from_navigation($menu, $node);
-                }
-			}
 		}
         return $this->render($menu);
     }
+	
+	public function lambda_h5p_header() {
+		$header = new stdClass();
+		$header->contextheader = $this->context_header();
+		$header->headeractions = $this->page->get_header_actions();
+		return $this->render_from_template('theme_lambda/lambda_h5p_header',$header);
+	}
 	
 	protected function build_action_menu_from_navigation(action_menu $menu,
                                                        navigation_node $node,

@@ -11,6 +11,8 @@
 
 .path-admin .admintable .leftalign {
     text-align: left;
+    padding-top: 0!important;
+    padding-bottom: 0!important;
 }
 
 span + .no-overflow {
@@ -246,7 +248,7 @@ span + .no-overflow {
       background-color: transparent;
 
       td {
-        padding: 0;
+        padding: 0!important;
       }
     }
   }
@@ -359,8 +361,7 @@ span + .no-overflow {
 }
 
 .path-admin .roleassigntable td {
-    vertical-align: top;
-    padding: 0.2em 0.3em;
+    vertical-align: top!important;
 }
 
 .path-admin .roleassigntable p {
@@ -501,10 +502,12 @@ span + .no-overflow {
 /* Styles for flags on admin settings */
 .adminsettingsflags {
     float: right;
+    display: inline-flex;
+    align-items: center;
     margin: 0 10px;
     padding: 5px;
 
-    background-color: $red-200;
+    background-color: $red-100;
     border-radius: $border-radius;
 
     label {
@@ -591,10 +594,11 @@ span + .no-overflow {
     display: inline-block;
 }
 
+
     [data-passwordunmask="wrapper"],
     .form-password {
-        background-color: $red-200;
-        padding: 10px 10px 10px 20px;
+        background-color: $red-100;
+        padding: 10px;
         border-radius: $border-radius;
 
         .text-muted {
@@ -612,14 +616,28 @@ span + .no-overflow {
     width: 8em;
 }
 
-#adminthemeselector .selectedtheme td.c0 {
-    border: 1px solid $state-info-border;
-    border-right-width: 0;
-}
+#adminthemeselector {
+    img {
+        max-width: 300px;
+        border-radius: $border-radius;
+    }
 
-#adminthemeselector .selectedtheme td.c1 {
-    border: 1px solid $state-info-border;
-    border-left-width: 0;
+    .selectedtheme td.c0 {
+        width: 300px;
+        border: 1px solid $state-info-border;
+        border-right-width: 0;
+    }
+
+    .selectedtheme td.c1 {
+        border: 1px solid $state-info-border;
+        border-left-width: 0;
+    }
+
+    .selectedtheme td {
+        background-color: $theme-color-9;
+        color: $theme-color-3!important;
+        border-bottom: 2px solid $theme-color-3!important;
+    }
 }
 
 .admin_colourpicker,
@@ -667,6 +685,26 @@ span + .no-overflow {
     text-align: center;
 }
 
+        .checkforupdates {
+            margin: 0!important;
+            padding: 5px 10px;
+
+            border: 2px solid $theme-color-3;
+            border-radius: $border-radius;
+            background-color: $theme-color-9;
+
+            font-size: $font-size-xs;
+            color: $theme-color-3;
+
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+
+            .btn {
+                margin: 0 20px 0 0;
+            }
+        }
+
 #page-admin-index .adminwarning.availableupdatesinfo .moodleupdateinfo.maturity200 .info.release {
     @extend .tag-info;
 }
@@ -705,7 +743,7 @@ span + .no-overflow {
     }
 
     .checkforupdates {
-        margin: 10px 0;
+        margin: 10px 0!important;
 
         .singlebutton {
             margin: 5px 0;
@@ -786,7 +824,7 @@ span + .no-overflow {
 
     // Section before the plugins check table.
     .lasttimefetched {
-      margin: 0 0 2rem 0;
+      margin: 5px 0;
       font-size: $font-size-xs;
       color: $gray-700;
     }
@@ -1140,31 +1178,25 @@ span + .no-overflow {
 
     .drag-handlecontainer {
         .moodle-core-dragdrop-draghandle {
+            width: 25px;
+            height: 100%;
+
             position: absolute;
-            top: 15px;
-            left: 0;
+            left: -30px;
+            top: 0;
 
-            width: 42px;
-            height: calc(100% - 30px);
-
-            line-height: 1;
-    
-            background-color: $body-bg;
+            background: $gray-200;
             border-radius: $border-radius;
-    
-    
-            border: 2px dashed $border-color;
-            box-shadow: $btn-box-shadow;
-    
-            color: $body-color; 
 
             cursor: move;
 
             .icon {
+                color: $gray-900;
                 font-size: 12px;
+
                 position: absolute;
-                top: calc(50% - 6px);
-                left: calc(50% - 6px);
+                top: calc(50% - 5px);
+                left: 5px;
             }
         }
     }
@@ -1197,28 +1229,27 @@ span + .no-overflow {
 
     .formsettingheading {
         font-size: $font-size-sm;
-        text-align: center;
         padding: 0;
         margin-bottom: 2rem;
+
+        #page-admin-setting-themesettingspace & {
+        text-align: center;
 
         img {
             max-width: 1110px;
             width: 100%;
         }
-    }
+        }
 
-    .alert {
-        max-width: 1110px;
     }
 
 
     fieldset {
       h3 {
-
-        font-size: $font-size-base * 1.25;
-        font-weight: $font-weight-sm-bold;
+        
+        #page-admin-setting-themesettingspace & {
         text-align: center;
-
+        }
 
           a:not([class='btn-icon']) {
             position: relative;
@@ -1296,6 +1327,7 @@ span + .no-overflow {
         color: #d2d6e6;
     }
 
+    textarea,
     input[type=text] {
         background-color: #1e2133;
         border-color: #4c516c;
@@ -1312,6 +1344,11 @@ span + .no-overflow {
         background-color: #1e2134;
         color: #6edeaf;
     }
+  }
+
+  div[id*="BlockProperties"] {
+      margin-bottom: 2px;
+      padding-bottom: 0;
   }
 
   #admin-sliderenabled,
@@ -1395,9 +1432,15 @@ span + .no-overflow {
   #admin-heroboxshadow,
   div[id*="admin-showfpblock11subsection"],
   div[id*="admin-fpblock11subsectioncontent"],
+  #admin-sliderintervalenabled,
+  #admin-sliderinterval
   {
       background-color: $gray-200;
       margin: 0;
+  }
+
+  #admin-sliderintervalenabled {
+      padding-bottom: 0;
   }
 
   #admin-FPHTMLBlock1IntroProperties,
@@ -1414,49 +1457,94 @@ span + .no-overflow {
       margin-bottom: 80px;
   }
 
-  .doc-btn {
-      width: 230px;
-      display: block;
-      margin-bottom: 1rem;
-      padding: 10px 30px 10px 80px;
+    // Content builder
+    #admin-slotblock1, 
+    #admin-slotblock2, 
+    #admin-slotblock4, 
+    #admin-slotblock5, 
+    #admin-slotblock6, 
+    #admin-slotblock7, 
+    #admin-slotblock8, 
+    #admin-slotblock10, 
+    #admin-slotblock11,
+    #admin-slotblock12
+    {
+        background-color: $gray-100;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-radius: 5px 5px 0 0;
 
-      border-radius: $border-radius;
-      background-color: $green-700;
-      box-shadow: 0 1px 1px rgba($green-700,.15), 0 1px 2px rgba($green-700,.15), 0 1px 2px rgba($green-700,.15), 0 2px 4px rgba($green-700,.15), 0 4px 12px rgba($green-700,.15);
-      color: $green-100!important;
+        select, .custom-select {
+            padding-top: .25rem;
+            padding-bottom: .25rem;
+            min-width: 60px;
+        }
+    }
 
-      position: relative;
+    #admin-slotblock3,
+    #admin-slotblock9,
+    #admin-slotblock13,
+    #admin-slotblock14
+    {
+        background-color: $gray-100;
+        padding-bottom: 0;
+        border-radius: 5px 5px 0 0;
 
-      :hover & {
-          background-color: $green-800;
-          box-shadow: 0 1px 1px rgba($green-800,.55), 0 2px 2px rgba($green-800,.35), 0 4px 4px rgba($green-800,.15), 0 6px 8px rgba($green-800,.15), 0 8px 16px rgba($green-800,.15);
-  
-          text-decoration: none;
-      }
+        select, .custom-select {
+            padding-top: .25rem;
+            padding-bottom: .25rem;
+            min-width: 60px;
+        }
+    }
 
-      i {
-        position: absolute;
-        top: calc(50% - 12px);
-        left: 20px;
+    #admin-showfpblock1hr,
+    #admin-showfpblock2hr,
+    #admin-showfpblock4hr,
+    #admin-showfpblock6hr,
+    #admin-showfpblock7hr,
+    #admin-showfpblock8hr,
+    #admin-showfpblock10hr,
+    #admin-showfpblock11hr,
+    #admin-showfpblock12hr,
+    #admin-showfpblockteamhr
+    {
+        background-color: $gray-100;
+        padding-top: 0;
+        border-radius: 0 0 5px 5px;
 
-        font-size: 24px;
-      }
+        label {
+            font-size: $font-size-xs;
+        }
 
-      strong, span {
-          display: block;
-          color: inherit;
-      }
+    }
 
-      strong {
-          font-size: $font-size-sm;
-      }
-
-      span {
-          font-size: $font-size-xs;
-          font-weight: $font-size-sm;
-      }
-  }
 
   .path-admin-tool-lp [data-region="competencylinktree"] ul li>span {
       padding-left: 10px;
   }
+
+  .backup_log_contents,
+  .debuggingmessage,
+  .plugin-install-console {
+      padding: 2rem;
+      border-radius: $border-radius;
+
+      font-size: $font-size-sm;
+
+      background-color: #000;
+      color: #fff;
+  }
+
+  #page-admin-search .list-unstyled a {
+    font-size: .875rem;
+    opacity: .7;
+ }
+
+
+
+ #page-admin-tool-dataprivacy-pluginregistry {
+    [role="contentinfo"] {
+      font-size: $font-size-sm;
+    }
+  }
+  

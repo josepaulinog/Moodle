@@ -5,6 +5,7 @@
     @include media-breakpoint-only(sm) {
       width: 100%;
       display: block;
+      text-align: center;
     }
 
     + .singlebutton {

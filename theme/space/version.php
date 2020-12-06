@@ -18,14 +18,14 @@
  * space.
  *
  * @package    theme_space
- * @copyright 2018 - 2020 Marcin Czaja - Rosea Themes
+ * @copyright  2018 - 2020 Marcin Czaja - Rosea Themes
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2020061902; // YYYYMMDDVV.
-$plugin->maturity = MATURITY_STABLE; // This version's maturity level.
-$plugin->requires  = 2020061500.00; // 3.9 (Build: 2020061500.00).
+$plugin->version = 2020112801; // YYYYMMDDVV.
+$plugin->maturity = MATURITY_STABLE;
+$plugin->requires  = 2020110300; // 3.10
 $plugin->component = 'theme_space';
-$plugin->release = '1.9.20 (Build: 2020061902)';
+$plugin->release = '1.11.7 (Build: 2020112801)';

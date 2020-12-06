@@ -72,21 +72,6 @@ a:hover {
 	padding-bottom: 10px;
 	background: #fff;
 }
-img.iconsmall {
-    height: inherit;
-	margin: 0;
-    vertical-align: inherit;
-    width: inherit;
-}
-.bor {
-    height: 20px;
-    margin: 0px;
-    margin-bottom: 20px;
-}
-.topbor {
-    height: 20px;
-    margin-bottom: 10px;
-}
 .side-pre {
     border: 1px solid #333;
 }
@@ -108,13 +93,11 @@ textarea[cols], input[size] {
 .form.form-inline input {
     margin-bottom: 10px;
 }
-.inline-req img {
-    height: 12px;
-    width: 8px;
-    float: right;
-}
 .form-inline .form-control {
     width: 95%;
+    max-width: 500px;
+}
+.form-inline .d-md-inline-block.mr-md-2.position-relative {
     max-width: 500px;
 }
 .form-inline .editor_atto .form-control {
@@ -138,9 +121,6 @@ textarea[cols], input[size] {
 }
 #page-navbar .breadcrumb-button .forumsearch #search {
 	width: 150px;
-}
-fieldset.coursesearchbox {
-    display: none;
 }
 #page-mod-forum-discuss .discussioncontrols {
     margin: 5px;
@@ -182,6 +162,9 @@ Header
 #page-header {
     padding: 12px 0;
 	background: [[setting:headercolor]] [[setting:header_bg]];
+}
+#page-content #page-header {
+    background: #fff;
 }
 #page-header > .container-fluid > .row-fluid {
 	display: flex;
@@ -241,9 +224,7 @@ h2#subtitle {
     vertical-align: text-top;
 }
 .login-header {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
+    display: block;
 }
 #block-login {
     padding: 15px 0 2px;
@@ -303,6 +284,7 @@ input{padding-left:40px;}
 }
 #loggedin-user {
 	float:right;
+	display: flex;
 }
 .jsenabled .usermenu .moodle-actionmenu .toggle-display.textmenu {
     padding-left: 0;
@@ -354,9 +336,6 @@ input{padding-left:40px;}
 }
 .jsenabled .usermenu .moodle-actionmenu.show {
     background-color: initial;
-}
-.profileblock {
-    padding: 5px 0;
 }
 .profileblock .usermenu {
     float: left;
@@ -425,6 +404,14 @@ Header - centered logo
 	margin-top: 8px;
 	min-width: 260px;
 	padding: 15px 15px 0 15px !important;
+}
+.dropdown-menu-right {
+    right: -10px;
+    left: auto;
+}
+.usermenu .dropdown-menu-right {
+    right: auto;
+    left: 0;
 }
 #top-login #block-login div#user, #top-login #block-login div#pass {
 	display: block !important;
@@ -707,6 +694,9 @@ Moodle gear menus and admin tabs
     border-radius: 2px;
     box-shadow: 0 -1px 0 rgba(0,0,0,.1) inset;
 }
+.path-mod .action-menu.moodle-actionmenu .icon.navicon, .breadcrumb-button .action-menu.moodle-actionmenu .icon.navicon {
+    display: none;
+}
 .breadcrumb-button .moodle-actionmenu a.dropdown-toggle {
 	min-width: 30px;
 }
@@ -811,6 +801,21 @@ Course
 table.flexible, .generaltable {
     display: table;
     overflow-x: auto;
+}
+@media (min-width: 768px) {
+	#groupeditform .col-md-6.mb-1 {width: calc(50% - 20px); float: left; margin-right: 10px;}
+}
+#addmembersform .groupmanagementtable td, #assignform .generaltable td {
+    vertical-align: top;
+}
+#removeselect_searchtext, #addselect_searchtext {
+    width: auto;
+}
+#removeselect_clearbutton, #addselect_clearbutton {
+    margin-bottom: 0;
+}
+#addcontrols input, #removecontrols input {
+    padding: 6px 4px;
 }
 #plugins-control-panel.generaltable, #serverstatus.generaltable {
     display: block;
@@ -932,6 +937,30 @@ margin-left: 0px;
 }
 .box.py-3.generalbox.folderbuttons {
     display: flex;
+}
+
+/*================================================== * 
+course competencies
+=====================================================*/
+.user-competency-course-navigation .d-md-inline-block {
+    display: inline-block;
+}
+#page-admin-tool-lp-coursecompetencies .alert {
+    margin-top: 20px;
+}
+.path-admin-tool-lp .moodle-dialogue-bd .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.path-admin-tool-lp [data-region="filtercompetencies"] input {
+    width: calc(100% - 90px);
+}
+.path-admin-tool-lp [data-region="filtercompetencies"] .btn.btn-secondary {
+    margin: 0;
+}
+.path-admin-tool-lp [data-region="filtercompetencies"] .btn.btn-secondary img.icon {
+    filter: brightness(2);
+    padding: 0;
 }
 
 /*================================================== * 
@@ -1140,7 +1169,6 @@ course category
     height: 80px;
     padding: 30px 15px;
     border-bottom: 1px solid #e2e2e2;
-	margin-top: -1em;
     background-size: cover;
 }
 .course_category_tree .collapsible-actions .collapseexpand {
@@ -1292,7 +1320,7 @@ body#page-mod-assign-grader, body#page-mod-assign-grader #page {padding:0;}
 .initialbar .letter {
     line-height: 20px;
 }
-.btn.btn-link, .btn.btn-link > a {
+.btn.btn-link, .btn.btn-link > a, input.btn.btn-link {
     color: #555 !important;
 }
 .btn.btn-link:hover, .btn.btn-link:active, .btn.btn-link:focus, a.btn.btn-link.p-0:hover {
@@ -1302,23 +1330,24 @@ a.btn.btn-link {
     color: [[setting:linkcolor]] !important;
 	background: transparent !important;
     text-decoration: none;
-	margin: 5px 0;
+	margin: 1px 0;
 }
 a.btn.btn-link:hover {
     color: #222 !important;
 	background: transparent !important;
     text-decoration: underline;
-	margin: 5px 0;
-}
-[data-toggle="dropdown"] + .dropdown-menu > .dropdown-item {
-    display: block;
-    white-space: nowrap;
 }
 [data-toggle="dropdown"] + .dropdown-menu > .dropdown-item.hidden {
     display: none;
 }
-a#prev-activity-link, a#next-activity-link {
+.activity-navigation #next-activity-link, .activity-navigation #prev-activity-link {
+    background: #f2f2f2 !important;
     color: #555 !important;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.1) inset;
+}
+.activity-navigation #next-activity-link:hover, .activity-navigation #prev-activity-link:hover {
+    background: #e2e2e2 !important;
+    text-decoration: none;
 }
 #comment_chooser ul {
     list-style: none;
@@ -1346,6 +1375,9 @@ a#prev-activity-link, a#next-activity-link {
 }
 .btn-toolbar.collapse-buttons .btn {
     background: #e2e2e2;
+}
+.path-mod-assign [data-region="input-field"] .d-md-inline-block {
+    display: inline-block !important;
 }
 
 /* =========================================================== *
@@ -1564,7 +1596,16 @@ body.sidebar-open #sidebar .block-region {
 .block.block_html.blank .content {
     padding: 6px 0;
 }
-
+.block.block_timeline .paged-content-page-container h5 {
+    font-size: 1rem;
+    margin-top: 0 !important;
+}
+.block.block_timeline .paged-content-page-container .media-body h6.text-truncate {
+    white-space: normal;
+    font-weight: 400 !important;
+    text-transform: none;
+    font-size: 1rem;
+}
 
 /* =========================================================== *
 Frontpage & Dashboard
@@ -1708,6 +1749,10 @@ Moodle 3.6 Dashboard
 	.block-myoverview.block-cards .course-summaryitem {position: relative;}
 	.block-myoverview.block-cards .course-summaryitem .ml-auto.dropdown {top: 0; position: absolute; right: 0;}
 	.block-myoverview.block-cards .course-summaryitem .d-flex {display: block !important;}
+}
+.dashboard-card-deck.one-row {
+    flex-flow: row wrap;
+    overflow-x: auto;
 }
 .block-myoverview.block-cards .dashboard-card-deck .card-footer.dashboard-card-footer.border-0.bg-white {
     position: absolute;
@@ -1916,6 +1961,45 @@ abbr[title], abbr[data-original-title] {
     line-height: 1rem;
     margin: 8px 0;
 }
+.calendar_event_other, .badge.badge-circle.calendar_event_other, .block .minicalendar td.duration_other.duration_finish {
+    background-color: #ced4da;
+}
+.path-calendar .maincalendar .calendar_event_other {
+	border-color:#ced4da;
+}
+.minicalendar td.duration_other {
+	border-top:1px solid #ced4da;
+	border-bottom:1px solid #ced4da;
+}
+.popover.fade {
+    opacity: 1 !important;
+    padding: 10px;
+}
+.popover .popover-header {
+    font-size: 1.35rem;
+    line-height: 2.5rem;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+.path-calendar .maincalendar .eventlist .event .card.rounded {
+    border-radius: 0;
+}
+.path-calendar .maincalendar .eventlist .event .description {
+    padding: 10px;
+}
+.path-calendar .maincalendar .box.card-header {
+    background: #f2f2f2;
+    border-left-width: 10px;
+    border-left-style: solid;
+    border-bottom: 1px solid #e3e3e3;
+}
+.path-calendar .maincalendar .box.card-header h3.name {
+    line-height: 1rem;
+    margin: 0;
+}
+.path-calendar .maincalendar .box.card-header img.icon {
+    display: block;
+}
 
 /* =========================================================== *
 Footer
@@ -1960,7 +2044,7 @@ Footer
 }
 #page-footer .row-fluid .span4 {
 	padding: 0 30px;
-	min-height: 0;
+	min-height: 1px;
 }
 #page-footer .row-fluid .span4 .block {
 	padding-top: 20px;
@@ -2155,6 +2239,19 @@ Quiz
 .path-question-type .fcontainer .form-inline > div, .path-question-type .fcontainer .form-inline > label {
     margin: 0 !important;
 }
+.modal-footer .btn {
+    margin-bottom: 0;
+}
+.btn-toolbar .selectmultiplecommandbuttons button {
+    font-size: 14px;
+    margin-left: 0;
+}
+#page-mod-quiz-edit ul.slots li.section li.activity > div {
+    overflow: hidden;
+}
+.mod_quiz-edit-action-buttons #repaginatecommand {
+    margin-bottom: 0;
+}
 
 /* =========================================================== *
 group Tabs
@@ -2190,6 +2287,9 @@ Atto editor
 .atto_form input.fullwidth {
     width: auto;
 }
+.atto_form .atto_media_name_entry, .atto_form .atto_media_title_entry {
+    display: block;
+}
 .yui3-skin-sam .yui3-tab-label {
     background: #f2f2f2 none repeat scroll 0 0;
 }
@@ -2213,7 +2313,6 @@ Atto editor
     font-size: 14px;
 }
 .atto_recordrtc, .atto_recordrtc div {
-    max-width: 250px;
     margin: 0 auto;
 }
 .moodle-dialogue .container {
@@ -2518,9 +2617,6 @@ Moodle dialogue and modals
 .moodle-dialogue-base .moodle-dialogue-wrap {
     border-radius: 4px;
 }
-.moodle-dialogue .mform label {
-    display: block;
-}
 .modal-body {
     position: relative;
     overflow-y: visible;
@@ -2685,7 +2781,7 @@ body#page-mod-feedback-print #page {
 	#wrapper {width: 100%;max-width: inherit;}
 	#page {padding: 0 10px;}
 	#page-header > .container-fluid > .row-fluid {display: block;}
-	.login-header {flex-direction: row;}
+	.login-header {display: flex !important; flex-direction: row; justify-content: center;}
 	.logo-header {text-align: center;}
 	a.logo img {margin-bottom: 10px;}
 	.form-item .form-setting, .form-item .form-description, .mform .fitem .felement, #page-mod-forum-search .c1 {margin-left: 0;}
@@ -2935,6 +3031,15 @@ Moodle 3.7 User Preferences
 /*================================================== * 
 Moodle 3.8
 =====================================================*/
+.overflow-auto {
+    overflow: auto !important; 
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+.justify-content-around {
+    justify-content: space-around;
+}
 .alert {
     text-shadow: none;
     position: relative;
@@ -2956,7 +3061,7 @@ Moodle 3.8
     margin-bottom: 15px;
 }
 #loggedin-user .usermenu .dropdown {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .dropdown-menu {
     padding: 5px;
@@ -2970,6 +3075,9 @@ Moodle 3.8
     display: block;
 	padding: 1px 3px;
 	white-space: nowrap;
+}
+.breadcrumb-button .moodle-actionmenu .dropdown-item {
+    white-space: normal;
 }
 .moodle-actionmenu .dropdown-item.hidden {
     height: 0;
@@ -3164,6 +3272,7 @@ Moodle 3.8
 }
 @media (max-width: 767px) {
 	#page-login-index.login_lambda.column-2 .row.justify-content-center {width: 100%;}
+	.hidden-desktop {display: none;}
 }
 .form-inline {
     display: flex;
@@ -3203,10 +3312,6 @@ Moodle 3.8
 .submitbutton.btn.btn-primary {
     color: #fff !important;
 }
-.mform abbr.text-danger img.icon {
-    width: 8px;
-    height: 12px;
-}
 .course-content ul.collapsibletopics .content .sectiontoggle ~ .section-summary-activities {
     display: block !important;
 }
@@ -3240,6 +3345,12 @@ Moodle 3.8
     margin: 0;
     border-radius: 0;
     padding: 5px 14px;
+}
+.path-backup .form-inline.felement .fdefaultcustom {
+    display: flex;
+}
+.path-backup .form-inline.felement .fdate_time_selector {
+    flex-wrap: nowrap;
 }
 .path-backup .mform .include_setting, .path-backup .mform .normal_setting {
     width: 50%;
@@ -3383,6 +3494,9 @@ Moodle 3.8
 #course-category-listings #menumovecoursesto, #course-category-listings #menumovecategoriesto {
     margin: 0;
 }
+#course-category-listings .listing-actions .moodle-actionmenu:not([data-enhanced]) > .menubar a {
+    display: block;
+}
 #page-mod-quiz-mod #id_reviewoptionshdr .form-group, #page-mod-quiz-mod #id_reviewoptionshdr .form-buttons, #page-mod-quiz-mod #id_reviewoptionshdr .path-admin .buttons, .path-admin #page-mod-quiz-mod #id_reviewoptionshdr .buttons, #page-mod-quiz-mod #id_reviewoptionshdr .fp-content-center form + div, .fp-content-center #page-mod-quiz-mod #id_reviewoptionshdr form + div, #page-mod-quiz-mod #id_reviewoptionshdr div.backup-section + form {
     float: left;
     width: 100%;
@@ -3424,6 +3538,9 @@ a[data-toggle="popover"] > img.icon {
     margin: 0;
     padding: 0;
     border: none;
+}
+#fgroup_id_buttonar .btn {
+    margin-bottom: 0;
 }
 .progress {
     width: 100%;
@@ -3568,10 +3685,11 @@ body #region-main .mform:not(.unresponsive) .femptylabel .form-inline.felement >
 #tag-search-box textarea[cols], input[size] {
     width: auto;
 }
-#loggedin-user .usertext .meta.viewingas {
+#loggedin-user .usertext .meta {
     font-size: 0.75em;
     font-weight: 300;
     display: block;
+	line-height: 0.75em;
 }
 #page-admin-tool-customlang-edit #id_filtersettings {
     max-width: 700px;
@@ -3656,15 +3774,18 @@ body #region-main .mform:not(.unresponsive) .femptylabel .form-inline.felement >
 .buttons > .singlebutton {
     margin-bottom: 10px;
 }
+.singlebutton + .continuebutton {
+    margin-top: 10px;
+}
 .generalbox.submissionaction .singlebutton {
     display: inline-block;
 }
 [hidden] {
     display: none !important;
 }
-
 .activity-navigation {
 	margin-top: 3rem;
+	padding: 0;
 }
 .activity-navigation .row {
 	display: flex;
@@ -3685,6 +3806,12 @@ body #region-main .mform:not(.unresponsive) .femptylabel .form-inline.felement >
 }
 .activity-navigation .row .float-right {
     float: right !important;
+}
+.activity-navigation #prev-activity-link {
+    margin-right: 15px;
+}
+.activity-navigation #next-activity-link {
+    margin-left: 15px;
 }
 .table.discussion-list .discussion [data-type="favorite-toggle"] {
 	margin-top: 3px;
@@ -3752,10 +3879,47 @@ body #region-main .mform:not(.unresponsive) .femptylabel .form-inline.felement >
 }
 .form-autocomplete-downarrow {
     color: #999;
-    left: calc(100% - 1.5em);
+    left: calc(95% - 1em);
 }
 #fitem_id_userlist .col-form-label.d-inline {
     vertical-align: bottom;
+}
+#rubric-rubric.gradingform_rubric input {
+    box-shadow: none;
+    background-color: transparent !important;
+}
+#rubric-rubric.gradingform_rubric .btn.btn-secondary {
+    background: [[setting:def_buttoncolor]] !important;
+    border: none !important;
+    border-radius: 2px !important;
+    color: #fff !important;
+    text-shadow: none !important;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.1) inset !important;
+	font-weight: 400;
+}
+#rubric-rubric.gradingform_rubric .btn.btn-secondary:hover {
+    background: [[setting:def_buttonhovercolor]] !important;
+    transition: all 0.3s ease 0.1s !important;
+}
+#rubric-rubric.gradingform_rubric .btn.btn-secondary #rubric-criteria-addcriterion {
+    filter: brightness(2);
+    background-position: 0 50%;
+}
+#rubric-rubric.gradingform_rubric .options {
+    margin-top: 20px;
+}
+.filemanager .fp-iconview .fp-folder.fp-hascontextmenu .fp-contextmenu {
+    background: none !important;
+    box-shadow: none;
+}
+.filemanager .fp-iconview .fp-folder.fp-hascontextmenu .fp-contextmenu img.icon {
+    padding: 8px !important;
+    background: rgba(255,255,255,.8);
+    border-radius: 50%;
+    border: rgba(33,33,33,0.33) 1px solid;
+}
+[class^="icon-size-"] {
+    background-image: none;
 }
 
 /*================================================== * 
@@ -3932,9 +4096,6 @@ Moodle 3.8 Messaging App
 }
 .message-app .overview-section-toggle.collapsed .collapsed-icon-container {
     display: block;
-}
-.message-app [data-region="loading-placeholder"] .icon-size-4 {
-    background-image: none;
 }
 
 /*================================================== * 
@@ -4466,6 +4627,155 @@ Moodle 3.8 Forum
 .path-mod-forum .header-container * {
     box-sizing: border-box;
 }
+.path-mod-forum .unified-grader .btn.btn-icon {
+    background-image: none !important;
+}
+.path-mod-forum .unified-grader .btn.criterion-toggle:not([id]) .expanded-icon {
+    display: none;
+}
+.path-mod-forum .unified-grader .btn.criterion-toggle:not([id]) .collapsed-icon {
+    display: block;
+}
+.path-mod-forum .unified-grader .btn.criterion-toggle .expanded-icon {
+    display: block;
+}
+.path-mod-forum .unified-grader .btn.criterion-toggle .collapsed-icon {
+    display: none;
+}
+.path-mod-forum .unified-grader .btn.criterion-toggle.collapsed .collapsed-icon {
+    display: block;
+}
+.path-mod-forum .unified-grader .btn.criterion-toggle.collapsed .expanded-icon {
+    display: none;
+}
+.path-mod-forum .unified-grader .criterion-toggle.btn.btn-icon:hover {
+    border-color: #bbb;
+}
+.path-mod-forum .unified-grader .criterion-toggle.btn.btn-icon {
+    background-color: #ddd !important;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+.path-mod-forum .unified-grader .criterion-toggle.btn.btn-icon img.icon {
+    padding-right: 0;
+}
+
+/*================================================== * 
+Moodle 3.9
+=====================================================*/
+a.action.btn.btn-lg:hover {
+    color: #333 !important;
+    background-position: initial !important;
+    box-shadow: 0 0 11px rgba(33,33,33,.2) !important;
+}
+a.action.btn.btn-lg:active {
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6) !important;
+}
+.fp-toolbar .fp-btn-delete a.btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #b3b3b3;
+    border-radius: 4px;
+}
+.fp-toolbar .fp-btn-delete a.btn img.icon {
+    margin: 7px 6px 6px 6px;
+    padding: 0;
+}
+.fp-toolbar .fp-btn-delete.d-none {
+    display: none;
+}
+.searchbar.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+.searchbar.input-group > .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    margin-bottom: 0;
+    padding: 7px 14px;
+}
+.searchbar.input-group .input-group-append {
+    display: flex;
+    align-items: center;
+    margin-left: -1px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    line-height: 1;
+}
+.searchbar.input-group .input-group-append .search-icon .btn[data-action="searchcontent"],
+.searchbar.input-group .input-group-append .clear-icon .btn[data-action="clearsearchcontent"] {
+    background: transparent !important;
+    padding: 7px 14px !important;
+    width: 50px;
+    height: 30px;
+    box-shadow: none;
+}
+.searchbar.input-group .input-group-append .btn[data-action="clearsearch"] {
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+}
+.simplesearchform.rcs-search.mb-3 {
+    display: flex;
+    margin: 15px 0 !important;
+}
+.simplesearchform.rcs-search input[type="text"] {
+    margin-bottom: 0 !important;
+}
+#page-admin-search #region-main .simplesearchform, #page-admin-search #region-main h2 + form {
+    display: none;
+}
+.coursecat-management-header + .simplesearchform, .path-course-index #region-main .simplesearchform, .path-course-index #region-main #coursesearch {
+    display: none !important;
+}
+#collapseAddForm.collapse {
+    margin: 15px 0 !important;
+    padding: 0 !important;
+}
+.badge.badge-info {
+    cursor: default;
+}
+#site-news-forum > div > .p-t-1.p-b-1, #site-news-forum > div > .py-3 {
+    padding: 0 !important;
+}
+.forumpost .header .mb-3 {
+    margin-bottom: 0 !important;
+}
+.col-form-label {
+    align-items: baseline;
+}
+.col-form-label > span img.icon {
+    margin-left: 5px;
+}
+.col-form-label a[data-toggle="popover"] > img.icon {
+    vertical-align: middle;
+}
+.mform .fdescription.required > .icon {
+    width: 16px;
+    height: 16px;
+}
+.fitem .float-sm-right.text-nowrap {
+    float: right;
+    margin-left: 5px;
+}
+#admin-maxsizeperdownloadcoursefile .form-filesize .form-inline {
+    display: flex;
+    flex-flow: row;
+    width: max-content;
+}
+#admin-maxsizeperdownloadcoursefile .form-filesize .form-inline > input {
+    margin-right: 0.5rem;
+}
 
 /*================================================== * 
 Moodle 3.9 modchooser
@@ -4484,35 +4794,14 @@ Moodle 3.9 modchooser
     padding: 0 !important;
 }
 .modchooser .carousel.lambda .carousel-item[data-region="modules"], .modchooser .carousel.lambda .carousel-item[data-region="help"] {
-    width: 0;
-    overflow: hidden;
-}
-.modchooser .carousel.lambda .carousel-item.active[data-region="modules"], .modchooser .carousel.lambda .carousel-item.active[data-region="help"] {
+    display: none;
     width: 100%;
+}
+.modchooser .carousel.lambda .carousel-item.active[data-region="help"], .modchooser .carousel.lambda .carousel-item.active[data-region="modules"] {
+    display: block;
 }
 .modchooser .flex-fill {
     flex: 1 1 auto !important;
-}
-.modchooser .searchbar.input-group {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
-}
-.modchooser .input-group > .form-control {
-    position: relative;
-    flex: 1 1 auto;
-    width: 1%;
-    min-width: 0;
-    margin-bottom: 0;
-}
-.modchooser .searchbar .input-group-append {
-    display: flex;
-    align-items: center;
-    margin-left: -1px;
-    border: 1px solid #ccc;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 .modchoosercontainer .optionscontainer, .modchoosercontainer .searchresultitemscontainer {
     overflow-x: hidden;
@@ -4577,11 +4866,22 @@ Moodle 3.9 modchooser
 .modchooser .bg-light.searchresultitemscontainer-wrapper {
     background-color: #fff !important;
 }
-.modchooser .btn[data-action="clearsearch"] {
-    background-color: transparent !important;
-    border: none;
-    box-shadow: none;
-    background-image: none;
+.modchooser .optionsummary p {
+    line-height: 25px;
+}
+.modchooser .optionsummary .heading img.icon {
+    height: 24px;
+    width: 24px;
+    padding: 0 4px;
+    vertical-align: text-bottom;
+}
+.modchooser .optionsummary .helpdoclink {
+    text-align: right;
+}
+.modchooser .optionsummary .fixed-bottom.position-absolute {
+    position: relative !important;
+    display: block;
+    margin-top: 20px;
 }
 
 /*================================================== * 
@@ -4624,6 +4924,161 @@ Moodle 3.9 participants-filter
 }
 [id*="core_user-participantsfilter"] .btn[data-filteraction="remove"] .fa {
     color: #999;
+}
+
+/*================================================== * 
+Moodle 3.9 h5p content bank
+=====================================================*/
+#page-contentbank .cb-toolbar-container .btn.btn-secondary {
+    background-image: none;
+    height: 32px;
+    line-height: 32px;
+    width: auto;
+    padding: 0 8px;
+    margin: 0 4px !important;
+} 
+#page-contentbank .cb-toolbar-container .btn.btn-secondary img.icon {
+    display: inline;
+    vertical-align: sub;
+    padding-left: 4px;
+}
+#page-contentbank .cb-toolbar-container a.btn.btn-secondary img.icon {
+    filter: brightness(2);
+}
+#page-contentbank .content-bank {
+    border: 1px solid #ddd;
+}
+.content-bank-container.view-grid .cb-heading, .content-bank-container.view-grid .cb-date, .content-bank-container.view-grid .cb-size, .content-bank-container.view-grid .cb-type {
+    display: none;
+}
+.content-bank-container.view-grid .cb-file {
+    padding: .5rem;
+}
+.content-bank-container .cb-content-wrapper {
+    padding: .5rem !important;
+    min-height: 140px;
+    max-height: 500px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.content-bank-container.view-list .cb-content-wrapper {
+    padding: 0 .5rem !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.cb-toolbar-container .dropdown-scrollable {
+    max-height: 190px;
+    overflow-y: auto;
+    width: 260px;
+}
+.content-bank-container .dropdown-menu-right {
+    right: auto;
+}
+.cb-toolbar-container button.icon-no-margin img.icon {
+    filter: brightness(2);
+}
+.cb-toolbar-container .dropdown-header {
+    text-transform: none;
+}
+.cb-toolbar-container .dropdown-scrollable a.dropdown-item {
+    background-image: none;
+    display: block;
+    width: 100% !important;
+    padding: 0;
+    clear: both;
+    color: #555;
+    white-space: nowrap;
+    line-height: 20px;
+    height: 20px !important;
+    margin-bottom: 10px;
+}
+.cb-toolbar-container .dropdown-scrollable a.dropdown-item img.icon {
+    padding: 0 !important;
+    width: 40px !important;
+    height: 20px !important;
+}
+.content-bank-container.view-grid .cb-listitem {
+    margin-bottom: .5rem;
+}
+.content-bank-container.view-grid .cb-file {
+    padding: .5rem;
+}
+.content-bank-container .cb-thumbnail {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.content-bank-container.view-grid .cb-thumbnail {
+    width: 64px;
+    height: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5rem;
+}
+.content-bank-container.view-list .cb-listitem, .content-bank-container.view-list .cb-heading {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+.content-bank-container .cb-heading .btn.cb-btnsort {
+    background: transparent !important;
+    box-shadow: none;
+    padding: 0;
+}
+.content-bank-container.view-list .cb-column {
+    display: flex;
+    padding: .25rem;
+}
+.content-bank-container.view-list .cb-column {
+    border-right: 1px solid #ddd;
+}
+.content-bank-container.view-list .cb-column {
+    display: flex;
+    padding: .25rem;
+    box-sizing: border-box;
+}
+.content-bank-container.view-list .cb-btnsort span {
+    display: none;
+}
+.content-bank-container.view-list .cb-btnsort.dir-none .default, .content-bank-container.view-list .cb-btnsort.dir-asc .asc, .content-bank-container.view-list .cb-btnsort.dir-desc .desc {
+    display: block;
+}
+.content-bank-container .cb-name {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.content-bank-container.view-grid .cb-name {
+    text-align: center;
+    line-height: 1.1rem;
+}
+@media (min-width: 576px) {
+	.content-bank-container.view-grid .cb-listitem {max-width: 120px; min-width: 120px;}
+	.content-bank-container.view-list .cb-heading {position: sticky; top: 0; z-index: 1;}
+	.content-bank-container.view-list .cb-file, .content-bank-container.view-list .cb-date {flex: 0 0 35%; max-width: 35%;}
+	.content-bank-container.view-list .cb-size, .content-bank-container.view-list .cb-type {flex: 0 0 15%; max-width: 15%;}
+	.content-bank-container.view-list .cb-column.last {border-right: 0;}
+}
+@media (max-width: 767px) {
+	.content-bank-container.view-grid .cb-listitem {flex-basis: 50%;}
+}
+.lambda_h5p_header {
+    position: relative;
+}
+.lambda_h5p_header .page-context-header .page-header-headings {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.lambda_h5p_header .header-actions-container {
+    position: absolute;
+    right: 0;
+    top: 15px;
 }
 
 /*================================================== * 
@@ -4733,13 +5188,32 @@ aside.block {
 .block #settingsnav {
     padding-top: 0 !important;
 }
+.block_search_forums .searchform .input-group, .block_settings .adminsearchform  .form-group, .block_settings .simplesearchform .input-group, .simplesearchform.rcs-search .input-group {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+.block_search_forums #searchform_search, .block_settings #adminsearchquery {
+    width: 100%;
+    max-width: 100%;
+}
+.block_settings .simplesearchform, .block_settings .simplesearchform .input-group {
+    width: calc(100% - 32px);
+    max-width: 100%;
+}
 .block_settings #adminsearchquery {
-    max-width: 92%;
-    width: 92%;
     margin-bottom: 10px;
 }
-.block .adminsearchform.form-inline {
-    text-align: center;
+.block_settings .adminsearchform.form-inline {
+    width: 100%;
+}
+.block_settings .simplesearchform .search-icon img.icon, .simplesearchform.rcs-search .input-group .search-icon img.icon {
+    filter: brightness(2);
+    vertical-align: sub;
+    padding-right: 1px;
+}
+.block_settings .footer {
+	display: flex;
 }
 .editing .block .header .commands {
     padding: 5px 0 5px 5px;
@@ -4761,4 +5235,8 @@ aside.block {
 }
 .jsenabled .block.hidden .content {
     display: inherit;
+}
+.block.block_timeline .paged-content-page-container .icon-size-4 {
+    width: 24px !important;
+    height: 24px !important;
 }

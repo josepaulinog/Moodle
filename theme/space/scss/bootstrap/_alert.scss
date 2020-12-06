@@ -18,7 +18,7 @@
 
 .alert {
   position: relative;
-  padding: $alert-padding-y 5rem $alert-padding-y $alert-padding-x;
+  padding: $alert-padding-y 3.5rem $alert-padding-y $alert-padding-x;
   margin: 0 0 1rem 0;
   border: $alert-border-width solid transparent;
 
@@ -27,12 +27,8 @@
 
   @include border-radius($alert-border-radius);
 
-  @include media-breakpoint-between(sm,md) {
-    padding: 1rem 3rem 1rem 1rem;
-  }
-
   .rtl & {
-    padding: $alert-padding-y $alert-padding-x $alert-padding-y 5rem ;
+    padding: $alert-padding-y $alert-padding-x $alert-padding-y 3.5rem;
   }
 
   &.card-content {
@@ -61,6 +57,10 @@
 
   .btn-icon .icon.fa-question-circle {
     color: inherit;
+  }
+
+  + .alert {
+    margin-top: 5px;
   }
 }
 
@@ -197,8 +197,8 @@
 }
 
 .fdescription.required {
-  color: $red-900;
-  background-color: $red-200;
+  color: $red-600;
+  background-color: $red-100;
   box-shadow: 0 1px 0 0 darken($red-200, 4);
 
   small {
@@ -213,9 +213,9 @@
   border: $alert-border-width solid transparent;
 
   color: $red-600;
-  background-color: $red-200;
+  background-color: $red-100;
 
-  box-shadow: 0 1px 0 0 #f5c6cb;
+  box-shadow: 0 1px 0 0 $red-100;
   border-radius: $border-radius;
 }
 
@@ -242,7 +242,7 @@
 .alert {
   .close {
     position: absolute;
-    top: calc(50% - 1.5rem);
+    top: 1px;
     right: 0;
     padding: 1.5rem;
 
@@ -371,12 +371,12 @@
 
 .alert-danger {
   color: $red-800;
-  background-color: $red-200;
-  box-shadow: 0 1px 0 0 darken($red-200, 4);
+  background-color: $red-100;
+  box-shadow: 0 1px 0 0 darken($red-100, 4);
   border-radius: $border-radius;
 
   hr {
-    border-top-color: darken($red-200, 4);
+    border-top-color: darken($red-100, 4);
   }
 
   a, .text-muted {
@@ -389,7 +389,7 @@
 
   .close {
     &:before {
-      color: $red-900;
+      color: $red-600;
     }
   }
 }
@@ -531,8 +531,8 @@
       margin: 0;
       
       color: $red-800;
-      background-color: $red-200;
-      box-shadow: 0 1px 0 0 darken($red-200, 4);
+      background-color: $red-100;
+      box-shadow: 0 1px 0 0 darken($red-100, 4);
       border-radius: $border-radius;
     }
   

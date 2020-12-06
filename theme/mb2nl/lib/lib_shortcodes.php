@@ -31,130 +31,114 @@ defined('MOODLE_INTERNAL') || die();
  * Method to get shortcode content template
  *
  */
-function theme_mb2nl_shortcodes_content_template ($items, $options)
+function theme_mb2nl_shortcodes_content_template( $items, $options )
 {
 
 	global $CFG;
 	$output = '';
 	$i = 0;
 	$x = 0;
-	$z = 0;
 	$col_style = '';
-	$carousel = ($options['layout'] === 'slidercols' && count($items) > $options['colnum']);
-
-	if ($options['layout'] === 'slidercols' && count($items) <= $options['colnum'])
-	{
-		$options['layout'] = 'cols';
-	}
-
-	if ($options['layout'] === 'cols')
-	{
-		$col = round(100/$options['colnum'], 10);
-		$col_style = ' style="width:' . $col . '%;"';
-	}
 
 	foreach ($items as $item)
 	{
-		$z++;
+		$i++;
+		$x++;
+		$item_cls = $i%2 ? ' item-odd' : ' item-even';
 
-		if ($options['limit'] < $z)
+		// Color class
+		$c_color = theme_mb2nl_shortcodes_custom_color($item->id, $options);
+		$item_cls .= $c_color ? ' color' : '';
+		//$item_cls .= $options['col_cls'];
+
+		// Show item b
+		$showtext = ($options['desclimit'] > 0 || $options['linkbtn'] || $item->price);
+
+		// Item id for admin users
+		$item_ID  = '';
+		$item_edit_link  = '';
+
+		if ( is_siteadmin() )
 		{
-			$item->showitem = false;
+			$item_ID = ' <span class="helper-itemid" style="background-color:green;color:#fff;padding:0 3px;">ID: ' . $item->id . '</span>';
+			// We don't need edit link in page builder preview
+			$item_edit_link = ! isset( $options['id'] ) ? ' <a href="' . $item->link_edit . '"><i class="fa fa-edit"></i> ' . $item->edit_text . '</a>' : '';
 		}
 
-		if ($item->showitem)
+		$output .= '<div class="mb2-pb-content-item theme-box item-' . $item->id . $item_cls .'">';
+		$output .= $item_ID . $item_edit_link;
+		// $output .= $options['link'] == 2 ? '<a href="' . $item->link . '">' : '';
+		$output .= '<div class="mb2-pb-content-item-inner">';
+		$output .= '<div class="mb2-pb-content-item-a">';
+
+		$output .= theme_mb2nl_shortcodes_image_notice($item->description);
+
+		if ( $item->imgurl )
 		{
-			$i++;
-			$x++;
-			$item_cls = $i%2 ? ' item-odd' : ' item-even';
+			$output .= '<div class="mb2-pb-content-img">';
+			$output .= '<a href="' . $item->link . '">';
+			$output .= '<img src="' . $item->imgurl . '" alt="' . $item->imgname . '" />';
+			$output .= '</a>';
+			$output .= '</div>';
+		}
 
-			// Color class
-			$c_color = theme_mb2nl_shortcodes_custom_color($item->id, $options);
-			$item_cls .= $c_color ? ' color' : '';
-			$item_cls .= $options['col_cls'];
+		$output .= '<div class="mb2-pb-content1">';
+		$output .= '<div class="mb2-pb-content2">';
+		$output .= '<div class="mb2-pb-content3">';
+		$output .= '<div class="mb2-pb-content4">';
 
-			// Show item b
-			$showtext = ($options['desclimit'] > 0 || $options['link'] == 1 || $item->price);
+		$output .= '<h4 class="mb2-pb-content-title">';
+		$output .= '<a href="' . $item->link . '">';
+		$output .= theme_mb2nl_wordlimit($item->title, $options['titlelimit']);
+		$output .= '</a>';
+		$output .= '</h4>';
+		$output .= $item->details ? '<div class="mb2-pb-content-details">' . $item->details . '</div>' : '';
+		$output .= $c_color ? '<span class="color-el" style="background-color:' . $c_color . ';"></span>' : '';
+		$output .= '</div>';
+		$output .= '</div>';
+		$output .= '</div>';
+		$output .= '</div>';
+		$output .= '</div>';
 
-			// Item id for admin users
-			$item_ID  = '';
-			$item_edit_link  = '';
+		if ( $showtext )
+		{
+			$output .= '<div class="mb2-pb-content-item-b">';
 
-			if (is_siteadmin())
+			if ( $options['desclimit'] > 0 )
 			{
-				$item_ID = ' <span style="background-color:green;color:#fff;padding:0 3px;">ID: ' . $item->id . '</span>';
-				$item_edit_link = ' <a href="' . $item->link_edit . '"><i class="fa fa-edit"></i> ' . $item->edit_text . '</a>';
-			}
-
-			$output .= '<div class="mb2-pb-content-item item-' . $item->id . $item_cls .'"' . $col_style . '>';
-			$output .= $item_ID . $item_edit_link;
-			$output .= $options['link'] == 2 ? '<a href="' . $item->link . '">' : '';
-			$output .= '<div class="mb2-pb-content-item-inner">';
-			$output .= '<div class="mb2-pb-content-item-a">';
-
-			$output .= theme_mb2nl_shortcodes_image_notice($item->description);
-
-			if ($item->imgurl)
-			{
-				$output .= '<div class="mb2-pb-content-img">';
-				$output .= $options['link'] != 2 ? '<a href="' . $item->link . '">' : '';
-				$output .= '<img src="' . $item->imgurl . '" alt="' . $item->imgname . '" />';
-				$output .= $options['link'] != 2 ? '</a>' : '';
+				$output .= '<div class="mb2-pb-content-desc">';
+				$output .= theme_mb2nl_wordlimit( $item->description, $options['desclimit'] );
 				$output .= '</div>';
 			}
 
-			$output .= '<div class="mb2-pb-content1">';
-			$output .= '<div class="mb2-pb-content2">';
-			$output .= '<div class="mb2-pb-content3">';
-			$output .= '<div class="mb2-pb-content4">';
-
-			$output .= '<h4 class="mb2-pb-content-title">';
-			$output .= $options['link'] != 2 ? '<a href="' . $item->link . '">' : '';
-			$output .= theme_mb2nl_wordlimit($item->title, $options['titlelimit']);
-			$output .= $options['link'] != 2 ? '</a>' : '';
-			$output .= '</h4>';
-			$output .= $item->details ? '<div class="mb2-pb-content-details">' . $item->details . '</div>' : '';
-			$output .= $c_color ? '<span class="color-el" style="background-color:' . $c_color . ';"></span>' : '';
-			$output .= '</div>';
-			$output .= '</div>';
-			$output .= '</div>';
-			$output .= '</div>';
-			$output .= '</div>';
-
-			if ($showtext)
+			if ( $options['linkbtn'] )
 			{
-				$output .= '<div class="mb2-pb-content-item-b">';
-				$output .= theme_mb2nl_wordlimit($item->description, $options['desclimit']);
+				$readmoretext = $options['readmoretext'] ? $options['readmoretext'] : get_string('readmore','theme_mb2nl');
 
-				if ($options['link'] == 1)
-				{
-					$readmoretext = $options['readmoretext'] ? $options['readmoretext'] : get_string('readmore','theme_mb2nl');
+				$output .= '<div class="mb2-pb-content-readmore">';
+				$output .= '<a class="btn btn-primary" href="' . $item->link . '">' . $readmoretext . '</a>';
+				$output .= '</div>';
+			}
 
-					$output .= '<div class="mb2-pb-content-readmore">';
-					$output .= '<a class="btn btn-primary" href="' . $item->link . '">' . $readmoretext . '</a>';
-					$output .= '</div>';
-				}
-
-				if ($item->price)
-				{
-					$output .= '<div class="mb2-pb-content-price">';
-					$output .=  $item->price;
-					$output .= '</div>';
-				}
-
+			if ($item->price)
+			{
+				$output .= '<div class="mb2-pb-content-price">';
+				$output .=  $item->price;
 				$output .= '</div>';
 			}
 
 			$output .= '</div>';
-			$output .= $options['link'] == 2 ? '</a>' : '';
-			$output .= '</div>';
-
-			if (!$carousel && $x == $options['colnum'])
-			{
-				$output .= '<div class="mb2-pb-content-sep clearfix"></div>';
-				$x = 0;
-			}
 		}
+
+		$output .= '</div>';
+		// $output .= $options['link'] == 2 ? '</a>' : '';
+		$output .= '</div>';
+
+		// if (!$carousel && $x == $options['columns'])
+		// {
+		// 	$output .= '<div class="mb2-pb-content-sep clearfix"></div>';
+		// 	$x = 0;
+		// }
 	}
 
 	return $output;
@@ -172,7 +156,7 @@ function theme_mb2nl_shortcodes_content_template ($items, $options)
  * It's require fro categories images
  *
  */
-function theme_mb2nl_shortcodes_image_notice ($desc)
+function theme_mb2nl_shortcodes_image_notice($desc)
 {
 
 	$urlfromdesc = theme_mb2nl_shortcodes_categories_image_from_text(s($desc),true);
@@ -180,7 +164,7 @@ function theme_mb2nl_shortcodes_image_notice ($desc)
 
 	if (preg_match('@%20@', $namefromdesc))
 	{
-		return '<span style="color:red;"><strong>' . get_string('imgnoticespace','local_mb2pages', array('img'=>urldecode($namefromdesc))) . '</strong></span>';
+		return '<span style="color:red;"><strong>' . get_string('imgnoticespace','local_mb2builder', array('img'=>urldecode($namefromdesc))) . '</strong></span>';
 	}
 
 	return;
@@ -270,7 +254,7 @@ function theme_mb2nl_shortcodes_content_get_image($attribs = array(), $name = fa
  * Method to get image from text
  *
  */
-function theme_mb2nl_shortcodes_categories_image_from_text($text)
+function theme_mb2nl_shortcodes_categories_image_from_text( $text )
 {
 
 	$output = '';
@@ -307,32 +291,33 @@ function theme_mb2nl_shortcodes_categories_image_from_text($text)
  * Method to set content carousel data attributes
  *
  */
-function theme_mb2nl_shortcodes_slider_data ($atts)
+function theme_mb2nl_shortcodes_slider_data( $atts )
 {
 
 	$output = '';
 
-	$iscols = $atts['colnum'];
-	$isDots = $atts['sdots'];
-	$isMargin = $atts['gridwidth'];
-
-	if ($atts['gridwidth'] === 'thin')
+	if ( $atts['gridwidth'] === 'thin' )
 	{
-		$isMargin = 4;
+		$gridwidth = 10;
 	}
-	elseif ($atts['gridwidth'] === 'normal')
+	elseif ( $atts['gridwidth'] === 'none' )
 	{
-		$isMargin = 30;
+		$gridwidth = 0;
+	}
+	else
+	{
+		$gridwidth = 30;
 	}
 
-	$output .= ' data-items="' . $iscols . '"';
-	$output .= ' data-margin="' . $isMargin . '"';
-	$output .= ' data-loop="' . $atts['sloop'] . '"';
-	$output .= ' data-nav="' . $atts['snav'] . '"';
-	$output .= ' data-dots="' . $isDots . '"';
+	$output .= ' data-columns="' .  $atts['columns'] . '"';
+	$output .= ' data-margin="' . $gridwidth . '"';
+	$output .= ' data-sloop="' . $atts['sloop'] . '"';
+	$output .= ' data-snav="' . $atts['snav'] . '"';
+	$output .= ' data-sdots="' . $atts['sdots'] . '"';
 	$output .= ' data-autoplay="' . $atts['sautoplay'] . '"';
 	$output .= ' data-pausetime="' . $atts['spausetime'] . '"';
 	$output .= ' data-animtime="' . $atts['sanimate'] . '"';
+	$output .= ' data-mobcolumns="' . $atts['mobcolumns'] . '"';
 
 	return $output;
 
@@ -371,7 +356,7 @@ function theme_mb2nl_shortcodes_custom_color ($id, $atts)
  * Method to get custo colors from shortcode settings
  *
  */
-function theme_mb2nl_shortcodes_custom_color_arr ($atts)
+function theme_mb2nl_shortcodes_custom_color_arr($atts)
 {
 
 	$colors = array();
@@ -402,7 +387,7 @@ function theme_mb2nl_shortcodes_custom_color_arr ($atts)
  * Method to get global options from shortcodes filter plugin
  *
  */
-function theme_mb2nl_shortcodes_global_opts ($shortcode, $option, $default)
+function theme_mb2nl_shortcodes_global_opts($shortcode, $option, $default)
 {
 	global $CFG;
 
@@ -444,7 +429,7 @@ function theme_mb2nl_shortcodes_global_opts ($shortcode, $option, $default)
  * Method to get global options from shortcodes filter plugin
  *
  */
-function theme_mb2nl_get_id_from_class ( $cls )
+function theme_mb2nl_get_id_from_class( $cls )
 {
 	$ids = array();
 
@@ -531,14 +516,13 @@ function theme_mb2nl_get_video_url( $url )
  * Method to get video id from video url
  *
  */
-function theme_mb2nl_get_video_id($url, $list = false)
+function theme_mb2nl_get_video_id( $url, $list = false )
 {
 
     $parts = parse_url($url);
 
 	if ( isset( $parts['query'] ) )
 	{
-
 	    parse_str($parts['query'], $qs);
 
 		if ( $list && isset( $qs['list'] ) )
@@ -554,7 +538,6 @@ function theme_mb2nl_get_video_id($url, $list = false)
 		{
             return $qs['vi'];
         }
-
     }
 
 	if ( ! $list && isset( $parts['path'] ) )
@@ -565,5 +548,37 @@ function theme_mb2nl_get_video_id($url, $list = false)
 
 
     return false;
+
+}
+
+
+
+/*
+ *
+ * Method to set heading size class
+ *
+ */
+function theme_mb2nl_heading_cls( $size = 1.4, $pref = 'hsize-', $rem = true )
+{
+	$i = 0;
+	$sizes = array(1,2,3,4,5);
+	$output = '';
+
+	if ( ! $rem )
+	{
+		$sizes = array(0,50,100,150,200,250);
+	}
+
+	foreach( $sizes as $s )
+	{
+		if ( $size > $sizes[$i] )
+		{
+			$output = $pref . $sizes[$i];
+		}
+
+		$i++;
+	}
+
+	return $output;
 
 }

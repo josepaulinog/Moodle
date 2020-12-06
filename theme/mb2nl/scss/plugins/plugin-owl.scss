@@ -1,17 +1,17 @@
 
 .owl-dots {
     text-align: center;
-    margin-top: 1.35rem
+    margin-top: 15px
 
 }
 
 .owl-dot {
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    box-shadow: 0 0 0 4px rgba(0,0,0,.1);
+    width: 8px;
+    height: 8px;
+    box-shadow: 0 0 0 3px rgba(0,0,0,.1);
     background-color: rgba(0,0,0,.3);
-    margin: .4rem .7rem;
+    margin: .4rem .6rem;
     border-radius: 999px;
 	@include mb2_transition1(all, .15s);
 

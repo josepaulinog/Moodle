@@ -18,45 +18,44 @@
     Page navbar.
 }}
 
-<div id="topBar5" class="s-top s-top--sidebar justify-content-center">
 
-  {{> theme_space/navbar-mobile }}
+  <div id="topBar5" class="s-top s-top--sidebar justify-content-center {{#ShowTopBarUserName}}showusername{{/ShowTopBarUserName}} {{#customtopnavhtml}}topbar-customtopnav{{/customtopnavhtml}} {{#TopBarText}}topbar-text{{/TopBarText}}">
 
-  <div class="s-top-container">
-    <div class="c-container c-top-additional row no-gutters justify-content-between align-items-center">
-      {{#ShowTopBarText}}<div class="c-top-text mx-2">{{{TopBarText}}}</div>{{/ShowTopBarText}}
-      {{#output.render_lang_menu}}<div class="c-lang-menu m-0">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
-    </div>
-    <div id="navBar" class="c-container row no-gutters py-md-1 justify-content-between align-items-center">
+    {{> theme_space/navbar-mobile }}
 
-      {{> theme_space/navbar-btn }}
-
-      {{#ShowCustomNav}}<div class="c-custom-nav-container mx-md-0">{{> theme_space/custom-nav }}</div>{{/ShowCustomNav}}
-
-      {{#customtopnavhtml}}
-      <div class="c-custom-main-nav navbar navbar-expand-md p-0 mx-md-0">
-        <nav class="c-custom-main-nav navbar navbar-expand-md p-0">
-          {{{customtopnavhtml}}}
-        </nav>
+    <div class="s-top-container">
+      <div class="c-container c-top-additional {{^TopBarText}}c-top-additional-hidden{{/TopBarText}} row no-gutters justify-content-between align-items-center mx-auto">
+        {{#TopBarText}}<div class="c-top-text mx-2 text-sm-center text-lg-left">{{{TopBarText}}}</div>{{/TopBarText}}
+        {{#output.render_lang_menu}}<div class="c-lang-menu m-0 d-sm-none d-lg-inline">{{{ output.render_lang_menu }}}</div>{{/output.render_lang_menu}}
       </div>
-      {{/customtopnavhtml}}
+      <div id="navBar" class="c-container row no-gutters py-md-1 justify-content-between align-items-center">
 
-      <div class="c-nav-user nav ml-sm-center ml-md-auto align-items-center justify-content-center">
+        {{> theme_space/navbar-btn }}
 
-          <div class="search-box d-block">
-          {{{ output.search_box }}}
+        {{#ShowCustomNav}}<div class="c-custom-nav-container">{{> theme_space/custom-nav }}</div>{{/ShowCustomNav}}
+
+        {{#customtopnavhtml}}
+          <div class="c-custom-main-nav">
+            {{{customtopnavhtml}}}
           </div>
+        {{/customtopnavhtml}}
 
-          <!-- navbar_plugin_output -->
-          <div class="top-icons-nav c-menu-sep mr-3">{{{ output.navbar_plugin_output }}}</div>
+        <div class="c-nav-user nav ml-sm-0 ml-md-auto align-items-center justify-content-sm-end justify-content-lg-center">
 
-          <!-- user_menu -->
-          <div class="c-user-menu">
-              {{{ output.user_menu }}}
-          </div>
+            <div class="search-box d-block">
+            {{{ output.search_box }}}
+            </div>
 
+            <!-- navbar_plugin_output -->
+            <div class="top-icons-nav c-menu-sep mr-lg-3">{{{ output.navbar_plugin_output }}}</div>
+
+            <!-- user_menu -->
+            <div class="c-user-menu mr-sm-3 mr-lg-0">
+                {{{ output.user_menu }}}
+            </div>
+
+        </div>
+        <!-- search_box -->
       </div>
-      <!-- search_box -->
     </div>
   </div>
-</div>

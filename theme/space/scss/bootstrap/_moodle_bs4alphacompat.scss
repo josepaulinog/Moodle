@@ -48,7 +48,7 @@ $table-bg-accent: $table-accent-bg;
 $tag-default-bg: $gray-light !default;
 $tag-primary-bg: $theme-color-3 !default;
 $tag-success-bg: $green-700 !default;
-$tag-info-bg: $gray-700 !default;
+$tag-info-bg: $theme-color-9 !default;
 $tag-warning-bg: $yellow-200 !default;
 $tag-danger-bg: $red-600 !default;
 
@@ -116,6 +116,10 @@ $tag-font-weight: $font-weight-sm-bold !default;
     &:empty {
         display: none;
     }
+
+    .ishidden & {
+      margin: 5px 0!important;
+    }
 }
 
 .form-control-success,
@@ -158,6 +162,7 @@ $tag-font-weight: $font-weight-sm-bold !default;
 
 .tag-info {
     @include tag-variant($tag-info-bg);
+    color: $theme-color-3;
     font-size: $font-size-sm;
 
     img {
@@ -167,6 +172,20 @@ $tag-font-weight: $font-weight-sm-bold !default;
 
       margin: 0 10px;
     }
+}
+
+.tag-light {
+  @include tag-variant($tag-info-bg);
+  font-size: $font-size-sm;
+  color: $theme-color-3;
+  
+  img {
+    width: 20px;
+    height: 20px;
+    border-radius: $border-radius;
+
+    margin: 0 10px;
+  }
 }
 
 .tag-warning {

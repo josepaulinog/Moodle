@@ -68,7 +68,7 @@ function theme_mb2nl_course_banner ()
 		$output .= '<div class="container-fluid">';
 		$output .= '<div class="row">';
 		$output .= '<div class="col-md-12">';
-		$output .= '<h1 class="h4">' . $COURSE->fullname . '</h1>';
+		$output .= '<h1 class="h4">' . format_text( $COURSE->fullname, FORMAT_HTML ) . '</h1>';
 		$output .= '</div>';
 		$output .= '</div>';
 		$output .= '</div>';
